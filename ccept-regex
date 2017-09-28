@@ -1,0 +1,580 @@
+--2017-09-28 14:51:39--  http://*-x/
+Resolving *-x (*-x)... failed: Name or service not known.
+wget: unable to resolve host address ‘*-x’
+--2017-09-28 14:51:39--  http://www.larioja.org/bor/es
+Resolving www.larioja.org (www.larioja.org)... 195.55.164.50
+Connecting to www.larioja.org (www.larioja.org)|195.55.164.50|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: unspecified [text/html]
+Saving to: ‘storage/app/larioja/es’
+
+     0K .......... .......... .......... .                     1.17M=0.03s
+
+Last-modified header missing -- time-stamps turned off.
+2017-09-28 14:51:39 (1.17 MB/s) - ‘storage/app/larioja/es’ saved [31976]
+
+--2017-09-28 14:51:39--  http://www.larioja.org/larioja-client/favicon.ico
+Reusing existing connection to www.larioja.org:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 5686 (5.6K) [image/x-icon]
+Saving to: ‘storage/app/larioja/favicon.ico’
+
+     0K .....                                                 100%  488M=0s
+
+2017-09-28 14:51:39 (488 MB/s) - ‘storage/app/larioja/favicon.ico’ saved [5686/5686]
+
+--2017-09-28 14:51:39--  http://www.larioja.org/larioja-client/css/estilo.css?nc=1489049334000
+Reusing existing connection to www.larioja.org:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 1068 (1.0K) [text/css]
+Saving to: ‘storage/app/larioja/estilo.css?nc=1489049334000’
+
+     0K .                                                     100%  205M=0s
+
+2017-09-28 14:51:39 (205 MB/s) - ‘storage/app/larioja/estilo.css?nc=1489049334000’ saved [1068/1068]
+
+--2017-09-28 14:51:39--  http://www.larioja.org/larioja-client/css/responsive.css?nc=1489049334000
+Reusing existing connection to www.larioja.org:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 26666 (26K) [text/css]
+Saving to: ‘storage/app/larioja/responsive.css?nc=1489049334000’
+
+     0K .......... .......... ......                          100% 1.44M=0.02s
+
+2017-09-28 14:51:39 (1.44 MB/s) - ‘storage/app/larioja/responsive.css?nc=1489049334000’ saved [26666/26666]
+
+--2017-09-28 14:51:39--  http://www.larioja.org/larioja-client/css/webs/web_bor.css?nc=1489049334000
+Reusing existing connection to www.larioja.org:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 541 [text/css]
+Saving to: ‘storage/app/larioja/web_bor.css?nc=1489049334000’
+
+     0K                                                       100% 53.5M=0s
+
+2017-09-28 14:51:39 (53.5 MB/s) - ‘storage/app/larioja/web_bor.css?nc=1489049334000’ saved [541/541]
+
+--2017-09-28 14:51:39--  http://www.larioja.org/larioja-client/css-sys/css-system.css
+Reusing existing connection to www.larioja.org:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 368 [text/css]
+Saving to: ‘storage/app/larioja/css-system.css’
+
+     0K                                                       100% 71.4M=0s
+
+2017-09-28 14:51:40 (71.4 MB/s) - ‘storage/app/larioja/css-system.css’ saved [368/368]
+
+--2017-09-28 14:51:40--  http://www.larioja.org/larioja-client/javaScript/proxia.js?nc=1489049334000
+Reusing existing connection to www.larioja.org:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 102347 (100K) [application/javascript]
+Saving to: ‘storage/app/larioja/proxia.js?nc=1489049334000’
+
+     0K .......... .......... .......... .......... .......... 50% 2.03M 0s
+    50K .......... .......... .......... .......... ......... 100% 2.38M=0.04s
+
+2017-09-28 14:51:40 (2.19 MB/s) - ‘storage/app/larioja/proxia.js?nc=1489049334000’ saved [102347/102347]
+
+--2017-09-28 14:51:40--  http://www.larioja.org/larioja-client/javaScript/jquery.min.js?nc=1489049334000
+Reusing existing connection to www.larioja.org:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 85659 (84K) [application/javascript]
+Saving to: ‘storage/app/larioja/jquery.min.js?nc=1489049334000’
+
+     0K .......... .......... .......... .......... .......... 59% 46.5M 0s
+    50K .......... .......... .......... ...                  100% 1.40M=0.02s
+
+2017-09-28 14:51:40 (3.33 MB/s) - ‘storage/app/larioja/jquery.min.js?nc=1489049334000’ saved [85659/85659]
+
+--2017-09-28 14:51:40--  http://www.larioja.org/larioja-client/javaScript/jquery-migrate.min.js?nc=1489049334000
+Reusing existing connection to www.larioja.org:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 7199 (7.0K) [application/javascript]
+Saving to: ‘storage/app/larioja/jquery-migrate.min.js?nc=1489049334000’
+
+     0K .......                                               100%  836M=0s
+
+2017-09-28 14:51:40 (836 MB/s) - ‘storage/app/larioja/jquery-migrate.min.js?nc=1489049334000’ saved [7199/7199]
+
+--2017-09-28 14:51:40--  http://www.larioja.org/larioja-client/javaScript/calendar/calendar.js?nc=1489049334000
+Reusing existing connection to www.larioja.org:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 31117 (30K) [application/javascript]
+Saving to: ‘storage/app/larioja/calendar.js?nc=1489049334000’
+
+     0K .......... .......... ..........                      100% 49.5M=0.001s
+
+2017-09-28 14:51:40 (49.5 MB/s) - ‘storage/app/larioja/calendar.js?nc=1489049334000’ saved [31117/31117]
+
+--2017-09-28 14:51:40--  http://www.larioja.org/larioja-client/javaScript/bootstrap/js/bootstrap.min.js?nc=1489049334000
+Reusing existing connection to www.larioja.org:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 37055 (36K) [application/javascript]
+Saving to: ‘storage/app/larioja/bootstrap.min.js?nc=1489049334000’
+
+     0K .......... .......... .......... ......               100% 5.13M=0.007s
+
+2017-09-28 14:51:40 (5.13 MB/s) - ‘storage/app/larioja/bootstrap.min.js?nc=1489049334000’ saved [37055/37055]
+
+--2017-09-28 14:51:40--  http://www.larioja.org/larioja-client/javaScript/jquery.easy.slider.js?nc=1489049334000
+Reusing existing connection to www.larioja.org:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 15795 (15K) [application/javascript]
+Saving to: ‘storage/app/larioja/jquery.easy.slider.js?nc=1489049334000’
+
+     0K .......... .....                                      100% 61.3M=0s
+
+2017-09-28 14:51:40 (61.3 MB/s) - ‘storage/app/larioja/jquery.easy.slider.js?nc=1489049334000’ saved [15795/15795]
+
+--2017-09-28 14:51:40--  http://www.larioja.org/larioja-client/javaScript/hammer.min.js?nc=1489049334000
+Reusing existing connection to www.larioja.org:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 17650 (17K) [application/javascript]
+Saving to: ‘storage/app/larioja/hammer.min.js?nc=1489049334000’
+
+     0K .......... .......                                    100% 30.6M=0.001s
+
+2017-09-28 14:51:40 (30.6 MB/s) - ‘storage/app/larioja/hammer.min.js?nc=1489049334000’ saved [17650/17650]
+
+--2017-09-28 14:51:40--  http://www.larioja.org/larioja-client/javaScript/init.js?nc=1489049334000
+Reusing existing connection to www.larioja.org:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 36841 (36K) [application/javascript]
+Saving to: ‘storage/app/larioja/init.js?nc=1489049334000’
+
+     0K .......... .......... .......... .....                100% 4.66M=0.008s
+
+2017-09-28 14:51:40 (4.66 MB/s) - ‘storage/app/larioja/init.js?nc=1489049334000’ saved [36841/36841]
+
+--2017-09-28 14:51:40--  http://www.larioja.org/larioja-client/javaScript/init_web.js?nc=1489049334000
+Reusing existing connection to www.larioja.org:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 34362 (34K) [application/javascript]
+Saving to: ‘storage/app/larioja/init_web.js?nc=1489049334000’
+
+     0K .......... .......... .......... ...                  100% 32.7M=0.001s
+
+2017-09-28 14:51:40 (32.7 MB/s) - ‘storage/app/larioja/init_web.js?nc=1489049334000’ saved [34362/34362]
+
+--2017-09-28 14:51:40--  http://www.larioja.org/larioja-client/javaScript/webs/web_larioja.js?nc=1489049334000
+Reusing existing connection to www.larioja.org:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 1019 [application/javascript]
+Saving to: ‘storage/app/larioja/web_larioja.js?nc=1489049334000’
+
+     0K                                                       100%  131M=0s
+
+2017-09-28 14:51:40 (131 MB/s) - ‘storage/app/larioja/web_larioja.js?nc=1489049334000’ saved [1019/1019]
+
+--2017-09-28 14:51:40--  http://www.larioja.org/larioja-client/javaScript/webs/web_bor.js?nc=1489049334000
+Reusing existing connection to www.larioja.org:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 357 [application/javascript]
+Saving to: ‘storage/app/larioja/web_bor.js?nc=1489049334000’
+
+     0K                                                       100% 42.6M=0s
+
+2017-09-28 14:51:40 (42.6 MB/s) - ‘storage/app/larioja/web_bor.js?nc=1489049334000’ saved [357/357]
+
+--2017-09-28 14:51:40--  http://www.larioja.org/larioja-client/cm/bor/DVCmAuthentication.1.2.tkMain.0/tkAuthenticationName
+Reusing existing connection to www.larioja.org:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 2867 (2.8K) [text/html]
+Saving to: ‘storage/app/larioja/tkAuthenticationName’
+
+     0K ..                                                    100%  314M=0s
+
+Last-modified header missing -- time-stamps turned off.
+2017-09-28 14:51:40 (314 MB/s) - ‘storage/app/larioja/tkAuthenticationName’ saved [2867/2867]
+
+--2017-09-28 14:51:40--  http://www.larioja.org/redes-sociales/es?locale=es_ES
+Reusing existing connection to www.larioja.org:80.
+HTTP request sent, awaiting response... 200 OK
+Length: unspecified [text/html]
+Saving to: ‘storage/app/larioja/es?locale=es_ES’
+
+     0K .......... .......... .......... .......... .......... 23.3M
+    50K .......... .......... ........                         1.99M=0.02s
+
+Last-modified header missing -- time-stamps turned off.
+2017-09-28 14:51:40 (4.76 MB/s) - ‘storage/app/larioja/es?locale=es_ES’ saved [80455]
+
+--2017-09-28 14:51:40--  https://twitter.com/lariojaorg
+Resolving twitter.com (twitter.com)... 104.244.42.1, 104.244.42.129
+Connecting to twitter.com (twitter.com)|104.244.42.1|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 359834 (351K) [text/html]
+Saving to: ‘storage/app/larioja/lariojaorg’
+
+     0K .......... .......... .......... .......... .......... 14%  526K 1s
+    50K .......... .......... .......... .......... .......... 28% 1.15M 0s
+   100K .......... .......... .......... .......... .......... 42% 1.54M 0s
+   150K .......... .......... .......... .......... .......... 56% 1.87M 0s
+   200K .......... .......... .......... .......... .......... 71% 2.13M 0s
+   250K .......... .......... .......... .......... .......... 85% 2.73M 0s
+   300K .......... .......... .......... .......... .......... 99% 2.54M 0s
+   350K .                                                     100% 2671G=0.3s
+
+2017-09-28 14:51:41 (1.34 MB/s) - ‘storage/app/larioja/lariojaorg’ saved [359834/359834]
+
+--2017-09-28 14:51:41--  http://www.larioja.org/es/menus/161-twitter.png
+Connecting to www.larioja.org (www.larioja.org)|195.55.164.50|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 4419 (4.3K) [image/png]
+Saving to: ‘storage/app/larioja/161-twitter.png’
+
+     0K ....                                                  100%  651M=0s
+
+Last-modified header missing -- time-stamps turned off.
+2017-09-28 14:51:41 (651 MB/s) - ‘storage/app/larioja/161-twitter.png’ saved [4419/4419]
+
+--2017-09-28 14:51:41--  http://www.larioja.org/larioja-client/imagenes/popup/popup_small.gif
+Reusing existing connection to www.larioja.org:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 901 [image/gif]
+Saving to: ‘storage/app/larioja/popup_small.gif’
+
+     0K                                                       100%  116M=0s
+
+2017-09-28 14:51:41 (116 MB/s) - ‘storage/app/larioja/popup_small.gif’ saved [901/901]
+
+--2017-09-28 14:51:41--  https://www.facebook.com/lariojaorg
+Resolving www.facebook.com (www.facebook.com)... 185.60.216.35
+Connecting to www.facebook.com (www.facebook.com)|185.60.216.35|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://www.facebook.com/unsupportedbrowser [following]
+--2017-09-28 14:51:42--  https://www.facebook.com/unsupportedbrowser
+Reusing existing connection to www.facebook.com:443.
+HTTP request sent, awaiting response... 200 OK
+Length: unspecified [text/html]
+Saving to: ‘storage/app/larioja/lariojaorg’
+
+     0K .......... .......... .......... .......... ..........  492K
+    50K .......... .......... .......... .......... .......... 1.22M
+   100K .......... .......... .......... .......... .......... 5.91M
+   150K .......... .......... .......... .....                  533K=0.2s
+
+Last-modified header missing -- time-stamps turned off.
+2017-09-28 14:51:43 (856 KB/s) - ‘storage/app/larioja/lariojaorg’ saved [190393]
+
+--2017-09-28 14:51:43--  http://www.larioja.org/es/menus/162-facebook.png
+Connecting to www.larioja.org (www.larioja.org)|195.55.164.50|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 1362 (1.3K) [image/png]
+Saving to: ‘storage/app/larioja/162-facebook.png’
+
+     0K .                                                     100%  209M=0s
+
+Last-modified header missing -- time-stamps turned off.
+2017-09-28 14:51:43 (209 MB/s) - ‘storage/app/larioja/162-facebook.png’ saved [1362/1362]
+
+--2017-09-28 14:51:43--  https://www.youtube.com/user/GobiernoDeLaRioja
+Resolving www.youtube.com (www.youtube.com)... 216.58.210.142
+Connecting to www.youtube.com (www.youtube.com)|216.58.210.142|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: unspecified [text/html]
+Saving to: ‘storage/app/larioja/GobiernoDeLaRioja’
+
+     0K .......... .......... .......... .......... .......... 7.69M
+    50K .......... .......... .......... .......... .......... 6.33M
+   100K .......... .......... .......... .......... .......... 8.83M
+   150K .......... .......... .......... .......... .......... 10.3M
+   200K .......... .......... .......... .......... .......... 15.4M
+   250K .......... .......... .......... ....                  14.6M=0.03s
+
+Last-modified header missing -- time-stamps turned off.
+2017-09-28 14:51:43 (9.31 MB/s) - ‘storage/app/larioja/GobiernoDeLaRioja’ saved [291626]
+
+--2017-09-28 14:51:43--  http://www.larioja.org/es/menus/163-logo_hh.png
+Connecting to www.larioja.org (www.larioja.org)|195.55.164.50|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 2666 (2.6K) [image/png]
+Saving to: ‘storage/app/larioja/163-logo_hh.png’
+
+     0K ..                                                    100%  354M=0s
+
+Last-modified header missing -- time-stamps turned off.
+2017-09-28 14:51:43 (354 MB/s) - ‘storage/app/larioja/163-logo_hh.png’ saved [2666/2666]
+
+--2017-09-28 14:51:43--  https://www.instagram.com/lariojaorg/
+Resolving www.instagram.com (www.instagram.com)... 31.13.83.52
+Connecting to www.instagram.com (www.instagram.com)|31.13.83.52|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 33576 (33K) [text/html]
+Saving to: ‘storage/app/larioja/index.html’
+
+     0K .......... .......... .......... ..                   100% 3.32M=0.01s
+
+Last-modified header missing -- time-stamps turned off.
+2017-09-28 14:51:44 (3.32 MB/s) - ‘storage/app/larioja/index.html’ saved [33576/33576]
+
+--2017-09-28 14:51:44--  http://www.larioja.org/es/menus/806662-instagram.png
+Connecting to www.larioja.org (www.larioja.org)|195.55.164.50|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 17269 (17K) [image/png]
+Saving to: ‘storage/app/larioja/806662-instagram.png’
+
+     0K .......... ......                                     100%  871K=0.02s
+
+Last-modified header missing -- time-stamps turned off.
+2017-09-28 14:51:44 (871 KB/s) - ‘storage/app/larioja/806662-instagram.png’ saved [17269/17269]
+
+--2017-09-28 14:51:44--  http://www.larioja.org/es/servicios/rss
+Reusing existing connection to www.larioja.org:80.
+HTTP request sent, awaiting response... 200 OK
+Length: unspecified [text/html]
+Saving to: ‘storage/app/larioja/rss’
+
+     0K .......... .......... .......... ......                1.64M=0.02s
+
+Last-modified header missing -- time-stamps turned off.
+2017-09-28 14:51:44 (1.64 MB/s) - ‘storage/app/larioja/rss’ saved [37551]
+
+--2017-09-28 14:51:44--  http://www.larioja.org/es/menus/164-rss.png
+Reusing existing connection to www.larioja.org:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 5533 (5.4K) [image/png]
+Saving to: ‘storage/app/larioja/164-rss.png’
+
+     0K .....                                                 100%  481M=0s
+
+Last-modified header missing -- time-stamps turned off.
+2017-09-28 14:51:44 (481 MB/s) - ‘storage/app/larioja/164-rss.png’ saved [5533/5533]
+
+--2017-09-28 14:51:44--  http://www--larioja--org.insuit.net/
+Resolving www--larioja--org.insuit.net (www--larioja--org.insuit.net)... 52.212.124.117, 52.212.194.240
+Connecting to www--larioja--org.insuit.net (www--larioja--org.insuit.net)|52.212.124.117|:80... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://www--larioja--org.insuit.net/ [following]
+--2017-09-28 14:51:44--  https://www--larioja--org.insuit.net/
+Connecting to www--larioja--org.insuit.net (www--larioja--org.insuit.net)|52.212.124.117|:443... connected.
+HTTP request sent, awaiting response... 301 Moved Permanently
+Location: /es [following]
+--2017-09-28 14:51:44--  https://www--larioja--org.insuit.net/es
+Reusing existing connection to www--larioja--org.insuit.net:443.
+HTTP request sent, awaiting response... 200 OK
+Length: 54679 (53K) [text/html]
+Saving to: ‘storage/app/larioja/index.html’
+
+     0K .......... .......... .......... .......... .......... 93% 1.13M 0s
+    50K ...                                                   100% 6480G=0.04s
+
+Last-modified header missing -- time-stamps turned off.
+2017-09-28 14:51:45 (1.21 MB/s) - ‘storage/app/larioja/index.html’ saved [54679/54679]
+
+--2017-09-28 14:51:45--  http://www.larioja.org/es/menus/166-inclusite.png
+Connecting to www.larioja.org (www.larioja.org)|195.55.164.50|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 2432 (2.4K) [image/png]
+Saving to: ‘storage/app/larioja/166-inclusite.png’
+
+     0K ..                                                    100%  296M=0s
+
+Last-modified header missing -- time-stamps turned off.
+2017-09-28 14:51:45 (296 MB/s) - ‘storage/app/larioja/166-inclusite.png’ saved [2432/2432]
+
+--2017-09-28 14:51:45--  http://www.larioja.org/larioja-client/imagenes/popup/popup_external_small.gif
+Reusing existing connection to www.larioja.org:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 864 [image/gif]
+Saving to: ‘storage/app/larioja/popup_external_small.gif’
+
+     0K                                                       100%  109M=0s
+
+2017-09-28 14:51:45 (109 MB/s) - ‘storage/app/larioja/popup_external_small.gif’ saved [864/864]
+
+--2017-09-28 14:51:45--  http://www.larioja.org/app-gobierno-rioja/es?locale=es_ES
+Reusing existing connection to www.larioja.org:80.
+HTTP request sent, awaiting response... 200 OK
+Length: unspecified [text/html]
+Saving to: ‘storage/app/larioja/es?locale=es_ES’
+
+     0K .......... .......... .......... ..                    1.47M=0.02s
+
+Last-modified header missing -- time-stamps turned off.
+2017-09-28 14:51:45 (1.47 MB/s) - ‘storage/app/larioja/es?locale=es_ES’ saved [32974]
+
+--2017-09-28 14:51:45--  http://www.larioja.org/es/menus/167-boton_portada_app.png
+Reusing existing connection to www.larioja.org:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 6780 (6.6K) [image/png]
+Saving to: ‘storage/app/larioja/167-boton_portada_app.png’
+
+     0K ......                                                100%  760M=0s
+
+Last-modified header missing -- time-stamps turned off.
+2017-09-28 14:51:45 (760 MB/s) - ‘storage/app/larioja/167-boton_portada_app.png’ saved [6780/6780]
+
+--2017-09-28 14:51:45--  http://www.larioja.org/larioja-client/cm?locale=es_ES
+Reusing existing connection to www.larioja.org:80.
+HTTP request sent, awaiting response... 200 OK
+Length: unspecified [text/html]
+Saving to: ‘storage/app/larioja/cm?locale=es_ES’
+
+     0K .......... .......... .......... .......... .......    1.97M=0.02s
+
+Last-modified header missing -- time-stamps turned off.
+2017-09-28 14:51:45 (1.97 MB/s) - ‘storage/app/larioja/cm?locale=es_ES’ saved [48895]
+
+--2017-09-28 14:51:45--  http://www.larioja.org/es/servicios/fecha-hora-sede
+Reusing existing connection to www.larioja.org:80.
+HTTP request sent, awaiting response... 200 OK
+Length: unspecified [text/html]
+Saving to: ‘storage/app/larioja/fecha-hora-sede’
+
+     0K .......... .......... ........                         4.80M=0.006s
+
+Last-modified header missing -- time-stamps turned off.
+2017-09-28 14:51:46 (4.80 MB/s) - ‘storage/app/larioja/fecha-hora-sede’ saved [28714]
+
+--2017-09-28 14:51:46--  http://www.larioja.org/es/servicios/contactar
+Reusing existing connection to www.larioja.org:80.
+HTTP request sent, awaiting response... 200 OK
+Length: unspecified [text/html]
+Saving to: ‘storage/app/larioja/contactar’
+
+     0K .......... .......... ..                               10.7M=0.002s
+
+Last-modified header missing -- time-stamps turned off.
+2017-09-28 14:51:46 (10.7 MB/s) - ‘storage/app/larioja/contactar’ saved [22884]
+
+--2017-09-28 14:51:46--  http://www.larioja.org/es/servicios/suscripciones
+Reusing existing connection to www.larioja.org:80.
+HTTP request sent, awaiting response... 200 OK
+Length: unspecified [text/html]
+Saving to: ‘storage/app/larioja/suscripciones’
+
+     0K .......... .......... ..........                       26.0M=0.001s
+
+Last-modified header missing -- time-stamps turned off.
+2017-09-28 14:51:46 (26.0 MB/s) - ‘storage/app/larioja/suscripciones’ saved [30921]
+
+--2017-09-28 14:51:46--  http://www.larioja.org/empleados/es?locale=es_ES
+Reusing existing connection to www.larioja.org:80.
+HTTP request sent, awaiting response... 200 OK
+Length: unspecified [text/html]
+Saving to: ‘storage/app/larioja/es?locale=es_ES’
+
+     0K .......... .......... .......... .......... .....      2.65M=0.02s
+
+Last-modified header missing -- time-stamps turned off.
+2017-09-28 14:51:46 (2.65 MB/s) - ‘storage/app/larioja/es?locale=es_ES’ saved [46575]
+
+--2017-09-28 14:51:46--  http://www.larioja.org/bor/es?locale=es_ES
+Reusing existing connection to www.larioja.org:80.
+HTTP request sent, awaiting response... 200 OK
+Length: unspecified [text/html]
+Saving to: ‘storage/app/larioja/es?locale=es_ES’
+
+     0K .......... .......... .......... .                     13.6M=0.002s
+
+Last-modified header missing -- time-stamps turned off.
+2017-09-28 14:51:46 (13.6 MB/s) - ‘storage/app/larioja/es?locale=es_ES’ saved [31976]
+
+--2017-09-28 14:51:46--  http://www.larioja.org/larioja-client/cm/tkAccessIntranet?locale=es_ES
+Reusing existing connection to www.larioja.org:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 2885 (2.8K) [text/html]
+Saving to: ‘storage/app/larioja/tkAccessIntranet?locale=es_ES’
+
+     0K ..                                                    100%  340M=0s
+
+Last-modified header missing -- time-stamps turned off.
+2017-09-28 14:51:46 (340 MB/s) - ‘storage/app/larioja/tkAccessIntranet?locale=es_ES’ saved [2885/2885]
+
+--2017-09-28 14:51:46--  http://www.larioja.org/direcciones-utiles/es?locale=es_ES
+Reusing existing connection to www.larioja.org:80.
+HTTP request sent, awaiting response... 200 OK
+Length: unspecified [text/html]
+Saving to: ‘storage/app/larioja/es?locale=es_ES’
+
+     0K .......... .......... .......                          26.6M=0.001s
+
+Last-modified header missing -- time-stamps turned off.
+2017-09-28 14:51:46 (26.6 MB/s) - ‘storage/app/larioja/es?locale=es_ES’ saved [27954]
+
+--2017-09-28 14:51:46--  http://www.valdezcaray.es/
+Resolving www.valdezcaray.es (www.valdezcaray.es)... 82.199.32.114
+Connecting to www.valdezcaray.es (www.valdezcaray.es)|82.199.32.114|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: unspecified [text/html]
+Saving to: ‘storage/app/larioja/index.html’
+
+     0K .......... .......... .......... ......                47.4M=0.001s
+
+Last-modified header missing -- time-stamps turned off.
+2017-09-28 14:51:47 (47.4 MB/s) - ‘storage/app/larioja/index.html’ saved [37026]
+
+--2017-09-28 14:51:47--  http://www.larioja.org/es/banners/124-valdezcaray_2014_2015.jpg
+Reusing existing connection to www.larioja.org:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 97086 (95K) [image/jpeg]
+Saving to: ‘storage/app/larioja/124-valdezcaray_2014_2015.jpg’
+
+     0K .......... .......... .......... .......... .......... 52% 2.43M 0s
+    50K .......... .......... .......... .......... ....      100% 1.78M=0.04s
+
+Last-modified header missing -- time-stamps turned off.
+2017-09-28 14:51:47 (2.07 MB/s) - ‘storage/app/larioja/124-valdezcaray_2014_2015.jpg’ saved [97086/97086]
+
+--2017-09-28 14:51:47--  http://www.larioja.org/larioja-client/cm
+Reusing existing connection to www.larioja.org:80.
+HTTP request sent, awaiting response... 200 OK
+Length: unspecified [text/html]
+Saving to: ‘storage/app/larioja/cm’
+
+     0K .......... .......... .......... .......... .......    26.0M=0.002s
+
+Last-modified header missing -- time-stamps turned off.
+2017-09-28 14:51:47 (26.0 MB/s) - ‘storage/app/larioja/cm’ saved [48895]
+
+--2017-09-28 14:51:47--  http://www.larioja.org/es/banners/185-larioja.png
+Reusing existing connection to www.larioja.org:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 28894 (28K) [image/png]
+Saving to: ‘storage/app/larioja/185-larioja.png’
+
+     0K .......... .......... ........                        100% 19.8M=0.001s
+
+Last-modified header missing -- time-stamps turned off.
+2017-09-28 14:51:47 (19.8 MB/s) - ‘storage/app/larioja/185-larioja.png’ saved [28894/28894]
+
+--2017-09-28 14:51:47--  http://www.larioja.org/bor/es/buscar
+Reusing existing connection to www.larioja.org:80.
+HTTP request sent, awaiting response... 200 OK
+Length: unspecified [text/html]
+Saving to: ‘storage/app/larioja/buscar’
+
+     0K .......... .......... .......... .                     6.46M=0.005s
+
+Last-modified header missing -- time-stamps turned off.
+2017-09-28 14:51:47 (6.46 MB/s) - ‘storage/app/larioja/buscar’ saved [32182]
+
+--2017-09-28 14:51:47--  http://www.larioja.org/comunidad/es?locale=es_ES
+Reusing existing connection to www.larioja.org:80.
+HTTP request sent, awaiting response... 200 OK
+Length: unspecified [text/html]
+Saving to: ‘storage/app/larioja/es?locale=es_ES’
+
+     0K .......... .......... ........                         4.20M=0.007s
+
+Last-modified header missing -- time-stamps turned off.
+2017-09-28 14:51:47 (4.20 MB/s) - ‘storage/app/larioja/es?locale=es_ES’ saved [29237]
+
+--2017-09-28 14:51:47--  http://www.larioja.org/presidente/es?locale=es_ES
+Reusing existing connection to www.larioja.org:80.
+HTTP request sent, awaiting response... 200 OK
+Length: unspecified [text/html]
+Saving to: ‘storage/app/larioja/es?locale=es_ES’
+
+     0K .......... .......... .......                          20.9M=0.001s
+
+Last-modified header missing -- time-stamps turned off.
+2017-09-28 14:51:47 (20.9 MB/s) - ‘storage/app/larioja/es?locale=es_ES’ saved [27725]
+
+--2017-09-28 14:51:47--  http://www.larioja.org/gobierno/es?locale=es_ES
+Reusing existing connection to www.larioja.org:80.
+HTTP request sent, awaiting response... 200 OK
+Length: unspecified [text/html]
+Saving to: ‘storage/app/larioja/es?locale=es_ES’
+
+     0K .......... .......... .......... ....
