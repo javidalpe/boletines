@@ -10,7 +10,9 @@ use App\Services\Scrapers\Comunidades\CantabriaScraperStrategy;
 use App\Services\Scrapers\Comunidades\CastillaLaManchaScraperStrategy;
 use App\Services\Scrapers\Comunidades\CastillaYLeonScraperStrategy;
 use App\Services\Scrapers\Comunidades\CatalunyaScraperStrategy;
+use App\Services\Scrapers\Comunidades\CeutaScraperStrategy;
 use App\Services\Scrapers\Comunidades\ComunidadDeMadridScraperStrategy;
+use App\Services\Scrapers\Comunidades\ComunidadValencianaScraperStrategy;
 use App\Services\Scrapers\Comunidades\ExtremaduraScraperStrategy;
 use App\Services\Scrapers\Comunidades\JuntaDeAndaluciaBoletinScraperStrategy;
 use App\Services\Scrapers\Comunidades\LaRiojaScraperStrategy;
@@ -62,9 +64,9 @@ class ScraperStrategyFactory
             case ScrapingService::BOLETIN_OFICIAL_DEL_PAIS_VASCO:
                 return new PaisVascoScraperStrategy();
             case ScrapingService::DIARI_OFICIAL_DE_LA_COMUNITAT_VALENCIANA:
-                return null;
+                return new ComunidadValencianaScraperStrategy();
             case ScrapingService::BOLETIN_OFICIAL_DE_LA_CIUDAD_AUTONOMA_DE_CEUTA:
-                return null;
+                return new CeutaScraperStrategy();
             case ScrapingService::BOLETIN_OFICIAL_DE_LA_CIUDAD_AUTONOMA_DE_MELILLA:
                 return new MelillaScraperStrategy();
         }
