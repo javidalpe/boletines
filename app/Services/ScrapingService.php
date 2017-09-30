@@ -159,6 +159,9 @@ class ScrapingService
         Log::debug("Parsing pdf: " . $filename);
 
         $content = $this->getContentFromPDF($filename);
+
+        if (!$content) return;
+
         $publishedAt = Storage::lastModified($filename);
 
         $this->storeText($filename, $content, $regionName, $priority, $publishedAt);
@@ -227,6 +230,9 @@ class ScrapingService
 
         exec("pdftotext -enc ASCII7 {$fullFilePath} {$fullPathWithText}");
 
+        if (!file_exists($fullPathWithText)) {
+        	return false;
+        }
         $content = utf8_decode(file_get_contents($fullPathWithText));
         return $content;
     }

@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Document extends Model
 {
+	use Searchable;
+
     /**
      * The attributes that should be mutated to dates.
      *

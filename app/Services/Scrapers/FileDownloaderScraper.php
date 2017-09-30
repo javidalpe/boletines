@@ -5,6 +5,7 @@ namespace App\Services\Scrapers;
 
 
 use App\Services\Scrapers\Http\EffectiveUrlMiddleware;
+use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;
 use Log;
@@ -63,6 +64,7 @@ class FileDownloaderScraper
 		$this->contents = [];
 
 		foreach ($this->links as $link) {
+			Log::debug("Obteniendo {$link}");
 			$content = $this->httpGet($link);
 			$this->contents[] = html_entity_decode($content);
 		}
@@ -154,8 +156,6 @@ class FileDownloaderScraper
 		}
 
 		$this->lastUrl = $protocol . $parse["host"] . $path;
-
-		Log::debug("Using base url {$this->lastUrl}");
 	}
 
 	/**
@@ -228,9 +228,17 @@ class FileDownloaderScraper
 	private function downloadFile($link)
 	{
 		Log::debug("Downloading {$link}");
-		$content = file_get_contents($link);
+		$count = 3;
+		do {
+			try {
+				$content = file_get_contents($link);
+				return $content;
+			} catch (Exception $e) {
+				$count--;
+			}
+		} while($count);
 
-		return $content;
+		return false;
 	}
 
 	/**

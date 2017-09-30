@@ -41,7 +41,7 @@ class UpdateIndexes extends Command
         $service = new ScrapingService();
         $id = $this->argument('id');
 
-        if (!$id) {
+        if ($id == null || $id === false) {
             $service->updateIndexes();
         } else {
             $service->updateIndex($id);

@@ -14,7 +14,7 @@ class MelillaScraperStrategy implements IBoletinScraperStrategy
 	public function downloadFilesFromInternet()
 	{
 		FileDownloaderScraper::create("http://www.melilla.es/melillaportal/contenedor.jsp?seccion=bome.jsp&language=es&codResi=1&layout=contenedor.jsp&codAdirecto=15")
-			->forEachLink ("/contenedor\.jsp\?seccion=ficha_bome\.jsp&dboidboletin=2\d+/")
+			->forEachLink ("/contenedor\.jsp\?seccion=ficha_bome\.jsp&dboidboletin=23\d+/")
 			->navigate()
 			->forEachLink("/http:\/\/www\.melilla\.es\/mandar\.php\/\w+\/\d+\/\d+\/\w+\.pdf/")
 			->download(storage_path('app/' . self::DIRECTORY_FILES. '/'));

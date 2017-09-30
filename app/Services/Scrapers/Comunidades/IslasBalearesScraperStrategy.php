@@ -19,7 +19,7 @@ class IslasBalearesScraperStrategy implements IBoletinScraperStrategy
 		$fileName = sprintf("%s.pdf", $now->format("Y-m-d"));
 
 		FileDownloaderScraper::create("http://www.caib.es/eboibfront/?lang=es")
-			->forEachLink ("/\/eboibfront\/es\/\d+\/\w+\/")
+			->forEachLink ("/\/eboibfront\/es\/\d+\/\d+/")
 			->navigate()
 			->forEachLink("/\/eboibfront\/pdf\/VisPdf\?action=VisEdicte&idDocument=\w+&lang=es/")
 			->download(storage_path('app/' . self::DIRECTORY_FILES. '/'), $fileName);

@@ -23,6 +23,7 @@ use App\Services\Scrapers\Comunidades\PaisVascoScraperStrategy;
 use App\Services\Scrapers\Comunidades\PrincipadoDeAsturiasScraperStrategy;
 use App\Services\Scrapers\Comunidades\RegionDeMurciaBoletinScraperStrategy;
 use App\Services\Scrapers\Comunidades\XuntaGaliciaScraperStrategy;
+use App\Services\Scrapers\Estatal\BoeScraperStrategy;
 use App\Services\ScrapingService;
 
 class ScraperStrategyFactory
@@ -32,6 +33,8 @@ class ScraperStrategyFactory
     {
         switch ($id)
         {
+	        case ScrapingService::BOLETIN_OFICIAL_DEL_ESTADO:
+	        	return new BoeScraperStrategy();
             case ScrapingService::BOLETIN_OFICIAL_DE_LA_JUNTA_DE_ANDALUCIA:
                 return new JuntaDeAndaluciaBoletinScraperStrategy();
             case ScrapingService::BOLETIN_OFICIAL_DE_ARAGON:
