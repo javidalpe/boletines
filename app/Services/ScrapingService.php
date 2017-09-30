@@ -54,7 +54,9 @@ class ScrapingService
 	const PDF_EXTENSION = 'pdf';
 	const PDF_EXTENSION_MAY = 'PDF';
 
-    public function updateIndexes()
+	const MAX_DOCUMENT_CONTENT_LENGTH = 7800;
+
+	public function updateIndexes()
     {
         Log::debug("Updating all indexes");
 
@@ -177,7 +179,7 @@ class ScrapingService
     private function storeText($filename, $text, $regionName, $priority, $publishedAt)
     {
         $textLength = strlen($text);
-        $lengthPerDocument = 8000;
+        $lengthPerDocument = self::MAX_DOCUMENT_CONTENT_LENGTH;
         $numDocuments = $textLength / $lengthPerDocument;
         for ($i = 0; $i < $numDocuments; $i++) {
             $body = substr($text, $i * $lengthPerDocument, $lengthPerDocument);
