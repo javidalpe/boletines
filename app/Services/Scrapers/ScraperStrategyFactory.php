@@ -14,6 +14,7 @@ use App\Services\Scrapers\Comunidades\CeutaScraperStrategy;
 use App\Services\Scrapers\Comunidades\ComunidadDeMadridScraperStrategy;
 use App\Services\Scrapers\Comunidades\ComunidadValencianaScraperStrategy;
 use App\Services\Scrapers\Comunidades\ExtremaduraScraperStrategy;
+use App\Services\Scrapers\Comunidades\IslasBalearesScraperStrategy;
 use App\Services\Scrapers\Comunidades\JuntaDeAndaluciaBoletinScraperStrategy;
 use App\Services\Scrapers\Comunidades\LaRiojaScraperStrategy;
 use App\Services\Scrapers\Comunidades\MelillaScraperStrategy;
@@ -38,7 +39,7 @@ class ScraperStrategyFactory
             case ScrapingService::BOLETIN_OFICIAL_DEL_PRINCIPADO_DE_ASTURIAS:
                 return new PrincipadoDeAsturiasScraperStrategy();
             case ScrapingService::BOLETIN_OFICIAL_DE_ISLAS_BALEARES:
-                return  null;
+                return new IslasBalearesScraperStrategy();
             case ScrapingService::BOLETIN_OFICIAL_DE_CANARIAS:
                 return new CanariasScraperStrategy();
             case ScrapingService::BOLETIN_OFICIAL_DE_CANTABRIA:
