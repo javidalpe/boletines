@@ -10,7 +10,7 @@ class AdminController extends Controller
     public function scrapers()
     {
         $publications = Publication::all();
-        $runs = Run::with("publication")->get();
+        $runs = Run::with("publication")->orderBy('id', 'desc')->get();
 
         $data = [
             'publications' => $publications,
