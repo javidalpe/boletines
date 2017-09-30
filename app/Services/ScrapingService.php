@@ -51,7 +51,8 @@ class ScrapingService
     const RUN_RESULT_OK = 'ok';
     const RUN_RESULT_ERROR = 'error';
 
-    const PDF_EXTENSION = 'pdf';
+	const PDF_EXTENSION = 'pdf';
+	const PDF_EXTENSION_MAY = 'PDF';
 
     public function updateIndexes()
     {
@@ -149,7 +150,7 @@ class ScrapingService
     {
         $info = pathinfo($filename);
 
-        if ($info['extension'] != self::PDF_EXTENSION) return;
+        if ($info['extension'] != self::PDF_EXTENSION && $info['extension'] != self::PDF_EXTENSION_MAY) return;
 
         $existingDocument = Document::where('filename', $filename)->first();
 

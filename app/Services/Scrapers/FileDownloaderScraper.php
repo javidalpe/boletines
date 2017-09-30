@@ -4,6 +4,9 @@
 namespace App\Services\Scrapers;
 
 
+use App\Services\Scrapers\Http\EffectiveUrlMiddleware;
+use GuzzleHttp\Client;
+use GuzzleHttp\HandlerStack;
 use Log;
 
 class FileDownloaderScraper
@@ -59,14 +62,9 @@ class FileDownloaderScraper
 		$this->contents = [];
 
 		foreach ($this->links as $link) {
-			$content = file_get_contents($link);
+			$content = $this->httpGet($link);
 			$this->contents[] = html_entity_decode($content);
 		}
-
-		if (count($this->links) > 0) {
-			$this->updateBaseUrl($this->links[0]);
-		}
-
 		$this->links = [];
 		return $this;
 	}
@@ -99,8 +97,8 @@ class FileDownloaderScraper
 	 */
 	private function match($body, $pattern)
 	{
-		preg_match_all($pattern, $body, $matches, PREG_OFFSET_CAPTURE);
-		return array_column($matches[0], 0);
+		preg_match_all($pattern, $body, $matches, PREG_PATTERN_ORDER);
+		return $matches[0];
 	}
 
 	/**
@@ -143,7 +141,6 @@ class FileDownloaderScraper
 	 */
 	private function updateBaseUrl(string $link)
 	{
-		Log::debug("Parsing {$link}");
 		$parse = parse_url($link);
 
 		$protocol = (isset($parse["scheme"]) ? ($parse["scheme"].":") : '') . '//';
@@ -156,6 +153,8 @@ class FileDownloaderScraper
 		}
 
 		$this->lastUrl = $protocol . $parse["host"] . $path;
+
+		Log::debug("Using base url {$this->lastUrl}");
 	}
 
 	/**
@@ -248,6 +247,28 @@ class FileDownloaderScraper
 
 		$content = $this->downloadFile($link);
 		$this->saveFile($directoryName, $filePath, $content);
+	}
+
+	/**
+	 * @param $url
+	 *
+	 * @return bool|string
+	 */
+	private function httpGet($url)
+	{
+		// Add the middleware to stack and create guzzle client
+		$stack = HandlerStack::create();
+		$stack->push(EffectiveUrlMiddleware::middleware());
+		$client = new Client(['handler' => $stack]);
+
+		$response = $client->request('GET', $url);
+		$body = $response->getBody();
+
+		$effectiveUrl = $response->getHeaderLine('X-GUZZLE-EFFECTIVE-URL');
+		$this->updateBaseUrl($effectiveUrl);
+
+		$stringBody = (string) $body;
+		return $stringBody;
 	}
 
 

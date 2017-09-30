@@ -10,12 +10,15 @@ use App\Services\Scrapers\Comunidades\CantabriaScraperStrategy;
 use App\Services\Scrapers\Comunidades\CastillaLaManchaScraperStrategy;
 use App\Services\Scrapers\Comunidades\CastillaYLeonScraperStrategy;
 use App\Services\Scrapers\Comunidades\CatalunyaScraperStrategy;
+use App\Services\Scrapers\Comunidades\ComunidadDeMadridScraperStrategy;
 use App\Services\Scrapers\Comunidades\ExtremaduraScraperStrategy;
 use App\Services\Scrapers\Comunidades\JuntaDeAndaluciaBoletinScraperStrategy;
+use App\Services\Scrapers\Comunidades\LaRiojaScraperStrategy;
 use App\Services\Scrapers\Comunidades\MelillaScraperStrategy;
 use App\Services\Scrapers\Comunidades\NavarraScraperStrategy;
 use App\Services\Scrapers\Comunidades\PrincipadoDeAsturiasScraperStrategy;
 use App\Services\Scrapers\Comunidades\RegionDeMurciaBoletinScraperStrategy;
+use App\Services\Scrapers\Comunidades\XuntaGaliciaScraperStrategy;
 use App\Services\ScrapingService;
 
 class ScraperStrategyFactory
@@ -46,11 +49,11 @@ class ScraperStrategyFactory
             case ScrapingService::DIARIO_OFICIAL_DE_EXTREMADURA:
                 return new ExtremaduraScraperStrategy();
             case ScrapingService::DIARIO_OFICIAL_DE_GALICIA:
-                return null;
+                return new XuntaGaliciaScraperStrategy();
             case ScrapingService::BOLETIN_OFICIAL_DE_LA_RIOJA:
-                return null;
+                return new LaRiojaScraperStrategy();
             case ScrapingService::BOLETIN_OFICIAL_DE_LA_COMUNIDAD_DE_MADRID:
-                return null;
+                return new ComunidadDeMadridScraperStrategy();
             case ScrapingService::BOLETIN_OFICIAL_DE_LA_REGION_DE_MURCIA:
                 return new RegionDeMurciaBoletinScraperStrategy();
             case ScrapingService::BOLETIN_OFICIAL_DE_NAVARRA:

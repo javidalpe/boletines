@@ -4,18 +4,27 @@
 namespace App\Services\Scrapers\Comunidades;
 
 
+use App\Services\Scrapers\FileDownloaderScraper;
 use App\Services\Scrapers\IBoletinScraperStrategy;
+use Carbon\Carbon;
+use Storage;
 
 class LaRiojaScraperStrategy implements IBoletinScraperStrategy
 {
+	const DIRECTORY_FILES = "larioja";
 
-    public function downloadFilesFromInternet()
-    {
-        echo("wget --no-directories --recursive -H -A \"/*-X\" --timeout=4 -N --tries=2 -l 1 -e robots=off -P storage/app/larioja http://www.larioja.org/bor/es");
-    }
+	public function downloadFilesFromInternet()
+	{
+		$now = Carbon::now();
+		$fileName = sprintf("%s.pdf", $now->format("Y-m-d"));
 
-    public function getFiles()
-    {
-        // TODO: Implement getFiles() method.
-    }
+		FileDownloaderScraper::create("http://www.larioja.org/bor/es")
+			->forEachLink ("/http:\/\/ias1\.larioja\.org\/boletin\/Bor_Boletin_visor_Servlet\?referencia=[^\"]+/")
+			->download(storage_path('app/' . self::DIRECTORY_FILES. '/'), $fileName);
+	}
+
+	public function getFiles()
+	{
+		return Storage::files(self::DIRECTORY_FILES);
+	}
 }
