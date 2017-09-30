@@ -8,6 +8,8 @@ use App\Services\Scrapers\Comunidades\AragonScraperStrategy;
 use App\Services\Scrapers\Comunidades\CanariasScraperStrategy;
 use App\Services\Scrapers\Comunidades\CantabriaScraperStrategy;
 use App\Services\Scrapers\Comunidades\CastillaLaManchaScraperStrategy;
+use App\Services\Scrapers\Comunidades\CastillaYLeonScraperStrategy;
+use App\Services\Scrapers\Comunidades\CatalunyaScraperStrategy;
 use App\Services\Scrapers\Comunidades\ExtremaduraScraperStrategy;
 use App\Services\Scrapers\Comunidades\JuntaDeAndaluciaBoletinScraperStrategy;
 use App\Services\Scrapers\Comunidades\MelillaScraperStrategy;
@@ -38,9 +40,9 @@ class ScraperStrategyFactory
             case ScrapingService::DIARIO_OFICIAL_DE_CASTILLA_LA_MANCHA:
                 return new CastillaLaManchaScraperStrategy();
             case ScrapingService::BOLETIN_OFICIAL_DE_CASTILLA_Y_LEON:
-                return null;
+                return new CastillaYLeonScraperStrategy();
             case ScrapingService::DIARI_OFICIAL_DE_LA_GENERALITAT_DE_CATALUNYA:
-                return null;
+                return new CatalunyaScraperStrategy();
             case ScrapingService::DIARIO_OFICIAL_DE_EXTREMADURA:
                 return new ExtremaduraScraperStrategy();
             case ScrapingService::DIARIO_OFICIAL_DE_GALICIA:
