@@ -6,6 +6,8 @@ namespace App\Services\Scrapers;
 
 use App\Services\Scrapers\Comunidades\AragonScraperStrategy;
 use App\Services\Scrapers\Comunidades\CanariasScraperStrategy;
+use App\Services\Scrapers\Comunidades\CantabriaScraperStrategy;
+use App\Services\Scrapers\Comunidades\CastillaLaManchaScraperStrategy;
 use App\Services\Scrapers\Comunidades\ExtremaduraScraperStrategy;
 use App\Services\Scrapers\Comunidades\JuntaDeAndaluciaBoletinScraperStrategy;
 use App\Services\Scrapers\Comunidades\MelillaScraperStrategy;
@@ -32,9 +34,9 @@ class ScraperStrategyFactory
             case ScrapingService::BOLETIN_OFICIAL_DE_CANARIAS:
                 return new CanariasScraperStrategy();
             case ScrapingService::BOLETIN_OFICIAL_DE_CANTABRIA:
-                return null;
+                return new CantabriaScraperStrategy();
             case ScrapingService::DIARIO_OFICIAL_DE_CASTILLA_LA_MANCHA:
-                return null;
+                return new CastillaLaManchaScraperStrategy();
             case ScrapingService::BOLETIN_OFICIAL_DE_CASTILLA_Y_LEON:
                 return null;
             case ScrapingService::DIARI_OFICIAL_DE_LA_GENERALITAT_DE_CATALUNYA:
