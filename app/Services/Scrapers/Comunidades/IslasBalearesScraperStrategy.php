@@ -22,7 +22,7 @@ class IslasBalearesScraperStrategy implements IBoletinScraperStrategy
 			->forEachLink ("/\/eboibfront\/es\/\d+\/\d+/")
 			->navigate()
 			->forEachLink("/\/eboibfront\/pdf\/VisPdf\?action=VisEdicte&idDocument=\w+&lang=es/")
-			->download(storage_path('app/' . self::DIRECTORY_FILES. '/'), $fileName);
+			->download(storage_path('app/public/' . self::DIRECTORY_FILES. '/'), $fileName);
 	}
 
 	public function getFiles()

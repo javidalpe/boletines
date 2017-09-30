@@ -18,7 +18,7 @@ class PaisVascoScraperStrategy implements IBoletinScraperStrategy
 			->forEachLink ("/\d+\/\d+\/\w+\.shtml/")
 			->navigate()
 			->forEachLink("/\w+\.pdf/")
-			->download(storage_path('app/' . self::DIRECTORY_FILES. '/'));
+			->download(storage_path('app/public/' . self::DIRECTORY_FILES. '/'));
 	}
 
 	public function getFiles()

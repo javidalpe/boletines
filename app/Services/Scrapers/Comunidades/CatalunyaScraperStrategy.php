@@ -20,7 +20,7 @@ class CatalunyaScraperStrategy implements IBoletinScraperStrategy
 
 		FileDownloaderScraper::create("http://dogc.gencat.cat/es/index.html?newLang=es_ES&language=es_ES")
 			->forEachLink ("/http:\/\/portaldogc\.gencat\.cat\/utilsEADOP\/dogc\d*\/dogc_es\.pdf/")
-			->download(storage_path('app/' . self::DIRECTORY_FILES. '/'), $fileName);
+			->download(storage_path('app/public/' . self::DIRECTORY_FILES. '/'), $fileName);
 	}
 
 	public function getFiles()

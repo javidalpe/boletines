@@ -20,7 +20,7 @@ class NavarraScraperStrategy implements IBoletinScraperStrategy
 
 		FileDownloaderScraper::create("http://www.navarra.es/home_es/Actualidad/BON/")
 			->forEachLink ("/\/home_es\/Actualidad\/BON\/Boletines\/\d+\/\d+\/boletin.pdf/")
-			->download(storage_path('app/' . self::DIRECTORY_FILES. '/'), $fileName);
+			->download(storage_path('app/public/' . self::DIRECTORY_FILES. '/'), $fileName);
 	}
 
 	public function getFiles()

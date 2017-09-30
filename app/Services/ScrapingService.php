@@ -235,7 +235,8 @@ class ScrapingService
         if (!file_exists($fullPathWithText)) {
         	return false;
         }
-        $content = utf8_decode(file_get_contents($fullPathWithText));
+        $content = file_get_contents($fullPathWithText);
+        unlink($fullPathWithText);
         return $content;
     }
 

@@ -17,11 +17,11 @@ class BoeScraperStrategy implements IBoletinScraperStrategy
 	{
 		FileDownloaderScraper::create("https://www.boe.es/diario_boe/ultimo.php")
 			->forEachLink ("/\/boe\/dias\/\d+\/\d+\/\d+\/pdfs\/[^\.]+\.pdf/")
-			->download(storage_path('app/' . self::DIRECTORY_FILES. '/'))
+			->download(storage_path('app/public/' . self::DIRECTORY_FILES. '/'))
 			->forEachLink ("/\/boe\/dias\/\d+\/\d+\/\d+\/index.php\?d=\d+&s=\d+/")
 			->navigate()
 			->forEachLink ("/\/boe\/dias\/\d+\/\d+\/\d+\/pdfs\/[^\.]+\.pdf/")
-			->download(storage_path('app/' . self::DIRECTORY_FILES. '/'));
+			->download(storage_path('app/public/' . self::DIRECTORY_FILES. '/'));
 	}
 
 	public function getFiles()

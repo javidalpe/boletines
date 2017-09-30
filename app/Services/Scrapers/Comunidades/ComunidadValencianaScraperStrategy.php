@@ -20,7 +20,7 @@ class ComunidadValencianaScraperStrategy implements IBoletinScraperStrategy
 
 		FileDownloaderScraper::create($initialUrl)
 			->forEachLink ("/pdf\/docv_\d+\.pdf/")
-			->download(storage_path('app/' . self::DIRECTORY_FILES. '/'));
+			->download(storage_path('app/public/' . self::DIRECTORY_FILES. '/'));
 	}
 
 	public function getFiles()

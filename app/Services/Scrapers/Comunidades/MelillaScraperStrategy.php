@@ -17,7 +17,7 @@ class MelillaScraperStrategy implements IBoletinScraperStrategy
 			->forEachLink ("/contenedor\.jsp\?seccion=ficha_bome\.jsp&dboidboletin=23\d+/")
 			->navigate()
 			->forEachLink("/http:\/\/www\.melilla\.es\/mandar\.php\/\w+\/\d+\/\d+\/\w+\.pdf/")
-			->download(storage_path('app/' . self::DIRECTORY_FILES. '/'));
+			->download(storage_path('app/public/' . self::DIRECTORY_FILES. '/'));
 	}
 
 	public function getFiles()

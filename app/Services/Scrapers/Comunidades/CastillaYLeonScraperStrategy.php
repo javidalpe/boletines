@@ -19,7 +19,7 @@ class CastillaYLeonScraperStrategy implements IBoletinScraperStrategy
 			->forEachLink("/boletin\.do\?fechaBoletin=\d+\/\d+\/\d+/")
 			->navigate()
 			->forEachLink("/http:\/\/bocyl\.jcyl\.es\/boletines\/\d+\/\d+\/\d+\/pdf\/BOCYL\-D\-\d+-\d+\.pdf/")
-			->download(storage_path('app/' . self::DIRECTORY_FILES. '/'));
+			->download(storage_path('app/public/' . self::DIRECTORY_FILES. '/'));
 	}
 
 	public function getFiles()

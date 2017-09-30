@@ -18,7 +18,7 @@ class XuntaGaliciaScraperStrategy implements IBoletinScraperStrategy
 			->forEachLink ("/mostrarContenido\.do\?paginaCompleta=false&idEstado=\d+&rutaRelativa=true&ruta=\/\d+\/\d+\/Secciones\w+\.html/")
 			->navigate()
 			->forEachLink("/\/dog\/Publicados\/\d+\/\d+\/\w+-\w+-\w+\.pdf/")
-			->download(storage_path('app/' . self::DIRECTORY_FILES. '/'));
+			->download(storage_path('app/public/' . self::DIRECTORY_FILES. '/'));
 	}
 
 	public function getFiles()

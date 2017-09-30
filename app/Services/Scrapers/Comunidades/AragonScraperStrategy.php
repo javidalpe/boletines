@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Storage;
 class AragonScraperStrategy implements IBoletinScraperStrategy
 {
 
-    const FILES_DIRECTORY = "aragon";
+    const FILES_DIRECTORY = "public/aragon";
     const INITIAL_PAGE = "http://www.boa.aragon.es/";
     const BOLETIN_LINK_REGEX = "/BRSCGI\?CMD=VEROBJ&MLKOB=\d+/";
     const BOLETIN_BASE_URL = self::INITIAL_PAGE . '/cgi-bin/EBOA/';

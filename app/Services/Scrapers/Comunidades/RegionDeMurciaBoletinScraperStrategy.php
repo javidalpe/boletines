@@ -19,7 +19,7 @@ class RegionDeMurciaBoletinScraperStrategy implements IBoletinScraperStrategy
 
     const BORM_LINK_REGEX = "/\/borm\/documento\?obj=bol&amp;id=\d+/";
 
-    const FILES_DIRECTORY = 'rmurcia';
+    const FILES_DIRECTORY = 'public/rmurcia';
 
 
     public function downloadFilesFromInternet()
