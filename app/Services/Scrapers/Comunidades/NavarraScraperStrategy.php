@@ -4,20 +4,27 @@
 namespace App\Services\Scrapers\Comunidades;
 
 
+use App\Services\Scrapers\FileDownloaderScraper;
 use App\Services\Scrapers\IBoletinScraperStrategy;
-use File;
+use Carbon\Carbon;
 use Storage;
 
 class NavarraScraperStrategy implements IBoletinScraperStrategy
 {
+	const DIRECTORY_FILES = "navarra";
 
-    public function downloadFilesFromInternet()
-    {
-        exec("wget --reject-regex \"/*Anuncio-*\" --recursive -H --accept-regex \"/home_es/Actualidad/BON/Boletines/*\" -A \"*boletin.pdf\" pdf --timeout=4 -N --tries=2 -l 3 -e robots=off -P storage/app/navarra --domains www.navarra.es http://www.navarra.es/home_es/Actualidad/BON/Boletines/");
-    }
+	public function downloadFilesFromInternet()
+	{
+		$now = Carbon::now();
+		$fileName = sprintf("%s.pdf", $now->format("Y-m-d"));
 
-    public function getFiles()
-    {
-        return Storage::allFiles('/navarra/www.navarra.es/home_es/Actualidad/BON/Boletines/');
-    }
+		FileDownloaderScraper::create("http://www.navarra.es/home_es/Actualidad/BON/")
+			->forEachLink ("/\/home_es\/Actualidad\/BON\/Boletines\/\d+\/\d+\/boletin.pdf/")
+			->download(storage_path('app/' . self::DIRECTORY_FILES. '/'), $fileName);
+	}
+
+	public function getFiles()
+	{
+		return Storage::files(self::DIRECTORY_FILES);
+	}
 }

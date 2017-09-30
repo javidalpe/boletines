@@ -45,9 +45,10 @@ class FileDownloaderScraper
 	public function forEachLink(string $regex)
 	{
 		Log::debug($regex);
+		$this->links = [];
 		foreach ($this->contents as $content) {
 			$rawHtmlLinks = $this->match($content, $regex);
-			$this->links  = $this->fixLinks($rawHtmlLinks);
+			$this->links  = array_merge($this->links, $this->fixLinks($rawHtmlLinks));
 		}
 		return $this;
 	}
@@ -240,6 +241,8 @@ class FileDownloaderScraper
 	 */
 	private function downloadLink($directoryName, $fileName, $link, $fileNumber)
 	{
+		Log::debug("Handling {$link}");
+
 		$downloadFileName = $this->getDownloadFileName($fileName, $link, $fileNumber);
 		$filePath = $directoryName . $downloadFileName;
 

@@ -16,6 +16,7 @@ use App\Services\Scrapers\Comunidades\JuntaDeAndaluciaBoletinScraperStrategy;
 use App\Services\Scrapers\Comunidades\LaRiojaScraperStrategy;
 use App\Services\Scrapers\Comunidades\MelillaScraperStrategy;
 use App\Services\Scrapers\Comunidades\NavarraScraperStrategy;
+use App\Services\Scrapers\Comunidades\PaisVascoScraperStrategy;
 use App\Services\Scrapers\Comunidades\PrincipadoDeAsturiasScraperStrategy;
 use App\Services\Scrapers\Comunidades\RegionDeMurciaBoletinScraperStrategy;
 use App\Services\Scrapers\Comunidades\XuntaGaliciaScraperStrategy;
@@ -59,7 +60,7 @@ class ScraperStrategyFactory
             case ScrapingService::BOLETIN_OFICIAL_DE_NAVARRA:
                 return new NavarraScraperStrategy();
             case ScrapingService::BOLETIN_OFICIAL_DEL_PAIS_VASCO:
-                return null;
+                return new PaisVascoScraperStrategy();
             case ScrapingService::DIARI_OFICIAL_DE_LA_COMUNITAT_VALENCIANA:
                 return null;
             case ScrapingService::BOLETIN_OFICIAL_DE_LA_CIUDAD_AUTONOMA_DE_CEUTA:
