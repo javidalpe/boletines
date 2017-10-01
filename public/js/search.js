@@ -19433,7 +19433,8 @@ ToggleButton.propTypes = propTypes;
 /* 306 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(307);
+__webpack_require__(307);
+module.exports = __webpack_require__(712);
 
 
 /***/ }),
@@ -19480,7 +19481,7 @@ var Hit = function Hit(_ref) {
 				null,
 				hit.published_at
 			),
-			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["Highlight"], { hit: hit, attributeName: 'content' })
+			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["Highlight"], { hit: hit, attributeName: 'content    ' })
 		)
 	);
 };
@@ -70034,6 +70035,12 @@ var Well = function (_React$Component) {
 
 
 
+
+/***/ }),
+/* 712 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

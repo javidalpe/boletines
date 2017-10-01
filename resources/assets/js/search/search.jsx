@@ -16,7 +16,7 @@ import { Panel } from 'react-bootstrap';
 const Hit = ({hit}) => {
 	var url = "/storage/" + hit.filename;
 	return <div className="hit panel panel-default panel-body">
-		<a href={url} className="btn btn-default pull-right">
+		<a href={url} target="_blank" className="btn btn-default pull-right">
 			<i className="glyphicon glyphicon-download"></i> Descargar PDF</a>
 		<div>
 			<strong>{hit.publication_name}</strong>
