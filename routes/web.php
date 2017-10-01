@@ -11,18 +11,17 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/demo', 'HomeController@demo')->name('demo');
+Route::get('/', 'LandingController@welcome')->name('welcome');
+Route::get('/demo', 'LandingController@demo')->name('demo');
+Route::get('/precios', 'LandingController@pricing')->name('pricing');
 
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/search', 'HomeController@search')->name('search');
-
+Route::middleware('auth')->group(function () {
+	Route::get('/home', 'HomeController@index')->name('home');
+	Route::get('/search', 'HomeController@search')->name('search');
+});
 
 Route::prefix('admin')->group(function () {
     Route::get('/scrapers', 'AdminController@scrapers')->name('scrapers');
