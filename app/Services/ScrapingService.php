@@ -10,6 +10,7 @@ use App\Run;
 use App\Services\Scrapers\Exceptions\BadRequestException;
 use App\Services\Scrapers\IBoletinScraperStrategy;
 use App\Services\Scrapers\ScraperStrategyFactory;
+use GuzzleHttp\Exception\ClientException;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -108,16 +109,19 @@ class ScrapingService
         $newCount = $oldCount;
 
         try {
-            $scrapper->downloadFilesFromInternet();
-            $files = $scrapper->getFiles();
-            $newCount = count($files);
+	        $scrapper->downloadFilesFromInternet();
+	        $files = $scrapper->getFiles();
+	        $newCount = count($files);
 
-            Log::debug("Parsing {$newCount} files.");
+	        Log::debug("Parsing {$newCount} files.");
 
-            $this->saveFiles($files, $regionName, $priority);
+	        $this->saveFiles($files, $regionName, $priority);
 
-            $run->result = self::RUN_RESULT_OK;
-            $publication->last_success_run_at = Carbon::now();
+	        $run->result = self::RUN_RESULT_OK;
+	        $publication->last_success_run_at = Carbon::now();
+        } catch (ClientException $e) {
+	        Log::debug("Error updating {$regionName}: error al obtener la url "  . $e->getRequest()->getUri());
+	        $run->result = self::RUN_RESULT_ERROR;
         } catch (\ErrorException $e) {
             Log::debug("Error updating {$regionName}: " . $e->getTraceAsString());
             $run->result = self::RUN_RESULT_ERROR;
@@ -196,19 +200,19 @@ class ScrapingService
 
     /**
      * @param $filename
-     * @param $body
+     * @param $content
      * @param $regionName
      * @param $priority
      * @param $publishedAt
      */
-    private function createChunk($filename, $body, $regionName, $priority, $publishedAt)
+    private function createChunk($filename, $content, $regionName, $priority, $publishedAt)
     {
         $chunk = new Chunk();
         $chunk->filename = $filename;
         $chunk->publication_name = $regionName;
         $chunk->publication_priority = $priority;
         $chunk->published_at = Carbon::createFromTimestamp($publishedAt);
-        $chunk->body = $body;
+        $chunk->content = $content;
         $chunk->save();
     }
 

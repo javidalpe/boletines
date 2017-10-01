@@ -21,7 +21,7 @@ const Hit = ({hit}) => {
 		<div>
 			<strong>{hit.publication_name}</strong>
 			<div>{hit.published_at}</div>
-			<Highlight hit={hit}  attributeName="body"/>
+			<Highlight hit={hit}  attributeName="content    "/>
 		</div>
 	</div>
 }
@@ -45,7 +45,7 @@ ReactDOM.render(
 	<InstantSearch
 		apiKey="ce998e3325240a5b676b316e8f682df2"
 		appId="GE8OQOT0GY"
-		indexName="document_index"
+		indexName="chunks_index"
 	>
 		<Configure distinct={1}/>
 

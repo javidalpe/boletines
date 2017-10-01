@@ -11,7 +11,7 @@ use Storage;
 
 class BoeScraperStrategy implements IBoletinScraperStrategy
 {
-	const DIRECTORY_FILES = "boe";
+	const DIRECTORY_FILES = "public/boe";
 
 	public function downloadFilesFromInternet()
 	{

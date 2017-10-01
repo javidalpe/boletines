@@ -19480,7 +19480,7 @@ var Hit = function Hit(_ref) {
 				null,
 				hit.published_at
 			),
-			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["Highlight"], { hit: hit, attributeName: 'body' })
+			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["Highlight"], { hit: hit, attributeName: 'content' })
 		)
 	);
 };
@@ -19515,7 +19515,7 @@ __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODU
 	{
 		apiKey: 'ce998e3325240a5b676b316e8f682df2',
 		appId: 'GE8OQOT0GY',
-		indexName: 'document_index'
+		indexName: 'chunks_index'
 	},
 	__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["Configure"], { distinct: 1 }),
 	__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(

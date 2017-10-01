@@ -7,7 +7,7 @@ use Laravel\Scout\Searchable;
 
 class Chunk extends Model
 {
-	//use Searchable;
+	use Searchable;
 
     /**
      * The attributes that should be mutated to dates.
@@ -29,5 +29,18 @@ class Chunk extends Model
 	public function searchableAs()
 	{
 		return 'chunks_index';
+	}
+
+	/**
+	 * Get the indexable data array for the model.
+	 *
+	 * @return array
+	 */
+	public function toSearchableArray()
+	{
+		$array = $this->toArray();
+		unset($array['updated_at']);
+		$array['timestamp'] = $this->published_at->timestamp;
+		return $array;
 	}
 }
