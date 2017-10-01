@@ -4,6 +4,7 @@
 namespace App\Services\Scrapers\Comunidades;
 
 
+use App\Services\Scrapers\FileDownloaderScraper;
 use App\Services\Scrapers\HttpService;
 use App\Services\Scrapers\IBoletinScraperStrategy;
 use App\Services\ScrapingService;
@@ -12,28 +13,21 @@ use Illuminate\Support\Facades\Storage;
 
 class AragonScraperStrategy implements IBoletinScraperStrategy
 {
+	const DIRECTORY_FILES = "public/aragon";
 
-    const FILES_DIRECTORY = "public/aragon";
-    const INITIAL_PAGE = "http://www.boa.aragon.es/";
-    const BOLETIN_LINK_REGEX = "/BRSCGI\?CMD=VEROBJ&MLKOB=\d+/";
-    const BOLETIN_BASE_URL = self::INITIAL_PAGE . '/cgi-bin/EBOA/';
+	public function downloadFilesFromInternet()
+	{
+		$now = Carbon::now();
+		$initialUrl = sprintf("http://www.boa.aragon.es/cgi-bin/EBOA/BRSCGI?CMD=VERLST&SEC=ULTBOL&DOCS=1-1&BASE=BCOM&SEPARADOR&TBOL-C=BOLE&@PUBL-E=%s", $now->format("Ymd"));
+		$fileName = sprintf("%s.pdf", $now->format("Y-m-d"));
 
-    public function downloadFilesFromInternet()
-    {
-        $url = self::INITIAL_PAGE;
-        $body = HttpService::get($url);
+		FileDownloaderScraper::create($initialUrl)
+			->forEachLink ("/BRSCGI\?CMD=VEROBJ&MLKOB=\w+/")
+			->download(storage_path('app/' . self::DIRECTORY_FILES. '/'), $fileName);
+	}
 
-        preg_match(self::BOLETIN_LINK_REGEX, $body, $matches, PREG_OFFSET_CAPTURE);
-        $url  = $matches[0][0];
-        $finalUrl = self::BOLETIN_BASE_URL. html_entity_decode($url);
-
-        $now = Carbon::now();
-        $fileName = sprintf("%s/%s.pdf", self::FILES_DIRECTORY, $now->format("Y-m-d"));
-        Storage::put($fileName, file_get_contents($finalUrl));
-    }
-
-    public function getFiles()
-    {
-        return Storage::files(self::FILES_DIRECTORY);
-    }
+	public function getFiles()
+	{
+		return Storage::files(self::DIRECTORY_FILES);
+	}
 }

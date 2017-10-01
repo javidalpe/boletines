@@ -12,7 +12,7 @@ use Storage;
 class CantabriaScraperStrategy implements IBoletinScraperStrategy
 {
 
-	const DIRECTORY_FILES = "cantabria";
+	const DIRECTORY_FILES = "public/cantabria";
 
 	public function downloadFilesFromInternet()
 	{
@@ -21,7 +21,7 @@ class CantabriaScraperStrategy implements IBoletinScraperStrategy
 
 		FileDownloaderScraper::create("https://boc.cantabria.es/boces/boletines.do?boton=UltimoBOCPublicado")
 			->forEachLink ("/verPdfAction\.do\?idBlob=\d+&tipoPdf=0/")
-			->download(storage_path('app/public/' . self::DIRECTORY_FILES. '/'), $fileName);
+			->download(storage_path('app/' . self::DIRECTORY_FILES. '/'), $fileName);
 	}
 
 	public function getFiles()

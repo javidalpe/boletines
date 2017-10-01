@@ -4,25 +4,25 @@
 namespace App\Services\Scrapers\Comunidades;
 
 
-use App\Services\Scrapers\HttpService;
+use App\Services\Scrapers\FileDownloaderScraper;
 use App\Services\Scrapers\IBoletinScraperStrategy;
+use Storage;
 
 class ExtremaduraScraperStrategy implements IBoletinScraperStrategy
 {
+	const DIRECTORY_FILES = "public/extremadura";
 
-    public function downloadFilesFromInternet()
+	public function downloadFilesFromInternet()
     {
-        $landing = HttpService::get("http://doe.gobex.es/busquedas/bus_calendario.php");
-        foreach (HttpService::match($landing, "/\.\.\/ultimosdoe\/mostrardoe\.php\?fecha=\d+/") as $match) {
-            $day = HttpService::get("http://doe.gobex.es" . substr($match, 2));
-            foreach (HttpService::match($day, "/doe\/\d+o\/\d+o\.pdf/") as $boe) {
-                dd($boe);
-            }
-        }
+	    FileDownloaderScraper::create("http://doe.gobex.es/busquedas/bus_calendario.php")
+		    ->forEachLink ("/\/ultimosdoe\/mostrardoe\.php\?fecha=\d+/")
+		    ->navigate()
+		    ->forEachLink("/\/pdfs\/doe\/\d+\/\d+o\/\d+o\.pdf/")
+		    ->download(storage_path('app/' . self::DIRECTORY_FILES. '/'));
     }
 
     public function getFiles()
     {
-        // TODO: Implement getFiles() method.
+	    return Storage::files(self::DIRECTORY_FILES);
     }
 }

@@ -54,7 +54,7 @@ class ScrapingService
 	const PDF_EXTENSION = 'pdf';
 	const PDF_EXTENSION_MAY = 'PDF';
 
-	const MAX_DOCUMENT_CONTENT_LENGTH = 7800;
+	const MAX_DOCUMENT_CONTENT_LENGTH = 7000;
 
 	public function updateIndexes()
     {
@@ -179,6 +179,7 @@ class ScrapingService
     private function storeText($filename, $text, $regionName, $priority, $publishedAt)
     {
         $textLength = strlen($text);
+        $filenameWithoutPublic = str_replace("public/", "", $filename);
         $lengthPerDocument = self::MAX_DOCUMENT_CONTENT_LENGTH;
         $numDocuments = $textLength / $lengthPerDocument;
         for ($i = 0; $i < $numDocuments; $i++) {
@@ -186,7 +187,7 @@ class ScrapingService
 
             if (strlen($body) <= 10) continue;
 
-            $this->createDocument($filename, $body, $regionName, $priority, $publishedAt);
+            $this->createDocument($filenameWithoutPublic, $body, $regionName, $priority, $publishedAt);
         }
     }
 

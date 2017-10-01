@@ -10,7 +10,7 @@ use Storage;
 
 class PaisVascoScraperStrategy implements IBoletinScraperStrategy
 {
-	const DIRECTORY_FILES = "paisvasco";
+	const DIRECTORY_FILES = "public/paisvasco";
 
 	public function downloadFilesFromInternet()
 	{
@@ -18,7 +18,7 @@ class PaisVascoScraperStrategy implements IBoletinScraperStrategy
 			->forEachLink ("/\d+\/\d+\/\w+\.shtml/")
 			->navigate()
 			->forEachLink("/\w+\.pdf/")
-			->download(storage_path('app/public/' . self::DIRECTORY_FILES. '/'));
+			->download(storage_path('app/' . self::DIRECTORY_FILES. '/'));
 	}
 
 	public function getFiles()
