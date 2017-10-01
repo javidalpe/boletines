@@ -4,7 +4,7 @@
 namespace App\Services;
 
 
-use App\Document;
+use App\Chunk;
 use App\Publication;
 use App\Run;
 use App\Services\Scrapers\Exceptions\BadRequestException;
@@ -161,7 +161,7 @@ class ScrapingService
 
         if ($info['extension'] != self::PDF_EXTENSION && $info['extension'] != self::PDF_EXTENSION_MAY) return;
 
-        $existingDocument = Document::where('filename', $filename)->first();
+        $existingDocument = Chunk::where('filename', $filename)->first();
 
         if ($existingDocument) return;
 
@@ -189,7 +189,7 @@ class ScrapingService
 	    $filenameWithoutPublic = str_replace("public/", "", $filename);
 
         foreach ($chunks as $content) {
-	        $this->createDocument($filenameWithoutPublic, $content, $regionName, $priority, $publishedAt);
+	        $this->createChunk($filenameWithoutPublic, $content, $regionName, $priority, $publishedAt);
         }
     }
 
@@ -201,15 +201,15 @@ class ScrapingService
      * @param $priority
      * @param $publishedAt
      */
-    private function createDocument($filename, $body, $regionName, $priority, $publishedAt)
+    private function createChunk($filename, $body, $regionName, $priority, $publishedAt)
     {
-        $document = new Document();
-        $document->filename = $filename;
-        $document->publication_name = $regionName;
-        $document->publication_priority = $priority;
-        $document->published_at = Carbon::createFromTimestamp($publishedAt);
-        $document->body = $body;
-        $document->save();
+        $chunk = new Chunk();
+        $chunk->filename = $filename;
+        $chunk->publication_name = $regionName;
+        $chunk->publication_priority = $priority;
+        $chunk->published_at = Carbon::createFromTimestamp($publishedAt);
+        $chunk->body = $body;
+        $chunk->save();
     }
 
     /**

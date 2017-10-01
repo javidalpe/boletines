@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
 
-class Document extends Model
+class Chunk extends Model
 {
 	//use Searchable;
 
@@ -28,6 +28,6 @@ class Document extends Model
 	 */
 	public function searchableAs()
 	{
-		return 'document_index';
+		return 'chunks_index';
 	}
 }
