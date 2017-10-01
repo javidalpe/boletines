@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {
 	InstantSearch,
+	Configure,
 	SearchBox,
 	Hits,
 	Highlight,
@@ -20,6 +21,7 @@ const Hit = ({hit}) => {
 		<div>
 			<strong>{hit.publication_name}</strong>
 			<div>{hit.published_at}</div>
+			<Highlight hit={hit}  attributeName="body"/>
 		</div>
 	</div>
 }
@@ -45,6 +47,8 @@ ReactDOM.render(
 		appId="GE8OQOT0GY"
 		indexName="document_index"
 	>
+		<Configure distinct={1}/>
+
 		<div className="col-md-12">
 			<Panel header="Buscar">
 				<SearchBox translation={{placeholder:"Buscar"}}/>

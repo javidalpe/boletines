@@ -46,15 +46,22 @@ class ScrapingService
     const BOLETIN_OFICIAL_DE_LA_CIUDAD_AUTONOMA_DE_CEUTA = 18;
     const BOLETIN_OFICIAL_DE_LA_CIUDAD_AUTONOMA_DE_MELILLA = 19;
 
-
-
     const RUN_RESULT_OK = 'ok';
     const RUN_RESULT_ERROR = 'error';
 
 	const PDF_EXTENSION = 'pdf';
 	const PDF_EXTENSION_MAY = 'PDF';
 
-	const MAX_DOCUMENT_CONTENT_LENGTH = 7000;
+	private $splitService;
+
+	/**
+	 * ScrapingService constructor.
+	 */
+	public function __construct()
+	{
+		$this->splitService = new FileSplitService();
+	}
+
 
 	public function updateIndexes()
     {
@@ -178,16 +185,11 @@ class ScrapingService
      */
     private function storeText($filename, $text, $regionName, $priority, $publishedAt)
     {
-        $textLength = strlen($text);
-        $filenameWithoutPublic = str_replace("public/", "", $filename);
-        $lengthPerDocument = self::MAX_DOCUMENT_CONTENT_LENGTH;
-        $numDocuments = $textLength / $lengthPerDocument;
-        for ($i = 0; $i < $numDocuments; $i++) {
-            $body = substr($text, $i * $lengthPerDocument, $lengthPerDocument);
+        $chunks = $this->splitService->splitDocument($text);
+	    $filenameWithoutPublic = str_replace("public/", "", $filename);
 
-            if (strlen($body) <= 10) continue;
-
-            $this->createDocument($filenameWithoutPublic, $body, $regionName, $priority, $publishedAt);
+        foreach ($chunks as $content) {
+	        $this->createDocument($filenameWithoutPublic, $content, $regionName, $priority, $publishedAt);
         }
     }
 
