@@ -73,7 +73,7 @@ class ScrapingService
         $publications = Publication::all();
         foreach ($publications as $publication) {
             $scrapper = ScraperStrategyFactory::getScrapperStrategy($publication->id);
-            if ($this->shouldRunScraper($scrapper)) {
+            if ($this->shouldRunScraper($scrapper, $publication)) {
                 $this->run($publication, $scrapper);
             }
         }
@@ -251,12 +251,13 @@ class ScrapingService
     }
 
     /**
-     * @param $scrapper
+     * @param IBoletinScraperStrategy $scrapper
+     * @param Publication $publication
      * @return bool
      */
-    private function shouldRunScraper($scrapper)
+    private function shouldRunScraper(IBoletinScraperStrategy $scrapper, Publication $publication) : bool
     {
-        return $scrapper && $this->scheduleService->isTodayAPublicationDay($scrapper->priority);
+        return $scrapper && $this->scheduleService->isTodayAPublicationDay($publication->priority);
     }
 
 

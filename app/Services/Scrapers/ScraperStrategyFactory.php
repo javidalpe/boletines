@@ -29,7 +29,11 @@ use App\Services\ScrapingService;
 class ScraperStrategyFactory
 {
 
-    public static function getScrapperStrategy($id)
+    /**
+     * @param $id
+     * @return IBoletinScraperStrategy
+     */
+    public static function getScrapperStrategy($id) : IBoletinScraperStrategy
     {
         switch ($id)
         {
