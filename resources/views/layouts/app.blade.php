@@ -10,7 +10,9 @@
     </head>
     <body>
         @include('layouts.navbar')
-        @yield('content')
+        <div class="container">
+            @yield('content')
+        </div>
         @include('dashboard.footer')
         @stack('scripts')
     </body>

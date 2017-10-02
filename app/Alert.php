@@ -18,6 +18,11 @@ class Alert extends Model
         'updated_at'
     ];
 
+    protected $fillable = [
+        'query',
+        'emails'
+    ];
+
     /**
      * Get the user that owns the phone.
      */

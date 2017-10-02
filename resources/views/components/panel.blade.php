@@ -1,5 +1,7 @@
 <div class="panel panel-default">
-    <div class="panel-heading">{{$title}}</div>
+    @if(isset($title))
+        <div class="panel-heading">{{$title}}</div>
+    @endif
 
     <div class="panel-body">
         {{$slot}}

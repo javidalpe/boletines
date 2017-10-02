@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Alert;
+use App\Http\Requests\StoreAlertRequest;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -36,12 +37,13 @@ class AlertController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  StoreAlertRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreAlertRequest $request)
     {
-        //
+        Auth::user()->alerts()->create($request->all());
+        return redirect()->route('alerts.index');
     }
 
     /**
@@ -63,19 +65,23 @@ class AlertController extends Controller
      */
     public function edit(Alert $alert)
     {
-        //
+        $data = [
+            'alert' => $alert
+        ];
+        return view('dashboard.alerts.edit', $data);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  StoreAlertRequest  $request
      * @param  \App\Alert  $alert
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Alert $alert)
+    public function update(StoreAlertRequest $request, Alert $alert)
     {
-        //
+        $alert->update($request->all());
+        return redirect()->route('alerts.index');
     }
 
     /**
@@ -86,6 +92,7 @@ class AlertController extends Controller
      */
     public function destroy(Alert $alert)
     {
-        //
+        $alert->delete();
+        return redirect()->route('alerts.index');
     }
 }
