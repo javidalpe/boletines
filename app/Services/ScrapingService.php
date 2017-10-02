@@ -54,6 +54,7 @@ class ScrapingService
 	const PDF_EXTENSION_MAY = 'PDF';
 
 	private $splitService;
+	private $scheduleService;
 
 	/**
 	 * ScrapingService constructor.
@@ -61,6 +62,7 @@ class ScrapingService
 	public function __construct()
 	{
 		$this->splitService = new FileSplitService();
+		$this->scheduleService = new PublicationsScheduleService();
 	}
 
 
@@ -71,7 +73,7 @@ class ScrapingService
         $publications = Publication::all();
         foreach ($publications as $publication) {
             $scrapper = ScraperStrategyFactory::getScrapperStrategy($publication->id);
-            if ($scrapper) {
+            if ($this->shouldRunScraper($scrapper)) {
                 $this->run($publication, $scrapper);
             }
         }
@@ -83,6 +85,7 @@ class ScrapingService
         $publication = Publication::find($id);
 
         if (!$publication) {
+            Log::debug("Runner for publication {$id} not found");
             return;
         }
 
@@ -247,6 +250,14 @@ class ScrapingService
         return $content;
     }
 
+    /**
+     * @param $scrapper
+     * @return bool
+     */
+    private function shouldRunScraper($scrapper)
+    {
+        return $scrapper && $this->scheduleService->isTodayAPublicationDay($scrapper->priority);
+    }
 
 
 }
