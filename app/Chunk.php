@@ -7,6 +7,7 @@ use Laravel\Scout\Searchable;
 
 class Chunk extends Model
 {
+	const SECONDS_IN_A_DAY = 86400;
 	use Searchable;
 
     /**
@@ -41,6 +42,7 @@ class Chunk extends Model
 		$array = $this->toArray();
 		unset($array['updated_at']);
 		$array['timestamp'] = $this->published_at->timestamp;
+		$array['day'] = floor($this->published_at->timestamp / self::SECONDS_IN_A_DAY);
 		return $array;
 	}
 }
