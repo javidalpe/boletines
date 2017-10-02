@@ -4,6 +4,7 @@ namespace App\Services\Alerts;
 
 use App\Alert;
 use App\Chunk;
+use Carbon\Carbon;
 use Log;
 
 class AlertsCheckService
@@ -22,6 +23,9 @@ class AlertsCheckService
      */
     private function checkAlert(Alert $alert)
     {
+        $alert->checked_at = Carbon::now();
+        $alert->save();
+
         $chuncks = Chunk::search($alert->query)
             ->get();
 
@@ -30,6 +34,9 @@ class AlertsCheckService
         $emails = json_decode($alert->emails);
 
         if (!$emails || count($emails) <= 0) return;
+
+        $alert->notified_at = Carbon::now();
+        $alert->save();
 
         foreach ($emails as $email) {
             Log::debug("Email to {$email}");

@@ -1,10 +1,17 @@
-<div class="form-group">
+@component('components.form-group', ['name' => 'query', 'help' => 'El término de búsqueda que se usará para buscar en los nuevos boletines.'])
     {!! Form::label('query', 'Termino de búsqueda') !!}
     {!! Form::text('query', null, array('class' => 'form-control')) !!}
-</div>
+@endcomponent
+
 <div class="form-group">
     {!! Form::label('emails', 'E-Mail Address') !!}
     {!! Form::text('emails', null, array('class' => 'form-control', 'id' => 'emails')) !!}
+    <p class="help-block">Los emails suscritos a la alerta diaria.</p>
+    @if ($errors->has('emails'))
+        <span class="help-block">
+            <strong>{{ $errors->first('emails') }}</strong>
+        </span>
+    @endif
 </div>
 
 <div class="form-group">
