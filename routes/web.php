@@ -21,6 +21,7 @@ Auth::routes();
 Route::middleware('auth')->group(function () {
 	Route::get('/home', 'HomeController@index')->name('home');
 	Route::get('/search', 'HomeController@search')->name('search');
+	Route::resource('alerts', 'AlertController');
 });
 
 Route::prefix('admin')->group(function () {
