@@ -6,7 +6,10 @@ import {
 	SearchBox,
 	Hits,
 	Highlight,
+	Snippet,
 	Menu,
+	VirtualMenu,
+	CurrentRefinements,
 	RefinementList,
 	Pagination,
 	Stats
@@ -20,16 +23,19 @@ const Hit = ({hit}) => {
 			<i className="glyphicon glyphicon-download"></i> Descargar PDF</a>
 		<div>
 			<strong>{hit.publication_name}</strong>
-			<div>{hit.published_at}</div>
-			<Highlight hit={hit}  attributeName="content    "/>
+			<div>{hit.day}</div>
+			<i><Snippet attributeName="content" hit={hit} tagName="i" /></i>
 		</div>
 	</div>
 }
 
 const Sidebar = () =>
 	<div className="sidebar">
-		<Panel header="Boletines">
+		<Panel header="Filtros">
+			<strong>Publicación</strong>
 			<RefinementList attributeName={"publication_name"}/>
+			<strong>Día</strong>
+			<Menu attributeName={"day"}/>
 		</Panel>
 	</div>
 
@@ -47,11 +53,11 @@ ReactDOM.render(
 		appId="GE8OQOT0GY"
 		indexName="chunks_index"
 	>
-		<Configure distinct={1}/>
+		<Configure facetingAfterDistinct ={true}/>
 
 		<div className="col-md-12">
 			<Panel header="Buscar">
-				<SearchBox translation={{placeholder:"Buscar"}}/>
+				<SearchBox translation={{placeholder:"Buscar"}} defaultRefinement="caza"/>
 				<div>
 					<Stats />
 				</div>

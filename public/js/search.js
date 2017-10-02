@@ -19433,8 +19433,7 @@ ToggleButton.propTypes = propTypes;
 /* 306 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(307);
-module.exports = __webpack_require__(712);
+module.exports = __webpack_require__(307);
 
 
 /***/ }),
@@ -19464,7 +19463,7 @@ var Hit = function Hit(_ref) {
 		{ className: 'hit panel panel-default panel-body' },
 		__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 			'a',
-			{ href: url, className: 'btn btn-default pull-right' },
+			{ href: url, target: '_blank', className: 'btn btn-default pull-right' },
 			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'glyphicon glyphicon-download' }),
 			' Descargar PDF'
 		),
@@ -19479,9 +19478,13 @@ var Hit = function Hit(_ref) {
 			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 				'div',
 				null,
-				hit.published_at
+				hit.day
 			),
-			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["Highlight"], { hit: hit, attributeName: 'content    ' })
+			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+				'i',
+				null,
+				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["Snippet"], { attributeName: 'content', hit: hit, tagName: 'i' })
+			)
 		)
 	);
 };
@@ -19492,8 +19495,19 @@ var Sidebar = function Sidebar() {
 		{ className: 'sidebar' },
 		__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 			__WEBPACK_IMPORTED_MODULE_3_react_bootstrap__["a" /* Panel */],
-			{ header: 'Boletines' },
-			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["RefinementList"], { attributeName: "publication_name" })
+			{ header: 'Filtros' },
+			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+				'strong',
+				null,
+				'Publicaci\xF3n'
+			),
+			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["RefinementList"], { attributeName: "publication_name" }),
+			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+				'strong',
+				null,
+				'D\xEDa'
+			),
+			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["Menu"], { attributeName: "day" })
 		)
 	);
 };
@@ -19518,14 +19532,14 @@ __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODU
 		appId: 'GE8OQOT0GY',
 		indexName: 'chunks_index'
 	},
-	__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["Configure"], { distinct: 1 }),
+	__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["Configure"], { facetingAfterDistinct: true }),
 	__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 		'div',
 		{ className: 'col-md-12' },
 		__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 			__WEBPACK_IMPORTED_MODULE_3_react_bootstrap__["a" /* Panel */],
 			{ header: 'Buscar' },
-			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["SearchBox"], { translation: { placeholder: "Buscar" } }),
+			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["SearchBox"], { translation: { placeholder: "Buscar" }, defaultRefinement: 'caza' }),
 			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 				'div',
 				null,
@@ -70035,12 +70049,6 @@ var Well = function (_React$Component) {
 
 
 
-
-/***/ }),
-/* 712 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

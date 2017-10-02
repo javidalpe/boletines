@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
 
@@ -41,8 +42,9 @@ class Chunk extends Model
 	{
 		$array = $this->toArray();
 		unset($array['updated_at']);
-		$array['timestamp'] = $this->published_at->timestamp;
-		$array['day'] = floor($this->published_at->timestamp / self::SECONDS_IN_A_DAY);
+		$array['daystamp'] = floor($this->published_at->timestamp / self::SECONDS_IN_A_DAY);
+		Carbon::setLocale('es');
+		$array['day'] = $this->published_at->formatLocalized('%d %B %Y');
 		return $array;
 	}
 }
