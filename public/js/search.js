@@ -19449,6 +19449,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__ = __webpack_require__(324);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_bootstrap__ = __webpack_require__(574);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 
 
 
@@ -19533,51 +19541,90 @@ var Content = function Content() {
 	);
 };
 
-var Search = function Search() {
+function Search(props) {
 	if (config.defaultRefinementSearch) {
-		return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["SearchBox"], { onChange: function onChange(e) {
-				console.log(e);
-			}, translation: { placeholder: "Buscar" }, defaultRefinement: config.defaultRefinementSearch });
+		return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["SearchBox"], { onChange: props.setSearched, translation: { placeholder: "Buscar..." },
+			defaultRefinement: config.defaultRefinementSearch });
 	} else {
-		return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["SearchBox"], { onChange: function onChange(e) {
-				console.log(e);
-			}, translation: { placeholder: "Buscar" } });
+		return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["SearchBox"], { onChange: props.setSearched, translation: { placeholder: "Buscar..." } });
 	}
+}
+
+function SearchPanel(props) {
+	return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+		__WEBPACK_IMPORTED_MODULE_3_react_bootstrap__["a" /* Panel */],
+		{ header: 'Buscar' },
+		__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Search, { setSearched: props.setSearched }),
+		__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+			'div',
+			null,
+			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["Stats"], null)
+		)
+	);
+}
+
+var Results = function Results() {
+	return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+		'div',
+		null,
+		__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+			'div',
+			{ className: 'col-md-4' },
+			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Sidebar, null)
+		),
+		__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+			'div',
+			{ className: 'col-md-8' },
+			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Content, null)
+		)
+	);
 };
 
-__WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-	__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["InstantSearch"],
-	{
-		apiKey: config.apiKey,
-		appId: config.appId,
-		indexName: config.indexId
-	},
-	__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["Configure"], { facetingAfterDistinct: true }),
-	__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-		'div',
-		{ className: 'col-md-12' },
-		__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-			__WEBPACK_IMPORTED_MODULE_3_react_bootstrap__["a" /* Panel */],
-			{ header: 'Buscar' },
-			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Search, null),
-			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-				'div',
-				null,
-				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["Stats"], null)
-			)
-		)
-	),
-	__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-		'div',
-		{ className: 'col-md-4' },
-		__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Sidebar, null)
-	),
-	__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-		'div',
-		{ className: 'col-md-8' },
-		__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Content, null)
-	)
-), document.getElementById('root'));
+var Main = function (_React$Component) {
+	_inherits(Main, _React$Component);
+
+	function Main() {
+		_classCallCheck(this, Main);
+
+		var _this = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this));
+
+		_this.state = {
+			searched: false
+		};
+		_this.setSearched = _this.setSearched.bind(_this);
+		return _this;
+	}
+
+	_createClass(Main, [{
+		key: 'setSearched',
+		value: function setSearched() {
+			this.setState({ searched: true });
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+				__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["InstantSearch"],
+				{
+					apiKey: config.apiKey,
+					appId: config.appId,
+					indexName: config.indexId
+				},
+				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["Configure"], { facetingAfterDistinct: true }),
+				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+					'div',
+					{ className: 'col-md-12' },
+					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(SearchPanel, { setSearched: this.setSearched })
+				),
+				(config.initWithResults || this.state.searched) && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Results, null)
+			);
+		}
+	}]);
+
+	return Main;
+}(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
+
+__WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Main, null), document.getElementById('root'));
 
 /***/ }),
 /* 308 */

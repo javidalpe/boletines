@@ -55,37 +55,66 @@ const Content = () =>
 		</Panel>
 	</div>
 
-const Search = () => {
-	if (config.defaultRefinementSearch) {
-        return <SearchBox onChange={function(e){ console.log(e); }} translation={{placeholder:"Buscar"}} defaultRefinement={config.defaultRefinementSearch}/>;
-	} else {
-        return <SearchBox onChange={function(e){ console.log(e); }} translation={{placeholder:"Buscar"}}/>;
-	}
+function Search(props) {
+    if (config.defaultRefinementSearch) {
+        return <SearchBox onChange={props.setSearched} translation={{placeholder: "Buscar..."}}
+						  defaultRefinement={config.defaultRefinementSearch}/>;
+    } else {
+        return <SearchBox onChange={props.setSearched} translation={{placeholder: "Buscar..."}}/>;
+    }
 }
 
-ReactDOM.render(
-	<InstantSearch
-		apiKey={config.apiKey}
-		appId={config.appId}
-		indexName={config.indexId}
-	>
-		<Configure facetingAfterDistinct ={true}/>
-
-		<div className="col-md-12">
-			<Panel header="Buscar">
-				<Search/>
-				<div>
-					<Stats />
-				</div>
-			</Panel>
+function SearchPanel(props) {
+    return <Panel header="Buscar">
+		<Search setSearched={props.setSearched}/>
+		<div>
+			<Stats/>
 		</div>
+	</Panel>;
+}
+
+const Results = () =>
+	<div>
 		<div className="col-md-4">
 			<Sidebar/>
 		</div>
 		<div className="col-md-8">
 			<Content/>
 		</div>
-	</InstantSearch>,
-	document.getElementById('root')
-);
+	</div>
+
+class Main extends React.Component {
+
+    constructor() {
+        super();
+        this.state = {
+            searched: false,
+        };
+        this.setSearched = this.setSearched.bind(this);
+    }
+
+    setSearched() {
+    	this.setState({searched: true});
+	}
+
+	render() {
+		return <InstantSearch
+			apiKey={config.apiKey}
+			appId={config.appId}
+			indexName={config.indexId}
+		>
+			<Configure facetingAfterDistinct ={true}/>
+
+			<div className="col-md-12">
+				<SearchPanel setSearched={this.setSearched}/>
+			</div>
+			{ (config.initWithResults || this.state.searched) &&
+                <Results/>
+            }
+
+		</InstantSearch>;
+	}
+}
+
+ReactDOM.render(<Main/>, document.getElementById('root'));
 

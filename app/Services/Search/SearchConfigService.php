@@ -14,17 +14,23 @@ class SearchConfigService
 
     public function createForSearch() : SearchConfig
     {
-        return new SearchConfig(config('scout.algolia.id'), config('scout.algolia.api-key'), self::MAIN_CHUNKS_INDEX);
+        $config =  new SearchConfig(config('scout.algolia.id'), config('scout.algolia.api-key'), self::MAIN_CHUNKS_INDEX);
+        return $config;
     }
 
     public function createForAlert(Alert $alert, Carbon $dayOfYear) : SearchConfig
     {
         $day = $dayOfYear->formatLocalized('%d %B %Y');
-        return new SearchConfig(config('scout.algolia.id'), config('scout.algolia.api-key'), self::MAIN_CHUNKS_INDEX, $alert->query, $day);
+        $config =  new SearchConfig(config('scout.algolia.id'), config('scout.algolia.api-key'), self::MAIN_CHUNKS_INDEX);
+        $config->setDefaultRefinementSearch($alert->query);
+        $config->setDefaultRefinementDay($day);
+        return $config;
     }
 
     public function createForDemo() : SearchConfig
     {
-        return new SearchConfig(config('scout.algolia.id'), config('scout.algolia.api-key'), self::DEMO_CHUNKS_INDEX);
+        $config =  new SearchConfig(config('scout.algolia.id'), config('scout.algolia.api-key'), self::MAIN_CHUNKS_INDEX);
+        $config->setInitWithResults(false);
+        return $config;
     }
 }

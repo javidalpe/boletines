@@ -16,7 +16,7 @@ class LandingController extends Controller
     {
         $service = new SearchConfigService();
         $data = [
-            'config' => json_encode($service->createForSearch())
+            'config' => json_encode($service->createForDemo())
         ];
         return view('landing.demo', $data);
     }
