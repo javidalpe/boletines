@@ -57,9 +57,9 @@ const Content = () =>
 
 const Search = () => {
 	if (config.defaultRefinementSearch) {
-        return <SearchBox translation={{placeholder:"Buscar"}} defaultRefinement={config.defaultRefinementSearch}/>;
+        return <SearchBox onChange={function(e){ console.log(e); }} translation={{placeholder:"Buscar"}} defaultRefinement={config.defaultRefinementSearch}/>;
 	} else {
-        return <SearchBox translation={{placeholder:"Buscar"}}/>;
+        return <SearchBox onChange={function(e){ console.log(e); }} translation={{placeholder:"Buscar"}}/>;
 	}
 }
 

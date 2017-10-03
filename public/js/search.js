@@ -19535,9 +19535,13 @@ var Content = function Content() {
 
 var Search = function Search() {
 	if (config.defaultRefinementSearch) {
-		return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["SearchBox"], { translation: { placeholder: "Buscar" }, defaultRefinement: config.defaultRefinementSearch });
+		return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["SearchBox"], { onChange: function onChange(e) {
+				console.log(e);
+			}, translation: { placeholder: "Buscar" }, defaultRefinement: config.defaultRefinementSearch });
 	} else {
-		return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["SearchBox"], { translation: { placeholder: "Buscar" } });
+		return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["SearchBox"], { onChange: function onChange(e) {
+				console.log(e);
+			}, translation: { placeholder: "Buscar" } });
 	}
 };
 

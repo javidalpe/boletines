@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\Search\SearchConfigService;
 use Illuminate\Http\Request;
 
 class LandingController extends Controller
@@ -10,6 +11,15 @@ class LandingController extends Controller
 	{
 		return view('landing.welcome');
 	}
+
+    public function demo()
+    {
+        $service = new SearchConfigService();
+        $data = [
+            'config' => json_encode($service->createForSearch())
+        ];
+        return view('landing.demo', $data);
+    }
 
 	public function pricing()
 	{
