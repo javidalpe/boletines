@@ -21,7 +21,7 @@ Auth::routes();
 Route::middleware('auth')->group(function () {
 	Route::get('/home', 'HomeController@index')->name('home');
 	Route::get('/search', 'HomeController@search')->name('search');
-	Route::get('/report', 'HomeController@report')->name('report');
+	Route::get('/report/{id}/{timestamp}', 'HomeController@report')->name('report');
 	Route::resource('alerts', 'AlertController');
 });
 

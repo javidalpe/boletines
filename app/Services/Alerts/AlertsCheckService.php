@@ -4,8 +4,10 @@ namespace App\Services\Alerts;
 
 use App\Alert;
 use App\Chunk;
+use App\Notifications\AlertNotification;
 use Carbon\Carbon;
 use Log;
+use Notification;
 
 class AlertsCheckService
 {
@@ -39,8 +41,8 @@ class AlertsCheckService
         $alert->save();
 
         foreach ($emails as $email) {
-            Log::debug("Email to {$email}");
+            Notification::route('mail', $email)
+                ->notify(new AlertNotification($alert));
         }
     }
-
 }

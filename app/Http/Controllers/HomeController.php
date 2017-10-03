@@ -39,15 +39,17 @@ class HomeController extends Controller
     	return view('dashboard.search', $data);
     }
 
-    public function report(Request $request)
+    public function report($id, $timestamp)
     {
-    	$alert = Alert::find($request->id);
+    	$alert = Alert::find($id);
 
     	if (!$alert) return redirect()->route('home');
 
         $service = new SearchConfigService();
+        $date = Carbon::createFromTimestamp($timestamp);
+
         $data = [
-            'config' => json_encode($service->createForAlert($alert, Carbon::now()))
+            'config' => json_encode($service->createForAlert($alert, $date))
         ];
 
         return view('dashboard.search', $data);

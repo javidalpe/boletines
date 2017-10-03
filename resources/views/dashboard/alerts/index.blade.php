@@ -7,7 +7,7 @@
 
                 @component('components.panel')
                     @slot('title')
-                        Alertas
+                        Mis alertas
                     @endslot
                     <table class="table table-borderless">
                         <thead>
