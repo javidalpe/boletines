@@ -1,21 +1,14 @@
-@component('components.form-group', ['name' => 'query', 'help' => 'El término de búsqueda que se usará para buscar en los nuevos boletines.'])
-    {!! Form::label('query', 'Termino de búsqueda') !!}
+@component('components.form-group', ['name' => 'query', 'label' => 'Termino de búsqueda', 'help' => 'El término de búsqueda que se usará para buscar en los nuevos boletines.'])
     {!! Form::text('query', null, array('class' => 'form-control')) !!}
 @endcomponent
 
-<div class="form-group">
-    {!! Form::label('emails', 'E-Mail Address') !!}
+@component('components.form-group', ['name' => 'emails', 'label' => 'Lista de emails', 'help' => 'Estas direcciones de correo quedan suscritar a las alertas de nuevos resultado de búsqueda.'])
     {!! Form::text('emails', null, array('class' => 'form-control', 'id' => 'emails')) !!}
-    <p class="help-block">Los emails suscritos a la alerta diaria.</p>
-    @if ($errors->has('emails'))
-        <span class="help-block">
-            <strong>{{ $errors->first('emails') }}</strong>
-        </span>
-    @endif
-</div>
+@endcomponent
 
 <div class="form-group">
     {!! Form::submit('Guardar', array('class' => 'btn btn-primary')) !!}
+    <a href="{{ route('alerts.index') }}" class="btn btn-default">Cancelar</a>
 </div>
 
 @push('styles')
