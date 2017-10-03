@@ -24,7 +24,12 @@
                                     <td>{{$alert->query}}</td>
                                     <td>{{$alert->created_at->toDateString()}}</td>
                                     <td>{{isset($alert->notified_at)?$alert->notified_at->toDateString():''}}</td>
-                                    <td><a href="{{route('alerts.edit', $alert)}}">Editar</a></td>
+                                    <td>
+                                        {!! Form::open(['id' => $alert->id, 'route' => ['alerts.destroy', $alert], 'method' => 'DELETE']) !!}
+                                            <a href="{{route('alerts.edit', $alert)}}">Editar</a>
+                                            <a href="#" onclick="document.getElementById({{$alert->id}}).submit()">Borrar</a>
+                                        {!! Form::close() !!}
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

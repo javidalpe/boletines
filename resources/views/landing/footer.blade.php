@@ -13,16 +13,17 @@
             <p class="lead">Ayuda</p>
             <hr>
             <ul class="list-unstyled">
-                <li><a href=""></a></li>
-                <li><a href=""></a></li>
+                <li><a href="">Términos</a></li>
+                <li><a href="">Privacidad</a></li>
             </ul>
         </div>
         <div class="col-md-3">
             <p class="lead">Compañía</p>
             <hr>
             <ul class="list-unstyled">
-                <li><a href=""></a></li>
-                <li><a href=""></a></li>
+                <li><a href="">Acerca de nosotros</a></li>
+                <li><a href="">Clientes</a></li>
+                <li><a href="">Contáctenos</a></li>
             </ul>
         </div>
         <div class="col-md-3">
