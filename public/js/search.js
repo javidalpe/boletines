@@ -19507,9 +19507,17 @@ var Sidebar = function Sidebar() {
 				null,
 				'D\xEDa'
 			),
-			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["Menu"], { attributeName: "day" })
+			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(DayMenu, null)
 		)
 	);
+};
+
+var DayMenu = function DayMenu() {
+	if (config.defaultRefinementDay) {
+		return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["Menu"], { attributeName: "day", defaultRefinement: config.defaultRefinementDay });
+	} else {
+		return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["Menu"], { attributeName: "day" });
+	}
 };
 
 var Content = function Content() {
@@ -19525,12 +19533,20 @@ var Content = function Content() {
 	);
 };
 
+var Search = function Search() {
+	if (config.defaultRefinementSearch) {
+		return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["SearchBox"], { translation: { placeholder: "Buscar" }, defaultRefinement: config.defaultRefinementSearch });
+	} else {
+		return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["SearchBox"], { translation: { placeholder: "Buscar" } });
+	}
+};
+
 __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 	__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["InstantSearch"],
 	{
-		apiKey: 'ce998e3325240a5b676b316e8f682df2',
-		appId: 'GE8OQOT0GY',
-		indexName: 'chunks_index'
+		apiKey: config.apiKey,
+		appId: config.appId,
+		indexName: config.indexId
 	},
 	__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["Configure"], { facetingAfterDistinct: true }),
 	__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -19539,7 +19555,7 @@ __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODU
 		__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 			__WEBPACK_IMPORTED_MODULE_3_react_bootstrap__["a" /* Panel */],
 			{ header: 'Buscar' },
-			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["SearchBox"], { translation: { placeholder: "Buscar" }, defaultRefinement: 'caza' }),
+			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Search, null),
 			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 				'div',
 				null,
@@ -58742,7 +58758,7 @@ function getDocumentProtocol() {
 "use strict";
 
 
-module.exports = '3.24.4';
+module.exports = '3.24.5';
 
 
 /***/ }),

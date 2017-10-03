@@ -35,9 +35,17 @@ const Sidebar = () =>
 			<strong>Publicación</strong>
 			<RefinementList attributeName={"publication_name"}/>
 			<strong>Día</strong>
-			<Menu attributeName={"day"}/>
+			<DayMenu/>
 		</Panel>
 	</div>
+
+const DayMenu = () => {
+	if (config.defaultRefinementDay) {
+		return <Menu attributeName={"day"} defaultRefinement={config.defaultRefinementDay}/>
+	} else {
+		return <Menu attributeName={"day"}/>
+	}
+}
 
 const Content = () =>
 	<div className="content">
@@ -47,17 +55,25 @@ const Content = () =>
 		</Panel>
 	</div>
 
+const Search = () => {
+	if (config.defaultRefinementSearch) {
+        return <SearchBox translation={{placeholder:"Buscar"}} defaultRefinement={config.defaultRefinementSearch}/>;
+	} else {
+        return <SearchBox translation={{placeholder:"Buscar"}}/>;
+	}
+}
+
 ReactDOM.render(
 	<InstantSearch
-		apiKey="ce998e3325240a5b676b316e8f682df2"
-		appId="GE8OQOT0GY"
-		indexName="chunks_index"
+		apiKey={config.apiKey}
+		appId={config.appId}
+		indexName={config.indexId}
 	>
 		<Configure facetingAfterDistinct ={true}/>
 
 		<div className="col-md-12">
 			<Panel header="Buscar">
-				<SearchBox translation={{placeholder:"Buscar"}} defaultRefinement="caza"/>
+				<Search/>
 				<div>
 					<Stats />
 				</div>

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Alert;
 use App\Chunk;
+use App\Services\Search\SearchConfigService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -30,7 +32,11 @@ class HomeController extends Controller
 
     public function search()
     {
-    	return view('dashboard.search');
+        $service = new SearchConfigService();
+        $data = [
+            'config' => json_encode($service->createForSearch())
+        ];
+    	return view('dashboard.search', $data);
     }
 
     public function report(Request $request)
@@ -39,14 +45,11 @@ class HomeController extends Controller
 
     	if (!$alert) return redirect()->route('home');
 
-    	$chunks = Chunk::search($alert->query)
-		    //->where('day', $request->day)
-		    ->get();
+        $service = new SearchConfigService();
+        $data = [
+            'config' => json_encode($service->createForAlert($alert, Carbon::now()))
+        ];
 
-    	$data = [
-    		'chunks' => $chunks
-	    ];
-
-    	return view('dashboard.report', $data);
+        return view('dashboard.search', $data);
     }
 }

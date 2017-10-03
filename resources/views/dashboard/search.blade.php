@@ -11,5 +11,8 @@
 @endpush
 
 @push('scripts')
+	<script>
+		var config = {!! $config !!};
+	</script>
 	<script src="/js/search.js"></script>
 @endpush
