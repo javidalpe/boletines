@@ -48,7 +48,7 @@ class AlertNotification extends Notification
         $url = route('report', ['id' => $this->alert, 'timestamp' => $now->timestamp]);
 
         $mail = new MailMessage();
-        $mail->greeting('Alerta de contenido oficial')
+        $mail->greeting('Alerta de nuevo contenido')
             ->line('Se han publicado las siguientes novedades según tus ofertas:')
             ->action('Ver reporte', $url)
             ->line('Gracias por confiar en nosotros!');
