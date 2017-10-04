@@ -168,7 +168,9 @@ class ScrapingService
 
         if ($info['extension'] != self::PDF_EXTENSION && $info['extension'] != self::PDF_EXTENSION_MAY) return;
 
-        $existingDocument = Chunk::where('filename', $filename)->first();
+        $destinationPath = str_replace("public/", "", $filename);
+
+        $existingDocument = Chunk::where('filename', $destinationPath)->first();
 
         if ($existingDocument) return;
 
@@ -180,23 +182,23 @@ class ScrapingService
 
         $publishedAt = Storage::lastModified($filename);
 
-        $this->storeText($filename, $content, $regionName, $priority, $publishedAt);
+        $this->storeText($destinationPath, $content, $regionName, $priority, $publishedAt);
     }
 
     /**
-     * @param $filename
+     * @param $destinationPath
      * @param $text
      * @param $regionName
      * @param $priority
      * @param $publishedAt
      */
-    private function storeText($filename, $text, $regionName, $priority, $publishedAt)
+    private function storeText($destinationPath, $text, $regionName, $priority, $publishedAt)
     {
         $chunks = $this->splitService->splitDocument($text);
-	    $filenameWithoutPublic = str_replace("public/", "", $filename);
+
 
         foreach ($chunks as $content) {
-	        $this->createChunk($filenameWithoutPublic, $content, $regionName, $priority, $publishedAt);
+	        $this->createChunk($destinationPath, $content, $regionName, $priority, $publishedAt);
         }
     }
 
