@@ -10,7 +10,7 @@ class SearchConfigService
 {
 
     const MAIN_CHUNKS_INDEX = 'chunks_index';
-    const DEMO_CHUNKS_INDEX = 'chunks_index';
+    const DEMO_CHUNKS_INDEX = 'demo_index';
 
     public function createForSearch() : SearchConfig
     {
@@ -29,7 +29,7 @@ class SearchConfigService
 
     public function createForDemo() : SearchConfig
     {
-        $config =  new SearchConfig(config('scout.algolia.id'), config('scout.algolia.api-key'), self::MAIN_CHUNKS_INDEX);
+        $config =  new SearchConfig(config('scout.algolia.id'), config('scout.algolia.api-key'), self::DEMO_CHUNKS_INDEX);
         $config->setInitWithResults(false);
         return $config;
     }

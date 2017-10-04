@@ -12,11 +12,12 @@ class PrincipadoDeAsturiasScraperStrategy implements IBoletinScraperStrategy
 {
 
     const DIRECTORY_FILES = "public/asturias";
+    const MAX_NUMBER_OF_PUBLICATIONS = 5;
 
     public function downloadFilesFromInternet()
     {
         FileDownloaderScraper::create("http://www.asturias.es/bopa")
-            ->forEachLink ("/\/portal\/site\/Asturias\/menuitem\.\w+\/\?vgnextoid=\w+&i18n\.http\.lang=es&fecha=\d+\/\d+\/\d+&FechaHidden1=FECHA&FechaCompHidden1=1&origen=calendario/")
+            ->forEachLink ("/\/portal\/site\/Asturias\/menuitem\.\w+\/\?vgnextoid=\w+&i18n\.http\.lang=es&fecha=\d+\/\d+\/\d+&FechaHidden1=FECHA&FechaCompHidden1=1&origen=calendario/", self::MAX_NUMBER_OF_PUBLICATIONS)
             ->navigate()
             ->forEachLink("/https:\/\/sede\.asturias\.es\/bopa\/\d+\/\d+\/\d+\/\w+\.pdf/")
             ->download(storage_path('app/' . self::DIRECTORY_FILES. '/'));

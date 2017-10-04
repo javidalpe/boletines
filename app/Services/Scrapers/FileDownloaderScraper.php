@@ -47,15 +47,16 @@ class FileDownloaderScraper
      * Save all found links for further operations
      *
      * @param string $regex
+     * @param int $maxNumberOfLinks
      *
      * @return $this
      */
-    public function forEachLink(string $regex)
+    public function forEachLink(string $regex, int $maxNumberOfLinks = 0)
     {
         Log::debug($regex);
         $this->links = [];
         foreach ($this->contents as $content) {
-            $sliceArray = $this->getLinksFromPageContent($regex, $content);
+            $sliceArray = $this->getLinksFromPageContent($regex, $content, $maxNumberOfLinks);
             $this->links = array_merge($this->links, $sliceArray);
         }
         return $this;
@@ -253,16 +254,21 @@ class FileDownloaderScraper
     /**
      * @param string $regex
      * @param $content
+     * @param int $maxNumberOfLinks
      * @return array
      */
-    private function getLinksFromPageContent(string $regex, $content): array
+    private function getLinksFromPageContent(string $regex, $content, $maxNumberOfLinks): array
     {
         $rawHtmlLinks = $this->match($content, $regex);
         $uniqueRawHtmlLinks = array_unique($rawHtmlLinks);
         $fixedLinks = $this->fixLinks($uniqueRawHtmlLinks);
         rsort($fixedLinks, SORT_STRING);
-        $sliceArray = array_slice($fixedLinks, 0, self::MAX_LINKS_PER_PAGE);
-        return $sliceArray;
+
+        if ($maxNumberOfLinks) {
+            return array_slice($fixedLinks, 0, $maxNumberOfLinks);
+        } else {
+            return $fixedLinks;
+        }
     }
 
 
