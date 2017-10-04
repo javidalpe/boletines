@@ -19558,7 +19558,7 @@ function SearchPanel(props) {
 		__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 			'div',
 			null,
-			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["Stats"], null)
+			props.showStats && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["Stats"], null)
 		)
 	);
 }
@@ -19614,7 +19614,7 @@ var Main = function (_React$Component) {
 				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 					'div',
 					{ className: 'col-md-12' },
-					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(SearchPanel, { setSearched: this.setSearched })
+					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(SearchPanel, { setSearched: this.setSearched, showStats: config.initWithResults || this.state.searched })
 				),
 				(config.initWithResults || this.state.searched) && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Results, null)
 			);

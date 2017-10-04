@@ -68,7 +68,9 @@ function SearchPanel(props) {
     return <Panel header="Buscar">
 		<Search setSearched={props.setSearched}/>
 		<div>
-			<Stats/>
+            {props.showStats &&
+				<Stats/>
+            }
 		</div>
 	</Panel>;
 }
@@ -106,7 +108,7 @@ class Main extends React.Component {
 			<Configure facetingAfterDistinct ={true}/>
 
 			<div className="col-md-12">
-				<SearchPanel setSearched={this.setSearched}/>
+				<SearchPanel setSearched={this.setSearched} showStats={(config.initWithResults || this.state.searched)}/>
 			</div>
 			{ (config.initWithResults || this.state.searched) &&
                 <Results/>
