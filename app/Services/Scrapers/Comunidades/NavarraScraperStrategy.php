@@ -15,12 +15,9 @@ class NavarraScraperStrategy implements IBoletinScraperStrategy
 
 	public function downloadFilesFromInternet()
 	{
-		$now = Carbon::now();
-		$fileName = sprintf("%s.pdf", $now->format("Y-m-d"));
-
 		FileDownloaderScraper::create("http://www.navarra.es/home_es/Actualidad/BON/")
 			->forEachLink ("/\/home_es\/Actualidad\/BON\/Boletines\/\d+\/\d+\/boletin.pdf/")
-			->download(storage_path('app/' . self::DIRECTORY_FILES. '/'), $fileName);
+			->download(storage_path('app/' . self::DIRECTORY_FILES. '/'));
 	}
 
 	public function getFiles()

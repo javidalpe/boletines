@@ -19,11 +19,10 @@ class AragonScraperStrategy implements IBoletinScraperStrategy
 	{
 		$now = Carbon::now();
 		$initialUrl = sprintf("http://www.boa.aragon.es/cgi-bin/EBOA/BRSCGI?CMD=VERLST&SEC=ULTBOL&DOCS=1-1&BASE=BCOM&SEPARADOR&TBOL-C=BOLE&@PUBL-E=%s", $now->format("Ymd"));
-		$fileName = sprintf("%s.pdf", $now->format("Y-m-d"));
 
 		FileDownloaderScraper::create($initialUrl)
 			->forEachLink ("/BRSCGI\?CMD=VEROBJ&MLKOB=\w+/")
-			->download(storage_path('app/' . self::DIRECTORY_FILES. '/'), $fileName);
+			->download(storage_path('app/' . self::DIRECTORY_FILES. '/'));
 	}
 
 	public function getFiles()

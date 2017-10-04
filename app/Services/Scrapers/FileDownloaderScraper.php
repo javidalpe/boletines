@@ -17,7 +17,13 @@ class FileDownloaderScraper
 	private $lastDomain;
 	private $lastUrl;
 
-	public static function create(string $initialUrl)
+    const MAX_LINKS_PER_PAGE = 10;
+
+    const URL_HASH_FUNCTION = 'md5';
+
+    const PDF_FILE_EXTENSION = '.pdf';
+
+    public static function create(string $initialUrl)
 	{
 		return new FileDownloaderScraper($initialUrl);
 	}
@@ -48,8 +54,8 @@ class FileDownloaderScraper
 		Log::debug($regex);
 		$this->links = [];
 		foreach ($this->contents as $content) {
-			$rawHtmlLinks = $this->match($content, $regex);
-			$this->links  = array_merge($this->links, $this->fixLinks($rawHtmlLinks));
+            $sliceArray = $this->getLinksFromPageContent($regex, $content);
+			$this->links  = array_merge($this->links, $sliceArray);
 		}
 		return $this;
 	}
@@ -76,16 +82,13 @@ class FileDownloaderScraper
 	 * Download all saved links
 	 *
 	 * @param      $directoryName
-	 * @param null $fileName
 	 *
 	 * @return $this
 	 */
-	public function download($directoryName, $fileName = null)
+	public function download($directoryName)
 	{
-		$fileNumber = 1;
 		foreach ($this->links as $link) {
-			$this->downloadLink($directoryName, $fileName, $link, $fileNumber);
-			$fileNumber++;
+			$this->downloadLink($directoryName, $link);
 		}
 
 		return $this;
@@ -158,52 +161,13 @@ class FileDownloaderScraper
 		$this->lastUrl = $protocol . $parse["host"] . $path;
 	}
 
-	/**
-	 * @param $link
-	 *
-	 * @return bool|string
-	 */
-	private function getFileNameFromLink($link)
+    /**
+     * @param $link
+     * @return string
+     */
+	private function getDownloadFileName($link)
 	{
-		$pos = strrpos($link, '/');
-		$fileName = substr($link, $pos);
-		return $fileName;
-	}
-
-	/**
-	 * @param $filename
-	 * @param $index
-	 *
-	 * @return string
-	 */
-	private function getFileNameWithNumber($filename, $index)
-	{
-		$pos = strrpos($filename, ".");
-		if ($pos) {
-			return substr($filename, 0, $pos) . '.' . $index . substr($filename, $pos);
-		} else {
-			return $filename . $index;
-		}
-	}
-
-	/**
-	 * @param $fileName
-	 * @param $link
-	 * @param $fileNumber
-	 *
-	 * @return bool|string
-	 */
-	private function getDownloadFileName($fileName, $link, $fileNumber)
-	{
-		if ($fileName == null) {
-			$downloadFileName = $this->getFileNameFromLink($link);
-		} else {
-			$downloadFileName = $fileName;
-			if (count($this->links) > 1) {
-				$downloadFileName = $this->getFileNameWithNumber($downloadFileName, $fileNumber);
-			}
-		}
-		return $downloadFileName;
+		return hash(self::URL_HASH_FUNCTION, $link) . self::PDF_FILE_EXTENSION;
 	}
 
 	/**
@@ -243,15 +207,13 @@ class FileDownloaderScraper
 
 	/**
 	 * @param $directoryName
-	 * @param $fileName
 	 * @param $link
-	 * @param $fileNumber
 	 */
-	private function downloadLink($directoryName, $fileName, $link, $fileNumber)
+	private function downloadLink($directoryName, $link)
 	{
 		Log::debug("Handling {$link}");
 
-		$downloadFileName = $this->getDownloadFileName($fileName, $link, $fileNumber);
+		$downloadFileName = $this->getDownloadFileName($link);
 		$filePath = $directoryName . $downloadFileName;
 
 		if (file_exists($filePath)) return;
@@ -281,6 +243,21 @@ class FileDownloaderScraper
 		$stringBody = (string) $body;
 		return $stringBody;
 	}
+
+    /**
+     * @param string $regex
+     * @param $content
+     * @return array
+     */
+    private function getLinksFromPageContent(string $regex, $content): array
+    {
+        $rawHtmlLinks = $this->match($content, $regex);
+        $uniqueRawHtmlLinks = array_unique($rawHtmlLinks);
+        $fixedLinks = $this->fixLinks($uniqueRawHtmlLinks);
+        rsort($fixedLinks, SORT_STRING);
+        $sliceArray = array_slice($fixedLinks, 0, self::MAX_LINKS_PER_PAGE);
+        return $sliceArray;
+    }
 
 
 }

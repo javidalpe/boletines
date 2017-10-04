@@ -15,13 +15,11 @@ class CeutaScraperStrategy implements IBoletinScraperStrategy
 
 	public function downloadFilesFromInternet()
 	{
-		$now = Carbon::now();
-		$fileName = sprintf("%s.pdf", $now->format("Y-m-d"));
 		FileDownloaderScraper::create("http://www.ceuta.es/ceuta/documentos/")
 			->forEachLink ("/\/ceuta\/component\/jdownloads\/viewdownload\/\d+\/\d+/")
 			->navigate()
 			->forEachLink("/\/ceuta\/component\/jdownloads\/finish\/\d+-\w+\/[^\"]+/")
-			->download(storage_path('app/' . self::DIRECTORY_FILES. '/'), $fileName);
+			->download(storage_path('app/' . self::DIRECTORY_FILES. '/'));
 	}
 
 	public function getFiles()
