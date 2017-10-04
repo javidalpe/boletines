@@ -4,22 +4,26 @@
 namespace App\Services\Scrapers\Comunidades;
 
 
+use App\Services\Scrapers\FileDownloaderScraper;
 use App\Services\Scrapers\IBoletinScraperStrategy;
-use App\Services\ScrapingService;
 use Storage;
 
 class PrincipadoDeAsturiasScraperStrategy implements IBoletinScraperStrategy
 {
 
-    const FILES_DIRECTORY = "asturias";
+    const DIRECTORY_FILES = "public/asturias";
 
     public function downloadFilesFromInternet()
     {
-        exec("wget --no-directories --recursive -H -A pdf  --timeout=4 -N --tries=2 -l 2 -e robots=off -P storage/app/public/asturias --domains sede.asturias.es https://www.asturias.es/bopa");
+        FileDownloaderScraper::create("http://www.asturias.es/bopa")
+            ->forEachLink ("/\/portal\/site\/Asturias\/menuitem\.\w+\/\?vgnextoid=\w+&i18n\.http\.lang=es&fecha=\d+\/\d+\/\d+&FechaHidden1=FECHA&FechaCompHidden1=1&origen=calendario/")
+            ->navigate()
+            ->forEachLink("/https:\/\/sede\.asturias\.es\/bopa\/\d+\/\d+\/\d+\/\w+\.pdf/")
+            ->download(storage_path('app/' . self::DIRECTORY_FILES. '/'));
     }
 
     public function getFiles()
     {
-        return Storage::files(self::FILES_DIRECTORY);
+        return Storage::files(self::DIRECTORY_FILES);
     }
 }
