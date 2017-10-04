@@ -19,10 +19,12 @@ Route::get('/precios', 'LandingController@pricing')->name('pricing');
 Auth::routes();
 
 Route::middleware('auth')->group(function () {
-	Route::get('/home', 'HomeController@index')->name('home');
 	Route::get('/search', 'HomeController@search')->name('search');
 	Route::get('/report/{id}/{timestamp}', 'HomeController@report')->name('report');
 	Route::resource('alerts', 'AlertController');
+
+    Route::get('/account', 'AccountController@show')->name('account.show');
+    Route::put('/account', 'AccountController@update')->name('account.update');
 });
 
 Route::prefix('admin')->group(function () {

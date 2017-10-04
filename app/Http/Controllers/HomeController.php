@@ -10,25 +10,6 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        return view('home');
-    }
 
     public function search()
     {
@@ -43,7 +24,7 @@ class HomeController extends Controller
     {
     	$alert = Alert::find($id);
 
-    	if (!$alert) return redirect()->route('home');
+    	if (!$alert) return redirect()->route('search');
 
         $service = new SearchConfigService();
         $date = Carbon::createFromTimestamp($timestamp);
