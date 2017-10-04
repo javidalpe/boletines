@@ -33,7 +33,7 @@ const Sidebar = () =>
 	<div className="sidebar">
 		<Panel header="Filtros">
 			<strong>Publicación</strong>
-			<RefinementList attributeName={"publication_name"}/>
+			<RefinementList attributeName={"publication_name"} showMore={true}/>
 			<strong>Día</strong>
 			<DayMenu/>
 		</Panel>

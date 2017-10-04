@@ -19509,7 +19509,7 @@ var Sidebar = function Sidebar() {
 				null,
 				'Publicaci\xF3n'
 			),
-			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["RefinementList"], { attributeName: "publication_name" }),
+			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["RefinementList"], { attributeName: "publication_name", showMore: true }),
 			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 				'strong',
 				null,
