@@ -11,6 +11,7 @@
     <body>
         @include('layouts.navbar')
         <div class="container">
+            @include('flash::message')
             @yield('content')
         </div>
         @include('dashboard.footer')

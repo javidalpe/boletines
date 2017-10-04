@@ -19543,10 +19543,10 @@ var Content = function Content() {
 
 function Search(props) {
 	if (config.defaultRefinementSearch) {
-		return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["SearchBox"], { onChange: props.setSearched, translation: { placeholder: "Buscar..." },
+		return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["SearchBox"], { autoFocus: true, onChange: props.setSearched, translation: { placeholder: "Buscar..." },
 			defaultRefinement: config.defaultRefinementSearch });
 	} else {
-		return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["SearchBox"], { onChange: props.setSearched, translation: { placeholder: "Buscar..." } });
+		return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["SearchBox"], { autoFocus: true, onChange: props.setSearched, translation: { placeholder: "Buscar..." } });
 	}
 }
 

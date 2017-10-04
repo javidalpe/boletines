@@ -57,10 +57,10 @@ const Content = () =>
 
 function Search(props) {
     if (config.defaultRefinementSearch) {
-        return <SearchBox onChange={props.setSearched} translation={{placeholder: "Buscar..."}}
+        return <SearchBox autoFocus={true} onChange={props.setSearched} translation={{placeholder: "Buscar..."}}
 						  defaultRefinement={config.defaultRefinementSearch}/>;
     } else {
-        return <SearchBox onChange={props.setSearched} translation={{placeholder: "Buscar..."}}/>;
+        return <SearchBox autoFocus={true} onChange={props.setSearched} translation={{placeholder: "Buscar..."}}/>;
     }
 }
 

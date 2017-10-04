@@ -17,6 +17,7 @@ class HomeController extends Controller
         $data = [
             'config' => json_encode($service->createForSearch())
         ];
+
     	return view('dashboard.search', $data);
     }
 

@@ -9,7 +9,9 @@
                 <a href="{{ route('demo') }}" class="btn btn-default">Mira la demo</a> <a href="{{ route('register') }}" class="btn btn-primary">Crea una cuenta</a>
             </div>
 
-            <hr>
+            <div class="col-md-12">
+                <hr>
+            </div>
 
             <div class="col-md-12">
                 <h2>Una base de datos en constante crecimiento</h2>

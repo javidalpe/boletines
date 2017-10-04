@@ -43,6 +43,7 @@ class AlertController extends Controller
     public function store(StoreAlertRequest $request)
     {
         Auth::user()->alerts()->create($request->all());
+        flash('Alerta creada satisfactoriamente.')->success();
         return redirect()->route('alerts.index');
     }
 
@@ -81,6 +82,7 @@ class AlertController extends Controller
     public function update(StoreAlertRequest $request, Alert $alert)
     {
         $alert->update($request->all());
+        flash('Alerta actualizada.')->success();
         return redirect()->route('alerts.index');
     }
 
@@ -93,6 +95,7 @@ class AlertController extends Controller
     public function destroy(Alert $alert)
     {
         $alert->delete();
+        flash('Alerta borrada.')->success();
         return redirect()->route('alerts.index');
     }
 }
