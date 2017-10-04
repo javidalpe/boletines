@@ -4,7 +4,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-8 col-md-offset-2">
-				<h1>Nuestra producto es sencillo, nuestros precios también</h1>
+				<h1>Nuestra producto es sencillo, nuestro precio también</h1>
 				<p class="lead">Todo claro, sin letra pequeña</p>
 			</div>
 		</div>

@@ -12,7 +12,11 @@
             <div class="col-md-12">
                 <hr>
             </div>
-
+            <div class="col-md-12">
+                <h2>Recibe alertas diarias o semanales</h2>
+                <p>Con {{config('app.name')}} puedes supervisar todas las publicaciones oficiales para encontrar nuevos contenidos interesantes.</p>
+                <p>Configura las alertas para recibirlas diariamente o semanalmente, como tu prefieras.</p>
+            </div>
             <div class="col-md-12">
                 <h2>Una base de datos en constante crecimiento</h2>
                 <p>Comprobamos diariamente las principales publicaciones del Estado Español. Estas son algunas de las

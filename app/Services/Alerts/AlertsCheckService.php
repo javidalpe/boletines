@@ -25,13 +25,18 @@ class AlertsCheckService
      */
     private function checkAlert(Alert $alert)
     {
-        $alert->checked_at = Carbon::now();
+        $now = Carbon::now();
+
+        $alert->checked_at = $now;
         $alert->save();
 
+        $daystamp = floor($now->timestamp / Chunk::SECONDS_IN_A_DAY);
+
         $chuncks = Chunk::search($alert->query)
+            ->where('daystamp', $daystamp)
             ->get();
 
-        if (!$chuncks) return;
+        if (count($chuncks) <= 0) return;
 
         $emails = json_decode($alert->emails);
 
