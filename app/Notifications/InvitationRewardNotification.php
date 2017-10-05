@@ -43,9 +43,9 @@ class InvitationRewardNotification extends Notification
         return (new MailMessage)
             ->subject("Felicidades, has ganado una alerta")
             ->greeting('Hola!')
-            ->line('Un amigo tuyo se ha registrado utilizando tu enlace de invitación. Como agradecimiento, te hemos incrementado el número de alertas disponibles en tu cuenta.')
+            ->line('Un amigo tuyo se ha registrado utilizando tu enlace de invitación. Como agradecimiento, os hemos incrementado a ambos el número de alertas disponibles.')
             ->action('Accede a tus alertas', route('alerts.index'))
-            ->line('Sigue invitando a otros usuarios para conseguir más alertas.')
+            ->line('Sigue invitando a tus amigos para conseguir más alertas.')
             ->salutation('Gracias por confiar en nosotros.');
     }
 

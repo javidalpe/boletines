@@ -9,7 +9,8 @@ use Log;
 class RewardsService
 {
 
-    const REWARD_INVITATION = 0;
+    const INVITER_REWARD = 0;
+    const INVITEE_REWARD = 1;
 
     public function rewardUser(User $user, $type)
     {
@@ -19,7 +20,7 @@ class RewardsService
 
         switch ($type)
         {
-            case self::REWARD_INVITATION:
+            case self::INVITER_REWARD:
                 $user->notify(new InvitationRewardNotification());
                 break;
             default:

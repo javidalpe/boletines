@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Services\Invitations\InvitationService;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -42,12 +43,16 @@ class YouHaveBeenInvitedNotification extends Notification
      */
     public function toMail($notifiable)
     {
+        $service = new InvitationService;
+        $url = $service->getInvitationUrl($this->user);
+
         return (new MailMessage)
                     ->subject(sprintf("Invitación a %s", config('app.name')))
                     ->greeting("Hola!")
-                    ->line(sprintf("Tu amigo %s te ha invitado a registrarte en %s.", $this->user->name, config('app.url')))
+                    ->line(sprintf("Tu amigo %s te ha regalado una alerta de %s GRATIS.", $this->user->name, config('app.url')))
                     ->line(sprintf("%s es una plataforma para buscar y supervisar los boletines oficiales del estado.", config('app.name')))
-                    ->action('Crear una cuenta', route('register'))
+                    ->line('Para solicitar tu alerta gratis, crea una cuenta a través del siguiente enlace.')
+                    ->action('Crear una cuenta', $url)
                     ->salutation('Saludos');
     }
 

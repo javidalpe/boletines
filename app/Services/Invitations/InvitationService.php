@@ -13,7 +13,13 @@ class InvitationService
         Log::debug(sprintf("Compute invite on %s", $user->email));
         if ($user->inviter) {
             $service = new RewardsService;
-            $service->rewardUser($user->inviter, RewardsService::REWARD_INVITATION);
+            $service->rewardUser($user->inviter, RewardsService::INVITER_REWARD);
+            $service->rewardUser($user, RewardsService::INVITEE_REWARD);
         }
+    }
+
+    public function getInvitationUrl(User $user)
+    {
+        return route('welcome', ['token' => $user->token]);
     }
 }

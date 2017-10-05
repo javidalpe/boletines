@@ -7,8 +7,12 @@ use Illuminate\Http\Request;
 
 class LandingController extends Controller
 {
-	public function welcome()
+	public function welcome(Request $request)
 	{
+	    if ($request->token) {
+	        session(['token'=> $request->token]);
+        }
+
 		return view('landing.welcome');
 	}
 

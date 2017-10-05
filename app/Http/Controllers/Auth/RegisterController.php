@@ -64,7 +64,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $inviterId = $this->getInviterId($data);
+        $inviterId = $this->getInviterId();
 
         $user = User::create([
             'name' => $data['name'],
@@ -80,16 +80,15 @@ class RegisterController extends Controller
     }
 
     /**
-     * @param array $data
      * @return int|null
      */
-    protected function getInviterId(array $data): ?int
+    protected function getInviterId(): ?int
     {
-        if (!isset($data['token'])) {
+        if (!session('token')) {
             return null;
         }
 
-        $token = $data['token'];
+        $token = session('token');
         $otherUser = User::where('token', $token)->first();
 
         if (!$otherUser) {

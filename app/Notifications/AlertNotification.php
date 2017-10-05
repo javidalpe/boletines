@@ -47,12 +47,11 @@ class AlertNotification extends Notification
         $now = Carbon::now();
         $url = route('report', ['id' => $this->alert, 'timestamp' => $now->timestamp]);
 
-        $mail = new MailMessage();
-        $mail->greeting('Alerta de nuevo contenido')
-            ->line('Se han publicado las siguientes novedades según tus ofertas:')
+        return (new MailMessage())
+            ->subject('Nueva publicación oficial')
+            ->greeting('Alerta de nuevo contenido')
+            ->line('Se han publicado nuevos contenidos de tu interés. Pincha en el siguiente enlace para acceder al reporte.')
             ->action('Ver reporte', $url)
-            ->line('Gracias por confiar en nosotros!');
-
-        return $mail;
+            ->salutation('Gracias por confiar en nosotros!');
     }
 }
