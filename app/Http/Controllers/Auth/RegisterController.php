@@ -22,6 +22,7 @@ class RegisterController extends Controller
     */
 
     const USER_RANDOM_TOKEN = 4;
+    const INITIAL_ALERTS = 1;
     use RegistersUsers;
 
     /**
@@ -71,6 +72,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'token' => str_random(self::USER_RANDOM_TOKEN),
+            'alerts_limit' => self::INITIAL_ALERTS,
             'user_id' => $inviterId
         ]);
 

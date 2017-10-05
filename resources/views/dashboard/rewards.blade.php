@@ -8,7 +8,7 @@
                     Invita a otros usuarios para conseguir alertas
                 @endslot
                 <p>Por cada nuevo usuario que se registre usando este enlace conseguiras una nueva alerta.</p>
-                    {!! Form::text('link', route('register', ['token' => $user->token]), array('class' => 'form-control')) !!}
+                    {!! Form::text('link', $url, array('class' => 'form-control')) !!}
                     <br>
                 <p>Invita a otros usuarios por correo.</p>
                 {!! Form::open(['url' => route('rewardsStore'), 'method' => 'post']) !!}

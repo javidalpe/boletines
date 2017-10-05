@@ -49,7 +49,7 @@ class YouHaveBeenInvitedNotification extends Notification
         return (new MailMessage)
                     ->subject(sprintf("Invitación a %s", config('app.name')))
                     ->greeting("Hola!")
-                    ->line(sprintf("Tu amigo %s te ha regalado una alerta de %s GRATIS.", $this->user->name, config('app.url')))
+                    ->line(sprintf("Tu amigo %s te ha regalado una alerta en %s GRATIS.", $this->user->name, config('app.url')))
                     ->line(sprintf("%s es una plataforma para buscar y supervisar los boletines oficiales del estado.", config('app.name')))
                     ->line('Para solicitar tu alerta gratis, crea una cuenta a través del siguiente enlace.')
                     ->action('Crear una cuenta', $url)
