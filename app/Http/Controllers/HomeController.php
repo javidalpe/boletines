@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Alert;
 use App\Chunk;
 use App\Services\Search\SearchConfigService;
+use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 

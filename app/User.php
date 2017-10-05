@@ -48,6 +48,6 @@ class User extends Authenticatable
      */
     public function inviter()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User','user_id');
     }
 }
