@@ -19463,165 +19463,206 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 var Hit = function Hit(_ref) {
-	var hit = _ref.hit;
+    var hit = _ref.hit;
 
-	var url = "/storage/" + hit.filename;
-	return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-		'div',
-		{ className: 'hit panel panel-default panel-body' },
-		__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-			'a',
-			{ href: url, target: '_blank', className: 'btn btn-default pull-right' },
-			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'glyphicon glyphicon-download' }),
-			' Descargar PDF'
-		),
-		__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-			'div',
-			null,
-			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-				'strong',
-				null,
-				hit.publication_name
-			),
-			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-				'div',
-				null,
-				hit.day
-			),
-			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-				'i',
-				null,
-				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["Snippet"], { attributeName: 'content', hit: hit, tagName: 'i' })
-			)
-		)
-	);
+    var url = "/storage/" + hit.filename;
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        { className: 'hit panel panel-default panel-body' },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'a',
+            { href: url, target: '_blank', className: 'btn btn-default pull-right' },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'glyphicon glyphicon-download' }),
+            ' Descargar PDF'
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'div',
+            null,
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'strong',
+                null,
+                hit.publication_name
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'div',
+                null,
+                hit.day
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'i',
+                null,
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["Snippet"], { attributeName: 'content', hit: hit, tagName: 'i' })
+            )
+        )
+    );
 };
 
 var Sidebar = function Sidebar() {
-	return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-		'div',
-		{ className: 'sidebar' },
-		__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-			__WEBPACK_IMPORTED_MODULE_3_react_bootstrap__["a" /* Panel */],
-			{ header: 'Filtros' },
-			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-				'strong',
-				null,
-				'Publicaci\xF3n'
-			),
-			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["RefinementList"], { attributeName: "publication_name", showMore: true }),
-			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-				'strong',
-				null,
-				'D\xEDa'
-			),
-			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(DayMenu, null)
-		)
-	);
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        { className: 'sidebar' },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            __WEBPACK_IMPORTED_MODULE_3_react_bootstrap__["a" /* Panel */],
+            { header: 'Filtros' },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'strong',
+                null,
+                'Publicaci\xF3n'
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["RefinementList"], { attributeName: "publication_name", showMore: true }),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'strong',
+                null,
+                'D\xEDa'
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(DayMenu, null)
+        )
+    );
 };
 
 var DayMenu = function DayMenu() {
-	if (config.defaultRefinementDay) {
-		return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["Menu"], { attributeName: "day", defaultRefinement: config.defaultRefinementDay });
-	} else {
-		return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["Menu"], { attributeName: "day" });
-	}
+    if (config.defaultRefinementDay) {
+        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["Menu"], { attributeName: "day", defaultRefinement: config.defaultRefinementDay });
+    } else {
+        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["Menu"], { attributeName: "day" });
+    }
 };
 
 var Content = function Content() {
-	return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-		'div',
-		{ className: 'content' },
-		__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-			__WEBPACK_IMPORTED_MODULE_3_react_bootstrap__["a" /* Panel */],
-			{ header: 'Resultados' },
-			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["Hits"], { hitComponent: Hit }),
-			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["Pagination"], null)
-		)
-	);
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        { className: 'content' },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            __WEBPACK_IMPORTED_MODULE_3_react_bootstrap__["a" /* Panel */],
+            { header: 'Resultados' },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["Hits"], { hitComponent: Hit }),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["Pagination"], null)
+        )
+    );
 };
 
 function Search(props) {
-	if (config.defaultRefinementSearch) {
-		return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["SearchBox"], { autoFocus: true, onChange: props.setSearched, translation: { placeholder: "Buscar..." },
-			defaultRefinement: config.defaultRefinementSearch });
-	} else {
-		return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["SearchBox"], { autoFocus: true, onChange: props.setSearched, translation: { placeholder: "Buscar..." } });
-	}
+    if (config.defaultRefinementSearch) {
+        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["SearchBox"], { autoFocus: true, onChange: props.onSearch, translation: { placeholder: "Buscar..." },
+            defaultRefinement: config.defaultRefinementSearch });
+    } else {
+        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["SearchBox"], { autoFocus: true, onChange: props.onSearch, translation: { placeholder: "Buscar..." } });
+    }
 }
 
-function SearchPanel(props) {
-	return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-		__WEBPACK_IMPORTED_MODULE_3_react_bootstrap__["a" /* Panel */],
-		{ header: 'Buscar' },
-		__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Search, { setSearched: props.setSearched }),
-		__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-			'div',
-			null,
-			props.showStats && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["Stats"], null)
-		)
-	);
+function CreateAlert(props) {
+    var url = "/alerts/create?query=" + props.query;
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'a',
+        { href: url, className: 'btn btn-default pull-right' },
+        'Crear alerta'
+    );
 }
+
+var SearchPanel = function (_React$Component) {
+    _inherits(SearchPanel, _React$Component);
+
+    function SearchPanel() {
+        _classCallCheck(this, SearchPanel);
+
+        var _this = _possibleConstructorReturn(this, (SearchPanel.__proto__ || Object.getPrototypeOf(SearchPanel)).call(this));
+
+        _this.state = {
+            query: ''
+        };
+        _this.onSearch = _this.onSearch.bind(_this);
+        return _this;
+    }
+
+    _createClass(SearchPanel, [{
+        key: 'onSearch',
+        value: function onSearch(event) {
+            var value = event.target.value;
+            this.props.setSearched(value.length > 0);
+            this.setState({ query: value });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var showCreateAlert = this.state.query.length > 0 && this.state.query !== config.defaultRefinementSearch;
+
+            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                __WEBPACK_IMPORTED_MODULE_3_react_bootstrap__["a" /* Panel */],
+                { header: 'Buscar' },
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Search, { onSearch: this.onSearch }),
+                showCreateAlert && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(CreateAlert, { query: this.state.query }),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    null,
+                    this.props.showStats && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["Stats"], null)
+                )
+            );
+        }
+    }]);
+
+    return SearchPanel;
+}(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
 
 var Results = function Results() {
-	return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-		'div',
-		null,
-		__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-			'div',
-			{ className: 'col-md-4' },
-			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Sidebar, null)
-		),
-		__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-			'div',
-			{ className: 'col-md-8' },
-			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Content, null)
-		)
-	);
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        null,
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'div',
+            { className: 'col-md-4' },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Sidebar, null)
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'div',
+            { className: 'col-md-8' },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Content, null)
+        )
+    );
 };
 
-var Main = function (_React$Component) {
-	_inherits(Main, _React$Component);
+var Main = function (_React$Component2) {
+    _inherits(Main, _React$Component2);
 
-	function Main() {
-		_classCallCheck(this, Main);
+    function Main() {
+        _classCallCheck(this, Main);
 
-		var _this = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this));
+        var _this2 = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this));
 
-		_this.state = {
-			searched: false
-		};
-		_this.setSearched = _this.setSearched.bind(_this);
-		return _this;
-	}
+        _this2.state = {
+            searched: false
+        };
+        _this2.setSearched = _this2.setSearched.bind(_this2);
+        return _this2;
+    }
 
-	_createClass(Main, [{
-		key: 'setSearched',
-		value: function setSearched() {
-			this.setState({ searched: true });
-		}
-	}, {
-		key: 'render',
-		value: function render() {
-			return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-				__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["InstantSearch"],
-				{
-					apiKey: config.apiKey,
-					appId: config.appId,
-					indexName: config.indexId
-				},
-				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["Configure"], { facetingAfterDistinct: true }),
-				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-					'div',
-					{ className: 'col-md-12' },
-					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(SearchPanel, { setSearched: this.setSearched, showStats: config.initWithResults || this.state.searched })
-				),
-				(config.initWithResults || this.state.searched) && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Results, null)
-			);
-		}
-	}]);
+    _createClass(Main, [{
+        key: 'setSearched',
+        value: function setSearched(searched) {
+            this.setState({ searched: searched });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                __WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["InstantSearch"],
+                {
+                    apiKey: config.apiKey,
+                    appId: config.appId,
+                    indexName: config.indexId
+                },
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_instantsearch_dom__["Configure"], { facetingAfterDistinct: true }),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'col-md-12' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(SearchPanel, { setSearched: this.setSearched,
+                        showStats: config.initWithResults || this.state.searched })
+                ),
+                (config.initWithResults || this.state.searched) && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Results, null)
+            );
+        }
+    }]);
 
-	return Main;
+    return Main;
 }(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
 
 __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Main, null), document.getElementById('root'));

@@ -1,89 +1,117 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {
-	InstantSearch,
-	Configure,
-	SearchBox,
-	Hits,
-	Highlight,
-	Snippet,
-	Menu,
-	VirtualMenu,
-	CurrentRefinements,
-	RefinementList,
-	Pagination,
-	Stats
+    InstantSearch,
+    Configure,
+    SearchBox,
+    Hits,
+    Highlight,
+    Snippet,
+    Menu,
+    VirtualMenu,
+    CurrentRefinements,
+    RefinementList,
+    Pagination,
+    Stats
 } from 'react-instantsearch/dom'
-import { Panel } from 'react-bootstrap';
+import {Panel} from 'react-bootstrap';
 
 const Hit = ({hit}) => {
-	var url = "/storage/" + hit.filename;
-	return <div className="hit panel panel-default panel-body">
-		<a href={url} target="_blank" className="btn btn-default pull-right">
-			<i className="glyphicon glyphicon-download"></i> Descargar PDF</a>
-		<div>
-			<strong>{hit.publication_name}</strong>
-			<div>{hit.day}</div>
-			<i><Snippet attributeName="content" hit={hit} tagName="i" /></i>
-		</div>
-	</div>
+    var url = "/storage/" + hit.filename;
+    return <div className="hit panel panel-default panel-body">
+        <a href={url} target="_blank" className="btn btn-default pull-right">
+            <i className="glyphicon glyphicon-download"></i> Descargar PDF</a>
+        <div>
+            <strong>{hit.publication_name}</strong>
+            <div>{hit.day}</div>
+            <i><Snippet attributeName="content" hit={hit} tagName="i"/></i>
+        </div>
+    </div>
 }
 
 const Sidebar = () =>
-	<div className="sidebar">
-		<Panel header="Filtros">
-			<strong>Publicación</strong>
-			<RefinementList attributeName={"publication_name"} showMore={true}/>
-			<strong>Día</strong>
-			<DayMenu/>
-		</Panel>
-	</div>
+    <div className="sidebar">
+        <Panel header="Filtros">
+            <strong>Publicación</strong>
+            <RefinementList attributeName={"publication_name"} showMore={true}/>
+            <strong>Día</strong>
+            <DayMenu/>
+        </Panel>
+    </div>
 
 const DayMenu = () => {
-	if (config.defaultRefinementDay) {
-		return <Menu attributeName={"day"} defaultRefinement={config.defaultRefinementDay}/>
-	} else {
-		return <Menu attributeName={"day"}/>
-	}
-}
-
-const Content = () =>
-	<div className="content">
-		<Panel header="Resultados">
-			<Hits hitComponent={Hit}/>
-			<Pagination/>
-		</Panel>
-	</div>
-
-function Search(props) {
-    if (config.defaultRefinementSearch) {
-        return <SearchBox autoFocus={true} onChange={props.setSearched} translation={{placeholder: "Buscar..."}}
-						  defaultRefinement={config.defaultRefinementSearch}/>;
+    if (config.defaultRefinementDay) {
+        return <Menu attributeName={"day"} defaultRefinement={config.defaultRefinementDay}/>
     } else {
-        return <SearchBox autoFocus={true} onChange={props.setSearched} translation={{placeholder: "Buscar..."}}/>;
+        return <Menu attributeName={"day"}/>
     }
 }
 
-function SearchPanel(props) {
-    return <Panel header="Buscar">
-		<Search setSearched={props.setSearched}/>
-		<div>
-            {props.showStats &&
-				<Stats/>
+const Content = () =>
+    <div className="content">
+        <Panel header="Resultados">
+            <Hits hitComponent={Hit}/>
+            <Pagination/>
+        </Panel>
+    </div>
+
+function Search(props) {
+    if (config.defaultRefinementSearch) {
+        return <SearchBox autoFocus={true} onChange={props.onSearch} translation={{placeholder: "Buscar..."}}
+                          defaultRefinement={config.defaultRefinementSearch}/>;
+    } else {
+        return <SearchBox autoFocus={true} onChange={props.onSearch} translation={{placeholder: "Buscar..."}}/>;
+    }
+}
+
+function CreateAlert(props) {
+    var url = "/alerts/create?query=" + props.query;
+    return <a href={url} className="btn btn-default pull-right">Crear alerta</a>;
+}
+
+class SearchPanel extends React.Component {
+
+
+    constructor() {
+        super();
+        this.state = {
+            query: '',
+        };
+        this.onSearch = this.onSearch.bind(this);
+    }
+
+    onSearch(event) {
+        var value = event.target.value;
+        this.props.setSearched(value.length > 0);
+        this.setState({query: value});
+    }
+
+    render() {
+        var showCreateAlert = this.state.query.length > 0 && this.state.query !== config.defaultRefinementSearch;
+
+        return <Panel header="Buscar">
+            <Search onSearch={this.onSearch}/>
+            { showCreateAlert &&
+                <CreateAlert query={this.state.query}/>
             }
-		</div>
-	</Panel>;
+            <div>
+                {this.props.showStats &&
+                <Stats/>
+                }
+            </div>
+        </Panel>;
+    }
 }
 
 const Results = () =>
-	<div>
-		<div className="col-md-4">
-			<Sidebar/>
-		</div>
-		<div className="col-md-8">
-			<Content/>
-		</div>
-	</div>
+    <div>
+        <div className="col-md-4">
+            <Sidebar/>
+        </div>
+        <div className="col-md-8">
+            <Content/>
+        </div>
+    </div>
 
 class Main extends React.Component {
 
@@ -95,27 +123,28 @@ class Main extends React.Component {
         this.setSearched = this.setSearched.bind(this);
     }
 
-    setSearched() {
-    	this.setState({searched: true});
-	}
+    setSearched(searched) {
+        this.setState({searched: searched});
+    }
 
-	render() {
-		return <InstantSearch
-			apiKey={config.apiKey}
-			appId={config.appId}
-			indexName={config.indexId}
-		>
-			<Configure facetingAfterDistinct ={true}/>
+    render() {
+        return <InstantSearch
+            apiKey={config.apiKey}
+            appId={config.appId}
+            indexName={config.indexId}
+        >
+            <Configure facetingAfterDistinct={true}/>
 
-			<div className="col-md-12">
-				<SearchPanel setSearched={this.setSearched} showStats={(config.initWithResults || this.state.searched)}/>
-			</div>
-			{ (config.initWithResults || this.state.searched) &&
-                <Results/>
+            <div className="col-md-12">
+                <SearchPanel setSearched={this.setSearched}
+                             showStats={(config.initWithResults || this.state.searched)}/>
+            </div>
+            {(config.initWithResults || this.state.searched) &&
+            <Results/>
             }
 
-		</InstantSearch>;
-	}
+        </InstantSearch>;
+    }
 }
 
 ReactDOM.render(<Main/>, document.getElementById('root'));

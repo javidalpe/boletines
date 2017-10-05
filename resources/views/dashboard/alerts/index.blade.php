@@ -4,7 +4,6 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             @if (count($alerts) > 0)
-
                 @component('components.panel')
                     @slot('title')
                         Mis alertas
@@ -35,7 +34,9 @@
                         </tbody>
                     </table>
                 @endcomponent
-                <a href="{{route('alerts.create')}}" class="btn btn-default">Crear alerta</a>
+
+                    <a href="{{route('alerts.create')}}" class="btn btn-primary">Crear alerta</a>
+
             @else
                 @component('components.empty')
                     @slot('title')
