@@ -3,8 +3,6 @@
         <div class="panel-heading">{{$title}}</div>
     @endif
 
-
-
     <div class="panel-body">
         {{$slot}}
     </div>

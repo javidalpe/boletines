@@ -25,6 +25,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/account', 'AccountController@show')->name('account.show');
     Route::put('/account', 'AccountController@update')->name('account.update');
+
+    Route::get('/rewards', 'RewardController@index')->name('rewards');
+    Route::post('/rewards', 'RewardController@store')->name('rewardsStore');
 });
 
 Route::prefix('admin')->group(function () {
