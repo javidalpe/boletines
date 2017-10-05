@@ -47,20 +47,31 @@ const DayMenu = () => {
     }
 }
 
-const Content = () =>
-    <div className="content">
-        <Panel header="Resultados">
+const ResultsHeader = () =>
+    <div>
+        <span className="pull-right"><Stats
+            translations={{stats: (n, t) => n + " resultados encontrados en " + t + "ms"}}/>
+        </span>
+        Resultados
+    </div>
+
+const Content = () => {
+
+    var title = <ResultsHeader/>
+    return <div className="content">
+        <Panel header={title}>
             <Hits hitComponent={Hit}/>
             <Pagination/>
         </Panel>
-    </div>
+    </div>;
+}
 
 function Search(props) {
     if (config.defaultRefinementSearch) {
-        return <SearchBox autoFocus={true} onChange={props.onSearch} translation={{placeholder: "Buscar..."}}
+        return <SearchBox autoFocus={true} onChange={props.onSearch} translations={{placeholder: ""}}
                           defaultRefinement={config.defaultRefinementSearch}/>;
     } else {
-        return <SearchBox autoFocus={true} onChange={props.onSearch} translation={{placeholder: "Buscar..."}}/>;
+        return <SearchBox autoFocus={true} onChange={props.onSearch} translations={{placeholder: ""}}/>;
     }
 }
 
@@ -68,6 +79,10 @@ function CreateAlert(props) {
     var url = "/alerts/create?query=" + props.query;
     return <a href={url} className="btn btn-default pull-right">Crear alerta</a>;
 }
+
+const SearchHelp = () =>
+    <div className="help-block">Puedes buscar nombres, direcciones, términos. Ejemplo: 75724470, "Maria Peña", Calle
+        Gran Via, ..</div>
 
 class SearchPanel extends React.Component {
 
@@ -90,14 +105,14 @@ class SearchPanel extends React.Component {
         var showCreateAlert = this.state.query.length > 0 && this.state.query !== config.defaultRefinementSearch;
 
         return <Panel header="Buscar">
+
             <Search onSearch={this.onSearch}/>
-            { showCreateAlert &&
-                <CreateAlert query={this.state.query}/>
+            {showCreateAlert &&
+            <CreateAlert query={this.state.query}/>
             }
+            <SearchHelp/>
             <div>
-                {this.props.showStats &&
-                <Stats/>
-                }
+
             </div>
         </Panel>;
     }
