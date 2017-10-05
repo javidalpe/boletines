@@ -24,7 +24,7 @@ class Alert extends Model
     ];
 
     /**
-     * Get the user that owns the phone.
+     * Get the user that owns the alert.
      */
     public function user()
     {

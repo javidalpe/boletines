@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\UserRegistered;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -20,6 +21,7 @@ class RegisterController extends Controller
     |
     */
 
+    const USER_RANDOM_TOKEN = 4;
     use RegistersUsers;
 
     /**
@@ -62,10 +64,38 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $inviterId = $this->getInviterId($data);
+
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'token' => str_random(self::USER_RANDOM_TOKEN),
+            'user_id' => $inviterId
         ]);
+
+        event(new UserRegistered($user));
+
+        return $user;
+    }
+
+    /**
+     * @param array $data
+     * @return int|null
+     */
+    protected function getInviterId(array $data): ?int
+    {
+        if (!isset($data['token'])) {
+            return null;
+        }
+
+        $token = $data['token'];
+        $otherUser = User::where('token', $token)->first();
+
+        if (!$otherUser) {
+            return null;
+        }
+
+        return  $otherUser->id;
     }
 }
