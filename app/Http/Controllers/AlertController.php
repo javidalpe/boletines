@@ -18,7 +18,8 @@ class AlertController extends Controller
     {
         $user = Auth::user();
         $data = [
-            'alerts' => $user->alerts
+            'alerts' => $user->alerts,
+            'user' => $user
         ];
 
         return view('dashboard.alerts.index', $data);
@@ -31,6 +32,10 @@ class AlertController extends Controller
      */
     public function create()
     {
+        if (!Auth::user()->can('create', Alert::class)) {
+            flash("Has superado el límite de alertas permitido.")->warning();
+            return back();
+        }
         return view('dashboard.alerts.create');
     }
 
@@ -42,6 +47,10 @@ class AlertController extends Controller
      */
     public function store(StoreAlertRequest $request)
     {
+        if (!Auth::user()->can('create', Alert::class)) {
+            flash("Has superado el límite de alertas permitido.")->warning();
+            return back();
+        }
         Auth::user()->alerts()->create($request->all());
         flash('Alerta creada satisfactoriamente.')->success();
         return redirect()->route('alerts.index');
