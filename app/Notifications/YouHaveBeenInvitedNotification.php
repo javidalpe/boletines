@@ -7,19 +7,21 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class InvitationRewardNotification extends Notification
+class YouHaveBeenInvitedNotification extends Notification
 {
     use Queueable;
 
+    private $user;
+
     /**
-     * Create a new notification instance.
-     *
-     * @return void
+     * YouHaveBeenInvitedNotification constructor.
+     * @param $user
      */
-    public function __construct()
+    public function __construct($user)
     {
-        //
+        $this->user = $user;
     }
+
 
     /**
      * Get the notification's delivery channels.
@@ -41,12 +43,12 @@ class InvitationRewardNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject("Felicidades, has ganado una alerta")
-            ->greeting('Hola!')
-            ->line('Un amigo tuyo se ha registrado utilizando tu enlace de invitación. Como agradecimiento, te hemos incrementado el número de alertas disponibles en tu cuenta.')
-            ->action('Accede a tus alertas', route('alerts.index'))
-            ->line('Sigue invitando a otros usuarios para conseguir más alertas.')
-            ->salutation('Gracias por confiar en nosotros.');
+                    ->subject(sprintf("Invitación a %s", config('app.name')))
+                    ->greeting("Hola!")
+                    ->line(sprintf("Tu amigo %s te ha invitado a registrarte en %s.", $this->user->name, config('app.url')))
+                    ->line(sprintf("%s es una plataforma para buscar y supervisar los boletines oficiales del estado.", config('app.name')))
+                    ->action('Crear una cuenta', route('register'))
+                    ->salutation('Saludos');
     }
 
     /**
