@@ -15,7 +15,7 @@ class CreateChunksTable extends Migration
     {
         Schema::create('chunks', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('filename');
+            $table->string('url');
             $table->text('content');
             $table->string('publication_name');
             $table->integer('publication_priority');
