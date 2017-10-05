@@ -24,9 +24,4 @@ class LandingController extends Controller
         ];
         return view('landing.demo', $data);
     }
-
-	public function pricing()
-	{
-		return view('landing.pricing');
-	}
 }

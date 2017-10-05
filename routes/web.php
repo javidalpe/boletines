@@ -13,7 +13,6 @@
 
 Route::get('/', 'LandingController@welcome')->name('welcome');
 Route::get('/demo', 'LandingController@demo')->name('demo');
-Route::get('/precios', 'LandingController@pricing')->name('pricing');
 
 
 Auth::routes();

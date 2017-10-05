@@ -6,7 +6,6 @@
             <hr>
             <ul class="list-unstyled">
                 <li><a href="{{route('demo')}}">Demo</a></li>
-                <li><a href="{{route('pricing')}}">Precios</a></li>
             </ul>
         </div>
         <div class="col-md-3">
