@@ -15,11 +15,10 @@ class ExtremaduraScraperStrategy implements IBoletinScraperStrategy
 
 	public function downloadFilesFromInternet()
     {
-	    FileDownloaderScraper::create("http://doe.gobex.es/busquedas/bus_calendario.php")
+	    return FileDownloaderScraper::create("http://doe.gobex.es/busquedas/bus_calendario.php")
 		    ->forEachLink ("/\/ultimosdoe\/mostrardoe\.php\?fecha=\d+/", self::MAX_NUMBER_OF_PUBLICATIONS)
 		    ->navigate()
-		    ->forEachLink("/\/pdfs\/doe\/\d+\/\d+o\/\d+o\.pdf/")
-		    ->download(storage_path('app/' . self::DIRECTORY_FILES. '/'));
+		    ->getLinks("/\/pdfs\/doe\/\d+\/\d+o\/\d+o\.pdf/");
     }
 
     public function getFiles()

@@ -9,7 +9,6 @@ use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;
 use Log;
-use Storage;
 
 class FileDownloaderScraper
 {
@@ -53,13 +52,14 @@ class FileDownloaderScraper
      */
     public function forEachLink(string $regex, int $maxNumberOfLinks = 0)
     {
-        Log::debug($regex);
-        $this->links = [];
-        foreach ($this->contents as $content) {
-            $sliceArray = $this->getLinksFromPageContent($regex, $content, $maxNumberOfLinks);
-            $this->links = array_merge($this->links, $sliceArray);
-        }
+        $this->updateLinks($regex, $maxNumberOfLinks);
         return $this;
+    }
+
+    public function getLinks(string $regex)
+    {
+        $this->updateLinks($regex, $maxNumberOfLinks = 0);
+        return $this->links;
     }
 
     /**
@@ -268,6 +268,20 @@ class FileDownloaderScraper
             return array_slice($fixedLinks, 0, $maxNumberOfLinks);
         } else {
             return $fixedLinks;
+        }
+    }
+
+    /**
+     * @param string $regex
+     * @param int $maxNumberOfLinks
+     */
+    protected function updateLinks(string $regex, int $maxNumberOfLinks)
+    {
+        Log::debug($regex);
+        $this->links = [];
+        foreach ($this->contents as $content) {
+            $sliceArray = $this->getLinksFromPageContent($regex, $content, $maxNumberOfLinks);
+            $this->links = array_merge($this->links, $sliceArray);
         }
     }
 

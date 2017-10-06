@@ -15,13 +15,12 @@ class BoeScraperStrategy implements IBoletinScraperStrategy
 
 	public function downloadFilesFromInternet()
 	{
-		FileDownloaderScraper::create("https://www.boe.es/diario_boe/ultimo.php")
+	    return FileDownloaderScraper::create("https://www.boe.es/diario_boe/ultimo.php")
 			->forEachLink ("/\/boe\/dias\/\d+\/\d+\/\d+\/pdfs\/[^\.]+\.pdf/")
 			->download(storage_path('app/' . self::DIRECTORY_FILES. '/'))
 			->forEachLink ("/\/boe\/dias\/\d+\/\d+\/\d+\/index.php\?d=\d+&s=\d+/")
 			->navigate()
-			->forEachLink ("/\/boe\/dias\/\d+\/\d+\/\d+\/pdfs\/[^\.]+\.pdf/")
-			->download(storage_path('app/' . self::DIRECTORY_FILES. '/'));
+            ->getLinks("/\/boe\/dias\/\d+\/\d+\/\d+\/pdfs\/[^\.]+\.pdf/");
 	}
 
 	public function getFiles()

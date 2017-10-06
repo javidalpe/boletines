@@ -14,9 +14,8 @@ class ComunidadDeMadridScraperStrategy implements IBoletinScraperStrategy
 
 	public function downloadFilesFromInternet()
 	{
-		FileDownloaderScraper::create("http://www.bocm.es/bocm/Satellite?language=es&pagename=Boletin/Page/BOCM_home")
-			->forEachLink ("/\/boletin\/CM_Boletin_BOCM\/\d+\/\d+\/\d+\/\d+.PDF/")
-			->download(storage_path('app/' . self::DIRECTORY_FILES. '/'));
+		return FileDownloaderScraper::create("http://www.bocm.es/bocm/Satellite?language=es&pagename=Boletin/Page/BOCM_home")
+			->getLinks ("/\/boletin\/CM_Boletin_BOCM\/\d+\/\d+\/\d+\/\d+.PDF/");
 	}
 
 	public function getFiles()

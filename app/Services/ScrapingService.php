@@ -10,7 +10,9 @@ use App\Run;
 use App\Services\Scrapers\Exceptions\BadRequestException;
 use App\Services\Scrapers\IBoletinScraperStrategy;
 use App\Services\Scrapers\ScraperStrategyFactory;
+use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\RequestException;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -50,23 +52,24 @@ class ScrapingService
     const RUN_RESULT_OK = 'ok';
     const RUN_RESULT_ERROR = 'error';
 
-	const PDF_EXTENSION = 'pdf';
-	const PDF_EXTENSION_MAY = 'PDF';
+    const PDF_EXTENSION = 'pdf';
+    const PDF_EXTENSION_MAY = 'PDF';
+    const URL_HASH_FUNCTION = 'md5';
 
-	private $splitService;
-	private $scheduleService;
+    private $splitService;
+    private $scheduleService;
 
-	/**
-	 * ScrapingService constructor.
-	 */
-	public function __construct()
-	{
-		$this->splitService = new FileSplitService();
-		$this->scheduleService = new PublicationsScheduleService();
-	}
+    /**
+     * ScrapingService constructor.
+     */
+    public function __construct()
+    {
+        $this->splitService = new FileSplitService();
+        $this->scheduleService = new PublicationsScheduleService();
+    }
 
 
-	public function updateIndexes()
+    public function updateIndexes()
     {
         Log::debug("Updating all indexes");
 
@@ -107,24 +110,23 @@ class ScrapingService
         Log::debug("Updating index of {$regionName}");
 
         $microsecondsBefore = microtime(true);
-        $oldFiles = $scrapper->getFiles();
-        $oldCount = count($oldFiles);
+
+        $oldCount = Chunk::where('publication_name', $regionName)->count();
         $newCount = $oldCount;
 
         try {
-	        $scrapper->downloadFilesFromInternet();
-	        $files = $scrapper->getFiles();
-	        $newCount = count($files);
+            $urls = $scrapper->downloadFilesFromInternet();
 
-	        Log::debug("Parsing {$newCount} files.");
+            Log::debug("Parsing {$newCount} files.");
 
-	        $this->saveFiles($files, $regionName, $priority);
+            $this->saveFiles($urls, $regionName, $priority);
 
-	        $run->result = self::RUN_RESULT_OK;
-	        $publication->last_success_run_at = Carbon::now();
+            $run->result = self::RUN_RESULT_OK;
+            $newCount = Chunk::where('publication_name', $regionName)->count();
+            $publication->last_success_run_at = Carbon::now();
         } catch (ClientException $e) {
-	        Log::debug("Error updating {$regionName}: error al obtener la url "  . $e->getRequest()->getUri());
-	        $run->result = self::RUN_RESULT_ERROR;
+            Log::debug("Error updating {$regionName}: error al obtener la url " . $e->getRequest()->getUri());
+            $run->result = self::RUN_RESULT_ERROR;
         } catch (\ErrorException $e) {
             Log::debug("Error updating {$regionName}: " . $e->getTraceAsString());
             $run->result = self::RUN_RESULT_ERROR;
@@ -149,74 +151,69 @@ class ScrapingService
         $publication->save();
     }
 
-    private function saveFiles($files, $regionName, $priority)
+    private function saveFiles($urls, $regionName, $priority)
     {
-        foreach ($files as $file) {
-            $this->parseFile($file, $regionName, $priority);
+        foreach ($urls as $url) {
+            $this->parseFile($url, $regionName, $priority);
         }
     }
 
 
     /**
-     * @param $filename
+     * @param $url
      * @param $regionName
      * @param $priority
      */
-    private function parseFile($filename, $regionName, $priority)
+    private function parseFile($url, $regionName, $priority)
     {
-        $info = pathinfo($filename);
+        if ($this->exists($url)) return;
 
-        if ($info['extension'] != self::PDF_EXTENSION && $info['extension'] != self::PDF_EXTENSION_MAY) return;
+        $response = $this->getHttpGetResponse($url);
 
-        $destinationPath = str_replace("public/", "", $filename);
+        $content = (string)$response->getBody();
 
-        $existingDocument = Chunk::where('filename', $destinationPath)->first();
+        if (!$content || strlen($content) <= 10) return;
 
-        if ($existingDocument) return;
+        $content = $this->getPlainTextFromRemotePdf($url, $content);
 
-        Log::debug("Parsing pdf: " . $filename);
+        if (!$content || strlen($content) <= 10) return;
 
-        $content = $this->getContentFromPDF($filename);
+        $publishedAt = $this->getFileDate($response);
 
-        if (!$content) return;
-
-        $publishedAt = Storage::lastModified($filename);
-
-        $this->storeText($destinationPath, $content, $regionName, $priority, $publishedAt);
+        $this->storeText($url, $content, $regionName, $priority, $publishedAt);
     }
 
     /**
-     * @param $destinationPath
+     * @param $url
      * @param $text
      * @param $regionName
      * @param $priority
      * @param $publishedAt
      */
-    private function storeText($destinationPath, $text, $regionName, $priority, $publishedAt)
+    private function storeText($url, $text, $regionName, $priority, $publishedAt)
     {
         $chunks = $this->splitService->splitDocument($text);
 
-
         foreach ($chunks as $content) {
-	        $this->createChunk($destinationPath, $content, $regionName, $priority, $publishedAt);
+            $this->createChunk($url, $content, $regionName, $priority, $publishedAt);
         }
     }
 
 
     /**
-     * @param $filename
-     * @param $content
-     * @param $regionName
-     * @param $priority
-     * @param $publishedAt
+     * @param string $url
+     * @param string $content
+     * @param string $regionName
+     * @param int $priority
+     * @param Carbon $publishedAt
      */
-    private function createChunk($filename, $content, $regionName, $priority, $publishedAt)
+    private function createChunk(string $url, string $content, string $regionName, int $priority, Carbon $publishedAt)
     {
         $chunk = new Chunk();
-        $chunk->filename = $filename;
+        $chunk->url = $url;
         $chunk->publication_name = $regionName;
         $chunk->publication_priority = $priority;
-        $chunk->published_at = Carbon::createFromTimestamp($publishedAt);
+        $chunk->published_at = $publishedAt;
         $chunk->content = $content;
         $chunk->save();
     }
@@ -237,16 +234,18 @@ class ScrapingService
      */
     private function getContentFromPDF($filename)
     {
-        $fullFilePath = $this->getFullPath($filename);
-        $pathIfo = pathinfo($fullFilePath);
+        Log::debug("Parsing pdf: " . $filename);
 
-        $fullPathWithText = storage_path('app/tmp/' . $pathIfo['filename'] . '.txt');
+        $fullFilePath = $this->getFullPath($filename);
+
+        $fullPathWithText = storage_path('app/' . $filename . '.txt');
 
         exec("pdftotext -enc ASCII7 {$fullFilePath} {$fullPathWithText}");
 
         if (!file_exists($fullPathWithText)) {
-        	return false;
+            return false;
         }
+
         $content = file_get_contents($fullPathWithText);
         unlink($fullPathWithText);
         return $content;
@@ -257,9 +256,65 @@ class ScrapingService
      * @param Publication $publication
      * @return bool
      */
-    private function shouldRunScraper(IBoletinScraperStrategy $scrapper, Publication $publication) : bool
+    private function shouldRunScraper(IBoletinScraperStrategy $scrapper, Publication $publication): bool
     {
         return $scrapper && $this->scheduleService->isTodayAPublicationDay($publication->priority);
+    }
+
+    /**
+     * @param $url
+     * @return bool
+     */
+    private function exists($url)
+    {
+        return Chunk::where('url', $url)->first() != null;
+    }
+
+    /**
+     * @param $url
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     */
+    private function getHttpGetResponse($url)
+    {
+        $try = 3;
+        while ($try) {
+            try {
+                $client = new Client();
+                return $client->request('GET', $url);
+            } catch (RequestException $e) {
+                $try--;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * @param $response
+     * @return Carbon
+     */
+    private function getFileDate($response): Carbon
+    {
+        $lastModifiedHeader = $response->getHeader('Last-Modified');
+
+        if (!$lastModifiedHeader) return Carbon::now();
+
+        return Carbon::parse($lastModifiedHeader[0]);
+    }
+
+    /**
+     * @param $url
+     * @param $content
+     * @return bool|string
+     */
+    private function getPlainTextFromRemotePdf($url, $content)
+    {
+        $filename = hash(self::URL_HASH_FUNCTION, $url);
+
+        Storage::put($filename, $content);
+        $content = $this->getContentFromPDF($filename);
+        Storage::delete($filename);
+
+        return $content;
     }
 
 

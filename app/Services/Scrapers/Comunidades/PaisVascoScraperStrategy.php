@@ -15,11 +15,10 @@ class PaisVascoScraperStrategy implements IBoletinScraperStrategy
 
 	public function downloadFilesFromInternet()
 	{
-		FileDownloaderScraper::create("https://www.euskadi.eus/r48-bopv2/es/bopv2/datos/Ultimo.shtml")
+		return FileDownloaderScraper::create("https://www.euskadi.eus/r48-bopv2/es/bopv2/datos/Ultimo.shtml")
 			->forEachLink ("/\d+\/\d+\/\w+\.shtml/", self::MAX_NUMBER_OF_PUBLICATIONS)
 			->navigate()
-			->forEachLink("/\w+\.pdf/")
-			->download(storage_path('app/' . self::DIRECTORY_FILES. '/'));
+			->getLinks("/\w+\.pdf/");
 	}
 
 	public function getFiles()

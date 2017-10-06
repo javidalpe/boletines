@@ -16,9 +16,8 @@ class CastillaLaManchaScraperStrategy implements IBoletinScraperStrategy
 
 	public function downloadFilesFromInternet()
 	{
-        FileDownloaderScraper::create("http://docm.jccm.es/portaldocm/")
-			->forEachLink ("/descargarArchivo\.do\?ruta=\d+\/\d+\/\d+\/pdf\/docm_\d+\.pdf&tipo=rutaDocm/")
-			->download(storage_path('app/' . self::DIRECTORY_FILES. '/'));
+        return FileDownloaderScraper::create("http://docm.jccm.es/portaldocm/")
+			->getLinks ("/descargarArchivo\.do\?ruta=\d+\/\d+\/\d+\/pdf\/docm_\d+\.pdf&tipo=rutaDocm/");
 	}
 
 	public function getFiles()

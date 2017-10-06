@@ -14,11 +14,10 @@ class RegionDeMurciaBoletinScraperStrategy implements IBoletinScraperStrategy
 
     public function downloadFilesFromInternet()
     {
-        FileDownloaderScraper::create("https://www.borm.es/borm/vista/principal/inicio.jsf")
+        return FileDownloaderScraper::create("https://www.borm.es/borm/vista/principal/inicio.jsf")
             ->forEachLink("/\/borm\/vista\/busqueda\/ver_sumario\.jsf\?fecha=\d+&origen=calendario/", self::MAX_NUMBER_OF_PUBLICATIONS)
             ->navigate()
-            ->forEachLink("/\/borm\/documento\?obj=bol&id=\d+/")
-            ->download(storage_path('app/' . self::FILES_DIRECTORY . '/'));
+            ->getLinks("/\/borm\/documento\?obj=bol&id=\d+/");
     }
 
     public function getFiles()

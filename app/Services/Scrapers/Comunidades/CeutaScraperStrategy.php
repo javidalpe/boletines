@@ -16,11 +16,10 @@ class CeutaScraperStrategy implements IBoletinScraperStrategy
 
 	public function downloadFilesFromInternet()
 	{
-		FileDownloaderScraper::create("http://www.ceuta.es/ceuta/documentos/")
+		return FileDownloaderScraper::create("http://www.ceuta.es/ceuta/documentos/")
 			->forEachLink ("/\/ceuta\/component\/jdownloads\/viewdownload\/\d+\/\d+/", self::MAX_NUMBER_OF_PUBLICATIONS)
 			->navigate()
-			->forEachLink("/\/ceuta\/component\/jdownloads\/finish\/\d+-\w+\/[^\"]+/")
-			->download(storage_path('app/' . self::DIRECTORY_FILES. '/'));
+			->getLinks("/\/ceuta\/component\/jdownloads\/finish\/\d+-\w+\/[^\"]+/");
 	}
 
 	public function getFiles()

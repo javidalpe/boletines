@@ -15,9 +15,8 @@ class LaRiojaScraperStrategy implements IBoletinScraperStrategy
 
 	public function downloadFilesFromInternet()
 	{
-		FileDownloaderScraper::create("http://www.larioja.org/bor/es")
-			->forEachLink ("/http:\/\/ias1\.larioja\.org\/boletin\/Bor_Boletin_visor_Servlet\?referencia=[^\"]+/")
-			->download(storage_path('app/' . self::DIRECTORY_FILES. '/'));
+		return FileDownloaderScraper::create("http://www.larioja.org/bor/es")
+			->getLinks ("/http:\/\/ias1\.larioja\.org\/boletin\/Bor_Boletin_visor_Servlet\?referencia=[^\"]+/");
 	}
 
 	public function getFiles()

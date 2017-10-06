@@ -18,11 +18,10 @@ class CanariasScraperStrategy implements IBoletinScraperStrategy
 
     public function downloadFilesFromInternet()
 	{
-		FileDownloaderScraper::create("http://www.gobiernodecanarias.org/boc/")
+		return FileDownloaderScraper::create("http://www.gobiernodecanarias.org/boc/")
 			->forEachLink ("/\/boc\/\d+\/\d+\//", self::MAX_NUMBER_OF_PUBLICATIONS)
 			->navigate()
-			->forEachLink ("/http:\/\/sede\.gobcan\.es\/boc\/boc-a-\d+-\w+-\w+\.pdf/")
-			->download(storage_path('app/' . self::DIRECTORY_FILES. '/'));
+			->getLinks ("/http:\/\/sede\.gobcan\.es\/boc\/boc-a-\d+-\w+-\w+\.pdf/");
 	}
 
 	public function getFiles()

@@ -18,9 +18,8 @@ class ComunidadValencianaScraperStrategy implements IBoletinScraperStrategy
 		$now = Carbon::now();
 		$initialUrl = sprintf("http://www.dogv.gva.es/datos/%s/PortalCAS.html", $now->format("Y/m/d"));
 
-		FileDownloaderScraper::create($initialUrl)
-			->forEachLink ("/pdf\/docv_\d+\.pdf/")
-			->download(storage_path('app/' . self::DIRECTORY_FILES. '/'));
+		return FileDownloaderScraper::create($initialUrl)
+			->getLinks ("/pdf\/docv_\d+\.pdf/");
 	}
 
 	public function getFiles()

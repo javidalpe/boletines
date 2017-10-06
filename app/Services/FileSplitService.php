@@ -6,7 +6,7 @@ namespace App\Services;
 
 class FileSplitService
 {
-	const MAX_DOCUMENT_CONTENT_LENGTH = 5000;
+	const MAX_DOCUMENT_CONTENT_LENGTH = 6500;
 
 	const MIN_DOCUMENT_LENGTH = 5;
 	private $maxChunkLength;

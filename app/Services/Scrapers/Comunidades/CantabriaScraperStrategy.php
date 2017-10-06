@@ -16,9 +16,8 @@ class CantabriaScraperStrategy implements IBoletinScraperStrategy
 
 	public function downloadFilesFromInternet()
 	{
-		FileDownloaderScraper::create("https://boc.cantabria.es/boces/boletines.do?boton=UltimoBOCPublicado")
-			->forEachLink ("/verPdfAction\.do\?idBlob=\d+&tipoPdf=0/")
-			->download(storage_path('app/' . self::DIRECTORY_FILES. '/'));
+		return FileDownloaderScraper::create("https://boc.cantabria.es/boces/boletines.do?boton=UltimoBOCPublicado")
+			->getLinks ("/verPdfAction\.do\?idBlob=\d+&tipoPdf=0/");
 	}
 
 	public function getFiles()
