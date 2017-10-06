@@ -16,10 +16,9 @@ import {
 } from 'react-instantsearch/dom'
 import {Panel} from 'react-bootstrap';
 
-const Hit = ({hit}) => {
-    var url = "/storage/" + hit.filename;
-    return <div className="hit panel panel-default panel-body">
-        <a href={url} target="_blank" className="btn btn-default pull-right">
+const Hit = ({hit}) =>
+    <div className="hit panel panel-default panel-body">
+        <a href={hit.url} target="_blank" className="btn btn-default pull-right">
             <i className="glyphicon glyphicon-download"></i> Descargar PDF</a>
         <div>
             <strong>{hit.publication_name}</strong>
@@ -27,7 +26,7 @@ const Hit = ({hit}) => {
             <i><Snippet attributeName="content" hit={hit} tagName="i"/></i>
         </div>
     </div>
-}
+
 
 const Sidebar = () =>
     <div className="sidebar">

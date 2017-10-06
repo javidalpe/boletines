@@ -19464,14 +19464,12 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var Hit = function Hit(_ref) {
     var hit = _ref.hit;
-
-    var url = "/storage/" + hit.filename;
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
         { className: 'hit panel panel-default panel-body' },
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'a',
-            { href: url, target: '_blank', className: 'btn btn-default pull-right' },
+            { href: hit.url, target: '_blank', className: 'btn btn-default pull-right' },
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'glyphicon glyphicon-download' }),
             ' Descargar PDF'
         ),
