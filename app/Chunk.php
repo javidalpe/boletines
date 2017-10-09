@@ -30,7 +30,7 @@ class Chunk extends Model
 	 */
 	public function searchableAs()
 	{
-		return 'chunks_index';
+		return config('scout.index');
 	}
 
 	/**

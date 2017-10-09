@@ -17,6 +17,8 @@ return [
 
     'driver' => env('SCOUT_DRIVER', 'algolia'),
 
+	'index' => env('SCOUT_INDEX', 'chunks_index'),
+
     /*
     |--------------------------------------------------------------------------
     | Index Prefix
