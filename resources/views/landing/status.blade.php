@@ -29,7 +29,7 @@
                                     @if (!$publication->last_run_result)
                                         <span class="label label-default">Never run</span>
                                     @elseif ($publication->last_run_result == \App\Services\ScrapingService::RUN_RESULT_OK)
-                                        <span class="label label-success">ok</span>
+                                        <span class="label label-success"><i class="glyphicon glyphicon-ok"></i></span>
                                     @else
                                         <span class="label label-danger">error</span>
                                     @endif
