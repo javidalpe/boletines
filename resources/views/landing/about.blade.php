@@ -5,8 +5,11 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h2>Sobre nosotros</h2>
-                <p>{{ config('app.name') }} es un prototipo que estamos probando para ver si puede ser de utilidad para los usuarios.</p>
-                <p>Esta idea surge de dos profesionales que han visto la oportunidad de negocio y queremos explorar con este prototipo si tiene sentido montarlo.</p>
+                <p>{{ config('app.name') }} es un prototipo orientado a descubrir la utilidad de una herramienta de
+                    búsqueda sobre los boletines oficiales publicados por el Gobierno de España.</p>
+                <p>Esta idea surge de dos profesionales que han descubierto la necesidad de mejorar el acceso a la
+                    información publicada por los órganos de gobierno. Descubierta además la oportunidad de negocio,
+                    con este piloto quieren explorar la viabilidad del proyecto.</p>
             </div>
         </div>
     </div>

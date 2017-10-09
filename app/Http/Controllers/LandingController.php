@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Publication;
 use App\Services\Search\SearchConfigService;
 use Illuminate\Http\Request;
 
@@ -25,6 +26,15 @@ class LandingController extends Controller
 	public function how()
     {
         return view('landing.how');
+    }
+
+    public function status()
+    {
+        $data = [
+            'publications' => Publication::all()
+        ];
+
+        return view('landing.status', $data);
     }
 
     public function about()
