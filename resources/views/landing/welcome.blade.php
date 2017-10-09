@@ -4,59 +4,62 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1>Busca en los boletines oficiales</h1>
-                <p class="lead">Es la plataforma más potente de búsqueda sobre los boletines oficiales del estado.</p>
-                <a href="{{ route('demo') }}" class="btn btn-default">Mira la demo</a> <a href="{{ route('register') }}" class="btn btn-primary">Crea una cuenta</a>
+                <h1>Busca en todos los boletines oficiales y crea tus alertas</h1>
+                <p>Goinfolex es un prototipo que queremos testar para entender las necesidades de los usuarios en las búsquedas de los boletines oficiales y la creación de alertas.
+                    En esta fase de prototipado no tenemos ningún animo lucrativo, es totalmente gratuito y no realizaremos ninguna venta de datos o publicidad.
+                    Queremos agradecerte que nos hagas llegar tus comentarios, experiencia de uso y sugerencias a Ayudanos
+                </p>
             </div>
 
-            <div class="col-md-12">
+            <div class="row">
+                <div id="root"></div>
+            </div>
+
+            @include('shared.search')
+
+            <div class="col-md-4">
+                <h3>¿Dónde buscamos?</h3>
                 <hr>
-            </div>
-            <div class="col-md-12">
-                <h2>Recibe alertas diarias o semanales</h2>
-                <p>Con {{config('app.name')}} puedes supervisar todas las publicaciones oficiales para encontrar nuevos contenidos interesantes.</p>
-                <p>Configura las alertas para recibirlas diariamente o semanalmente, como tu prefieras.</p>
-            </div>
-            <div class="col-md-12">
-                <h2>Una base de datos en constante crecimiento</h2>
-                <p>Comprobamos diariamente las principales publicaciones del Estado Español. Estas son algunas de las
-                publicaciones que gestionamos actualmente.</p>
-            </div>
-            <div class="col-md-12">
-                <h4>Boletines del Estado</h4>
+                <p>Boletín Oficial del Estado (BOE).</p>
+                <p>Boletines Autonómicos</p>
                 <ul>
-                    <li>Diario oficial Boletín Oficial del Estado (BOE)</li>
+                    <li>Boletín Oficial de la Junta de Andalucía (BOJA)</li>
+                    <li>Boletín Oficial de Aragón (BOA)</li>
+                    <li>Boletín Oficial del Principado de Asturias (BOPA)</li>
+                    <li>Boletín Oficial de Islas Baleares (BOIB)</li>
+                    <li>Boletín Oficial de Canarias (BOC)</li>
+                    <li>Boletín Oficial de Cantabria (BOC)</li>
+                    <li>Diario Oficial de Castilla-La Mancha (DOCM)</li>
+                    <li>Boletín Oficial de Castilla y León (BOCYL)</li>
+                    <li>Diari Oficial de la Generalitat de Catalunya (DOGC)</li>
+                    <li>Diario Oficial de Extremadura (DOE)</li>
+                    <li>Diario Oficial de Galicia (DOG)</li>
+                    <li>Boletín Oficial de La Rioja (BOR)</li>
+                    <li>Boletín Oficial de la Comunidad de Madrid (BOCM)</li>
+                    <li>Boletín Oficial de la Región de Murcia (BORM)</li>
+                    <li>Boletín Oficial de Navarra (BON)</li>
+                    <li>Boletín Oficial del País Vasco (BOPV)</li>
+                    <li>Diari Oficial de la Comunitat Valenciana (DOCV)</li>
+                    <li>Boletín Oficial de la Ciudad Autónoma de Ceuta (BOCCE)</li>
+                    <li>Boletín Oficial de la Ciudad Autónoma de Melilla (BOME)</li>
                 </ul>
             </div>
-            <div class="col-md-12">
-                <h4>Boletines autonómicos</h4>
+            <div class="col-md-4">
+                <h3>¿Qué puedes buscar?</h3>
+                <hr>
+                <p>Puedes buscar el nombre de una persona,
+                    empresa, CIF, NIF, Matrícula, oposición,
+                    nombramiento, normativa, sector… que se
+                    publica en cualquiera de los boletines
+                    oficiales en el día de hoy.</p>
             </div>
-            <div class="col-md-6">
-                <ul>
-                    <li>Boletín Oficial de la Junta de Andalucía Abre una nueva ventana (BOJA)</li>
-                    <li>Boletín Oficial de Aragón Abre una nueva ventana (BOA)</li>
-                    <li>Boletín Oficial del Principado de Asturias Abre una nueva ventana (BOPA)</li>
-                    <li>Boletín Oficial de Islas Baleares Abre una nueva ventana (BOIB)</li>
-                    <li>Boletín Oficial de Canarias Abre una nueva ventana (BOC)</li>
-                    <li>Boletín Oficial de Cantabria Abre una nueva ventana (BOC)</li>
-                    <li>Diario Oficial de Castilla-La Mancha Abre una nueva ventana (DOCM)</li>
-                    <li>Boletín Oficial de Castilla y León Abre una nueva ventana (BOCYL)</li>
-                    <li>Diari Oficial de la Generalitat de Catalunya Abre una nueva ventana (DOGC)</li>
-                    <li>Diario Oficial de Extremadura Abre una nueva ventana (DOE)</li>
-                    <li>Diario Oficial de Galicia Abre una nueva ventana (DOG)</li>
-                </ul>
-            </div>
-            <div class="col-md-6">
-                <ul>
-                    <li>Boletín Oficial de La Rioja Abre una nueva ventana (BOR)</li>
-                    <li>Boletín Oficial de la Comunidad de Madrid Abre una nueva ventana (BOCM)</li>
-                    <li>Boletín Oficial de la Región de Murcia Abre una nueva ventana (BORM)</li>
-                    <li>Boletín Oficial de Navarra Abre una nueva ventana (BON)</li>
-                    <li>Boletín Oficial del País Vasco Abre una nueva ventana (BOPV)</li>
-                    <li>Diari Oficial de la Comunitat Valenciana Abre una nueva ventana (DOCV)</li>
-                    <li>Boletín Oficial de la Ciudad Autónoma de Ceuta Abre una nueva ventana (BOCCE)</li>
-                    <li>Boletín Oficial de la Ciudad Autónoma de Melilla Abre una nueva ventana (BOME)</li>
-                </ul>
+            <div class="col-md-4">
+                <h3>¿Cómo creo una alerta?</h3>
+                <hr>
+                <p>Podrás convertir cada búsqueda en una
+                    alerta que te avisará en tu mail todas las
+                    mañanas de los resultados que encuentre
+                    en los boletines para esa búsqueda./p>
             </div>
         </div>
     </div>

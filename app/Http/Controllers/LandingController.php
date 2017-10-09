@@ -13,15 +13,12 @@ class LandingController extends Controller
 	        session(['token'=> $request->token]);
         }
 
-		return view('landing.welcome');
-	}
-
-    public function demo()
-    {
         $service = new SearchConfigService();
+
         $data = [
-            'config' => json_encode($service->createForDemo())
+            'config' => json_encode($service->createForSearch())
         ];
-        return view('landing.demo', $data);
-    }
+
+		return view('landing.welcome',$data);
+	}
 }

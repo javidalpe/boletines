@@ -76,11 +76,11 @@ function Search(props) {
 
 function CreateAlert(props) {
     var url = "/alerts/create?query=" + props.query;
-    return <a href={url} className="btn btn-default pull-right">Crear alerta</a>;
+    return <a href={url} className="btn btn-default pull-right">Convertir en alerta</a>;
 }
 
 const SearchHelp = () =>
-    <div className="help-block">Puedes buscar nombres, direcciones, términos. Ejemplo: 75724470, "Maria Peña", Calle
+    <div className="help-block">Puedes buscar nombres, direcciones, empresas. Ejemplo: 75724470, "Maria Peña", Calle
         Gran Via, ..</div>
 
 class SearchPanel extends React.Component {
@@ -103,7 +103,7 @@ class SearchPanel extends React.Component {
     render() {
         var showCreateAlert = this.state.query.length > 0 && this.state.query !== config.defaultRefinementSearch;
 
-        return <Panel header="Buscar">
+        return <Panel header="Buscador">
 
             <Search onSearch={this.onSearch}/>
             {showCreateAlert &&

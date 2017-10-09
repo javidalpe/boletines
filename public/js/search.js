@@ -19571,7 +19571,7 @@ function CreateAlert(props) {
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'a',
         { href: url, className: 'btn btn-default pull-right' },
-        'Crear alerta'
+        'Convertir en alerta'
     );
 }
 
@@ -19579,7 +19579,7 @@ var SearchHelp = function SearchHelp() {
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
         { className: 'help-block' },
-        'Puedes buscar nombres, direcciones, t\xE9rminos. Ejemplo: 75724470, "Maria Pe\xF1a", Calle Gran Via, ..'
+        'Puedes buscar nombres, direcciones, empresas. Ejemplo: 75724470, "Maria Pe\xF1a", Calle Gran Via, ..'
     );
 };
 
@@ -19612,7 +19612,7 @@ var SearchPanel = function (_React$Component) {
 
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 __WEBPACK_IMPORTED_MODULE_3_react_bootstrap__["a" /* Panel */],
-                { header: 'Buscar' },
+                { header: 'Buscador' },
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Search, { onSearch: this.onSearch }),
                 showCreateAlert && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(CreateAlert, { query: this.state.query }),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(SearchHelp, null),
