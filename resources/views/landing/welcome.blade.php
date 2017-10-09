@@ -59,7 +59,7 @@
                 <p>Podrás convertir cada búsqueda en una
                     alerta que te avisará en tu mail todas las
                     mañanas de los resultados que encuentre
-                    en los boletines para esa búsqueda./p>
+                    en los boletines para esa búsqueda.</p>
             </div>
         </div>
     </div>
