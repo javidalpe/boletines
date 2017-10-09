@@ -26,6 +26,7 @@
                                     <td>{{isset($alert->notified_at)?$alert->notified_at->toDateString():''}}</td>
                                     <td>
                                         {!! Form::open(['id' => $alert->id, 'route' => ['alerts.destroy', $alert], 'method' => 'DELETE']) !!}
+                                            <a href="{{ (new App\Services\Alerts\ReportService())->getReportUrlForTodayAlert($alert)  }}">Comprobar ahora</a>
                                             <a href="{{route('alerts.edit', $alert)}}">Editar</a>
                                             <a href="#" onclick="document.getElementById({{$alert->id}}).submit()">Borrar</a>
                                         {!! Form::close() !!}

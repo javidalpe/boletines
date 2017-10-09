@@ -3,6 +3,7 @@
 namespace App\Notifications;
 
 use App\Alert;
+use App\Services\Alerts\ReportService;
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
@@ -45,7 +46,8 @@ class AlertNotification extends Notification
     public function toMail($notifiable)
     {
         $now = Carbon::now();
-        $url = route('report', ['id' => $this->alert, 'timestamp' => $now->timestamp]);
+        $service = new ReportService();
+        $url = $service->getReportUrlForTodayAlert($this->alert);
 
         return (new MailMessage())
             ->subject('Nueva publicación oficial')
