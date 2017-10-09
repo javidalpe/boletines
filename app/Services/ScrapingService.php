@@ -117,7 +117,7 @@ class ScrapingService
         try {
             $urls = $scrapper->downloadFilesFromInternet();
 
-            Log::debug("Parsing {$newCount} files.");
+            Log::debug("Handling " . count($urls) . " urls.");
 
             $this->saveFiles($urls, $regionName, $priority);
 
@@ -143,8 +143,11 @@ class ScrapingService
 
         $microsecondsAfter = microtime(true);
         $run->duration = $microsecondsAfter - $microsecondsBefore;
-        $run->new_files = $newCount - $oldCount;
+        $new_files = $newCount - $oldCount;
+        $run->new_files = $new_files;
         $run->save();
+
+	    Log::debug("Finished with {$new_files} new files");
 
         $publication->last_run_result = $run->result;
         $publication->last_run_at = Carbon::now();
