@@ -38,16 +38,10 @@ class AlertsCheckService
 
         if (count($chuncks) <= 0) return;
 
-        $emails = json_decode($alert->emails);
-
-        if (!$emails || count($emails) <= 0) return;
-
         $alert->notified_at = Carbon::now();
         $alert->save();
 
-        foreach ($emails as $email) {
-            Notification::route('mail', $email)
-                ->notify(new AlertNotification($alert));
-        }
+        $alert->user->notify(new AlertNotification($alert));
+
     }
 }
