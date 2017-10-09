@@ -25,8 +25,7 @@ class StoreAlertRequest extends FormRequest
     public function rules()
     {
         return [
-            'query' => 'required',
-            'emails' => 'required|json',
+            'query' => 'required'
         ];
     }
 }

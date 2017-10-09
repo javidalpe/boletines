@@ -17,7 +17,6 @@ class CreateAlertsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->string('query');
-            $table->json("emails");
             $table->dateTime("notified_at")->nullable();
             $table->dateTime("checked_at")->nullable();
             $table->timestamps();
