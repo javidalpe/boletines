@@ -12,13 +12,15 @@
 */
 
 Route::get('/', 'LandingController@welcome')->name('welcome');
-Route::get('/demo', 'LandingController@demo')->name('demo');
+Route::get('/como-funciona', 'LandingController@how')->name('how');
+Route::get('/sobre-nosotros', 'LandingController@about')->name('about');
+Route::get('/contactanos', 'LandingController@contact')->name('contact');
 
 
 Auth::routes();
 
 Route::middleware('auth')->group(function () {
-	Route::get('/search', 'HomeController@search')->name('search');
+
 	Route::get('/report/{id}/{timestamp}', 'HomeController@report')->name('report');
 	Route::resource('alerts', 'AlertController');
 

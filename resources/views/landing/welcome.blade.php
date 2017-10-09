@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-12">
                 <h1>Busca en todos los boletines oficiales y crea tus alertas</h1>
-                <p>Goinfolex es un prototipo que queremos testar para entender las necesidades de los usuarios en las búsquedas de los boletines oficiales y la creación de alertas.
+                <p>{{ config('app.name') }} es un prototipo que queremos testar para entender las necesidades de los usuarios en las búsquedas de los boletines oficiales y la creación de alertas.
                     En esta fase de prototipado no tenemos ningún animo lucrativo, es totalmente gratuito y no realizaremos ninguna venta de datos o publicidad.
                     Queremos agradecerte que nos hagas llegar tus comentarios, experiencia de uso y sugerencias a Ayudanos
                 </p>

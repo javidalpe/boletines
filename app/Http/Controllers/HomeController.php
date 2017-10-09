@@ -12,21 +12,11 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
 
-    public function search()
-    {
-        $service = new SearchConfigService();
-        $data = [
-            'config' => json_encode($service->createForSearch())
-        ];
-
-    	return view('dashboard.search', $data);
-    }
-
     public function report($id, $timestamp)
     {
     	$alert = Alert::find($id);
 
-    	if (!$alert) return redirect()->route('search');
+    	if (!$alert) return redirect()->route('welcome');
 
         $service = new SearchConfigService();
         $date = Carbon::createFromTimestamp($timestamp);

@@ -21,4 +21,19 @@ class LandingController extends Controller
 
 		return view('landing.welcome',$data);
 	}
+
+	public function how()
+    {
+        return view('landing.how');
+    }
+
+    public function about()
+    {
+        return view('landing.about');
+    }
+
+    public function contact()
+    {
+        return view('landing.contact');
+    }
 }
