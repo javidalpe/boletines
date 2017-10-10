@@ -8,7 +8,7 @@
                 Supervisa las publicaciones para encontrar nuevos contenidos interesantes
             @endslot
             {!! Form::open(array('route' => 'alerts.store', 'class' => 'form')) !!}
-                @include('dashboard.alerts.fields')
+                @include('dashboard.alerts.partials.fields')
             {!! Form::close() !!}
         @endcomponent
     </div>

@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Alert extends Model
 {
+    const FREQUENCY_DAILY = "daily";
+    const FREQUENCY_WEEKLY = "weekly";
     /**
      * The attributes that should be mutated to dates.
      *
@@ -20,6 +22,7 @@ class Alert extends Model
 
     protected $fillable = [
         'query',
+        'frequency',
     ];
 
     /**

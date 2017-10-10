@@ -12,8 +12,12 @@
                     <br>
                 <p>Invita a otros usuarios por correo.</p>
                 {!! Form::open(['url' => route('rewardsStore'), 'method' => 'post']) !!}
-                    {!! Form::text('emails', null, array('class' => 'form-control', 'id' => 'emails', 'placeholder' => 'Introduce los correos electrónicos')) !!}
-                    {!! Form::submit('Invitar', array('class' => 'btn btn-primary')) !!}
+                    <div class="form-group">
+                        {!! Form::text('emails', null, array('class' => 'form-control', 'id' => 'emails', 'placeholder' => 'Introduce los correos electrónicos')) !!}
+                    </div>
+                    <div class="form-group">
+                        {!! Form::submit('Invitar', array('class' => 'btn btn-primary')) !!}
+                    </div>
                 {!! Form::close() !!}
             @endcomponent
 

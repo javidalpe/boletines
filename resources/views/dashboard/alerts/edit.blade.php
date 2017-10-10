@@ -8,7 +8,7 @@
                     Edita la alerta
                 @endslot
                 {!! Form::model($alert, array('route' => ['alerts.update', $alert], 'class' => 'form', 'method' => 'patch')) !!}
-                    @include('dashboard.alerts.fields')
+                    @include('dashboard.alerts.partials.fields')
                 {!! Form::close() !!}
             @endcomponent
         </div>
