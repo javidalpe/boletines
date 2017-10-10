@@ -24,9 +24,7 @@ Route::middleware('auth')->group(function () {
 
 	Route::get('/report/{id}/{timestamp}', 'HomeController@report')->name('report');
 	Route::resource('alerts', 'AlertController');
-
-    Route::get('/account', 'AccountController@show')->name('account.show');
-    Route::put('/account', 'AccountController@update')->name('account.update');
+    Route::resource('account', 'AccountController');
 
     Route::get('/rewards', 'RewardController@index')->name('rewards');
     Route::post('/rewards', 'RewardController@store')->name('rewardsStore');

@@ -10,6 +10,9 @@
 </head>
 <body>
 @include('layouts.navbar')
+<div class="container">
+    @include('flash::message')
+</div>
 @yield('content')
 @include('landing.footer')
 @include('layouts.scripts')
