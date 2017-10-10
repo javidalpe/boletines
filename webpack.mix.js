@@ -12,6 +12,7 @@ let mix = require('laravel-mix');
  */
 
 //mix.sass('resources/assets/sass/app.scss', 'public/css');
-mix.react('resources/assets/js/search/search.jsx', 'public/js');
+//mix.react('resources/assets/js/search/search.jsx', 'public/js');
+mix.copy('node_modules/jquery/dist/jquery.slim.min.js', 'public/js');
 
 mix.browserSync('boletines.dev');
