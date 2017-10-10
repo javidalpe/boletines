@@ -9,8 +9,8 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
 {
-	const ALERTS_DAILY_TIME = '13:00';
-	const SCRAP_DAILY_TIME = '11:00';
+	const ALERTS_DAILY_TIME = '11:00';
+	const SCRAP_DAILY_TIME = '09:30';
 
     /**
      * The Artisan commands provided by your application.
