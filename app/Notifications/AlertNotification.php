@@ -45,15 +45,15 @@ class AlertNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        $now = Carbon::now();
         $service = new ReportService();
         $url = $service->getReportUrlForTodayAlert($this->alert);
 
         return (new MailMessage())
-            ->subject('Nueva publicación oficial')
-            ->greeting('Alerta de nuevo contenido')
-            ->line('Se han publicado nuevos contenidos de tu interés. Pincha en el siguiente enlace para acceder al reporte.')
-            ->action('Ver reporte', $url)
-            ->salutation('Gracias por confiar en nosotros!');
+            ->subject('Tenemos una alerta para ti')
+            ->greeting('¡Hola!')
+            ->line(sprintf('Hemos encontrado el término -%s- en al menos uno de los boletines oficiales.', $this->alert->query))
+            ->action('Ver boletines', $url)
+            ->line(sprintf('Podrás gestionar tus alertas desde el área privada de %s.', config('app.name')))
+            ->salutation('Saludos del equipo');
     }
 }
