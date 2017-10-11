@@ -15,8 +15,14 @@ class CatalunyaScraperStrategy implements IBoletinScraperStrategy
 
 	public function downloadFilesFromInternet()
 	{
-		return FileDownloaderScraper::create("http://dogc.gencat.cat/es/index.html?newLang=es_ES&language=es_ES")
+		$links = FileDownloaderScraper::create("http://dogc.gencat.cat/es/index.html?newLang=es_ES&language=es_ES")
 			->getLinks ("/http:\/\/portaldogc\.gencat\.cat\/utilsEADOP\/dogc\d*\/dogc_es\.pdf/");
+		$linksWithDates = [];
+		$dateString = (Carbon::now())->format('Ymd');
+		foreach ($links as $link) {
+			array_push($linksWithDates, sprintf('%s?d=%s', $link, $dateString));
+		}
+		return $linksWithDates;
 	}
 
 	public function getFiles()
