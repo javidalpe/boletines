@@ -44,16 +44,17 @@ class MultipleAlertNotification extends Notification
     public function toMail($notifiable)
     {
         $mail = (new MailMessage())
+            ->success()
             ->subject('Tenemos varias alertas para ti')
             ->greeting('¡Hola!')
             ->line("Hemos encontrado varios términos en los boletines oficiales.");
 
-        foreach ($this->alerts as $alert) {
-            $service = new ReportService();
-            $url = $service->getReportUrlForTodayAlert($alert);
+        $service = new ReportService();
 
+        foreach ($this->alerts as $alert) {
+            $url = $service->getReportUrlForTodayAlert($alert);
             $mail = $mail->line(sprintf('El término -%s- ha aparecido en los siguientes boletines:', $alert->query))
-                ->action('Ver boletines', $url);
+                ->line($url);
         }
 
         return $mail->line(sprintf('Podrás gestionar tus alertas desde el área privada de %s.', config('app.name')))
