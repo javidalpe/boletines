@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\AccountDeletedNotification;
 use App\User;
 use Auth;
 use Illuminate\Http\Request;
@@ -84,13 +85,14 @@ class AccountController extends Controller
         if (Auth::user()->id != $id) {
             return back();
         }
-
-        Auth::logout();
-
         $user = User::find($id);
+
+        $user->notify(new AccountDeletedNotification());
+
         $user->alerts()->delete();
         $user->delete();
 
+        Auth::logout();
         flash("Tu cuenta y todas sus alertas han sido borradas.")->success();
         return redirect()->route('welcome');
     }
