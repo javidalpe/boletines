@@ -16,6 +16,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\UserRegistered' => [
             'App\Listeners\UserRegisteredEventListener',
         ],
+        'Illuminate\Auth\Events\PasswordReset' => [
+            'App\Listeners\PasswordResetEventListener',
+        ]
     ];
 
     /**
