@@ -47,9 +47,9 @@ class AlertsCheckService
     {
         $user = $alert->user;
         if (isset($alertsPerUser[$user->id])) {
-            $alertsPerUser[$user->id][] = $alert;
+            array_push($alertsPerUser[$user->id], $alert);
         } else {
-            $alertsPerUser[$user->id] = [$alert];
+            $alertsPerUser[$user->id] = array($alert);
         }
         return $alertsPerUser;
     }
@@ -60,7 +60,7 @@ class AlertsCheckService
      */
     private function notifyAlertsToUser($alerts, $userId)
     {
-        if (count($alerts) > 1) {
+        if (count($alerts) <= 1) {
             $alert = $alerts[0];
             $alert->user->notify(new AlertNotification($alert));
             $this->markAlertAsNotified($alert);

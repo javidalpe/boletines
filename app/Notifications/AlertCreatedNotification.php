@@ -46,7 +46,7 @@ class AlertCreatedNotification extends Notification
         return (new MailMessage)
             ->subject("Has creado una alerta")
             ->greeting('¡Hola!')
-            ->line(sprintf('Has creado una alerta de búsqueda diario en los boletines oficiales para el siguiente término: %s', $this->alert->query))
+            ->line(sprintf('Has creado una alerta de búsqueda diaria en los boletines oficiales para el siguiente término: %s', $this->alert->query))
             ->line('Todos los días que encontremos en algún boletín oficial este término, te haremos llegar un mail para informarte.')
             ->line(sprintf('Podrás gestionar tus alertas desde el área privada de %s.', config('app.name')))
             ->salutation('Saludos del equipo.');
