@@ -11,9 +11,8 @@
                 </p>
             </div>
 
-            <div class="row">
-                <div id="root"></div>
-            </div>
+
+            <div id="root"></div>
 
             @include('shared.search')
 
