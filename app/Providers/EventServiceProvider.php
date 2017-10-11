@@ -18,7 +18,13 @@ class EventServiceProvider extends ServiceProvider
         ],
         'Illuminate\Auth\Events\PasswordReset' => [
             'App\Listeners\PasswordResetEventListener',
-        ]
+        ],
+        'App\Events\AlertCreated' => [
+            'App\Listeners\AlertCreatedEventListener',
+        ],
+        'App\Events\AlertDeleted' => [
+            'App\Listeners\AlertDeletedEventListener',
+        ],
     ];
 
     /**

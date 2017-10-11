@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Alert;
+use App\Events\AlertCreated;
+use App\Events\AlertDeleted;
 use App\Http\Requests\StoreAlertRequest;
 use Auth;
 use Illuminate\Http\Request;
@@ -51,7 +53,8 @@ class AlertController extends Controller
             flash("Has superado el límite de alertas permitido.")->warning();
             return back();
         }
-        Auth::user()->alerts()->create($request->all());
+        $alert = Auth::user()->alerts()->create($request->all());
+        event(new AlertCreated($alert));
         flash('Alerta creada satisfactoriamente.')->success();
         return redirect()->route('alerts.index');
     }
@@ -103,6 +106,7 @@ class AlertController extends Controller
      */
     public function destroy(Alert $alert)
     {
+        event(new AlertDeleted($alert));
         $alert->delete();
         flash('Alerta borrada.')->success();
         return redirect()->route('alerts.index');
