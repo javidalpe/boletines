@@ -27,7 +27,9 @@
                                     <td>
                                         {!! Form::open(['id' => $alert->id, 'route' => ['alerts.destroy', $alert], 'method' => 'DELETE']) !!}
                                             <a href="{{ (new App\Services\Alerts\ReportService())->getReportUrlForTodayAlert($alert)  }}">Comprobar ahora</a>
+                                            <span> | </span>
                                             <a href="{{route('alerts.edit', $alert)}}">Editar</a>
+                                            <span> | </span>
                                             <a href="#" onclick="document.getElementById({{$alert->id}}).submit()">Borrar</a>
                                         {!! Form::close() !!}
                                     </td>

@@ -19,7 +19,7 @@ class AlertsCheckService
         $alertsPerUser = [];
         $alerts = Alert::with('user')->get();
         foreach ($alerts as $alert) {
-            if (!$this->searchReturnsNewContent($alert)) {
+            if ($this->searchReturnsNewContent($alert)) {
                 $alertsPerUser = $this->addAlertToUser($alert, $alertsPerUser);
             }
         }

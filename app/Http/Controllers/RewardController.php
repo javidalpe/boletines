@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\InviteRequest;
 use App\Notifications\YouHaveBeenInvitedNotification;
 use App\Services\Invitations\InvitationService;
 use App\User;
@@ -25,7 +26,7 @@ class RewardController extends Controller
         return view('dashboard.rewards', $data);
     }
 
-    public function store(Request $request)
+    public function store(InviteRequest $request)
     {
         $emails = json_decode($request->emails);
         $user = Auth::user();

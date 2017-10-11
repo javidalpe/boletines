@@ -8,16 +8,16 @@
                     Invita a otros usuarios para conseguir alertas
                 @endslot
                 <p>Por cada nuevo usuario que se registre usando este enlace conseguiras una nueva alerta.</p>
-                    {!! Form::text('link', $url, array('class' => 'form-control')) !!}
-                    <br>
+                {!! Form::text('link', $url, array('class' => 'form-control')) !!}
+                <br>
                 <p>Invita a otros usuarios por correo.</p>
                 {!! Form::open(['url' => route('rewardsStore'), 'method' => 'post']) !!}
-                    <div class="form-group">
-                        {!! Form::text('emails', null, array('class' => 'form-control', 'id' => 'emails', 'placeholder' => 'Introduce los correos electrónicos')) !!}
-                    </div>
-                    <div class="form-group">
-                        {!! Form::submit('Invitar', array('class' => 'btn btn-primary')) !!}
-                    </div>
+                @component('components.form-group', ['name' => 'emails'])
+                    {!! Form::text('emails', null, array('class' => 'form-control', 'id' => 'emails', 'placeholder' => 'Introduce los correos electrónicos')) !!}
+                @endcomponent
+                <div class="form-group">
+                    {!! Form::submit('Invitar', array('class' => 'btn btn-primary')) !!}
+                </div>
                 {!! Form::close() !!}
             @endcomponent
 
