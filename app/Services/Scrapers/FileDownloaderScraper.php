@@ -47,18 +47,19 @@ class FileDownloaderScraper
      *
      * @param string $regex
      * @param int $maxNumberOfLinks
+     * @param bool $inverseSort
      *
      * @return $this
      */
-    public function forEachLink(string $regex, int $maxNumberOfLinks = 0)
+    public function forEachLink(string $regex, int $maxNumberOfLinks = 0, $inverseSort = true)
     {
-        $this->updateLinks($regex, $maxNumberOfLinks);
+        $this->updateLinks($regex, $maxNumberOfLinks, $inverseSort);
         return $this;
     }
 
     public function getLinks(string $regex)
     {
-        $this->updateLinks($regex, $maxNumberOfLinks = 0);
+        $this->updateLinks($regex, $maxNumberOfLinks = 0, $inverseSort = true);
         return $this->links;
     }
 
@@ -257,12 +258,14 @@ class FileDownloaderScraper
      * @param int $maxNumberOfLinks
      * @return array
      */
-    private function getLinksFromPageContent(string $regex, $content, $maxNumberOfLinks): array
+    private function getLinksFromPageContent(string $regex, $content, $maxNumberOfLinks, $inverseSort): array
     {
         $rawHtmlLinks = $this->match($content, $regex);
         $uniqueRawHtmlLinks = array_unique($rawHtmlLinks);
         $fixedLinks = $this->fixLinks($uniqueRawHtmlLinks);
-        rsort($fixedLinks, SORT_STRING);
+        if ($inverseSort) {
+	        rsort($fixedLinks, SORT_STRING);
+        }
 
         if ($maxNumberOfLinks) {
             return array_slice($fixedLinks, 0, $maxNumberOfLinks);
@@ -274,13 +277,14 @@ class FileDownloaderScraper
     /**
      * @param string $regex
      * @param int $maxNumberOfLinks
+     * @param bool $inverseSort
      */
-    protected function updateLinks(string $regex, int $maxNumberOfLinks)
+    protected function updateLinks(string $regex, int $maxNumberOfLinks, $inverseSort)
     {
         Log::debug($regex);
         $this->links = [];
         foreach ($this->contents as $content) {
-            $sliceArray = $this->getLinksFromPageContent($regex, $content, $maxNumberOfLinks);
+            $sliceArray = $this->getLinksFromPageContent($regex, $content, $maxNumberOfLinks, $inverseSort);
             $this->links = array_merge($this->links, $sliceArray);
         }
     }
