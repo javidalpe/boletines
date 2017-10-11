@@ -28,15 +28,16 @@ class FileSplitService
 	public function splitDocument($content)
 	{
 		$trimContent = trim($content);
+		$reducedContent = preg_replace('/\\s+/',' ', $trimContent);
 
-		$textLength = strlen($trimContent);
+		$textLength = strlen($reducedContent);
 
 		if ($textLength < $this->maxChunkLength) {
-			return [$trimContent];
+			return [$reducedContent];
 		}
 
 		$chunks = [];
-		$remainingContent = $trimContent;
+		$remainingContent = $reducedContent;
 
 		$remainingContentLength = strlen($remainingContent);
 		while ($remainingContentLength > $this->maxChunkLength) {
