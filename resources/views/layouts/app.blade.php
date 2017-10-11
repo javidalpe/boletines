@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
     <head>
-       @include('layouts.meta')
+        @include('layouts.meta')
         <title>{{ config('app.name', 'Laravel') }}</title>
-
-        <!-- Styles -->
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        @include('layouts.styles')
         @stack('styles')
     </head>
     <body>

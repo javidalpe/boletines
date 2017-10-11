@@ -1,5 +1,5 @@
 @push('styles')
-    <link rel="stylesheet" href="/css/search.css">
+    <link rel="stylesheet" href="{{ mix('/css/search.css') }}">
 @endpush
 
 @push('scripts')

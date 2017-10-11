@@ -11,9 +11,13 @@ let mix = require('laravel-mix');
  |
  */
 
-//mix.sass('resources/assets/sass/app.scss', 'public/css');
+mix.sass('resources/assets/sass/app.scss', 'public/css');
 mix.sass('resources/assets/sass/search.scss', 'public/css');
-//mix.react('resources/assets/js/search/search.jsx', 'public/js');
-//mix.copy('node_modules/jquery/dist/jquery.slim.min.js', 'public/js');
+mix.react('resources/assets/js/search/search.jsx', 'public/js');
+mix.copy('node_modules/jquery/dist/jquery.slim.min.js', 'public/js');
+
+if (mix.inProduction()) {
+    mix.version();
+}
 
 mix.browserSync('boletines.dev');
