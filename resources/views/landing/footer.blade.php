@@ -24,7 +24,7 @@
             <hr>
             <ul class="list-unstyled">
                 <li><a href="{{ route('about') }}">Acerca de nosotros</a></li>
-                <li><a href="{{ route('contact') }}">Contáctenos</a></li>
+                <li><a href="{{ route('contact') }}">Contáctanos</a></li>
                 <li><a href="{{route('status')}}">Estado del sistema</a></li>
             </ul>
         </div>

@@ -15,7 +15,7 @@ $gray:                   #666 !default;
 $gray-light:             #bbb !default;
 $gray-lighter:           lighten($gray-base, 93.5%) !default; // #eee
 
-$brand-primary:         #339aa3 !default;
+$brand-primary:         #008a8f !default;
 $brand-success:         #4CAF50 !default;
 $brand-info:            #9C27B0 !default;
 $brand-warning:         #ff9800 !default;
@@ -69,7 +69,7 @@ $line-height-computed:    floor(($font-size-base * $line-height-base)) !default;
 $headings-font-family:    inherit !default;
 $headings-font-weight:    400 !default;
 $headings-line-height:    1.1 !default;
-$headings-color:          #444 !default;
+$headings-color:          $brand-primary !default;
 
 
 //== Iconography
