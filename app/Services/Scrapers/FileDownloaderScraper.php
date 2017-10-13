@@ -7,6 +7,7 @@ namespace App\Services\Scrapers;
 use App\Services\Scrapers\Http\EffectiveUrlMiddleware;
 use Exception;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ServerException;
 use GuzzleHttp\HandlerStack;
 use Log;
 
@@ -237,19 +238,28 @@ class FileDownloaderScraper
      */
     private function httpGet($url)
     {
-        // Add the middleware to stack and create guzzle client
-        $stack = HandlerStack::create();
-        $stack->push(EffectiveUrlMiddleware::middleware());
-        $client = new Client(['handler' => $stack]);
+        $try = 3;
 
-        $response = $client->request('GET', $url);
-        $body = $response->getBody();
+        while($try) {
+            try {
+                // Add the middleware to stack and create guzzle client
+                $stack = HandlerStack::create();
+                $stack->push(EffectiveUrlMiddleware::middleware());
+                $client = new Client(['handler' => $stack]);
 
-        $effectiveUrl = $response->getHeaderLine('X-GUZZLE-EFFECTIVE-URL');
-        $this->updateBaseUrl($effectiveUrl);
+                $response = $client->request('GET', $url);
+                $body = $response->getBody();
 
-        $stringBody = (string)$body;
-        return $stringBody;
+                $effectiveUrl = $response->getHeaderLine('X-GUZZLE-EFFECTIVE-URL');
+                $this->updateBaseUrl($effectiveUrl);
+
+                $stringBody = (string)$body;
+                return $stringBody;
+            } catch (ServerException $e) {
+                $try--;
+            }
+        }
+        throw new ServerException();
     }
 
     /**

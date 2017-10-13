@@ -13,6 +13,7 @@ use App\Services\Scrapers\ScraperStrategyFactory;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Exception\ServerException;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -124,6 +125,9 @@ class ScrapingService
             $run->result = self::RUN_RESULT_OK;
             $newCount = Chunk::where('publication_name', $regionName)->count();
             $publication->last_success_run_at = Carbon::now();
+        } catch (ServerException $e) {
+            Log::debug("Error updating {$regionName}: error de servidor en " . $e->getRequest()->getUri());
+            $run->result = self::RUN_RESULT_ERROR;
         } catch (ClientException $e) {
             Log::debug("Error updating {$regionName}: error al obtener la url " . $e->getRequest()->getUri());
             $run->result = self::RUN_RESULT_ERROR;
@@ -293,10 +297,15 @@ class ScrapingService
 
     /**
      * @param $response
+     * @param bool $useLastModifiedHeader
      * @return Carbon
      */
-    private function getFileDate($response): Carbon
+    private function getFileDate($response, $useLastModifiedHeader = false): Carbon
     {
+        if (!$useLastModifiedHeader) {
+            return Carbon::now();
+        }
+
         $lastModifiedHeader = $response->getHeader('Last-Modified');
 
         if (!$lastModifiedHeader) return Carbon::now();
