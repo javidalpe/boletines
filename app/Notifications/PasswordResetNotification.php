@@ -42,9 +42,7 @@ class PasswordResetNotification extends Notification
     {
         return (new MailMessage)
             ->subject("Contraseña cambiada")
-            ->greeting('¡Hola!')
-            ->line(sprintf('Has restablecido tu contraseña en %s.', config('app.name')))
-            ->salutation("Saludos del equipo");
+            ->line(sprintf('Has restablecido tu contraseña en %s.', config('app.name')));
     }
 
     /**
