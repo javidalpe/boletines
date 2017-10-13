@@ -42,7 +42,7 @@ class FileSplitService
 		$remainingContentLength = strlen($remainingContent);
 		while ($remainingContentLength > $this->maxChunkLength) {
 			$suggestedChunk = substr($remainingContent,0, $this->maxChunkLength);
-			$newLineIndex = strrpos($suggestedChunk, "\n");
+			$newLineIndex = strrpos($suggestedChunk, " ");
 			if ($newLineIndex) {
 				$to = $newLineIndex;
 				$from = $newLineIndex + 1;
