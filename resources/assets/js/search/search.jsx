@@ -5,16 +5,17 @@ import {
     Configure,
     SearchBox,
     Hits,
-    Highlight,
     Snippet,
     Menu,
-    VirtualMenu,
-    CurrentRefinements,
     RefinementList,
     Pagination,
     Stats
 } from 'react-instantsearch/dom'
 import {Panel} from 'react-bootstrap';
+import {connectMenu} from 'react-instantsearch/connectors';
+import {orderBy} from 'lodash';
+
+const VirtualMenu = connectMenu(() => null);
 
 const Hit = ({hit}) =>
     <div className="hit panel panel-default panel-body">
@@ -32,17 +33,26 @@ const Sidebar = () =>
     <div className="sidebar">
         <Panel header="Filtros">
             <strong>Publicación</strong>
-            <RefinementList attributeName={"publication_name"} showMore={true}/>
-            <strong>Día</strong>
+            <RefinementList
+                attributeName={"publication_name"}
+                showMore={true}
+                translations={{showMore: 'Mostrar más'}}
+                transformItems={items => orderBy(items, ['label'], ['asc'])}/>
             <DayMenu/>
         </Panel>
     </div>
 
 const DayMenu = () => {
     if (config.defaultRefinementDay) {
-        return <Menu attributeName={"day"} defaultRefinement={config.defaultRefinementDay}/>
+        return <VirtualMenu attributeName="day" defaultRefinement={config.defaultRefinementDay}/>
     } else {
-        return <Menu attributeName={"day"}/>
+        return (<div>
+            <strong>Día</strong>
+            <Menu attributeName={"day"}
+                  translations={{showMore: 'Mostrar más'}}
+                  showMore={true}
+                  transformItems={items => orderBy(items, ['label'], ['asc'])}/>
+        </div>);
     }
 }
 
@@ -101,7 +111,7 @@ class SearchPanel extends React.Component {
     }
 
     render() {
-        var showCreateAlert = this.state.query.length > 0 && this.state.query !== config.defaultRefinementSearch;
+        var showCreateAlert = this.state.query.length > 2 && this.state.query !== config.defaultRefinementSearch;
 
         return <Panel header="Buscador">
 

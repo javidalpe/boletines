@@ -25,7 +25,7 @@ class StoreAlertRequest extends FormRequest
     public function rules()
     {
         return [
-            'query' => 'required'
+            'query' => 'required|min:3|max:255'
         ];
     }
 }
