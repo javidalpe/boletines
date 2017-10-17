@@ -44,14 +44,14 @@ const Sidebar = () =>
 
 const DayMenu = () => {
     if (config.defaultRefinementDay) {
-        return <VirtualMenu attributeName="day" defaultRefinement={config.defaultRefinementDay}/>
+        return <VirtualMenu attributeName="date" defaultRefinement={config.defaultRefinementDay}/>
     } else {
         return (<div>
             <strong>Día</strong>
-            <Menu attributeName={"day"}
+            <Menu attributeName={"date"}
                   translations={{showMore: 'Mostrar más'}}
                   showMore={true}
-                  transformItems={items => orderBy(items, ['label'], ['asc'])}/>
+                  transformItems={items => orderBy(items, ['label'], ['desc'])}/>
         </div>);
     }
 }

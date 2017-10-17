@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Alert;
 use App\Chunk;
-use App\Services\Search\SearchConfigService;
+use App\Mothers\SearchConfigMother;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -18,7 +18,7 @@ class HomeController extends Controller
 
     	if (!$alert) return redirect()->route('welcome');
 
-        $service = new SearchConfigService();
+        $service = new SearchConfigMother();
         $date = Carbon::createFromTimestamp($timestamp);
 
         $data = [

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Mothers\SearchConfigMother;
 use App\Publication;
-use App\Services\Search\SearchConfigService;
 use Illuminate\Http\Request;
 
 class LandingController extends Controller
@@ -14,7 +14,7 @@ class LandingController extends Controller
 	        session(['token'=> $request->token]);
         }
 
-        $service = new SearchConfigService();
+        $service = new SearchConfigMother();
 
         $data = [
             'config' => json_encode($service->createForSearch())
