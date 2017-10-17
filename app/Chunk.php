@@ -9,6 +9,8 @@ use Laravel\Scout\Searchable;
 class Chunk extends Model
 {
 	const SECONDS_IN_A_DAY = 86400;
+	const SECONDS_IN_A_WEEK = self::SECONDS_IN_A_DAY * 7;
+
 	use Searchable;
 
     /**
@@ -41,10 +43,17 @@ class Chunk extends Model
 	public function toSearchableArray()
 	{
 		$array = $this->toArray();
+
+        unset($array['published_at']);
 		unset($array['updated_at']);
-		$array['daystamp'] = floor($this->published_at->timestamp / self::SECONDS_IN_A_DAY);
+        unset($array['created_at']);
+
 		Carbon::setLocale('es');
 		$array['day'] = $this->published_at->formatLocalized('%d %B %Y');
+        $array['date'] = $this->published_at->format('Y-m-d');
+        $array['daystamp'] = floor($this->published_at->timestamp / self::SECONDS_IN_A_DAY);
+        $array['weekstamp'] = floor($this->published_at->timestamp / self::SECONDS_IN_A_WEEK);
+
 		return $array;
 	}
 }
