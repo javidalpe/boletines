@@ -11,7 +11,7 @@ use Storage;
 
 class CeutaScraperStrategy implements IBoletinScraperStrategy
 {
-	const DIRECTORY_FILES = "public/ceuta";
+
     const MAX_NUMBER_OF_PUBLICATIONS = 5;
 
 	public function downloadFilesFromInternet()
@@ -22,8 +22,8 @@ class CeutaScraperStrategy implements IBoletinScraperStrategy
 			->getLinks("/\/ceuta\/component\/jdownloads\/finish\/\d+-\w+\/[^\"]+/");
 	}
 
-	public function getFiles()
-	{
-		return Storage::files(self::DIRECTORY_FILES);
-	}
+    public function hasEachDocumentUniqueUrl()
+    {
+        return true;
+    }
 }

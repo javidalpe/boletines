@@ -10,7 +10,7 @@ use Storage;
 
 class XuntaGaliciaScraperStrategy implements IBoletinScraperStrategy
 {
-	const DIRECTORY_FILES = "public/galicia";
+
     const MAX_NUMBER_OF_PUBLICATIONS = 5;
 
 	public function downloadFilesFromInternet()
@@ -21,8 +21,8 @@ class XuntaGaliciaScraperStrategy implements IBoletinScraperStrategy
 			->getLinks("/\/dog\/Publicados\/\d+\/\d+\/\w+-\w+-\w+\.pdf/");
 	}
 
-	public function getFiles()
+	public function hasEachDocumentUniqueUrl()
 	{
-		return Storage::files(self::DIRECTORY_FILES);
+		return true;
 	}
 }

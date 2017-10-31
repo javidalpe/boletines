@@ -11,7 +11,7 @@ use Storage;
 
 class NavarraScraperStrategy implements IBoletinScraperStrategy
 {
-	const DIRECTORY_FILES = "public/navarra";
+
 
 	public function downloadFilesFromInternet()
 	{
@@ -19,8 +19,8 @@ class NavarraScraperStrategy implements IBoletinScraperStrategy
 			->getLinks ("/\/home_es\/Actualidad\/BON\/Boletines\/\d+\/\d+\/boletin.pdf/");
 	}
 
-	public function getFiles()
+	public function hasEachDocumentUniqueUrl()
 	{
-		return Storage::files(self::DIRECTORY_FILES);
+		return true;
 	}
 }

@@ -12,7 +12,7 @@ use Storage;
 class CastillaLaManchaScraperStrategy implements IBoletinScraperStrategy
 {
 
-	const DIRECTORY_FILES = "public/lamancha";
+
 
 	public function downloadFilesFromInternet()
 	{
@@ -20,8 +20,8 @@ class CastillaLaManchaScraperStrategy implements IBoletinScraperStrategy
 			->getLinks ("/descargarArchivo\.do\?ruta=\d+\/\d+\/\d+\/pdf\/docm_\d+\.pdf&tipo=rutaDocm/");
 	}
 
-	public function getFiles()
-	{
-		return Storage::files(self::DIRECTORY_FILES);
-	}
+    public function hasEachDocumentUniqueUrl()
+    {
+        return true;
+    }
 }

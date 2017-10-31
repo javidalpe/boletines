@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Storage;
 
 class AragonScraperStrategy implements IBoletinScraperStrategy
 {
-	const DIRECTORY_FILES = "public/aragon";
+
 
 	public function downloadFilesFromInternet()
 	{
@@ -24,8 +24,8 @@ class AragonScraperStrategy implements IBoletinScraperStrategy
 			->getLinks("/BRSCGI\?CMD=VEROBJ&MLKOB=\w+/");
 	}
 
-	public function getFiles()
-	{
-		return Storage::files(self::DIRECTORY_FILES);
-	}
+    public function hasEachDocumentUniqueUrl()
+    {
+        return true;
+    }
 }

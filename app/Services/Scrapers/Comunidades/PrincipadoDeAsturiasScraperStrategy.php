@@ -11,7 +11,7 @@ use Storage;
 class PrincipadoDeAsturiasScraperStrategy implements IBoletinScraperStrategy
 {
 
-    const DIRECTORY_FILES = "public/asturias";
+
     const MAX_NUMBER_OF_PUBLICATIONS = 5;
 
     public function downloadFilesFromInternet()
@@ -22,8 +22,8 @@ class PrincipadoDeAsturiasScraperStrategy implements IBoletinScraperStrategy
             ->getLinks("/https:\/\/sede\.asturias\.es\/bopa\/\d+\/\d+\/\d+\/\w+\.pdf/");
     }
 
-    public function getFiles()
+    public function hasEachDocumentUniqueUrl()
     {
-        return Storage::files(self::DIRECTORY_FILES);
+        return true;
     }
 }

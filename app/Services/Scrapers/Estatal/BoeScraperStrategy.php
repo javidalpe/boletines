@@ -11,7 +11,7 @@ use Storage;
 
 class BoeScraperStrategy implements IBoletinScraperStrategy
 {
-	const DIRECTORY_FILES = "public/boe";
+
 
 	public function downloadFilesFromInternet()
 	{
@@ -26,8 +26,8 @@ class BoeScraperStrategy implements IBoletinScraperStrategy
 		return array_merge($firstLinks, $secondLinks);
 	}
 
-	public function getFiles()
-	{
-		return Storage::files(self::DIRECTORY_FILES);
-	}
+    public function hasEachDocumentUniqueUrl()
+    {
+        return true;
+    }
 }

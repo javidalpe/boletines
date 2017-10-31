@@ -8,5 +8,5 @@ interface IBoletinScraperStrategy
 {
     public function downloadFilesFromInternet();
 
-    public function getFiles();
+    public function hasEachDocumentUniqueUrl();
 }

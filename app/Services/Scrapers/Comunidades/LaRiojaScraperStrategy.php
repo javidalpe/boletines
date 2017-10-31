@@ -11,7 +11,7 @@ use Storage;
 
 class LaRiojaScraperStrategy implements IBoletinScraperStrategy
 {
-	const DIRECTORY_FILES = "public/larioja";
+
 
 	public function downloadFilesFromInternet()
 	{
@@ -19,8 +19,8 @@ class LaRiojaScraperStrategy implements IBoletinScraperStrategy
 			->getLinks ("/http:\/\/ias1\.larioja\.org\/boletin\/Bor_Boletin_visor_Servlet\?referencia=[^\"]+/");
 	}
 
-	public function getFiles()
+	public function hasEachDocumentUniqueUrl()
 	{
-		return Storage::files(self::DIRECTORY_FILES);
+		return true;
 	}
 }

@@ -11,7 +11,7 @@ use Storage;
 
 class CastillaYLeonScraperStrategy implements IBoletinScraperStrategy
 {
-	const DIRECTORY_FILES = "public/castillayleon";
+
     const MAX_NUMBER_OF_PUBLICATIONS = 5;
 
 	public function downloadFilesFromInternet()
@@ -22,8 +22,8 @@ class CastillaYLeonScraperStrategy implements IBoletinScraperStrategy
 			->getLinks("/http:\/\/bocyl\.jcyl\.es\/boletines\/\d+\/\d+\/\d+\/pdf\/BOCYL\-D\-\d+-\d+\.pdf/");
 	}
 
-	public function getFiles()
-	{
-		return Storage::files(self::DIRECTORY_FILES);
-	}
+    public function hasEachDocumentUniqueUrl()
+    {
+        return true;
+    }
 }

@@ -10,7 +10,7 @@ use Storage;
 
 class ExtremaduraScraperStrategy implements IBoletinScraperStrategy
 {
-	const DIRECTORY_FILES = "public/extremadura";
+
     const MAX_NUMBER_OF_PUBLICATIONS = 5;
 
 	public function downloadFilesFromInternet()
@@ -21,8 +21,8 @@ class ExtremaduraScraperStrategy implements IBoletinScraperStrategy
 		    ->getLinks("/\/pdfs\/doe\/\d+\/\d+o\/\d+o\.pdf/");
     }
 
-    public function getFiles()
+    public function hasEachDocumentUniqueUrl()
     {
-	    return Storage::files(self::DIRECTORY_FILES);
+	    return true;
     }
 }

@@ -10,7 +10,7 @@ use Storage;
 
 class PaisVascoScraperStrategy implements IBoletinScraperStrategy
 {
-	const DIRECTORY_FILES = "public/paisvasco";
+
     const MAX_NUMBER_OF_PUBLICATIONS = 5;
 
 	public function downloadFilesFromInternet()
@@ -21,8 +21,8 @@ class PaisVascoScraperStrategy implements IBoletinScraperStrategy
 			->getLinks("/\w+\.pdf/");
 	}
 
-	public function getFiles()
+	public function hasEachDocumentUniqueUrl()
 	{
-		return Storage::files(self::DIRECTORY_FILES);
+		return true;
 	}
 }

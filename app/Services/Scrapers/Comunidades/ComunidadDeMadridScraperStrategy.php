@@ -10,7 +10,7 @@ use Storage;
 
 class ComunidadDeMadridScraperStrategy implements IBoletinScraperStrategy
 {
-	const DIRECTORY_FILES = "public/cmadrid";
+
 
 	public function downloadFilesFromInternet()
 	{
@@ -18,8 +18,8 @@ class ComunidadDeMadridScraperStrategy implements IBoletinScraperStrategy
 			->getLinks ("/\/boletin\/CM_Boletin_BOCM\/\d+\/\d+\/\d+\/\d+.PDF/");
 	}
 
-	public function getFiles()
+	public function hasEachDocumentUniqueUrl()
 	{
-		return Storage::files(self::DIRECTORY_FILES);
+		return true;
 	}
 }

@@ -9,7 +9,7 @@ use Storage;
 
 class MelillaScraperStrategy implements IBoletinScraperStrategy
 {
-	const DIRECTORY_FILES = "public/melilla";
+
     const MAX_NUMBER_OF_PUBLICATIONS = 5;
 
 
@@ -21,8 +21,8 @@ class MelillaScraperStrategy implements IBoletinScraperStrategy
 			->getLinks("/http:\/\/www\.melilla\.es\/mandar\.php\/\w+\/\d+\/\d+\/[a-zA-Z0-9]+\.pdf/");
 	}
 
-	public function getFiles()
+	public function hasEachDocumentUniqueUrl()
 	{
-		return Storage::files(self::DIRECTORY_FILES);
+		return true;
 	}
 }

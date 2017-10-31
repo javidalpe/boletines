@@ -20,8 +20,8 @@ class RegionDeMurciaBoletinScraperStrategy implements IBoletinScraperStrategy
             ->getLinks("/\/borm\/documento\?obj=bol&id=\d+/");
     }
 
-    public function getFiles()
+    public function hasEachDocumentUniqueUrl()
     {
-        return Storage::files(self::FILES_DIRECTORY);
+        return true;
     }
 }

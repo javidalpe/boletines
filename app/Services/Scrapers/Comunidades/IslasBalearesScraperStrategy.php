@@ -11,7 +11,7 @@ use Storage;
 
 class IslasBalearesScraperStrategy implements IBoletinScraperStrategy
 {
-	const DIRECTORY_FILES = "public/baleares";
+
     const MAX_NUMBER_OF_PUBLICATIONS = 5;
 
 	public function downloadFilesFromInternet()
@@ -22,8 +22,8 @@ class IslasBalearesScraperStrategy implements IBoletinScraperStrategy
 			->getLinks("/\/eboibfront\/pdf\/VisPdf\?action=VisEdicte&idDocument=\w+&lang=es/");
 	}
 
-	public function getFiles()
+	public function hasEachDocumentUniqueUrl()
 	{
-		return Storage::files(self::DIRECTORY_FILES);
+		return true;
 	}
 }

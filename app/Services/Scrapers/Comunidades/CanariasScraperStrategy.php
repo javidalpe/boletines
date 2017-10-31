@@ -12,7 +12,7 @@ use Storage;
 
 class CanariasScraperStrategy implements IBoletinScraperStrategy
 {
-	const DIRECTORY_FILES = "public/canarias";
+
 
     const MAX_NUMBER_OF_PUBLICATIONS = 5;
 
@@ -24,8 +24,8 @@ class CanariasScraperStrategy implements IBoletinScraperStrategy
 			->getLinks ("/http:\/\/sede\.gobcan\.es\/boc\/boc-a-\d+-\w+-\w+\.pdf/");
 	}
 
-	public function getFiles()
-	{
-		return Storage::files(self::DIRECTORY_FILES);
-	}
+    public function hasEachDocumentUniqueUrl()
+    {
+        return true;
+    }
 }

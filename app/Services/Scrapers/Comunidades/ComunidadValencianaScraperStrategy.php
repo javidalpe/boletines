@@ -12,7 +12,7 @@ use Storage;
 
 class ComunidadValencianaScraperStrategy implements IBoletinScraperStrategy
 {
-	const DIRECTORY_FILES = "public/cmadrid";
+
 
 	public function downloadFilesFromInternet()
 	{
@@ -27,8 +27,8 @@ class ComunidadValencianaScraperStrategy implements IBoletinScraperStrategy
         }
 	}
 
-	public function getFiles()
+	public function hasEachDocumentUniqueUrl()
 	{
-		return Storage::files(self::DIRECTORY_FILES);
+		return true;
 	}
 }

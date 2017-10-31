@@ -59,6 +59,7 @@ class ScrapingService
 
     private $splitService;
     private $scheduleService;
+    const DOCUMENTS_STORAGE_DIRECTORY = 'documents';
 
     /**
      * ScrapingService constructor.
@@ -68,7 +69,6 @@ class ScrapingService
         $this->splitService = new FileSplitService();
         $this->scheduleService = new PublicationsScheduleService();
     }
-
 
     public function updateIndexes()
     {
@@ -120,7 +120,7 @@ class ScrapingService
 
             Log::debug("Handling " . count($urls) . " urls.");
 
-            $this->saveFiles($urls, $regionName, $priority);
+            $this->saveFiles($urls, $regionName, $priority, $scrapper);
 
             $run->result = self::RUN_RESULT_OK;
             $newCount = Chunk::where('publication_name', $regionName)->count();
@@ -158,66 +158,79 @@ class ScrapingService
         $publication->save();
     }
 
-    private function saveFiles($urls, $regionName, $priority)
+    /**
+     * @param $urls
+     * @param $regionName
+     * @param $priority
+     * @param IBoletinScraperStrategy $scrapper
+     */
+    private function saveFiles($urls, $regionName, $priority, IBoletinScraperStrategy $scrapper)
     {
         foreach ($urls as $url) {
-            $this->parseFile($url, $regionName, $priority);
+            $this->parseFile($url, $regionName, $priority, $scrapper);
         }
     }
 
 
     /**
-     * @param $url
+     * @param $originUrl
      * @param $regionName
      * @param $priority
+     * @param IBoletinScraperStrategy $scrapper
      */
-    private function parseFile($url, $regionName, $priority)
+    private function parseFile($originUrl, $regionName, $priority, IBoletinScraperStrategy $scrapper)
     {
-        if ($this->exists($url)) return;
+        $storeUrl = $this->getStoreUrl($originUrl, $scrapper);
 
-        $response = $this->getHttpGetResponse($url);
+        if ($this->exists($storeUrl)) return;
+
+        $response = $this->getHttpGetResponse($originUrl);
 
         $content = (string)$response->getBody();
 
         if (!$content || strlen($content) <= 10) return;
 
-        $content = $this->getPlainTextFromRemotePdf($url, $content);
+        $plainText = $this->getPlainTextFromRemotePdf($storeUrl, $content);
 
-        if (!$content || strlen($content) <= 10) return;
+        if (!$plainText || strlen($plainText) <= 10) return;
 
         $publishedAt = $this->getFileDate($response);
 
-        $this->storeText($url, $content, $regionName, $priority, $publishedAt);
+        $this->storeText($storeUrl, $plainText, $regionName, $priority, $publishedAt);
+
+        if (!$scrapper->hasEachDocumentUniqueUrl()) {
+            $this->storeDocumentContent($content, $originUrl);
+        }
     }
 
     /**
-     * @param $url
+     * @param $storeUrl
      * @param $text
      * @param $regionName
      * @param $priority
      * @param $publishedAt
      */
-    private function storeText($url, $text, $regionName, $priority, $publishedAt)
+    private function storeText($storeUrl, $text, $regionName, $priority, $publishedAt)
     {
         $chunks = $this->splitService->splitDocument($text);
 
         foreach ($chunks as $content) {
-            $this->createChunk($url, $content, $regionName, $priority, $publishedAt);
+            $this->createChunk($storeUrl, $content, $regionName, $priority, $publishedAt);
         }
     }
 
 
     /**
-     * @param string $url
+     * @param string $storedUrl
      * @param string $content
      * @param string $regionName
      * @param int $priority
      * @param Carbon $publishedAt
      */
-    private function createChunk(string $url, string $content, string $regionName, int $priority, Carbon $publishedAt)
+    private function createChunk(string $storedUrl, string $content, string $regionName, int $priority, Carbon $publishedAt)
     {
         $chunk = new Chunk();
-        $chunk->url = $url;
+        $chunk->url = $storedUrl;
         $chunk->publication_name = $regionName;
         $chunk->publication_priority = $priority;
         $chunk->published_at = $publishedAt;
@@ -320,13 +333,49 @@ class ScrapingService
      */
     private function getPlainTextFromRemotePdf($url, $content)
     {
-        $filename = hash(self::URL_HASH_FUNCTION, $url);
+        $filename = $this->hashUrl($url);
 
         Storage::put($filename, $content);
         $content = $this->getContentFromPDF($filename);
         Storage::delete($filename);
 
         return $content;
+    }
+
+    private function getStoreUrl($originUrl, IBoletinScraperStrategy $scrapper)
+    {
+        if ($scrapper->hasEachDocumentUniqueUrl()) {
+            return $originUrl;
+        } else {
+            $storePath = $this->getStorePathForUrl($originUrl);
+            return Storage::disk('s3')->url($storePath);
+        }
+    }
+
+    /**
+     * @param $url
+     * @return string
+     */
+    private function hashUrl($url): string
+    {
+        $filename = hash(self::URL_HASH_FUNCTION, $url);
+        return $filename;
+    }
+
+    private function getStorePathForUrl($originUrl)
+    {
+        $hash = $this->hashUrl($originUrl);
+        $dateString = (Carbon::now())->format('Ymd');
+        $directory = self::DOCUMENTS_STORAGE_DIRECTORY;
+        $extension = self::PDF_EXTENSION;
+        return sprintf('%s/%s-%s.%s', $directory, $hash, $dateString, $extension);
+
+    }
+
+    private function storeDocumentContent($content, $originUrl)
+    {
+        $storePath = $this->getStorePathForUrl($originUrl);
+        Storage::disk('s3')->put($storePath, $content);
     }
 
 
