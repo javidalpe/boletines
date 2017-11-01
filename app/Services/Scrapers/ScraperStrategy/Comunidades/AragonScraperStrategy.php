@@ -24,8 +24,5 @@ class AragonScraperStrategy implements IBoletinScraperStrategy
 			->getLinks("/BRSCGI\?CMD=VEROBJ&MLKOB=\w+/");
 	}
 
-    public function hasEachDocumentUniqueUrl()
-    {
-        return true;
-    }
+
 }

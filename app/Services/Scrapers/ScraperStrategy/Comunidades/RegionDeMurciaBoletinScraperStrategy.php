@@ -20,8 +20,5 @@ class RegionDeMurciaBoletinScraperStrategy implements IBoletinScraperStrategy
             ->getLinks("/\/borm\/documento\?obj=bol&id=\d+/");
     }
 
-    public function hasEachDocumentUniqueUrl()
-    {
-        return true;
-    }
+
 }

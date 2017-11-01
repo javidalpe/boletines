@@ -33,9 +33,9 @@ class ScraperStrategyFactory
      * @param $id
      * @return IBoletinScraperStrategy
      */
-    public static function getScrapperStrategy($id) : IBoletinScraperStrategy
+    public function getScrapperStrategy(Publication $publication) : IBoletinScraperStrategy
     {
-        switch ($id)
+        switch ($publication->id)
         {
 	        case ScrapingService::BOLETIN_OFICIAL_DEL_ESTADO:
 	        	return new BoeScraperStrategy();

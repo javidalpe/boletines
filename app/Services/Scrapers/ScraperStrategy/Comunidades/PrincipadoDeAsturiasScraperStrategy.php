@@ -22,8 +22,5 @@ class PrincipadoDeAsturiasScraperStrategy implements IBoletinScraperStrategy
             ->getLinks("/https:\/\/sede\.asturias\.es\/bopa\/\d+\/\d+\/\d+\/\w+\.pdf/");
     }
 
-    public function hasEachDocumentUniqueUrl()
-    {
-        return true;
-    }
+
 }

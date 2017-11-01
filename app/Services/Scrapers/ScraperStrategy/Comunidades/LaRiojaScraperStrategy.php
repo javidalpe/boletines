@@ -19,8 +19,5 @@ class LaRiojaScraperStrategy implements IBoletinScraperStrategy
 			->getLinks ("/http:\/\/ias1\.larioja\.org\/boletin\/Bor_Boletin_visor_Servlet\?referencia=[^\"]+/");
 	}
 
-	public function hasEachDocumentUniqueUrl()
-	{
-		return true;
-	}
+
 }

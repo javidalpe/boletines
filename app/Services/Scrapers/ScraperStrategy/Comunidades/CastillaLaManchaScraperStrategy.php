@@ -20,8 +20,5 @@ class CastillaLaManchaScraperStrategy implements IBoletinScraperStrategy
 			->getLinks ("/descargarArchivo\.do\?ruta=\d+\/\d+\/\d+\/pdf\/docm_\d+\.pdf&tipo=rutaDocm/");
 	}
 
-    public function hasEachDocumentUniqueUrl()
-    {
-        return true;
-    }
+
 }

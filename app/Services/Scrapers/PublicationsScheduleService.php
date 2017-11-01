@@ -8,7 +8,12 @@ use Carbon\Carbon;
 
 class PublicationsScheduleService
 {
-	public function isTodayAPublicationDay($administrativeLevel) {
+	/**
+	 * @param $administrativeLevel
+	 *
+	 * @return bool
+	 */
+	public function isTodayAPublicationDay($administrativeLevel): bool {
 		$now = Carbon::now();
 
 		if ($administrativeLevel == ScrapingService::PRIORITY_ADMINISTRATIVE_AREA_1) {

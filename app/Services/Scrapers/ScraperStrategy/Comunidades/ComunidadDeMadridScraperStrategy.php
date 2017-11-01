@@ -18,8 +18,5 @@ class ComunidadDeMadridScraperStrategy implements IBoletinScraperStrategy
 			->getLinks ("/\/boletin\/CM_Boletin_BOCM\/\d+\/\d+\/\d+\/\d+.PDF/");
 	}
 
-	public function hasEachDocumentUniqueUrl()
-	{
-		return true;
-	}
+
 }

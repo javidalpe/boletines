@@ -21,8 +21,5 @@ class MelillaScraperStrategy implements IBoletinScraperStrategy
 			->getLinks("/http:\/\/www\.melilla\.es\/mandar\.php\/\w+\/\d+\/\d+\/[a-zA-Z0-9]+\.pdf/");
 	}
 
-	public function hasEachDocumentUniqueUrl()
-	{
-		return true;
-	}
+
 }

@@ -21,8 +21,5 @@ class PaisVascoScraperStrategy implements IBoletinScraperStrategy
 			->getLinks("/\w+\.pdf/");
 	}
 
-	public function hasEachDocumentUniqueUrl()
-	{
-		return true;
-	}
+
 }

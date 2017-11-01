@@ -21,8 +21,5 @@ class XuntaGaliciaScraperStrategy implements IBoletinScraperStrategy
 			->getLinks("/\/dog\/Publicados\/\d+\/\d+\/\w+-\w+-\w+\.pdf/");
 	}
 
-	public function hasEachDocumentUniqueUrl()
-	{
-		return true;
-	}
+
 }

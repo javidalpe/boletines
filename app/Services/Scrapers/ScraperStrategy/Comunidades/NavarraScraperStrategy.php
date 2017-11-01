@@ -19,8 +19,5 @@ class NavarraScraperStrategy implements IBoletinScraperStrategy
 			->getLinks ("/\/home_es\/Actualidad\/BON\/Boletines\/\d+\/\d+\/boletin.pdf/");
 	}
 
-	public function hasEachDocumentUniqueUrl()
-	{
-		return true;
-	}
+
 }

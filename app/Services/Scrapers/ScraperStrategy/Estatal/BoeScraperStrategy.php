@@ -26,8 +26,5 @@ class BoeScraperStrategy implements IBoletinScraperStrategy
 		return array_merge($firstLinks, $secondLinks);
 	}
 
-    public function hasEachDocumentUniqueUrl()
-    {
-        return true;
-    }
+
 }

@@ -22,8 +22,5 @@ class CastillaYLeonScraperStrategy implements IBoletinScraperStrategy
 			->getLinks("/http:\/\/bocyl\.jcyl\.es\/boletines\/\d+\/\d+\/\d+\/pdf\/BOCYL\-D\-\d+-\d+\.pdf/");
 	}
 
-    public function hasEachDocumentUniqueUrl()
-    {
-        return true;
-    }
+
 }

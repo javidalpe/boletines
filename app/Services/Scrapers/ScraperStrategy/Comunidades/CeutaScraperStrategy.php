@@ -22,8 +22,5 @@ class CeutaScraperStrategy implements IBoletinScraperStrategy
 			->getLinks("/\/ceuta\/component\/jdownloads\/finish\/\d+-\w+\/[^\"]+/");
 	}
 
-    public function hasEachDocumentUniqueUrl()
-    {
-        return true;
-    }
+
 }

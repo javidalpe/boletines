@@ -20,8 +20,5 @@ class CantabriaScraperStrategy implements IBoletinScraperStrategy
 			->getLinks ("/verPdfAction\.do\?idBlob=\d+&tipoPdf=0/");
 	}
 
-    public function hasEachDocumentUniqueUrl()
-    {
-        return true;
-    }
+
 }

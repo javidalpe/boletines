@@ -22,8 +22,5 @@ class IslasBalearesScraperStrategy implements IBoletinScraperStrategy
 			->getLinks("/\/eboibfront\/pdf\/VisPdf\?action=VisEdicte&idDocument=\w+&lang=es/");
 	}
 
-	public function hasEachDocumentUniqueUrl()
-	{
-		return true;
-	}
+
 }

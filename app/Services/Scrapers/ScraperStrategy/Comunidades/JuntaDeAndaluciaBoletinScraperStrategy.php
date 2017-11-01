@@ -22,8 +22,5 @@ class JuntaDeAndaluciaBoletinScraperStrategy implements IBoletinScraperStrategy
             ->getLinks("/http:\/\/www\.juntadeandalucia\.es\/boja\/\d+\/\d+\/\w+-\w+-\w+.pdf/");
     }
 
-    public function hasEachDocumentUniqueUrl()
-    {
-        return true;
-    }
+
 }

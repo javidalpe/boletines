@@ -27,8 +27,5 @@ class ComunidadValencianaScraperStrategy implements IBoletinScraperStrategy
         }
 	}
 
-	public function hasEachDocumentUniqueUrl()
-	{
-		return true;
-	}
+
 }

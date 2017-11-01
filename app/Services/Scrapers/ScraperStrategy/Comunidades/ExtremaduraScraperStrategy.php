@@ -20,9 +20,4 @@ class ExtremaduraScraperStrategy implements IBoletinScraperStrategy
 		    ->navigate()
 		    ->getLinks("/\/pdfs\/doe\/\d+\/\d+o\/\d+o\.pdf/");
     }
-
-    public function hasEachDocumentUniqueUrl()
-    {
-	    return true;
-    }
 }

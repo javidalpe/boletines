@@ -24,8 +24,5 @@ class CanariasScraperStrategy implements IBoletinScraperStrategy
 			->getLinks ("/http:\/\/sede\.gobcan\.es\/boc\/boc-a-\d+-\w+-\w+\.pdf/");
 	}
 
-    public function hasEachDocumentUniqueUrl()
-    {
-        return true;
-    }
+
 }

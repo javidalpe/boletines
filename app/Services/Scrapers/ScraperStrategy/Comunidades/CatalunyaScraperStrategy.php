@@ -20,8 +20,4 @@ class CatalunyaScraperStrategy implements IBoletinScraperStrategy
 		return $links;
 	}
 
-    public function hasEachDocumentUniqueUrl()
-    {
-        return false;
-    }
 }
