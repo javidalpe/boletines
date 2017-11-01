@@ -6,6 +6,27 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
 
+/**
+ * App\Chunk
+ *
+ * @property int $id
+ * @property string $url
+ * @property string $content
+ * @property string $publication_name
+ * @property int $publication_priority
+ * @property \Carbon\Carbon $published_at
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Chunk whereContent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Chunk whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Chunk whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Chunk wherePublicationName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Chunk wherePublicationPriority($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Chunk wherePublishedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Chunk whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Chunk whereUrl($value)
+ * @mixin \Eloquent
+ */
 class Chunk extends Model
 {
 	const SECONDS_IN_A_DAY = 86400;

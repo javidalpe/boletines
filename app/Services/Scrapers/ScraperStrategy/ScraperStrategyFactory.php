@@ -4,6 +4,7 @@
 namespace App\Services\Scrapers;
 
 
+use App\Publication;
 use App\Services\Scrapers\Comunidades\AragonScraperStrategy;
 use App\Services\Scrapers\Comunidades\CanariasScraperStrategy;
 use App\Services\Scrapers\Comunidades\CantabriaScraperStrategy;
@@ -25,15 +26,17 @@ use App\Services\Scrapers\Comunidades\RegionDeMurciaBoletinScraperStrategy;
 use App\Services\Scrapers\Comunidades\XuntaGaliciaScraperStrategy;
 use App\Services\Scrapers\Estatal\BoeScraperStrategy;
 use App\Services\ScrapingService;
+use Exception;
 
 class ScraperStrategyFactory
 {
 
-    /**
-     * @param $id
-     * @return IBoletinScraperStrategy
-     */
-    public function getScrapperStrategy(Publication $publication) : IBoletinScraperStrategy
+	/**
+	 * @param Publication $publication
+	 *
+	 * @return IBoletinScraperStrategy|null
+	 */
+    public function getScrapperStrategy(Publication $publication) : ?IBoletinScraperStrategy
     {
         switch ($publication->id)
         {
@@ -77,6 +80,8 @@ class ScraperStrategyFactory
                 return new CeutaScraperStrategy();
             case ScrapingService::BOLETIN_OFICIAL_DE_LA_CIUDAD_AUTONOMA_DE_MELILLA:
                 return new MelillaScraperStrategy();
+	        default:
+	        	return null;
         }
     }
 }
