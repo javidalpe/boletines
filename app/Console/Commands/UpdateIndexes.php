@@ -21,14 +21,16 @@ class UpdateIndexes extends Command
      */
     protected $description = 'Download and parse pdfs';
 
+    private $service;
     /**
      * Create a new command instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(ScrapingService $service)
     {
         parent::__construct();
+        $this->service = $service;
     }
 
     /**
@@ -38,13 +40,12 @@ class UpdateIndexes extends Command
      */
     public function handle()
     {
-        $service = new ScrapingService();
         $id = $this->argument('id');
 
         if ($id == null || $id === false) {
-            $service->updateIndexes();
+            $this->service->updateIndexes();
         } else {
-            $service->updateIndex($id);
+	        $this->service->updateIndex($id);
         }
 
     }
