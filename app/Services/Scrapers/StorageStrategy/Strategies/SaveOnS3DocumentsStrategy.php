@@ -25,7 +25,7 @@ class SaveOnS3DocumentsStrategy implements IStorageDocumentStrategy
 	public function saveDocument(string $content, string $originalUrl): string
 	{
 		$storePath = $this->getStorePathForUrl($originalUrl);
-		Storage::disk('s3')->put($storePath, $content);
+		Storage::disk('s3')->put($storePath, $content, 'public');
 
 		return $this->getFullUrlPath($storePath);
 	}
