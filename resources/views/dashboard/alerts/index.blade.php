@@ -13,7 +13,6 @@
                         <thead>
                             <tr>
                                 <th>Búsqueda</th>
-                                <th>Frecuencia</th>
                                 <th>Última notificación</th>
                                 <th>Acciones</th>
                             </tr>
@@ -22,7 +21,6 @@
                             @foreach($alerts as $alert)
                                 <tr>
                                     <td>{{$alert->query}}</td>
-                                    <td>@include('dashboard.alerts.partials.frequency')</td>
                                     <td>{{isset($alert->notified_at)?$alert->notified_at->toDateString():''}}</td>
                                     <td>
                                         {!! Form::open(['id' => $alert->id, 'route' => ['alerts.destroy', $alert], 'method' => 'DELETE']) !!}
