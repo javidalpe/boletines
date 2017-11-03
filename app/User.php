@@ -34,6 +34,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUserId($value)
  * @mixin \Eloquent
+ * @property string|null $improvement
+ * @property string|null $feature
+ * @property string|null $util
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereFeature($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereImprovement($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUtil($value)
  */
 class User extends Authenticatable
 {
@@ -45,7 +51,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'token', 'user_id', 'alerts_limit'
+        'name', 'email', 'password', 'token', 'user_id', 'alerts_limit', 'feature', 'useful', 'improvement'
     ];
 
     /**
@@ -78,13 +84,13 @@ class User extends Authenticatable
      */
     public function inviter()
     {
-        return $this->belongsTo('App\User','user_id');
+        return $this->belongsTo('App\User', 'user_id');
     }
 
     /**
      * Send the password reset notification.
      *
-     * @param  string  $token
+     * @param  string $token
      * @return void
      */
     public function sendPasswordResetNotification($token)

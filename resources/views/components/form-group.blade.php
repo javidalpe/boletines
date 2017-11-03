@@ -1,5 +1,5 @@
 <div class="form-group {{ $errors->has($name) ? ' has-error' : '' }}">
-    @if (isset($help))
+    @if (isset($label))
         {!! Form::label($name, $label) !!}
     @endif
     {{ $slot }}

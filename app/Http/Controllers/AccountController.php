@@ -2,13 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreUserRequest;
 use App\Notifications\AccountDeletedNotification;
+use App\Services\Rewards\RewardsService;
 use App\User;
 use Auth;
 use Illuminate\Http\Request;
 
 class AccountController extends Controller
 {
+
+    private $rewardService;
+
+    /**
+     * AccountController constructor.
+     * @param RewardsService $rewardService
+     */
+    public function __construct(RewardsService $rewardService)
+    {
+        $this->rewardService = $rewardService;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -35,9 +49,9 @@ class AccountController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
-        //
+
     }
 
     /**
@@ -69,9 +83,13 @@ class AccountController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreUserRequest $request, $id)
     {
-        //
+        $user = Auth::user();
+        $user->update($request->all());
+        flash("Gracias por enviarnos tus comentarios.")->success();
+        $this->rewardService->rewardUser($user, RewardsService::FEEDBACK_REWARD);
+        return redirect()->route('rewards');
     }
 
     /**

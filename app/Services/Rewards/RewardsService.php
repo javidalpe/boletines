@@ -11,6 +11,7 @@ class RewardsService
 
     const INVITER_REWARD = 0;
     const INVITEE_REWARD = 1;
+    const FEEDBACK_REWARD = 2;
 
     public function rewardUser(User $user, $type)
     {
