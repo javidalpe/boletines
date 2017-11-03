@@ -14,6 +14,7 @@
         @yield('content')
         @include('landing.footer')
         @include('layouts.scripts')
+        @include('cookieConsent::index')
         @stack('scripts')
     </body>
 </html>
