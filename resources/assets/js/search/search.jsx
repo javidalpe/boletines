@@ -48,7 +48,8 @@ const DayMenu = () => {
     } else {
         return (<div>
             <strong>Día</strong>
-            <Menu attributeName={"date"}
+            <RefinementList
+                attributeName={"date"}
                   translations={{showMore: 'Mostrar más'}}
                   showMore={true}
                   transformItems={items => orderBy(items, ['label'], ['desc'])}/>
