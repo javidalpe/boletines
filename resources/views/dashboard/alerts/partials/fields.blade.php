@@ -1,4 +1,4 @@
-@component('components.form-group', ['name' => 'query', 'label' => 'Termino de búsqueda', 'help' => 'El término de búsqueda que se usará para buscar en los nuevos boletines.'])
+@component('components.form-group', ['name' => 'query', 'label' => 'Termino de búsqueda', 'help' => 'El término de búsqueda que se usará para buscar en los nuevos boletines. '])
     {!! Form::text('query', null, array('class' => 'form-control')) !!}
 @endcomponent
 
