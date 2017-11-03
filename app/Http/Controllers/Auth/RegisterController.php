@@ -97,6 +97,6 @@ class RegisterController extends Controller
             return null;
         }
 
-        return  $otherUser->id;
+        return $otherUser->id;
     }
 }

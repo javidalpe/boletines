@@ -20,25 +20,10 @@ class RewardController extends Controller
         $data = [
             'user' => $user,
             'url' => $url,
-            'invitees' => $user->invitees
+            'invitees' => $user->invitees,
+            'invites' => $user->invites()->pending()->get()
         ];
 
         return view('dashboard.rewards', $data);
-    }
-
-    public function store(InviteRequest $request)
-    {
-        $emails = json_decode($request->emails);
-        $user = Auth::user();
-
-        foreach ($emails as $email) {
-            if (User::where('email', $email)->first()) continue;
-
-            Notification::route('mail', $email)
-                ->notify(new YouHaveBeenInvitedNotification($user));
-        }
-
-        flash("Invitaciones enviadas")->success();
-        return back();
     }
 }

@@ -11,7 +11,7 @@
                 {!! Form::text('link', $url, array('class' => 'form-control')) !!}
                 <br>
                 <p>O escribe aquí el mail de la persona a la que quieres invitar.</p>
-                {!! Form::open(['url' => route('rewardsStore'), 'method' => 'post']) !!}
+                {!! Form::open(['url' => route('invites.store'), 'method' => 'post']) !!}
                 @component('components.form-group', ['name' => 'emails'])
                     {!! Form::text('emails', null, array('class' => 'form-control', 'id' => 'emails', 'placeholder' => 'Introduce los correos electrónicos')) !!}
                 @endcomponent
@@ -20,6 +20,17 @@
                 </div>
                 {!! Form::close() !!}
             @endcomponent
+
+            @if(count($invites))
+                @component('components.panel')
+                    @slot('title')
+                        Invitaciones enviadas pendientes
+                    @endslot
+                    @foreach($invites as $invite)
+                        <div>{{ $invite->email }}</div>
+                    @endforeach
+                @endcomponent
+            @endif
 
             @component('components.panel')
                 @slot('title')

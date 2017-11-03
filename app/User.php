@@ -72,6 +72,14 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the alerts for the account.
+     */
+    public function invites()
+    {
+        return $this->hasMany('App\Invite');
+    }
+
+    /**
      * Get the invites for the account.
      */
     public function invitees()

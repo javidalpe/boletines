@@ -27,9 +27,9 @@ Route::middleware('auth')->group(function () {
 	Route::get('/report/{id}/{timestamp}', 'HomeController@report')->name('report');
 	Route::resource('alerts', 'AlertController');
     Route::resource('account', 'AccountController');
+    Route::resource('invites', 'InviteController');
 
     Route::get('/rewards', 'RewardController@index')->name('rewards');
-    Route::post('/rewards', 'RewardController@store')->name('rewardsStore');
 });
 
 Route::prefix('admin')->group(function () {

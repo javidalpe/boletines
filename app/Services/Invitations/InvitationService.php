@@ -10,11 +10,16 @@ class InvitationService
 {
     public function computeInvite(User $user)
     {
-        Log::debug(sprintf("Compute invite on %s", $user->email));
-        if ($user->inviter) {
+        $email = $user->email;
+        Log::debug(sprintf("Compute invite on %s", $email));
+        $inviter = $user->inviter;
+
+        if ($inviter) {
             $service = new RewardsService;
-            $service->rewardUser($user->inviter, RewardsService::INVITER_REWARD);
+            $service->rewardUser($inviter, RewardsService::INVITER_REWARD);
             $service->rewardUser($user, RewardsService::INVITEE_REWARD);
+
+            $inviter->invites()->where('email', $email)->update(['used' => true]);
         }
     }
 
