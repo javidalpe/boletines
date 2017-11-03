@@ -7,6 +7,7 @@
             <ul class="list-unstyled">
                 <li><a href="{{route('welcome')}}">Buscar</a></li>
                 <li><a href="{{route('alerts.index')}}">Alertas</a></li>
+                <li><a href="{{route('account.index')}}">Darse de Baja</a></li>
 
             </ul>
         </div>
@@ -15,8 +16,8 @@
             <hr>
             <ul class="list-unstyled">
                 <li><a href="{{route('how')}}">¿Cómo funciona?</a></li>
-                <li><a href="">Términos</a></li>
-                <li><a href="">Privacidad</a></li>
+                <li><a href="{{route('cookies')}}">Política de Cookies</a></li>
+                <li><a href="{{route('privacy')}}">Privacidad</a></li>
             </ul>
         </div>
         <div class="col-md-3">

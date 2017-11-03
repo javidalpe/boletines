@@ -10,7 +10,7 @@
                 <p>Por cada nuevo usuario que se registre usando este enlace conseguiras una nueva alerta.</p>
                 {!! Form::text('link', $url, array('class' => 'form-control')) !!}
                 <br>
-                <p>Invita a otros usuarios por correo.</p>
+                <p>O escribe aquí el mail de la persona a la que quieres invitar.</p>
                 {!! Form::open(['url' => route('rewardsStore'), 'method' => 'post']) !!}
                 @component('components.form-group', ['name' => 'emails'])
                     {!! Form::text('emails', null, array('class' => 'form-control', 'id' => 'emails', 'placeholder' => 'Introduce los correos electrónicos')) !!}

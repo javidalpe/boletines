@@ -21,7 +21,7 @@
 			@include('shared.search')
 
 			<div class="col-md-4">
-				<h3>¿Dónde buscamos?</h3>
+				<h3 id="donde">¿Dónde buscamos?</h3>
 				<hr>
 				<p>Boletín Oficial del Estado (BOE).</p>
 				<p>Boletines Autonómicos</p>
@@ -30,6 +30,9 @@
 					<li>Boletín Oficial de Aragón (BOA)</li>
 					<li>Boletín Oficial del Principado de Asturias (BOPA)</li>
 					<li>Boletín Oficial de Islas Baleares (BOIB)</li>
+				</ul>
+				<a data-toggle="collapse" data-target="#mas">Mostrar más</a>
+				<ul id="mas" class="collapse">
 					<li>Boletín Oficial de Canarias (BOC)</li>
 					<li>Boletín Oficial de Cantabria (BOC)</li>
 					<li>Diario Oficial de Castilla-La Mancha (DOCM)</li>

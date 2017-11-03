@@ -16,6 +16,8 @@ Route::get('/como-funciona', 'LandingController@how')->name('how');
 Route::get('/sobre-nosotros', 'LandingController@about')->name('about');
 Route::get('/contactanos', 'LandingController@contact')->name('contact');
 Route::get('/estado', 'LandingController@status')->name('status');
+Route::get('/politica-de-privacidad', 'LandingController@privacy')->name('privacy');
+Route::get('/politica-de-cookies', 'LandingController@cookies')->name('cookies');
 
 
 Auth::routes();

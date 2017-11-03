@@ -42,6 +42,16 @@ class LandingController extends Controller
         return view('landing.about');
     }
 
+        public function privacy()
+    {
+        return view('landing.privacy');
+    }
+
+    public function cookies()
+    {
+        return view('landing.cookies');
+    }
+
     public function contact()
     {
         return view('landing.contact');

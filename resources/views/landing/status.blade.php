@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
 
-                <h3>¿Qué es este sitio?</h3>
+                <h3>Estado de Actualización de la Información</h3>
                 <p>Controlamos contínuamente el estado de nuestros sistemas. Si hay alguna interrupción en nuestro
                     servicio podrás verlo aquí.</p>
                 <p>¿Tienes problemas? No dudes en <a href="{{ route('contact') }}">contactarnos</a>.</p>
