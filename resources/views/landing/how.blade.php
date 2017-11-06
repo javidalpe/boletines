@@ -12,6 +12,7 @@
                     días. <a href="{{route('status')}}">Aquí</a> puedes consultar el estado del sistema.</p>
                 <p>Para facilitarte el trabajo, puedes crear alertas que te avisan todos los días por mail, si ese día
                     se ha publicado algo sobre tu búsqueda. <a href="{{route('alerts.create')}}">Crea una alerta</a>.</p>
+                <p>Infoboe no se hace responsable del mal uso por parte de los usuarios, ni del mal funcionamiento del buscador o las alertas.</p>
             </div>
         </div>
     </div>
