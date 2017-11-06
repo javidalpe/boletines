@@ -6,5 +6,5 @@
     <script>
         var config = {!! $config !!};
     </script>
-    <script src="/js/search.js" async></script>
+    <script src="{{ mix('/js/search.js') }}" async></script>
 @endpush
