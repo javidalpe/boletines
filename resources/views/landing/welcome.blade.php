@@ -19,7 +19,8 @@
             <div id="root"></div>
 
             @include('shared.search')
-
+        </div>
+        <div class="row" style="margin-top: 42px">
             <div class="col-md-4">
                 <h3 id="donde">¿Dónde buscamos?</h3>
                 <hr>

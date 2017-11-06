@@ -50,18 +50,18 @@ const DayMenu = () => {
             <strong>Día</strong>
             <RefinementList
                 attributeName={"date"}
-                  translations={{showMore: 'Mostrar más'}}
-                  showMore={true}
-                  transformItems={items => orderBy(items, ['label'], ['desc'])}/>
+                translations={{showMore: 'Mostrar más'}}
+                showMore={true}
+                transformItems={items => orderBy(items, ['label'], ['desc'])}/>
         </div>);
     }
 }
 
+const Counter = () => <Stats
+    translations={{stats: (n, t) => n + " resultados encontrados en " + t + "ms. "}}/>;
+
 const ResultsHeader = () =>
     <div>
-        <span className="pull-right"><Stats
-            translations={{stats: (n, t) => n + " resultados encontrados en " + t + "ms"}}/>
-        </span>
         Resultados
     </div>
 
@@ -87,12 +87,16 @@ function Search(props) {
 
 function CreateAlert(props) {
     var url = "/alerts/create?query=" + props.query;
-    return <a href={url} className="btn btn-default pull-right">Convertir en alerta</a>;
+    return <a href={url}>Convertir búsqueda en alerta.</a>;
 }
 
-const SearchHelp = () =>
-    <div className="help-block">Puedes buscar nombres, direcciones, empresas. Ejemplo: 75724470, "Maria Peña", Calle
-        Gran Via, ..</div>
+const SearchHelp = () => {
+    if (config.defaultRefinementSearch !== null) {
+        return null;
+    }
+    return <div className="help-block"><p>Puedes buscar nombres, direcciones, empresas. Ejemplo: 75724470, "Maria Peña", Calle
+        Gran Via, ...</p></div>
+}
 
 class SearchPanel extends React.Component {
 
@@ -112,33 +116,41 @@ class SearchPanel extends React.Component {
     }
 
     render() {
-        var showCreateAlert = this.state.query.length > 2 && this.state.query !== config.defaultRefinementSearch;
-
-        return <Panel header="Buscador">
-
-            <Search onSearch={this.onSearch}/>
-            {showCreateAlert &&
-            <CreateAlert query={this.state.query}/>
-            }
+        return <div>
             <SearchHelp/>
-            <div>
-
-            </div>
-        </Panel>;
+            <Search onSearch={this.onSearch}/>
+            <ResultResume query={this.state.query}/>
+        </div>
     }
 }
 
-const Results = () =>
-    <div>
-        <div className="col-md-4">
-            <Sidebar/>
-        </div>
-        <div className="col-md-8">
-            <Content/>
-        </div>
-    </div>
+class ResultResume extends React.Component {
+    render() {
+        return <p>
+            {this.props.query.length > 0 &&
+            <Counter/>
+            }
+            {this.props.query.length > 0 && this.props.query !== config.defaultRefinementSearch &&
+            <CreateAlert query={this.props.query}/>
+            }
+        </p>
+    }
+}
 
-class Main extends React.Component {
+const
+    Results = () =>
+        <div>
+            <div className="col-md-4">
+                <Sidebar/>
+            </div>
+            <div className="col-md-8">
+                <Content/>
+            </div>
+        </div>
+
+class Main
+    extends React
+        .Component {
 
     constructor() {
         super();
