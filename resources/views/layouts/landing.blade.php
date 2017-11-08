@@ -5,9 +5,9 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
         @include('layouts.styles')
         @stack('styles')
-        @include('layouts.analytics')
     </head>
     <body>
+    @include('layouts.tag-manager-noscript')
         @include('layouts.navbar')
         <div class="container">
             @include('flash::message')

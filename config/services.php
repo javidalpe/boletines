@@ -39,4 +39,8 @@ return [
         'id' => env('GOOGLE_ANALYTICS', null),
     ],
 
+    'google-tag-manager' => [
+        'id' => env('GOOGLE_TAG_MANAGER', null),
+    ],
+
 ];
