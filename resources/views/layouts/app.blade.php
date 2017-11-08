@@ -5,6 +5,7 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
         @include('layouts.styles')
         @stack('styles')
+        @include('layouts.analytics')
     </head>
     <body>
         @include('layouts.navbar')
