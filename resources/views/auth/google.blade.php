@@ -1,0 +1,1 @@
+<a href="{{route('google.login')}}" class="btn btn-default"><img style="height: 20px; margin-top: -2px; margin-right: 6px" src="{{mix('img/google-logo.png')}}" alt="Google">{{$label}}</a>

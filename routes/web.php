@@ -22,6 +22,11 @@ Route::get('/politica-de-cookies', 'LandingController@cookies')->name('cookies')
 
 Auth::routes();
 
+Route::middleware('guest')->group(function() {
+	Route::get('login/google', 'Auth\GoogleLoginController@redirectToProvider')->name('google.login');
+	Route::get('login/googlecallback', 'Auth\GoogleLoginController@handleProviderCallback')->name('google.logincallback');
+});
+
 Route::middleware('auth')->group(function () {
 
 	Route::get('/report/{id}/{timestamp}', 'HomeController@report')->name('report');

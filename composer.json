@@ -13,11 +13,13 @@
         "laracasts/flash": "^3.0",
         "laravel/framework": "5.5.*",
         "laravel/scout": "^3.0",
+        "laravel/socialite": "^3.0",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.5",
         "league/flysystem-aws-s3-v3": "^1.0",
         "sentry/sentry": "^1.7",
         "smalot/pdfparser": "^0.11.0",
+        "socialiteproviders/google": "^3.0",
         "spatie/laravel-cookie-consent": "^2.1"
     },
     "require-dev": {
