@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Events\UserRegistered;
+use App\Repositories\UserRepositoryEloquent;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -21,8 +22,7 @@ class RegisterController extends Controller
     |
     */
 
-    const USER_RANDOM_TOKEN = 4;
-    const INITIAL_ALERTS = 1;
+
     use RegistersUsers;
 
     /**
@@ -32,14 +32,17 @@ class RegisterController extends Controller
      */
     protected $redirectTo = '/alerts';
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    private $userRepository;
+
+	/**
+	 * RegisterController constructor.
+	 *
+	 * @param UserRepositoryEloquent $userRepositoryEloquent
+	 */
+    public function __construct(UserRepositoryEloquent $userRepositoryEloquent)
     {
         $this->middleware('guest');
+        $this->userRepository = $userRepositoryEloquent;
     }
 
     /**
@@ -65,38 +68,6 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $inviterId = $this->getInviterId();
-
-        $user = User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-            'token' => str_random(self::USER_RANDOM_TOKEN),
-            'alerts_limit' => self::INITIAL_ALERTS,
-            'user_id' => $inviterId
-        ]);
-
-        event(new UserRegistered($user));
-
-        return $user;
-    }
-
-    /**
-     * @return int|null
-     */
-    protected function getInviterId(): ?int
-    {
-        if (!session('token')) {
-            return null;
-        }
-
-        $token = session('token');
-        $otherUser = User::where('token', $token)->first();
-
-        if (!$otherUser) {
-            return null;
-        }
-
-        return $otherUser->id;
+	    return $this->userRepository->registerUser($data);
     }
 }

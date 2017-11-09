@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Repositories\UserRepositoryEloquent;
 use App\User;
 use Auth;
 use Illuminate\Http\Request;
@@ -10,6 +11,20 @@ use Laravel\Socialite\Facades\Socialite;
 
 class GoogleLoginController extends Controller
 {
+
+	private $userRepository;
+
+	/**
+	 * GoogleLoginController constructor.
+	 *
+	 * @param $userRepository
+	 */
+	public function __construct(UserRepositoryEloquent $userRepository)
+	{
+		$this->userRepository = $userRepository;
+	}
+
+
 	/**
 	 * Redirect the user to the GitHub authentication page.
 	 *
@@ -30,12 +45,31 @@ class GoogleLoginController extends Controller
 		$data = Socialite::driver('google')->user();
 		$email = $data->email;
 
-		$user = User::where('email', $email)->first();
-		if ($user) {
-			Auth::login($user);
-			return redirect()->intended(route('welcome'));
-		} else {
+		$user = $this->getUser($email, $data);
 
+		Auth::login($user);
+
+		return redirect()->intended(route('welcome'));
+	}
+
+	/**
+	 * @param $email
+	 * @param $data
+	 *
+	 * @return \Illuminate\Database\Eloquent\Model|mixed|null|static
+	 */
+	private function getUser($email, $data)
+	{
+		$user = User::where('email', $email)->first();
+
+		if (!$user) {
+			$user = $this->userRepository->registerUser([
+				'name'     => $data->name,
+				'email'    => $email,
+				'password' => str_random(6)
+			]);
 		}
+
+		return $user;
 	}
 }
