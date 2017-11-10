@@ -15,9 +15,6 @@
                 </p>
             </div>
 
-
-            <div id="root"></div>
-
             @include('shared.search')
         </div>
         <div class="row" style="margin-top: 42px">

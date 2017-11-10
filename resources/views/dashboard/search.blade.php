@@ -2,8 +2,6 @@
 
 @section('content')
 	<div class="row">
-		<div id="root"></div>
+		@include('shared.search')
 	</div>
 @endsection
-
-@include('shared.search')
