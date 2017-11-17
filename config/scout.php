@@ -19,16 +19,18 @@ return [
 
 	'index' => env('SCOUT_INDEX', 'chunks_index'),
 
-    /*
-    |--------------------------------------------------------------------------
-    | Index Prefix
-    |--------------------------------------------------------------------------
-    |
-    | Here you may specify a prefix that will be applied to all search index
-    | names used by Scout. This prefix may be useful if you have multiple
-    | "tenants" or applications sharing the same search infrastructure.
-    |
-    */
+	'index_limit' => env('INDEX_LIMIT', 45000),
+
+		/*
+		|--------------------------------------------------------------------------
+		| Index Prefix
+		|--------------------------------------------------------------------------
+		|
+		| Here you may specify a prefix that will be applied to all search index
+		| names used by Scout. This prefix may be useful if you have multiple
+		| "tenants" or applications sharing the same search infrastructure.
+		|
+		*/
 
     'prefix' => env('SCOUT_PREFIX', ''),
 
