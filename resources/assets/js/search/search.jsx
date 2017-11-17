@@ -124,16 +124,26 @@ class SearchPanel extends React.Component {
     }
 }
 
+function Suggestion(props) {
+	if(props.query[0] === "\"" || props.query[props.query.length -1 ] === "\"" || !props.query.includes(" ")) return null;
+
+	return <div className="alert alert-warning">Consejo. Puedes entrecomillar {props.query} para buscar concondarcias exactas.</div>
+}
+
 class ResultResume extends React.Component {
     render() {
-        return <p>
+        return <div><p>
             {this.props.query.length > 0 &&
             <Counter/>
             }
             {this.props.query.length > 0 && this.props.query !== config.defaultRefinementSearch &&
-            <CreateAlert query={this.props.query}/>
+                <CreateAlert query={this.props.query}/>
             }
         </p>
+	        {this.props.query.length > 0 && this.props.query !== config.defaultRefinementSearch &&
+	            <Suggestion query={this.props.query}/>
+	        }
+        </div>
     }
 }
 
