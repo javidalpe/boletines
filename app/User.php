@@ -40,6 +40,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereFeature($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereImprovement($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUtil($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Invite[] $invites
  */
 class User extends Authenticatable
 {
