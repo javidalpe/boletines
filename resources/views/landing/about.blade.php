@@ -1,5 +1,10 @@
 @extends('layouts.landing')
 
+@section('seo')
+    <title>Sobre {{ config('app.name') }}, cómo surge el buscador</title>
+    <meta name="description" content="Conoce el origen y el equipo detrás del proyecto {{ config('app.name') }}.">
+@endsection
+
 @section('content')
     <div class="container">
         <div class="row">

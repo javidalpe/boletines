@@ -4,6 +4,7 @@
         @include('layouts.meta')
         <title>{{ config('app.name', 'Laravel') }}</title>
         @include('layouts.styles')
+        @yield('seo')
         @stack('styles')
     </head>
     <body>

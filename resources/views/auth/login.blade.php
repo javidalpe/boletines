@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+@section('seo')
+	<title>Inicia sesión en {{ config('app.name') }}</title>
+	<meta name="description" content="Accede a tu area privada para gestionar tus alertas de búsqueda.">
+@endsection
+
 @section('content')
 
 	<div class="row">

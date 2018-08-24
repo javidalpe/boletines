@@ -1,5 +1,11 @@
 @extends('layouts.app')
 
+
+@section('seo')
+    <title>Crea una cuenta en el buscador {{ config('app.name') }}</title>
+    <meta name="description" content="Crea una cuenta para gestionar tus propias alertas de búsqueda.">
+@endsection
+
 @section('content')
     <div class="row">
         <div class="col-md-8 col-md-offset-2">

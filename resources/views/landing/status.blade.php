@@ -1,5 +1,10 @@
 @extends('layouts.landing')
 
+@section('seo')
+    <title>Estado de la información en {{ config('app.name') }}</title>
+    <meta name="description" content="Comprueba el estado y las incidencias de nuestros sistemas.">
+@endsection
+
 @section('content')
     <div class="container">
         <div class="row">

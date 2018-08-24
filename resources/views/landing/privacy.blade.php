@@ -1,5 +1,10 @@
 @extends('layouts.landing')
 
+@section('seo')
+    <title>Política de privacidad de {{ config('app.name') }}</title>
+    <meta name="description" content="Estas son las políticas de privacidad del buscador {{ config('app.name') }}.">
+@endsection
+
 @section('content')
     <div class="container">
         <div class="row">

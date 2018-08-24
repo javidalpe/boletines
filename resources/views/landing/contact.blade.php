@@ -1,5 +1,10 @@
 @extends('layouts.landing')
 
+@section('seo')
+	<title>Contacta con {{ config('app.name') }}</title>
+	<meta name="description" content="¿Tienes alguna duda o sugerencia sobre {{ config('app.name') }}? Contacta con nosotros.">
+@endsection
+
 @section('content')
 	<div class="container">
 		<div class="row">
