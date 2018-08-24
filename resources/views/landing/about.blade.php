@@ -6,9 +6,9 @@
             <div class="col-md-8 col-md-offset-2">
                 <h2>Sobre nosotros</h2>
                 <p>{{ config('app.name') }} es un prototipo orientado a descubrir la utilidad de una herramienta de
-                    búsqueda sobre los boletines publicados por los Boletines Oficiales del Estado y Comunidades Autónomas.</p>
+                    búsqueda sobre los Boletines Oficiales del Estado y Comunidades Autónomas.</p>
                 <p>Esta idea surge de dos profesionales que han descubierto la necesidad de mejorar el acceso a la
-                    información publicada en los Boletines Oficiales del Estado y Comunidades Autónomas.</p>
+                    información publicada por el gobierno de España.</p>
             </div>
         </div>
     </div>
