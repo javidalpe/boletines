@@ -1,11 +1,16 @@
 @extends('layouts.landing')
 
+@section('seo')
+    <title>¿Cómo funciona {{ config('app.name') }}?</title>
+    <meta name="description" content="Busca en todos los Boletines Oficiales del Estado y Comunidades Autónomas.">
+@endsection
+
 @section('content')
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h2>¿Cómo funciona?</h2>
-                <p>{{ config('app.name') }} te permite realizar, desde un único sitio,  búsquedas diarias en todos los Boletines
+                <p>{{ config('app.name') }} te permite realizar, desde un único sitio, búsquedas diarias en todos los Boletines
                     Oficiales del Estado y Comunidades Autónomas para encontrar si han publicado algo relacionado con tu búsqueda.
                 Consulta <a href="{{route('welcome')}}#donde">dónde buscamos</a>.</p>
                 <p>De momento no buscamos en el histórico completo de los Boletines, es una búsqueda en lo que se pública en los últimos
