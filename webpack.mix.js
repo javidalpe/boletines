@@ -16,6 +16,11 @@ mix.sass('resources/assets/sass/search.scss', 'public/css');
 mix.react('resources/assets/js/search/search.jsx', 'public/js');
 mix.copy('node_modules/jquery/dist/jquery.slim.min.js', 'public/js');
 mix.copy('resources/assets/img/google-logo.png', 'public/img');
+mix.copy('resources/assets/img/boe.png', 'public/img');
+mix.copy('resources/assets/img/lex.png', 'public/img');
+mix.copy('resources/assets/img/powered_by_stripe@3x.png', 'public/img');
+mix.copy('resources/assets/img/powered_by_stripe@2x.png', 'public/img');
+mix.copy('resources/assets/img/powered_by_stripe.png', 'public/img');
 
 if (mix.inProduction()) {
     mix.version();

@@ -33,4 +33,12 @@
             <p>&copy; {{config('app.name')}}<p>
         </div>
     </div>
+    <div class="row" style="margin-top: 40px; margin-bottom: 40px">
+        <div class="col-md-2"><img class="img-responsive" src="{{mix('img/boe.png')}}" alt=""></div>
+        <div class="col-md-4"><img class="img-responsive" src="{{mix('img/lex.png')}}"
+                                   alt=""></div>
+        <div class="col-md-2 col-md-offset-3"><img class="img-responsive" src="{{mix
+        ('img/powered_by_stripe@3x.png')}}"
+                                   alt=""></div>
+    </div>
 </div>
