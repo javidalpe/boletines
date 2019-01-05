@@ -28,10 +28,20 @@
       };
 
       // Create an instance of the card Element.
-      var card = elements.create('card', {style: style});
+      var card = elements.create('card', {style: style, hidePostalCode: true, iconStyle: "solid"});
 
       // Add an instance of the card Element into the `card-element` <div>.
       card.mount('#card-element');
+
+      //Errors
+      card.addEventListener('change', function(event) {
+        var displayError = document.getElementById('card-errors');
+        if (event.error) {
+          displayError.textContent = event.error.message;
+        } else {
+          displayError.textContent = '';
+        }
+      });
 
 
       // Create a token or display an error when the form is submitted.
@@ -70,12 +80,20 @@
 
 
 
-    <div id="card-element">
-        <!-- A Stripe Element will be inserted here. -->
+<div class="row">
+    <div class="col-md-8">
+        <div id="card-element">
+            <!-- A Stripe Element will be inserted here. -->
+        </div>
+
+        <!-- Used to display form errors. -->
+        <div id="card-errors" role="alert"></div>
     </div>
 
-    <!-- Used to display form errors. -->
-    <div id="card-errors" role="alert"></div>
+</div>
+
+
+
 
 @push('styles')
     <style>
