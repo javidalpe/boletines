@@ -30,9 +30,10 @@ return [
     ],
 
     'stripe' => [
-        'model'  => App\User::class,
-        'key'    => env('STRIPE_KEY'),
-        'secret' => env('STRIPE_SECRET'),
+        'model'    => App\User::class,
+        'alert-id' => env('STRIPE_ALERT_ID'),
+        'key'      => env('STRIPE_KEY'),
+        'secret'   => env('STRIPE_SECRET'),
     ],
 
 	'google' => [

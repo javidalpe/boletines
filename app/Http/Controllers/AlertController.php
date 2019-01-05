@@ -6,6 +6,7 @@ use App\Alert;
 use App\Events\AlertCreated;
 use App\Events\AlertDeleted;
 use App\Http\Requests\StoreAlertRequest;
+use App\User;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -49,11 +50,23 @@ class AlertController extends Controller
      */
     public function store(StoreAlertRequest $request)
     {
-        if (!Auth::user()->can('create', Alert::class)) {
+        $user = Auth::user();
+        if (!$user->can('create', Alert::class)) {
             flash("Has superado el límite de alertas permitido.")->warning();
             return back();
         }
-        $alert = Auth::user()->alerts()->create($request->all());
+
+        if ($user->subscribed('main')) {
+            $user->subscription('main')->incrementQuantity();
+        } else {
+            $user->newSubscription('main', config('services.stripe.alert-id'))
+                ->quantity(1)
+                ->create($request->stripeToken);
+        }
+
+
+        $alert = $user->alerts()->create($request->all());
+
         event(new AlertCreated($alert));
         flash('Alerta creada satisfactoriamente.')->success();
         return redirect()->route('alerts.index');
