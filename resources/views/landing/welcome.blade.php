@@ -12,13 +12,15 @@
 	        @unless (Request::get('utm_source') == 'homescreen')
 	            <div class="col-md-12">
 	                <h1>Busca en todos los boletines oficiales y crea tus alertas</h1>
-	                <p>{{ config('app.name') }} es un prototipo que queremos testar para entender las necesidades de los
-	                    usuarios en las búsquedas de los boletines oficiales y la creación de alertas.
-	                    En esta fase de prototipado no tenemos ningún animo lucrativo, es totalmente gratuito y no
-	                    realizaremos ninguna venta de datos o publicidad.
-	                    Queremos agradecerte que nos hagas llegar tus comentarios, experiencia de uso y sugerencias en la
-	                    sección interna
-	                    <a href="{{ route('rewards')  }}#mejorar">Ayudanos a mejorar</a>.
+	                <p>Bienvenido a {{ config('app.name') }}, el único buscador que te permite, desde un único sitio, buscar en el Boletín Oficial
+                        del Estado, en el Diario Oficial de la Unión Europea y en todos los
+                        Boletines Oficiales de las Comunidades Autónomas para encontrar si han
+                        publicado algo relacionado con tu búsqueda.
+                    </p>
+                <p>
+	                    Queremos agradecerte que nos hagas llegar tus comentarios, experiencia
+                        de uso y sugerencias en la sección interna <a href="{{ route('rewards')  }}#mejorar">Ayudanos a
+                            mejorar</a>.
 	                </p>
 	            </div>
 	        @endunless
@@ -29,6 +31,7 @@
             <div class="col-md-4">
                 <h3 id="donde">¿Dónde buscamos?</h3>
                 <hr>
+                <p>Diario Oficial de la Unión Europea (EUR-LEX).</p>
                 <p>Boletín Oficial del Estado (BOE).</p>
                 <p>Boletines Autonómicos</p>
                 <ul>
@@ -73,7 +76,8 @@
                 <p>Podrás convertir cada búsqueda en una
                     alerta que te avisará en tu mail todas las
                     mañanas de los resultados que encuentre
-                    en los boletines para esa búsqueda.</p>
+                    en los boletines para esa búsqueda. <a href="{{route('alerts.create')
+                    }}">Crea una alerta aquí</a>.</p>
             </div>
         </div>
     </div>

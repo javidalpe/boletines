@@ -10,10 +10,12 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h2>Sobre nosotros</h2>
-                <p>{{ config('app.name') }} es un prototipo orientado a descubrir la utilidad de una herramienta de
-                    búsqueda sobre los Boletines Oficiales del Estado y Comunidades Autónomas.</p>
-                <p>Esta idea surge de dos profesionales que han descubierto la necesidad de mejorar el acceso a la
-                    información publicada por el gobierno de España.</p>
+                <p>Somos un grupo de ingenieros relacionados con las tecnologías de la
+                    información y la comunicación. En 2017 descubrimos la necesidad de mejorar
+                    el acceso a la información de los
+                    boletines oficiales y desde entonces desarrollamos {{ config('app.name') }}.</p>
+                <p>¿Quieres saber más sobre nosotros? <a href="{{route('contact')
+                }}">Escríbenos</a></p>
             </div>
         </div>
     </div>

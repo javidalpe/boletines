@@ -9,12 +9,6 @@
 @section('content')
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <p>Para poder convertir una búsqueda en alerta diaria necesitamos que te registres para poder gestionar esta
-                u otras alertas que crees y que nos des un mail donde mandarte las alertas.
-
-                Como explicamos en <a href="{{route('about')}}">Acerca de nosotros</a> estamos en una fase de
-                investigación en este proyecto y solo vamos a usarlos para este fin. Podrás darte de baja y todos tus
-                datos serán eliminados.</p>
             <div class="panel panel-default">
                 <div class="panel-heading">Crea una cuenta nueva</div>
 
@@ -96,6 +90,14 @@
 
                 </div>
             </div>
+
+            <p>Para poder convertir una búsqueda en alerta diaria necesitamos que crees una
+                nueva cuenta. En esa cuenta podrás gestionar esta u otras alertas que crees.
+                Además, usaremos el correo electrónico de la cuenta para enviarte las alertas.</p>
+
+            <p>En cualquier momento podrás darte de baja y todos tus datos serán eliminados
+                .</p>
+
         </div>
     </div>
 @endsection
