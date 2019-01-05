@@ -30,7 +30,8 @@ class AlertPolicy
      */
     public function create(User $user)
     {
-        return $user->alerts()->count() < $user->alerts_limit;
+        return true;
+        //return $user->alerts()->count() < $user->alerts_limit;
     }
 
     /**

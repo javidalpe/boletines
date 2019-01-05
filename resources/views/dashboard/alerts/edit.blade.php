@@ -9,6 +9,7 @@
                 @endslot
                 {!! Form::model($alert, array('route' => ['alerts.update', $alert], 'class' => 'form', 'method' => 'patch')) !!}
                     @include('dashboard.alerts.partials.fields')
+                    @include('components.form-submit', ['fallback' => route('alerts.index')])
                 {!! Form::close() !!}
             @endcomponent
         </div>

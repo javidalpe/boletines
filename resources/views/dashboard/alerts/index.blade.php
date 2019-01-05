@@ -7,7 +7,6 @@
                 @component('components.panel')
                     @slot('title')
                         Mis alertas
-                        <a class="label label-primary pull-right" href="{{route('rewards')}}">{{count($alerts)}}/{{$user->alerts_limit}}</a>
                     @endslot
                     <table class="table table-borderless">
                         <thead>
@@ -40,7 +39,6 @@
                 @can ('create', App\Alert::class)
                     <a href="{{route('alerts.create')}}" class="btn btn-primary">Crear alerta</a>
                 @endif
-                    <a href="{{route('rewards')}}" class="btn btn-default">Conseguir más alertas</a>
 
             @else
                 @component('components.empty')

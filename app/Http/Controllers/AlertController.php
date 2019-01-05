@@ -56,16 +56,16 @@ class AlertController extends Controller
             return back();
         }
 
+        $alert = $user->alerts()->create($request->all());
+
         if ($user->subscribed('main')) {
-            $user->subscription('main')->incrementQuantity();
+            $user->subscription('main')->updateQuantity($user->alerts()->count());
         } else {
             $user->newSubscription('main', config('services.stripe.alert-id'))
                 ->quantity(1)
                 ->create($request->stripeToken);
         }
 
-
-        $alert = $user->alerts()->create($request->all());
 
         event(new AlertCreated($alert));
         flash('Alerta creada satisfactoriamente.')->success();
@@ -121,6 +121,10 @@ class AlertController extends Controller
     {
         event(new AlertDeleted($alert));
         $alert->delete();
+        $user = Auth::user();
+        if ($user->subscribed('main')) {
+            $user->subscription('main')->updateQuantity($user->alerts()->count());
+        }
         flash('Alerta borrada.')->success();
         return redirect()->route('alerts.index');
     }
