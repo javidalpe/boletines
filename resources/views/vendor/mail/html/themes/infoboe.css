@@ -30,7 +30,7 @@ blockquote {
 }
 
 a {
-    color: #008a8f;
+    color: #034ea1;
 }
 
 a img {
@@ -217,11 +217,11 @@ img {
 }
 
 .button-blue {
-    background-color: #008a8f;
-    border-top: 10px solid #008a8f;
-    border-right: 18px solid #008a8f;
-    border-bottom: 10px solid #008a8f;
-    border-left: 18px solid #008a8f;
+    background-color: #034ea1;
+    border-top: 10px solid #034ea1;
+    border-right: 18px solid #034ea1;
+    border-bottom: 10px solid #034ea1;
+    border-left: 18px solid #034ea1;
 }
 
 .button-green {
