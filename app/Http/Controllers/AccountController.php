@@ -30,7 +30,14 @@ class AccountController extends Controller
      */
     public function index()
     {
-        return view('dashboard.account.show');
+        $user = Auth::user();
+        $invoices = $user->subscribed('main') ? $user->invoicesIncludingPending() : [];
+        $data = [
+            'invoices' => $invoices
+        ];
+
+        //dd($invoices);
+        return view('dashboard.account.show', $data);
     }
 
     /**

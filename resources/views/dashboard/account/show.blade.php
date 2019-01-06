@@ -3,6 +3,11 @@
 @section('content')
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
+
+            @if(count($invoices) > 0)
+                @include('dashboard.invoices.index')
+            @endif
+
             @component('components.panel')
                 @slot('title')
                     Borrar la cuenta y todos sus datos

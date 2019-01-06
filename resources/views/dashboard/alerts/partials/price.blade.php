@@ -14,4 +14,6 @@
         @else
             <h2>8€<small>/mes</small></h2>
         @endif
+    <p class="help-block">Precio de la alerta: 15€/mes las 5 primeras alertas. 12€/mes hasta 20 alertas y 8€/mes para más de 20 alertas.
+    </p>
 </div>

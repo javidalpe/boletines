@@ -5,7 +5,7 @@
     <div class="col-md-8 col-md-offset-2">
         @component('components.panel')
             @slot('title')
-                Supervisa las publicaciones para encontrar nuevos contenidos interesantes
+                Crear nueva alerta
             @endslot
             {!! Form::open(array('route' => 'alerts.store', 'class' => 'form', 'id' => 'form')) !!}
                 @include('dashboard.alerts.partials.fields')

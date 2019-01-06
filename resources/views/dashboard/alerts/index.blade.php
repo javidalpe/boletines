@@ -11,7 +11,7 @@
                     <table class="table table-borderless">
                         <thead>
                             <tr>
-                                <th>Búsqueda</th>
+                                <th>Término de búsqueda</th>
                                 <th>Última notificación</th>
                                 <th>Acciones</th>
                             </tr>
