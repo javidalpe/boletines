@@ -25,6 +25,7 @@ use App\Services\Scrapers\Comunidades\PrincipadoDeAsturiasScraperStrategy;
 use App\Services\Scrapers\Comunidades\RegionDeMurciaBoletinScraperStrategy;
 use App\Services\Scrapers\Comunidades\XuntaGaliciaScraperStrategy;
 use App\Services\Scrapers\Estatal\BoeScraperStrategy;
+use App\Services\Scrapers\Europeo\EurLexScraperStrategy;
 use App\Services\ScrapingService;
 use Exception;
 
@@ -42,6 +43,8 @@ class ScraperStrategyFactory
         {
 	        case ScrapingService::BOLETIN_OFICIAL_DEL_ESTADO:
 	        	return new BoeScraperStrategy();
+            case ScrapingService::DIARIO_OFICIAL_DE_LA_UNION_EUROPEA:
+                return new EurLexScraperStrategy();
             case ScrapingService::BOLETIN_OFICIAL_DE_LA_JUNTA_DE_ANDALUCIA:
                 return new JuntaDeAndaluciaBoletinScraperStrategy();
             case ScrapingService::BOLETIN_OFICIAL_DE_ARAGON:
