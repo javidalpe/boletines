@@ -36,7 +36,6 @@ class AccountController extends Controller
             'invoices' => $invoices
         ];
 
-        //dd($invoices);
         return view('dashboard.account.show', $data);
     }
 
@@ -109,6 +108,10 @@ class AccountController extends Controller
             return back();
         }
         $user = User::find($id);
+
+        if ($user->subscribed('main')) {
+            $user->subscription('main')->cancelNow();
+        }
 
         $user->notify(new AccountDeletedNotification());
 
