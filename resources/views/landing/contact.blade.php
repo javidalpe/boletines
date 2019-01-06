@@ -10,7 +10,7 @@
 		<div class="row">
 			<div class="col-md-8 col-md-offset-2">
 				<h2>Contacta</h2>
-				<p>Si tienes algún problema, alguna sugerencia o alguna duda no dudes en
+				<p>Si tienes algún problema, alguna sugerencia o alguna pregunta no dudes en
 					contactarnos. Estamos encantados de recibir comentarios para mejorar la
 					plataforma.</p>
 				<p>Nuestro horario de atención es de 09:00 a 21:00, de lunes a sábado.</p>
