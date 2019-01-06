@@ -22,10 +22,13 @@ use Mockery\Exception;
 
 class ScrapingService
 {
-	const PRIORITY_NATIONAL = 0; //Estatal
+	const PRIORITY_NATIONAL = 0; //Estatal y Europeo
 	const PRIORITY_ADMINISTRATIVE_AREA_1 = 1; //Comunidad
 	const PRIORITY_ADMINISTRATIVE_AREA_2 = 2; //Provincia
 	const PRIORITY_CITY = 3; //Alcaldia
+
+    //Europeo
+    const DIARIO_OFICIAL_DE_LA_UNION_EUROPEA = 20;
 
 	//Estatal
 	const BOLETIN_OFICIAL_DEL_ESTADO = 0;

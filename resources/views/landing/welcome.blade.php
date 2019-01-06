@@ -17,11 +17,6 @@
                         Boletines Oficiales de las Comunidades Autónomas para encontrar si han
                         publicado algo relacionado con tu búsqueda.
                     </p>
-                <p>
-	                    Queremos agradecerte que nos hagas llegar tus comentarios, experiencia
-                        de uso y sugerencias en la sección interna <a href="{{ route('rewards')  }}#mejorar">Ayudanos a
-                            mejorar</a>.
-	                </p>
 	            </div>
 	        @endunless
 
