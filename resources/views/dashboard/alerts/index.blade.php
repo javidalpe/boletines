@@ -45,7 +45,7 @@
                     @slot('title')
                         No tienes alertas
                     @endslot
-                    Las alertas te permiten recibir avisos cuando una búsqueda concreta ofrece un resultado nuevo.
+                    Por cada alerta que crees recibirás un email si el término de búsqueda aparece en un nuevo boletín.
 
                     @slot('actions')
                             <a href="{{route('alerts.create')}}" class="btn btn-default">Crear alerta</a>
