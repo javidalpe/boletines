@@ -15,7 +15,7 @@
             <p class="lead">Ayuda</p>
             <hr>
             <ul class="list-unstyled">
-                <li><a href="{{route('how')}}">¿Cómo funciona?</a></li>
+                <li><a href="{{route('how')}}">Acerca de {{ config('app.name') }}</a></li>
                 <li><a href="{{route('cookies')}}">Política de Cookies</a></li>
                 <li><a href="{{route('privacy')}}">Privacidad</a></li>
             </ul>

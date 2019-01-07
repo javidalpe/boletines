@@ -82,7 +82,7 @@
                     <div class="form-horizontal">
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <p><strong>¿Tienes una cuenta de Google?</strong></p>
+                                <p>¿Tienes una cuenta de Google?</p>
                                 @include('auth.google', ['label' => 'Registrate con Google'])
                             </div>
                         </div>
