@@ -146,6 +146,8 @@ class ScrapingService
 		foreach ($publications as $publication) {
 			$scrapper = $this->scraperStrategyFactory->getScrapperStrategy($publication);
 
+			if (!$scrapper) continue;
+
 			if ($this->shouldRunScraper($scrapper, $publication)) {
 				$this->run($publication, $scrapper);
 			}
@@ -346,7 +348,7 @@ class ScrapingService
 	 */
 	private function shouldRunScraper(IBoletinScraperStrategy $scrapper, Publication $publication): bool
 	{
-		return $scrapper && $this->scheduleService->isTodayAPublicationDay($publication->priority);
+		return $this->scheduleService->isTodayAPublicationDay($publication->priority);
 	}
 
 	/**

@@ -20,6 +20,10 @@ class PublicationsScheduleService
 			return $now->isWeekday();
 		}
 
+        if ($administrativeLevel == ScrapingService::PRIORITY_PROVINCE) {
+            return $now->isWeekday();
+        }
+
 		if ($administrativeLevel == ScrapingService::PRIORITY_NATIONAL) {
 			return $now->isWeekday() || $now->dayOfWeek == Carbon::SATURDAY;
 		}
