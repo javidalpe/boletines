@@ -61,6 +61,12 @@ class ScrapingService
 	const PDF_EXTENSION_MAY = 'PDF';
 	const URL_HASH_FUNCTION = 'md5';
 
+    const PAGINATION_REGEX = '/\sp[aá]g[º\-\.]?\s*\d+/miu';
+    const NUMERATION_REGEX = '/\sn([uú]m)?[º\-\.]?\s*\d+/miu';
+    const ALPHA_NUMERATION_REGEX = '/\s[a-zA-Z]\)/miu';
+    const SECTION_REGEX = '/\s(\d+\.)+\d*\s?\-?/miu';
+    const POSITION_REGEX = '/(PRIMERO|SEGUNDO|TERCERO|CUARTO|QUINTO|SEXTO|SEPTIMO)\.?\s?\–?/miu';
+
 	private $splitService;
 	private $scheduleService;
 	private $scraperStrategyFactory;
@@ -75,10 +81,10 @@ class ScrapingService
 	 * @param StorageStrategyFactory      $storageStrategyFactory
 	 * @param ScraperStrategyFactory      $scraperStrategyFactory
 	 */
-	public function __construct(FileSplitService $splitService,
-	                            PublicationsScheduleService $scheduleService,
-	                            StorageStrategyFactory $storageStrategyFactory,
-	                            ScraperStrategyFactory $scraperStrategyFactory)
+    public function __construct(FileSplitService $splitService,
+                                PublicationsScheduleService $scheduleService,
+                                StorageStrategyFactory $storageStrategyFactory,
+                                ScraperStrategyFactory $scraperStrategyFactory)
 	{
 		$this->splitService = $splitService;
 		$this->scheduleService = $scheduleService;
@@ -212,7 +218,9 @@ class ScrapingService
 
 		$storeUrl = $storeStrategy->saveDocument($content, $originUrl);
 
-		$this->storeText($storeUrl, $plainText, $publication, $publishedAt);
+		$reducedText = $this->removeUselessCharacters($plainText);
+
+		$this->storeText($storeUrl, $reducedText, $publication, $publishedAt);
 	}
 
 	/**
@@ -363,6 +371,22 @@ class ScrapingService
 	{
 		return hash(self::URL_HASH_FUNCTION, $url);
 	}
+
+    /**
+     * @param $plainText
+     *
+     * @return string
+     */
+    private function removeUselessCharacters($plainText)
+    {
+        $reduced = preg_replace(self::PAGINATION_REGEX, '', $plainText);
+        $reduced = preg_replace(self::NUMERATION_REGEX, '', $reduced);
+        $reduced = preg_replace(self::ALPHA_NUMERATION_REGEX, '', $reduced);
+        $reduced = preg_replace(self::SECTION_REGEX, '', $reduced);
+        $reduced = preg_replace(self::POSITION_REGEX, '', $reduced);
+
+        return $reduced;
+    }
 
 
 }
