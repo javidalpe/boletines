@@ -49,18 +49,25 @@ class FileDownloaderScraper
      * @param string $regex
      * @param int $maxNumberOfLinks
      * @param bool $inverseSort
+     * @param $modifier
      *
      * @return $this
      */
-    public function forEachLink(string $regex, int $maxNumberOfLinks = 0, $inverseSort = true)
+    public function forEachLink(string $regex, int $maxNumberOfLinks = 0, $inverseSort = true,
+                                $modifier = null)
     {
-        $this->updateLinks($regex, $maxNumberOfLinks, $inverseSort);
+        $this->updateLinks($regex, $maxNumberOfLinks, $inverseSort, $modifier);
         return $this;
     }
 
-    public function getLinks(string $regex)
+    /**
+     * @param string $regex
+     * @param $modifier
+     * @return array
+     */
+    public function getLinks(string $regex, $modifier)
     {
-        $this->updateLinks($regex, $maxNumberOfLinks = 0, $inverseSort = true);
+        $this->updateLinks($regex, $maxNumberOfLinks = 0, $inverseSort = true, $modifier);
         return $this->links;
     }
 
@@ -264,15 +271,25 @@ class FileDownloaderScraper
 
     /**
      * @param string $regex
-     * @param $content
+     * @param string $content
      * @param int $maxNumberOfLinks
+     * @param bool $inverseSort
+     * @param $modifier
      * @return array
      */
-    private function getLinksFromPageContent(string $regex, $content, $maxNumberOfLinks, $inverseSort): array
+    private function getLinksFromPageContent(string $regex, string $content, int
+    $maxNumberOfLinks,
+                                             bool $inverseSort, $modifier): array
     {
         $rawHtmlLinks = $this->match($content, $regex);
         $uniqueRawHtmlLinks = array_unique($rawHtmlLinks);
-        $fixedLinks = $this->fixLinks($uniqueRawHtmlLinks);
+        if ($modifier) {
+            $modifiedLinks = $this->modify($uniqueRawHtmlLinks, $modifier);
+            $fixedLinks = $this->fixLinks($modifiedLinks);
+        } else {
+            $fixedLinks = $this->fixLinks($uniqueRawHtmlLinks);
+        }
+
         if ($inverseSort) {
 	        rsort($fixedLinks, SORT_STRING);
         }
@@ -288,15 +305,35 @@ class FileDownloaderScraper
      * @param string $regex
      * @param int $maxNumberOfLinks
      * @param bool $inverseSort
+     * @param $modifier
      */
-    protected function updateLinks(string $regex, int $maxNumberOfLinks, $inverseSort)
+    protected function updateLinks(string $regex, int $maxNumberOfLinks, bool $inverseSort,
+                                   $modifier)
     {
         Log::debug($regex);
         $this->links = [];
         foreach ($this->contents as $content) {
-            $sliceArray = $this->getLinksFromPageContent($regex, $content, $maxNumberOfLinks, $inverseSort);
+            $sliceArray = $this->getLinksFromPageContent($regex, $content, $maxNumberOfLinks,
+                $inverseSort, $modifier);
             $this->links = array_merge($this->links, $sliceArray);
         }
+    }
+
+    /**
+     * @param array $uniqueRawHtmlLinks
+     * @param $modifier
+     * @return array
+     */
+    private function modify(array $uniqueRawHtmlLinks, $modifier)
+    {
+        $newLinks = [];
+        foreach ($uniqueRawHtmlLinks as $link) {
+            $modified = $modifier($link);
+            Log::debug("Modified {$link} to {$modified}");
+            $newLinks[] = $modified;
+        }
+
+        return $newLinks;
     }
 
 

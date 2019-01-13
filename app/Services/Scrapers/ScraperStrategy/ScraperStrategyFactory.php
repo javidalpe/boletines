@@ -25,6 +25,7 @@ use App\Services\Scrapers\Comunidades\PrincipadoDeAsturiasScraperStrategy;
 use App\Services\Scrapers\Comunidades\RegionDeMurciaBoletinScraperStrategy;
 use App\Services\Scrapers\Comunidades\XuntaGaliciaScraperStrategy;
 use App\Services\Scrapers\Estatal\BoeScraperStrategy;
+use App\Services\Scrapers\Europeo\ACorunaScraperStrategy;
 use App\Services\Scrapers\Europeo\EurLexScraperStrategy;
 use App\Services\ScrapingService;
 use Exception;
@@ -83,6 +84,8 @@ class ScraperStrategyFactory
                 return new CeutaScraperStrategy();
             case ScrapingService::BOLETIN_OFICIAL_DE_LA_CIUDAD_AUTONOMA_DE_MELILLA:
                 return new MelillaScraperStrategy();
+            case ScrapingService::BOLETIN_A_CORUNA:
+                return new ACorunaScraperStrategy();
 	        default:
 	        	return null;
         }

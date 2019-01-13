@@ -253,6 +253,8 @@ class ScrapingService
 
 		$response = $this->getHttpGetResponse($originUrl);
 
+		if (!$response) return;
+
 		$content = (string)$response->getBody();
 
 		if (!$content || strlen($content) <= 10) return;
