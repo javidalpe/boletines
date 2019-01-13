@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mothers\SearchConfigMother;
 use App\Publication;
+use App\Services\ScrapingService;
 use Illuminate\Http\Request;
 
 class LandingController extends Controller
@@ -31,7 +32,11 @@ class LandingController extends Controller
     public function status()
     {
         $data = [
-            'publications' => Publication::all()
+            'publications1' => Publication::whereIn('priority',
+                [ScrapingService::PRIORITY_ADMINISTRATIVE_AREA_1,
+                    ScrapingService::PRIORITY_ADMINISTRATIVE_AREA_1])->get(),
+            'publications2' => Publication::whereIn('priority',
+                [ScrapingService::PRIORITY_PROVINCE])->get(),
         ];
 
         return view('landing.status', $data);

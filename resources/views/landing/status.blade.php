@@ -8,50 +8,31 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-12">
 
                 <h3>Estado de Actualización de la Información</h3>
                 <p>Controlamos contínuamente el estado de nuestros sistemas. Si hay alguna interrupción en nuestro
                     servicio podrás verlo aquí.</p>
                 <p>¿Tienes problemas? No dudes en <a href="{{ route('contact') }}">contactarnos</a>.</p>
-
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 ">
                 @component('components.panel')
                     @slot('title')
-                        Rastreo de publicaciones oficiales
+                        Publicaciones nacionales
                     @endslot
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>Estado</th>
-                                <th>Publicación</th>
-                                <th>Última comprobación</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($publications as $publication)
-                            <tr>
-                                <td>
-                                    @if (!$publication->last_run_result)
-                                        <span class="label label-default">Never run</span>
-                                    @elseif ($publication->last_run_result == \App\Services\ScrapingService::RUN_RESULT_OK)
-                                        <span class="label label-success"><i class="glyphicon glyphicon-ok"></i></span>
-                                    @else
-                                        <span class="label label-danger">error</span>
-                                    @endif
-                                </td>
-                                <td>
-                                    {{$publication->name}}
-                                </td>
-                                <td>
-                                    @if ($publication->last_run_at)
-                                        {{ $publication->last_run_at->diffForHumans() }}
-                                    @endif
-                                </td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
+                    @include('landing.components.publications', ['publications' => $publications1])
                 @endcomponent
+            </div>
+            <div class="col-md-6 ">
+                @component('components.panel')
+                    @slot('title')
+                        Boletines provinciales
+                    @endslot
+                    @include('landing.components.publications', ['publications' => $publications2])
+                @endcomponent
+
             </div>
         </div>
     </div>

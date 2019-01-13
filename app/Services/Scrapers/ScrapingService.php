@@ -24,17 +24,16 @@ class ScrapingService
 {
 	const PRIORITY_NATIONAL = 0; //Estatal y Europeo
 	const PRIORITY_ADMINISTRATIVE_AREA_1 = 1; //Comunidad
-	const PRIORITY_ADMINISTRATIVE_AREA_2 = 2; //Provincia
+	const PRIORITY_PROVINCE = 2; //Provincia
 	const PRIORITY_CITY = 3; //Alcaldia
 
-    //Europeo
-    const DIARIO_OFICIAL_DE_LA_UNION_EUROPEA = 20;
+    //Estatal
+    const BOLETIN_OFICIAL_DEL_ESTADO = 0;
 
-	//Estatal
-	const BOLETIN_OFICIAL_DEL_ESTADO = 0;
+    //Europeo
+    const DIARIO_OFICIAL_DE_LA_UNION_EUROPEA = 1;
 
 	//Comunidad
-	const BOLETIN_OFICIAL_DE_LA_JUNTA_DE_ANDALUCIA = 1;
 	const BOLETIN_OFICIAL_DE_ARAGON = 2;
 	const BOLETIN_OFICIAL_DEL_PRINCIPADO_DE_ASTURIAS = 3;
 	const BOLETIN_OFICIAL_DE_ISLAS_BALEARES = 4;
@@ -53,6 +52,52 @@ class ScrapingService
 	const DIARI_OFICIAL_DE_LA_COMUNITAT_VALENCIANA = 17;
 	const BOLETIN_OFICIAL_DE_LA_CIUDAD_AUTONOMA_DE_CEUTA = 18;
 	const BOLETIN_OFICIAL_DE_LA_CIUDAD_AUTONOMA_DE_MELILLA = 19;
+    const BOLETIN_OFICIAL_DE_LA_JUNTA_DE_ANDALUCIA = 20;
+
+    //Provincias
+    const BOLETIN_A_CORUNA = 21;
+    const BOLETIN_TERRITORIO_HISTORICO_DE_ALAVA = 22;
+    const BOLETIN_ALBACETE = 23;
+    const BOLETIN_ALICANTE = 24;
+    const BOLETIN_ALMERIA = 25;
+    const BOLETIN_AVILA = 26;
+    const BOLETIN_BADAJOZ = 27;
+    const BOLETIN_BARCELONA = 28;
+    const BOLETIN_BURGOS = 29;
+    const BOLETIN_CACERES = 30;
+    const BOLETIN_CADIZ = 31;
+    const BOLETIN_CASTELLON = 32;
+    const BOLETIN_CIUDAD_REAL = 33;
+    const BOLETIN_CORDOBA = 34;
+    const BOLETIN_CUENCA = 35;
+    const BOLETIN_GIRONA = 36;
+    const BOLETIN_GRANADA = 37;
+    const BOLETIN_GUADALAJARA = 38;
+    const BOLETIN_GUIPUZKOA = 39;
+    const BOLETIN_HUELVA = 40;
+    const BOLETIN_HUESCA = 41;
+    const BOLETIN_JAEN = 42;
+    const BOLETIN_LAS_PALMAS = 43;
+    const BOLETIN_LEON = 44;
+    const BOLETIN_LLEIDA = 45;
+    const BOLETIN_LUGO = 46;
+    const BOLETIN_MALAGA = 47;
+    const BOLETIN_OURENSE = 48;
+    const BOLETIN_PALENCIA = 49;
+    const BOLETIN_PONTEVEDRA = 50;
+    const BOLETIN_SALAMANCA = 51;
+    const BOLETIN_SANTA_CRUZ_DE_TENERIFE = 52;
+    const BOLETIN_SEGOVIA = 53;
+    const BOLETIN_SEVILLA = 54;
+    const BOLETIN_SORIA = 55;
+    const BOLETIN_TARRAGONA = 56;
+    const BOLETIN_TERUEL = 57;
+    const BOLETIN_TOLEDO = 58;
+    const BOLETIN_VALENCIA = 59;
+    const BOLETIN_VALLADOLID = 60;
+    const BOLETIN_VIZCAYA = 61;
+    const BOLETIN_ZAMORA = 62;
+    const BOLETIN_ZARAGOZA = 63;
 
 	const RUN_RESULT_OK = 'ok';
 	const RUN_RESULT_ERROR = 'error';
