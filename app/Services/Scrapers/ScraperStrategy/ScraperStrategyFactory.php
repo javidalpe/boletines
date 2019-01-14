@@ -29,6 +29,7 @@ use App\Services\Scrapers\Europeo\ACorunaScraperStrategy;
 use App\Services\Scrapers\Europeo\AlavaScraperStrategy;
 use App\Services\Scrapers\Europeo\AlbaceteScraperStrategy;
 use App\Services\Scrapers\Europeo\AlicanteScraperStrategy;
+use App\Services\Scrapers\Europeo\AlmeriaScraperStrategy;
 use App\Services\Scrapers\Europeo\EurLexScraperStrategy;
 use App\Services\ScrapingService;
 use Exception;
@@ -95,6 +96,8 @@ class ScraperStrategyFactory
                 return new AlbaceteScraperStrategy();
             case ScrapingService::BOLETIN_ALICANTE:
                 return new AlicanteScraperStrategy();
+            case ScrapingService::BOLETIN_ALMERIA:
+                return new AlmeriaScraperStrategy();
 	        default:
 	        	return null;
         }
