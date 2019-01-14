@@ -65,7 +65,7 @@ class FileDownloaderScraper
      * @param $modifier
      * @return array
      */
-    public function getLinks(string $regex, $modifier)
+    public function getLinks(string $regex, $modifier = null)
     {
         $this->updateLinks($regex, $maxNumberOfLinks = 0, $inverseSort = true, $modifier);
         return $this->links;
