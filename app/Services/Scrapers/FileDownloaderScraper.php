@@ -5,6 +5,7 @@ namespace App\Services\Scrapers;
 
 
 use App\Services\Scrapers\Http\EffectiveUrlMiddleware;
+use App\Services\Scrapers\Http\Request;
 use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ServerException;
@@ -13,7 +14,10 @@ use Log;
 
 class FileDownloaderScraper
 {
-    private $links;
+    /**
+     * @var Request[]
+     */
+    private $requests;
     private $contents;
     private $lastDomain;
     private $lastUrl;
@@ -24,21 +28,25 @@ class FileDownloaderScraper
 
     const PDF_FILE_EXTENSION = '.pdf';
 
-    public static function create(string $initialUrl)
+    /**
+     * @param string $initialUrl
+     * @param string $method
+     * @param array $options
+     * @return FileDownloaderScraper
+     */
+    public static function create(string $initialUrl, string $method = "GET", $options = [])
     {
-        return new FileDownloaderScraper($initialUrl);
+        return new FileDownloaderScraper(new Request($initialUrl, $method, $options));
     }
 
     /**
      * FileDownloaderScraper constructor.
-     *
-     * @param string $initialUrl
+     * @param Request $request
      */
-    private function __construct(string $initialUrl)
+    private function __construct(Request $request)
     {
-        $this->links = [$initialUrl];
+        $this->requests = [$request];
         $this->contents = [];
-
 
         $this->navigate();
     }
@@ -68,7 +76,7 @@ class FileDownloaderScraper
     public function getLinks(string $regex, $modifier = null)
     {
         $this->updateLinks($regex, $maxNumberOfLinks = 0, $inverseSort = true, $modifier);
-        return $this->links;
+        return $this->requests;
     }
 
     /**
@@ -80,28 +88,12 @@ class FileDownloaderScraper
     {
         $this->contents = [];
 
-        foreach ($this->links as $link) {
-            Log::debug("Obteniendo {$link}");
-            $content = $this->httpGet($link);
+        foreach ($this->requests as $request) {
+            Log::debug("Obteniendo {$request->url}");
+            $content = $this->httpContentFromRequest($request);
             $this->contents[] = html_entity_decode($content);
         }
-        $this->links = [];
-        return $this;
-    }
-
-    /**
-     * Download all saved links
-     *
-     * @param      $directoryName
-     *
-     * @return $this
-     */
-    public function download($directoryName)
-    {
-        foreach ($this->links as $link) {
-            $this->downloadLink($directoryName, $link);
-        }
-
+        $this->requests = [];
         return $this;
     }
 
@@ -178,72 +170,10 @@ class FileDownloaderScraper
     }
 
     /**
-     * @param $link
+     * @param Request $request
      * @return string
      */
-    private function getDownloadFileName($link)
-    {
-        return hash(self::URL_HASH_FUNCTION, $link) . self::PDF_FILE_EXTENSION;
-    }
-
-    /**
-     * @param $directoryName
-     * @param $filePath
-     * @param $content
-     */
-    private function saveFile($directoryName, $filePath, $content)
-    {
-        Log::debug("Saving to " . $filePath);
-        if (!is_dir($directoryName)) {
-            mkdir($directoryName, null, true);
-        }
-        file_put_contents($filePath, $content);
-    }
-
-    /**
-     * @param $link
-     *
-     * @return bool|string
-     */
-    private function downloadFile($link)
-    {
-        Log::debug("Downloading {$link}");
-        $count = 3;
-        do {
-            try {
-                $content = file_get_contents($link);
-                return $content;
-            } catch (Exception $e) {
-                $count--;
-            }
-        } while ($count);
-
-        return false;
-    }
-
-    /**
-     * @param $directoryName
-     * @param $link
-     */
-    private function downloadLink($directoryName, $link)
-    {
-        Log::debug("Handling {$link}");
-
-        $downloadFileName = $this->getDownloadFileName($link);
-        $filePath = $directoryName . $downloadFileName;
-
-        if (file_exists($filePath)) return;
-
-        $content = $this->downloadFile($link);
-        $this->saveFile($directoryName, $filePath, $content);
-    }
-
-    /**
-     * @param $url
-     *
-     * @return bool|string
-     */
-    private function httpGet($url)
+    private function httpContentFromRequest(Request $request)
     {
         $try = 3;
 
@@ -254,7 +184,7 @@ class FileDownloaderScraper
                 $stack->push(EffectiveUrlMiddleware::middleware());
                 $client = new Client(['handler' => $stack]);
 
-                $response = $client->request('GET', $url);
+                $response = $client->request($request->method, $request->url, $request->options);
                 $body = $response->getBody();
 
                 $effectiveUrl = $response->getHeaderLine('X-GUZZLE-EFFECTIVE-URL');
@@ -295,10 +225,14 @@ class FileDownloaderScraper
         }
 
         if ($maxNumberOfLinks) {
-            return array_slice($fixedLinks, 0, $maxNumberOfLinks);
+            $links = array_slice($fixedLinks, 0, $maxNumberOfLinks);
         } else {
-            return $fixedLinks;
+            $links = $fixedLinks;
         }
+
+        return array_map(function ($link) {
+            return new Request($link, 'GET', []);
+        }, $links);
     }
 
     /**
@@ -311,11 +245,11 @@ class FileDownloaderScraper
                                    $modifier)
     {
         Log::debug($regex);
-        $this->links = [];
+        $this->requests = [];
         foreach ($this->contents as $content) {
             $sliceArray = $this->getLinksFromPageContent($regex, $content, $maxNumberOfLinks,
                 $inverseSort, $modifier);
-            $this->links = array_merge($this->links, $sliceArray);
+            $this->requests = array_merge($this->requests, $sliceArray);
         }
     }
 

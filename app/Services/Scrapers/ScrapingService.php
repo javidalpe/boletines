@@ -187,7 +187,11 @@ class ScrapingService
 		$newCount = $oldCount;
 
 		try {
-			$urls = $scrapper->downloadFilesFromInternet();
+			$requests = $scrapper->downloadFilesFromInternet();
+
+			$urls = array_map(function ($request) {
+                return $request->url;
+            }, $requests);
 
 			Log::debug("Handling " . count($urls) . " urls.");
 

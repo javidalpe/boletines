@@ -27,6 +27,7 @@ use App\Services\Scrapers\Comunidades\XuntaGaliciaScraperStrategy;
 use App\Services\Scrapers\Estatal\BoeScraperStrategy;
 use App\Services\Scrapers\Europeo\ACorunaScraperStrategy;
 use App\Services\Scrapers\Europeo\AlavaScraperStrategy;
+use App\Services\Scrapers\Europeo\AlbaceteScraperStrategy;
 use App\Services\Scrapers\Europeo\EurLexScraperStrategy;
 use App\Services\ScrapingService;
 use Exception;
@@ -89,6 +90,8 @@ class ScraperStrategyFactory
                 return new ACorunaScraperStrategy();
             case ScrapingService::BOLETIN_TERRITORIO_HISTORICO_DE_ALAVA:
                 return new AlavaScraperStrategy();
+            case ScrapingService::BOLETIN_ALBACETE:
+                return new AlbaceteScraperStrategy();
 	        default:
 	        	return null;
         }
