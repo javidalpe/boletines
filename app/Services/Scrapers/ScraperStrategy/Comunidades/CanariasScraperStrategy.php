@@ -4,7 +4,7 @@
 namespace App\Services\Scrapers\Comunidades;
 
 
-use App\Services\Scrapers\FileDownloaderScraper;
+use App\Services\Scrapers\HTMLScraper;
 use App\Services\Scrapers\IBoletinScraperStrategy;
 use App\Services\ScrapingService;
 use Carbon\Carbon;
@@ -18,7 +18,7 @@ class CanariasScraperStrategy implements IBoletinScraperStrategy
 
     public function downloadFilesFromInternet()
 	{
-		return FileDownloaderScraper::create("http://www.gobiernodecanarias.org/boc/")
+		return HTMLScraper::create("http://www.gobiernodecanarias.org/boc/")
 			->forEachLink ("/\/boc\/\d+\/\d+\//", self::MAX_NUMBER_OF_PUBLICATIONS)
 			->navigate()
 			->getLinks ("/http:\/\/sede\.gobcan\.es\/boc\/boc-a-\d+-\w+-\w+\.pdf/");

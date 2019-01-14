@@ -3,7 +3,7 @@
 
 namespace App\Services\Scrapers\Comunidades;
 
-use App\Services\Scrapers\FileDownloaderScraper;
+use App\Services\Scrapers\HTMLScraper;
 use App\Services\Scrapers\IBoletinScraperStrategy;
 use Illuminate\Support\Facades\Storage;
 
@@ -14,7 +14,7 @@ class RegionDeMurciaBoletinScraperStrategy implements IBoletinScraperStrategy
 
     public function downloadFilesFromInternet()
     {
-        return FileDownloaderScraper::create("https://www.borm.es/borm/vista/principal/inicio.jsf")
+        return HTMLScraper::create("https://www.borm.es/borm/vista/principal/inicio.jsf")
             ->forEachLink("/\/borm\/vista\/busqueda\/ver_sumario\.jsf\?fecha=\d+&origen=calendario/", self::MAX_NUMBER_OF_PUBLICATIONS)
             ->navigate()
             ->getLinks("/\/borm\/documento\?obj=bol&id=\d+/");

@@ -3,7 +3,7 @@
 
 namespace App\Services\Scrapers\Comunidades;
 
-use App\Services\Scrapers\FileDownloaderScraper;
+use App\Services\Scrapers\HTMLScraper;
 use App\Services\Scrapers\IBoletinScraperStrategy;
 use Illuminate\Support\Facades\Storage;
 
@@ -16,7 +16,7 @@ class JuntaDeAndaluciaBoletinScraperStrategy implements IBoletinScraperStrategy
 
     public function downloadFilesFromInternet()
     {
-        return FileDownloaderScraper::create("http://www.juntadeandalucia.es/boja")
+        return HTMLScraper::create("http://www.juntadeandalucia.es/boja")
             ->forEachLink ("/http:\/\/www\.juntadeandalucia\.es\/boja\/\d+\/\d+\/index\.html/", self::MAX_NUMBER_OF_PUBLICATIONS)
             ->navigate()
             ->getLinks("/http:\/\/www\.juntadeandalucia\.es\/boja\/\d+\/\d+\/\w+-\w+-\w+.pdf/");

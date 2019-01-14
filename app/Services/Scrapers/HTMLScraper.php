@@ -12,7 +12,7 @@ use GuzzleHttp\Exception\ServerException;
 use GuzzleHttp\HandlerStack;
 use Log;
 
-class FileDownloaderScraper
+class HTMLScraper
 {
     /**
      * @var Request[]
@@ -32,11 +32,11 @@ class FileDownloaderScraper
      * @param string $initialUrl
      * @param string $method
      * @param array $options
-     * @return FileDownloaderScraper
+     * @return HTMLScraper
      */
     public static function create(string $initialUrl, string $method = "GET", $options = [])
     {
-        return new FileDownloaderScraper(new Request($initialUrl, $method, $options));
+        return new HTMLScraper(new Request($initialUrl, $method, $options));
     }
 
     /**

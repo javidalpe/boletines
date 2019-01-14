@@ -4,7 +4,7 @@
 namespace App\Services\Scrapers\Comunidades;
 
 
-use App\Services\Scrapers\FileDownloaderScraper;
+use App\Services\Scrapers\HTMLScraper;
 use App\Services\Scrapers\HttpService;
 use App\Services\Scrapers\IBoletinScraperStrategy;
 use App\Services\ScrapingService;
@@ -20,7 +20,7 @@ class AragonScraperStrategy implements IBoletinScraperStrategy
 		$now = Carbon::now();
 		$initialUrl = sprintf("http://www.boa.aragon.es/cgi-bin/EBOA/BRSCGI?CMD=VERLST&SEC=ULTBOL&DOCS=1-1&BASE=BCOM&SEPARADOR&TBOL-C=BOLE&@PUBL-E=%s", $now->format("Ymd"));
 
-		return FileDownloaderScraper::create($initialUrl)
+		return HTMLScraper::create($initialUrl)
 			->getLinks("/BRSCGI\?CMD=VEROBJ&MLKOB=\w+/");
 	}
 

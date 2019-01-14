@@ -4,7 +4,7 @@
 namespace App\Services\Scrapers\Comunidades;
 
 
-use App\Services\Scrapers\FileDownloaderScraper;
+use App\Services\Scrapers\HTMLScraper;
 use App\Services\Scrapers\IBoletinScraperStrategy;
 use Carbon\Carbon;
 use Storage;
@@ -16,7 +16,7 @@ class CeutaScraperStrategy implements IBoletinScraperStrategy
 
 	public function downloadFilesFromInternet()
 	{
-		return FileDownloaderScraper::create("http://www.ceuta.es/ceuta/documentos/")
+		return HTMLScraper::create("http://www.ceuta.es/ceuta/documentos/")
 			->forEachLink ("/\/ceuta\/component\/jdownloads\/viewdownload\/\d+\/\d+/", self::MAX_NUMBER_OF_PUBLICATIONS)
 			->navigate()
 			->getLinks("/\/ceuta\/component\/jdownloads\/finish\/\d+-\w+\/[^\"]+/");
