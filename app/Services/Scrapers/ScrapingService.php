@@ -188,7 +188,6 @@ class ScrapingService
 
 		try {
 			$requests = $scrapper->downloadFilesFromInternet();
-
 			$urls = array_map(function ($request) {
                 return $request->url;
             }, $requests);
@@ -207,6 +206,9 @@ class ScrapingService
 			Log::debug("Error updating {$regionName}: error al obtener la url " . $e->getRequest()->getUri());
 			$run->result = self::RUN_RESULT_ERROR;
 		} catch (\ErrorException $e) {
+		    if (config('app.debug')) {
+		        throw $e;
+            }
 			Log::debug("Error updating {$regionName}: " . $e->getTraceAsString());
 			$run->result = self::RUN_RESULT_ERROR;
 		} catch (BadRequestException $e) {
@@ -214,9 +216,6 @@ class ScrapingService
 			$run->result = self::RUN_RESULT_ERROR;
 		} catch (\PDOException $e) {
 			Log::debug("Error updating {$regionName}: error al guardar el documento " . $e->getTraceAsString());
-			$run->result = self::RUN_RESULT_ERROR;
-		} catch (Exception $e) {
-			Log::debug("Error updating {$regionName}: " . $e->getTraceAsString());
 			$run->result = self::RUN_RESULT_ERROR;
 		}
 

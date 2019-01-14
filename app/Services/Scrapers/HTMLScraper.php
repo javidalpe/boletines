@@ -270,5 +270,23 @@ class HTMLScraper
         return $newLinks;
     }
 
+    /**
+     * @param \Closure $func
+     * @return array
+     */
+    public function getLinksFromJson(\Closure $func)
+    {
+        $newLinks = [];
+        foreach ($this->contents as $content) {
+            $json = json_decode($content, true);
+            $urls = $func($json);
+            $requests = array_map(function ($url) {
+                return new Request($url, 'GET', []);
+            }, $urls);
+            $newLinks = array_merge($newLinks, $requests);
+        }
+
+        return $newLinks;
+    }
 
 }

@@ -10,17 +10,11 @@ class AlicanteScraperStrategy implements IBoletinScraperStrategy
 
     public function downloadFilesFromInternet()
     {
-        $firstLinks =  HTMLScraper::create("http://sede.diputacionalicante.es/consultas-bop/")
-            ->forEachLink("/\.\/\.\.\/legal-content\/ES\/TXT\/\?uri=OJ:L:2019:\d+:TOC/")
-            ->navigate()
-            ->getLinks('/\.\/\.\.\/\.\.\/\.\.\/legal-content\/ES\/TXT\/PDF\/\?uri=OJ:L:2019:\d+:FULL&from=ES/');
-
-
-        $secondLinks =  HTMLScraper::create("https://eur-lex.europa.eu/oj/direct-access.html?locale=es")
-            ->forEachLink("/\.\/\.\.\/legal-content\/ES\/TXT\/\?uri=OJ:C:2019:\d+:TOC/")
-            ->navigate()
-            ->getLinks('/\.\/\.\.\/\.\.\/\.\.\/legal-content\/ES\/TXT\/PDF\/\?uri=OJ:C:2019:\d+:FULL&from=ES/');
-
-        return array_merge($firstLinks, $secondLinks);
+        return HTMLScraper::create("http://sede.diputacionalicante.es/wp-content/themes/Desarrollo-Diputacion/wseConsultaAjax.php?nemo=BOP_CON&param=%3Craiz%3E%3Centrada%3E%3Cregistro%3E%3CfechaPub%3E%3C%2FfechaPub%3E%3Ctipoorganismo%3E%3C%2Ftipoorganismo%3E%3C%2Fregistro%3E%3C%2Fentrada%3E%3C%2Fraiz%3E&usuario=-")
+            ->getLinksFromJson(function($json) {
+                return array_map(function ($j) {
+                    return $j['ubicacion'][0];
+                }, $json['boletin']['bop'][0]['registro']);
+            });
     }
 }
