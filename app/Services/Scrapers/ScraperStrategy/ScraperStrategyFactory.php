@@ -34,6 +34,7 @@ use App\Services\Scrapers\Europeo\AvilaScraperStrategy;
 use App\Services\Scrapers\Europeo\BadajozScraperStrategy;
 use App\Services\Scrapers\Europeo\BarcelonaScraperStrategy;
 use App\Services\Scrapers\Europeo\BurgosScraperStrategy;
+use App\Services\Scrapers\Europeo\CaceresScraperStrategy;
 use App\Services\Scrapers\Europeo\EurLexScraperStrategy;
 use App\Services\ScrapingService;
 use Exception;
@@ -110,6 +111,8 @@ class ScraperStrategyFactory
 	        	return new BarcelonaScraperStrategy();
 	        case ScrapingService::BOLETIN_BURGOS:
 	        	return new BurgosScraperStrategy();
+	        case ScrapingService::BOLETIN_CACERES:
+	        	return new CaceresScraperStrategy();
 	        default:
 	        	return null;
         }

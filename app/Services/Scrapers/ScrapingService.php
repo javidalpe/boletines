@@ -8,12 +8,14 @@ use App\Chunk;
 use App\Publication;
 use App\Run;
 use App\Services\Scrapers\Exceptions\BadRequestException;
+use App\Services\Scrapers\Http\HttpService;
 use App\Services\Scrapers\IBoletinScraperStrategy;
 use App\Services\Scrapers\ParseContentStrategy\ParseContentStrategyFactory;
 use App\Services\Scrapers\ScraperStrategyFactory;
 use App\Services\Scrapers\StorageStrategy\StorageStrategyFactory;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Exception\ServerException;
 use Illuminate\Support\Carbon;
@@ -221,6 +223,9 @@ class ScrapingService
 		} catch (\PDOException $e) {
 			Log::debug("Error updating {$regionName}: error al guardar el documento " . $e->getTraceAsString());
 			$run->result = self::RUN_RESULT_ERROR;
+		} catch (GuzzleException $e) {
+			Log::debug("Error updating {$regionName}: error al obtener una url " . $e->getMessage());
+			$run->result = self::RUN_RESULT_ERROR;
 		}
 
 		$microsecondsAfter = microtime(true);
@@ -239,6 +244,8 @@ class ScrapingService
 	/**
 	 * @param                          $urls
 	 * @param Publication              $publication
+	 *
+	 * @throws \GuzzleHttp\Exception\GuzzleException
 	 */
 	private function saveFiles($urls, Publication $publication)
 	{
@@ -251,6 +258,8 @@ class ScrapingService
 	/**
 	 * @param                          $originUrl
 	 * @param Publication              $publication
+	 *
+	 * @throws \GuzzleHttp\Exception\GuzzleException
 	 */
 	private function parseFile($originUrl, Publication $publication)
 	{
@@ -258,7 +267,7 @@ class ScrapingService
 
 		if ($storeStrategy->fileExists($originUrl)) return;
 
-		$response = $this->getHttpGetResponse($originUrl);
+		$response = HttpService::get($originUrl);
 
 		if (!$response) return;
 
@@ -323,27 +332,6 @@ class ScrapingService
 	private function shouldRunScraper(IBoletinScraperStrategy $scrapper, Publication $publication): bool
 	{
 		return $this->scheduleService->isTodayAPublicationDay($publication->priority);
-	}
-
-	/**
-	 * @param $url
-	 *
-	 * @return mixed|\Psr\Http\Message\ResponseInterface
-	 */
-	private function getHttpGetResponse($url)
-	{
-		$try = 3;
-		while ($try) {
-			try {
-				$client = new Client(['verify' => false]);
-
-				return $client->request('GET', $url);
-			} catch (RequestException $e) {
-				$try--;
-			}
-		}
-
-		return null;
 	}
 
 	/**
