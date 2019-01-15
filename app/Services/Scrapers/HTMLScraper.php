@@ -182,7 +182,7 @@ class HTMLScraper
                 // Add the middleware to stack and create guzzle client
                 $stack = HandlerStack::create();
                 $stack->push(EffectiveUrlMiddleware::middleware());
-                $client = new Client(['handler' => $stack]);
+                $client = new Client(['handler' => $stack, 'verify' => false]);
 
                 $response = $client->request($request->method, $request->url, $request->options);
                 $body = $response->getBody();

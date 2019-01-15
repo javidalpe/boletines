@@ -335,7 +335,7 @@ class ScrapingService
 		$try = 3;
 		while ($try) {
 			try {
-				$client = new Client();
+				$client = new Client(['verify' => false]);
 
 				return $client->request('GET', $url);
 			} catch (RequestException $e) {
