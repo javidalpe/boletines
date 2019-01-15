@@ -5,6 +5,7 @@ namespace App\Services\Scrapers\ParseContentStrategy\Strategies;
 
 
 use App\Services\Scrapers\ParseContentStrategy\IParseContentStrategy;
+use Log;
 use Storage;
 
 class ParsePdfContentStrategy implements IParseContentStrategy
@@ -40,4 +41,42 @@ class ParsePdfContentStrategy implements IParseContentStrategy
 	{
 		return hash(self::URL_HASH_FUNCTION, $url);
 	}
+
+	/**
+	 * @param $filename
+	 *
+	 * @return bool|string
+	 */
+	private function getContentFromPDF($filename)
+	{
+		Log::debug("Parsing pdf: " . $filename);
+
+		$fullFilePath = $this->getFullPath($filename);
+
+		$fullPathWithText = storage_path('app/' . $filename . '.txt');
+
+		exec("pdftotext -enc ASCII7 {$fullFilePath} {$fullPathWithText}");
+
+		if (!file_exists($fullPathWithText)) {
+			return false;
+		}
+
+		$content = file_get_contents($fullPathWithText);
+		unlink($fullPathWithText);
+
+		return $content;
+	}
+
+	/**
+	 * @param $filename
+	 *
+	 * @return string
+	 */
+	private function getFullPath($filename)
+	{
+		$fullFilePath = storage_path('app/' . $filename);
+
+		return $fullFilePath;
+	}
+
 }

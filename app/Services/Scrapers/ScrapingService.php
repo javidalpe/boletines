@@ -9,7 +9,7 @@ use App\Publication;
 use App\Run;
 use App\Services\Scrapers\Exceptions\BadRequestException;
 use App\Services\Scrapers\IBoletinScraperStrategy;
-use App\Services\Scrapers\ParseContentStrategy\Strategies\ParseContentStrategyFactory;
+use App\Services\Scrapers\ParseContentStrategy\ParseContentStrategyFactory;
 use App\Services\Scrapers\ScraperStrategyFactory;
 use App\Services\Scrapers\StorageStrategy\StorageStrategyFactory;
 use GuzzleHttp\Client;
@@ -269,7 +269,6 @@ class ScrapingService
 		$parseStrategy = $this->parseContentStrategyFactory->getParseContentStrategy($publication);
 		$plainText = $parseStrategy->parseBodyContent($content, $originUrl);
 
-		dd($plainText);
 		if (!$plainText || strlen($plainText) <= 10) return;
 
 		$publishedAt = $this->getFileDate($response);
@@ -314,42 +313,6 @@ class ScrapingService
 		$chunk->save();
 	}
 
-	/**
-	 * @param $filename
-	 *
-	 * @return string
-	 */
-	private function getFullPath($filename)
-	{
-		$fullFilePath = storage_path('app/' . $filename);
-
-		return $fullFilePath;
-	}
-
-	/**
-	 * @param $filename
-	 *
-	 * @return bool|string
-	 */
-	private function getContentFromPDF($filename)
-	{
-		Log::debug("Parsing pdf: " . $filename);
-
-		$fullFilePath = $this->getFullPath($filename);
-
-		$fullPathWithText = storage_path('app/' . $filename . '.txt');
-
-		exec("pdftotext -enc ASCII7 {$fullFilePath} {$fullPathWithText}");
-
-		if (!file_exists($fullPathWithText)) {
-			return false;
-		}
-
-		$content = file_get_contents($fullPathWithText);
-		unlink($fullPathWithText);
-
-		return $content;
-	}
 
 	/**
 	 * @param IBoletinScraperStrategy $scrapper
@@ -401,25 +364,6 @@ class ScrapingService
 
 		return Carbon::parse($lastModifiedHeader[0]);
 	}
-
-	/**
-	 * @param $url
-	 * @param $content
-	 *
-	 * @return bool|string
-	 */
-	private function getPlainTextFromRemotePdf($url, $content)
-	{
-		$filename = $this->hashUrl($url);
-
-		Storage::put($filename, $content);
-		$content = $this->getContentFromPDF($filename);
-		Storage::delete($filename);
-
-		return $content;
-	}
-
-
 
 
     /**
