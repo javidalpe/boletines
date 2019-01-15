@@ -9,6 +9,7 @@ use App\Publication;
 use App\Run;
 use App\Services\Scrapers\Exceptions\BadRequestException;
 use App\Services\Scrapers\IBoletinScraperStrategy;
+use App\Services\Scrapers\ParseContentStrategy\Strategies\ParseContentStrategyFactory;
 use App\Services\Scrapers\ScraperStrategyFactory;
 use App\Services\Scrapers\StorageStrategy\StorageStrategyFactory;
 use GuzzleHttp\Client;
@@ -104,7 +105,6 @@ class ScrapingService
 
 	const PDF_EXTENSION = 'pdf';
 	const PDF_EXTENSION_MAY = 'PDF';
-	const URL_HASH_FUNCTION = 'md5';
 
     const PAGINATION_REGEX = '/\sp[aá]g[º\-\.]?\s*\d+/miu';
     const NUMERATION_REGEX = '/\sn([uú]m)?[º\-\.]?\s*\d+/miu';
@@ -116,6 +116,7 @@ class ScrapingService
 	private $scheduleService;
 	private $scraperStrategyFactory;
 	private $storageStrategyFactory;
+	private $parseContentStrategyFactory;
 
 
 	/**
@@ -125,16 +126,19 @@ class ScrapingService
 	 * @param PublicationsScheduleService $scheduleService
 	 * @param StorageStrategyFactory      $storageStrategyFactory
 	 * @param ScraperStrategyFactory      $scraperStrategyFactory
+	 * @param ParseContentStrategyFactory $parseContentStrategyFactory
 	 */
     public function __construct(FileSplitService $splitService,
                                 PublicationsScheduleService $scheduleService,
                                 StorageStrategyFactory $storageStrategyFactory,
-                                ScraperStrategyFactory $scraperStrategyFactory)
+                                ScraperStrategyFactory $scraperStrategyFactory,
+								ParseContentStrategyFactory $parseContentStrategyFactory)
 	{
 		$this->splitService = $splitService;
 		$this->scheduleService = $scheduleService;
 		$this->scraperStrategyFactory = $scraperStrategyFactory;
 		$this->storageStrategyFactory = $storageStrategyFactory;
+		$this->parseContentStrategyFactory = $parseContentStrategyFactory;
 	}
 
 
@@ -203,7 +207,7 @@ class ScrapingService
 			Log::debug("Error updating {$regionName}: error de servidor en " . $e->getRequest()->getUri());
 			$run->result = self::RUN_RESULT_ERROR;
 		} catch (ClientException $e) {
-			Log::debug("Error updating {$regionName}: error al obtener la url " . $e->getRequest()->getUri());
+			Log::debug("Error updating {$regionName}: error cliente al obtener la url " . $e->getRequest()->getUri() . " : " . $e->getMessage());
 			$run->result = self::RUN_RESULT_ERROR;
 		} catch (\ErrorException $e) {
 		    if (config('app.debug')) {
@@ -212,7 +216,7 @@ class ScrapingService
 			Log::debug("Error updating {$regionName}: " . $e->getTraceAsString());
 			$run->result = self::RUN_RESULT_ERROR;
 		} catch (BadRequestException $e) {
-			Log::debug("Error updating {$regionName}: error al obtener la url " . $e->url);
+			Log::debug("Error updating {$regionName}: error en la petición al obtener la url " . $e->url);
 			$run->result = self::RUN_RESULT_ERROR;
 		} catch (\PDOException $e) {
 			Log::debug("Error updating {$regionName}: error al guardar el documento " . $e->getTraceAsString());
@@ -262,8 +266,10 @@ class ScrapingService
 
 		if (!$content || strlen($content) <= 10) return;
 
-		$plainText = $this->getPlainTextFromRemotePdf($originUrl, $content);
+		$parseStrategy = $this->parseContentStrategyFactory->getParseContentStrategy($publication);
+		$plainText = $parseStrategy->parseBodyContent($content, $originUrl);
 
+		dd($plainText);
 		if (!$plainText || strlen($plainText) <= 10) return;
 
 		$publishedAt = $this->getFileDate($response);
@@ -414,15 +420,7 @@ class ScrapingService
 	}
 
 
-	/**
-	 * @param $url
-	 *
-	 * @return string
-	 */
-	private function hashUrl($url): string
-	{
-		return hash(self::URL_HASH_FUNCTION, $url);
-	}
+
 
     /**
      * @param $plainText
