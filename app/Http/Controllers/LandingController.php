@@ -33,7 +33,7 @@ class LandingController extends Controller
     {
         $data = [
             'publications1' => Publication::whereIn('priority',
-                [ScrapingService::PRIORITY_ADMINISTRATIVE_AREA_1,
+                [ScrapingService::PRIORITY_NATIONAL,
                     ScrapingService::PRIORITY_ADMINISTRATIVE_AREA_1])->get(),
             'publications2' => Publication::whereIn('priority',
                 [ScrapingService::PRIORITY_PROVINCE])->get(),

@@ -154,7 +154,7 @@ class ScrapingService
 
 			if (!$scrapper) continue;
 
-			if ($this->shouldRunScraper($scrapper, $publication)) {
+			if ($this->shouldRunScraper($publication)) {
 				$this->run($publication, $scrapper);
 			}
 		}
@@ -324,14 +324,13 @@ class ScrapingService
 
 
 	/**
-	 * @param IBoletinScraperStrategy $scrapper
-	 * @param Publication             $publication
+	 * @param Publication $publication
 	 *
 	 * @return bool
 	 */
-	private function shouldRunScraper(IBoletinScraperStrategy $scrapper, Publication $publication): bool
+	private function shouldRunScraper(Publication $publication): bool
 	{
-		return $this->scheduleService->isTodayAPublicationDay($publication->priority);
+		return $this->scheduleService->isTodayAPublicationDay($publication);
 	}
 
 	/**
