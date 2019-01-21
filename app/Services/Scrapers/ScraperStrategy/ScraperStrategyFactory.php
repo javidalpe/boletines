@@ -35,7 +35,11 @@ use App\Services\Scrapers\Europeo\BadajozScraperStrategy;
 use App\Services\Scrapers\Europeo\BarcelonaScraperStrategy;
 use App\Services\Scrapers\Europeo\BurgosScraperStrategy;
 use App\Services\Scrapers\Europeo\CaceresScraperStrategy;
+use App\Services\Scrapers\Europeo\CadizScraperStrategy;
 use App\Services\Scrapers\Europeo\CastellonScraperStrategy;
+use App\Services\Scrapers\Europeo\CiudadRealScraperStrategy;
+use App\Services\Scrapers\Europeo\CordobaScraperStrategy;
+use App\Services\Scrapers\Europeo\CuencaScraperStrategy;
 use App\Services\Scrapers\Europeo\EurLexScraperStrategy;
 use App\Services\ScrapingService;
 use Exception;
@@ -114,9 +118,16 @@ class ScraperStrategyFactory
 	        	return new BurgosScraperStrategy();
 	        case ScrapingService::BOLETIN_CACERES:
 	        	return new CaceresScraperStrategy();
-
+	        case ScrapingService::BOLETIN_CADIZ:
+	        	return new CadizScraperStrategy();
 	        case ScrapingService::BOLETIN_CASTELLON:
 	        	return new CastellonScraperStrategy();
+	        case ScrapingService::BOLETIN_CIUDAD_REAL:
+	        	return new CiudadRealScraperStrategy();
+	        case ScrapingService::BOLETIN_CORDOBA:
+	        	return new CordobaScraperStrategy();
+	        case ScrapingService::BOLETIN_CUENCA:
+	        	return new CuencaScraperStrategy();
 	        default:
 	        	return null;
         }
