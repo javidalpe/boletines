@@ -14,6 +14,7 @@ import {
 import {Panel} from 'react-bootstrap';
 import {connectMenu} from 'react-instantsearch/connectors';
 import {orderBy} from 'lodash';
+import "./search.css";
 
 const VirtualMenu = connectMenu(() => null);
 
@@ -87,7 +88,7 @@ function Search(props) {
 
 function CreateAlert(props) {
     var url = "/alerts/create?query=" + props.query;
-    return <a href={url}>Convertir búsqueda en alerta.</a>;
+    return <a id="call-to-action" href={url} className="btn btn-primary">Crear alerta diaria</a>;
 }
 
 const SearchHelp = () => {
@@ -116,10 +117,17 @@ class SearchPanel extends React.Component {
     }
 
     render() {
-        return <div>
+	    const state = this.state;
+	    const query = state.query;
+	    return <div>
             <SearchHelp/>
-            <Search onSearch={this.onSearch}/>
-            <ResultResume query={this.state.query}/>
+            <div id="searchbox-container">
+                <Search onSearch={this.onSearch}/>
+                { query.length > 0 && state !== config.defaultRefinementSearch &&
+                    <CreateAlert query={query}/>
+                }
+            </div>
+            <ResultResume query={query}/>
         </div>
     }
 }
@@ -135,9 +143,6 @@ class ResultResume extends React.Component {
         return <div><p>
             {this.props.query.length > 0 &&
             <Counter/>
-            }
-            {this.props.query.length > 0 && this.props.query !== config.defaultRefinementSearch &&
-                <CreateAlert query={this.props.query}/>
             }
         </p>
 	        {this.props.query.length > 0 && this.props.query !== config.defaultRefinementSearch &&
