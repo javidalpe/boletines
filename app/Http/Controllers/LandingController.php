@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mothers\SearchConfigMother;
 use App\Publication;
 use App\Services\ScrapingService;
+use Auth;
 use Illuminate\Http\Request;
 
 class LandingController extends Controller
@@ -28,6 +29,15 @@ class LandingController extends Controller
     {
         return view('landing.how');
     }
+
+	public function alerts(Request $request)
+	{
+		if (Auth::check()) {
+			return redirect()->route('alerts.create', $request->query());
+		}
+
+		return view('landing.alerts');
+	}
 
     public function status()
     {

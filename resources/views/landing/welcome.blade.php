@@ -14,10 +14,9 @@
 				<div class="col-md-12">
 					<h1>Busca en todos los boletines oficiales y crea tus alertas</h1>
 					<p>Bienvenido a {{ config('app.name') }}, el único buscador que te permite, desde un único sitio,
-						buscar en el Boletín Oficial
-						del Estado, en el Diario Oficial de la Unión Europea y en todos los
-						Boletines Oficiales de las Comunidades Autónomas para encontrar si han
-						publicado algo relacionado con tu búsqueda.
+						buscar en el Boletín Oficial del Estado, en el Diario Oficial de la Unión Europea, los
+						Boletines Oficiales de las Comunidades Autónomas y en todos los boletines provinciales de España
+						para encontrar si han publicado algo relacionado con tu búsqueda.
 					</p>
 				</div>
 			@endunless

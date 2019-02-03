@@ -87,7 +87,7 @@ function Search(props) {
 }
 
 function CreateAlert(props) {
-    var url = "/alerts/create?query=" + props.query;
+    var url = "/alertas?query=" + props.query;
     return <a id="call-to-action" href={url} className="btn btn-primary">Crear alerta diaria</a>;
 }
 
