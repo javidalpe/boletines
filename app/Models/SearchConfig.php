@@ -9,7 +9,10 @@ class SearchConfig
     public $apiKey;
     public $indexId;
     public $defaultRefinementSearch;
-    public $defaultRefinementDay;
+	/***
+	 * @var string[]
+	 */
+    public $defaultRefinementDays;
     public $initWithResults;
 
     /**
@@ -34,12 +37,12 @@ class SearchConfig
         $this->defaultRefinementSearch = $defaultRefinementSearch;
     }
 
-    /**
-     * @param null|string $defaultRefinementDay
-     */
-    public function setDefaultRefinementDay($defaultRefinementDay)
+	/**
+	 * @param string[] $defaultRefinementDays
+	 */
+    public function setDefaultRefinementDays($defaultRefinementDays)
     {
-        $this->defaultRefinementDay = $defaultRefinementDay;
+        $this->defaultRefinementDays = $defaultRefinementDays;
     }
 
     /**

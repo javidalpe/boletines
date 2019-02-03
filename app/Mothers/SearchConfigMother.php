@@ -19,10 +19,23 @@ class SearchConfigMother
 
     public function createForAlert(Alert $alert, Carbon $dayOfYear) : SearchConfig
     {
-        $day = $dayOfYear->format('Y-m-d');
+
         $config =  new SearchConfig(config('scout.algolia.id'), config('scout.algolia.api-key'), config('scout.index'));
         $config->setDefaultRefinementSearch($alert->query);
-        $config->setDefaultRefinementDay($day);
+
+        if ($alert->frequency === Alert::FREQUENCY_DAILY) {
+	        $day = $dayOfYear->format('Y-m-d');
+	        $config->setDefaultRefinementDays([$day]);
+        } else {
+        	$days = [];
+        	$iterator = 7;
+        	while($iterator--){
+        		$days[] = $dayOfYear->format('Y-m-d');
+        	    $dayOfYear->addDays(-1);
+	        }
+	        $config->setDefaultRefinementDays($days);
+        }
+
         return $config;
     }
 }

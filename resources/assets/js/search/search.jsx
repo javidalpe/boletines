@@ -12,11 +12,11 @@ import {
     Stats
 } from 'react-instantsearch/dom'
 import {Panel} from 'react-bootstrap';
-import {connectMenu} from 'react-instantsearch/connectors';
+import {connectRefinementList} from 'react-instantsearch/connectors';
 import {orderBy} from 'lodash';
 import "./search.css";
 
-const VirtualMenu = connectMenu(() => null);
+const VirtualMenu = connectRefinementList(() => null);
 
 const Hit = ({hit}) =>
     <div className="hit panel panel-default panel-body">
@@ -44,8 +44,8 @@ const Sidebar = () =>
     </div>
 
 const DayMenu = () => {
-    if (config.defaultRefinementDay) {
-        return <VirtualMenu attributeName="date" defaultRefinement={config.defaultRefinementDay}/>
+    if (config.defaultRefinementDays) {
+        return <VirtualMenu attributeName="date" defaultRefinement={config.defaultRefinementDays}/>
     } else {
         return (<div>
             <strong>Día</strong>
