@@ -45,6 +45,8 @@ class Alert extends Model
     protected $fillable = [
         'query',
         'frequency',
+	    'email',
+	    'time',
     ];
 
     /**

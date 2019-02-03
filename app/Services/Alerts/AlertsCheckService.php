@@ -6,6 +6,7 @@ use App\Alert;
 use App\Chunk;
 use App\Notifications\AlertNotification;
 use App\Notifications\MultipleAlertNotification;
+use App\Services\Time\TimeService;
 use App\User;
 use Carbon\Carbon;
 use Log;
@@ -17,9 +18,12 @@ class AlertsCheckService
     public function checkAllAlerts()
     {
         $alertsPerUser = [];
-        $alerts = Alert::with('user')->get();
+        $alerts = Alert::with('user')
+	        ->where('time', '=', Carbon::now()->format('H:i:s'))
+	        ->get();
+
         foreach ($alerts as $alert) {
-            if ($this->searchReturnsNewContent($alert)) {
+            if ($this->isDayToCheck($alert) && $this->searchReturnsNewContent($alert)) {
                 $alertsPerUser = $this->addAlertToUser($alert, $alertsPerUser);
             }
         }
@@ -35,7 +39,12 @@ class AlertsCheckService
      */
     private function searchReturnsNewContent(Alert $alert)
     {
-        return $this->getSearchChunksCountForToday($alert) > 0;
+    	if ($alert->frequency === Alert::FREQUENCY_DAILY) {
+		    return $this->getSearchChunksCountForToday($alert) > 0;
+	    } else {
+		    return $this->getSearchChunksCountForAWeek($alert) > 0;
+	    }
+
     }
 
     /**
@@ -84,7 +93,7 @@ class AlertsCheckService
         $alert->checked_at = $now;
         $alert->save();
 
-        $daystamp = (int)floor($now->timestamp / Chunk::SECONDS_IN_A_DAY);
+        $daystamp = TimeService::dayStamp($now);
 
         $chunks = Chunk::search($alert->query)
             ->where('daystamp', $daystamp)
@@ -92,6 +101,28 @@ class AlertsCheckService
 
         return count($chunks);
     }
+
+	/**
+	 * @param Alert $alert
+	 * @return int
+	 */
+	private function getSearchChunksCountForAWeek(Alert $alert): int
+	{
+		$now = Carbon::now();
+
+		$alert->checked_at = $now;
+		$alert->save();
+
+		$pastWeek = $now->addDays(-2);
+		$weekStamp = TimeService::weekStamp($pastWeek);
+
+		$chunks = Chunk::search($alert->query)
+			->where('weekstamp', $weekStamp)
+			->get();
+
+		return count($chunks);
+	}
+
 
     /**
      * @param $alert
@@ -101,4 +132,20 @@ class AlertsCheckService
         $alert->notified_at = Carbon::now();
         $alert->save();
     }
+
+	/**
+	 * @param Alert $alert
+	 *
+	 * @return bool
+	 */
+	private function isDayToCheck(Alert $alert)
+	{
+		if ($alert->frequency === Alert::FREQUENCY_DAILY) {
+			return true;
+		}
+
+		$now = Carbon::now();
+		return $now->dayOfWeek === Carbon::MONDAY;
+	}
+
 }

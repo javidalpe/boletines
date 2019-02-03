@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Services\Time\TimeService;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
@@ -70,10 +71,12 @@ class Chunk extends Model
         unset($array['created_at']);
 
 		Carbon::setLocale('es');
+		$now = Carbon::now();
+
 		$array['day'] = $this->published_at->formatLocalized('%d %B %Y');
         $array['date'] = $this->published_at->format('Y-m-d');
-        $array['daystamp'] = floor($this->published_at->timestamp / self::SECONDS_IN_A_DAY);
-        $array['weekstamp'] = floor($this->published_at->timestamp / self::SECONDS_IN_A_WEEK);
+        $array['daystamp'] = TimeService::dayStamp($now);
+        $array['weekstamp'] = TimeService::weekStamp($now);
 
 		return $array;
 	}

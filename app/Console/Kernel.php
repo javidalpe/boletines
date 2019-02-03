@@ -10,7 +10,6 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
 {
-	const ALERTS_DAILY_TIME = '11:00';
 	const SCRAP_DAILY_TIME = '09:30';
 	const FREE_DAILY_TIME = '07:00';
 
@@ -35,7 +34,7 @@ class Kernel extends ConsoleKernel
     {
 	    $schedule->command('indexes:free')->dailyAt(self::FREE_DAILY_TIME);
 	    $schedule->command('indexes:update')->dailyAt(self::SCRAP_DAILY_TIME);
-	    $schedule->command('alerts:check')->dailyAt(self::ALERTS_DAILY_TIME);
+	    $schedule->command('alerts:check')->hourly();
     }
 
     /**
