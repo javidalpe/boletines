@@ -69,7 +69,7 @@ class AlertController extends Controller
 
         event(new AlertCreated($alert));
         flash('Alerta creada satisfactoriamente.')->success();
-        return redirect()->route('alerts.index');
+        return redirect()->route('alerts.index', ['created' => true]);
     }
 
     /**

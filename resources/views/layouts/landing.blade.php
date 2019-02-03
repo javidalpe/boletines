@@ -7,7 +7,7 @@
         @stack('styles')
     </head>
     <body>
-    @include('layouts.tag-manager-noscript')
+        @include('layouts.tag-manager-noscript')
         @include('layouts.navbar')
         <div class="container">
             @include('flash::message')

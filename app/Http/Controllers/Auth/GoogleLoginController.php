@@ -49,7 +49,7 @@ class GoogleLoginController extends Controller
 
 		Auth::login($user);
 
-		return redirect()->intended(route('welcome'));
+		return redirect()->intended(route('alerts.create'));
 	}
 
 	/**
