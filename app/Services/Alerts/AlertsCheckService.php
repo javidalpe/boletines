@@ -19,7 +19,7 @@ class AlertsCheckService
     {
         $alertsPerUser = [];
         $alerts = Alert::with('user')
-	        ->where('time', '=', Carbon::now()->format('H:i:s'))
+	        //->where('time', '=', Carbon::now()->format('H:i:s'))
 	        ->get();
 
         foreach ($alerts as $alert) {

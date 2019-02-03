@@ -1,5 +1,6 @@
 <?php
 
+use App\Alert;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -17,6 +18,10 @@ class AddEmailTimeToAlerts extends Migration
 	        $table->string("email")->nullable();
 	        $table->time("time")->default("11:00");
         });
+
+        foreach(Alert::all() as $alert) {
+        	$alert->update(['email' => $alert->user->email]);
+        }
     }
 
     /**
