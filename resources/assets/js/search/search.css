@@ -11,7 +11,12 @@
 
 @media only screen and (max-width: 599px) {
     #call-to-action {
-        margin-top: 10px
+        margin-top: 10px;
+        width: 100%;
+    }
+
+    #searchbox-container {
+        padding-top: 10px;
     }
 }
 

@@ -69,7 +69,14 @@ const ResultsHeader = () =>
 
 const Content = () => {
 
-    var title = <ResultsHeader/>
+	if (mobile()) {
+	    return <div>
+		    <Hits hitComponent={Hit}/>
+		    <Pagination/>
+        </div>
+	}
+
+    const title = <ResultsHeader/>
     return <div className="content">
         <Panel header={title}>
             <Hits hitComponent={Hit}/>

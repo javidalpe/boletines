@@ -23,7 +23,7 @@
 
 			@include('shared.search')
 		</div>
-		<div class="row" style="margin-top: 42px">
+		<div class="row row-after-search">
 			<div class="col-md-6">
 				<h3>¿Qué puedes buscar?</h3>
 				<hr>
