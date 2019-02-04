@@ -80,16 +80,17 @@ const Content = () => {
 
 const scrollToSearchInput = () => {
   document.getElementById('searchbox-container').scrollIntoView();
+  document.getElementsByClassName("ais-SearchBox__input")[0].focus();
 };
 
 function Search(props) {
     const onFocus = () => mobile() && scrollToSearchInput();
 
     if (config.defaultRefinementSearch) {
-        return <SearchBox onFocus={onFocus} autoFocus={true} onChange={props.onSearch} translations={{placeholder: ""}}
+        return <SearchBox id="searchbox" onFocus={onFocus} autoFocus={true} onChange={props.onSearch} translations={{placeholder: ""}}
                           defaultRefinement={config.defaultRefinementSearch}/>;
     } else {
-        return <SearchBox onFocus={onFocus} autoFocus={true} onChange={props.onSearch} translations={{placeholder: ""}}/>;
+        return <SearchBox id="searchbox" onFocus={onFocus} autoFocus={true} onChange={props.onSearch} translations={{placeholder: ""}}/>;
     }
 }
 
