@@ -78,13 +78,12 @@ const Content = () => {
     </div>;
 }
 
-function Search(props) {
+const scrollToSearchInput = () => {
+  document.getElementById('searchbox-container').scrollIntoView();
+};
 
-    const onFocus = () => {
-        if (mobile()) {
-            window.location.href = "#searchbox-container";
-        }
-    };
+function Search(props) {
+    const onFocus = () => mobile() && scrollToSearchInput();
 
     if (config.defaultRefinementSearch) {
         return <SearchBox onFocus={onFocus} autoFocus={true} onChange={props.onSearch} translations={{placeholder: ""}}
