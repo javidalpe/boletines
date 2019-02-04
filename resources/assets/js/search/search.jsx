@@ -15,6 +15,7 @@ import {Panel} from 'react-bootstrap';
 import {connectRefinementList} from 'react-instantsearch/connectors';
 import {orderBy} from 'lodash';
 import "./search.css";
+import mobile from "is-mobile";
 
 const VirtualMenu = connectRefinementList(() => null);
 
@@ -78,11 +79,18 @@ const Content = () => {
 }
 
 function Search(props) {
+
+    const onFocus = () => {
+        if (mobile()) {
+            window.location.href = "#searchbox-container";
+        }
+    };
+
     if (config.defaultRefinementSearch) {
-        return <SearchBox autoFocus={true} onChange={props.onSearch} translations={{placeholder: ""}}
+        return <SearchBox onFocus={onFocus} autoFocus={true} onChange={props.onSearch} translations={{placeholder: ""}}
                           defaultRefinement={config.defaultRefinementSearch}/>;
     } else {
-        return <SearchBox autoFocus={true} onChange={props.onSearch} translations={{placeholder: ""}}/>;
+        return <SearchBox onFocus={onFocus} autoFocus={true} onChange={props.onSearch} translations={{placeholder: ""}}/>;
     }
 }
 
@@ -152,16 +160,22 @@ class ResultResume extends React.Component {
     }
 }
 
-const
-    Results = () =>
-        <div>
-            <div className="col-md-4">
-                <Sidebar/>
-            </div>
-            <div className="col-md-8">
-                <Content/>
-            </div>
+const Results = () => {
+    if (mobile()) {
+        return <div className="col-md-12">
+          <Content/>
         </div>
+    }
+
+    return <div>
+        <div className="col-md-4">
+          <Sidebar/>
+        </div>
+        <div className="col-md-8">
+          <Content/>
+        </div>
+      </div>
+}
 
 class Main
     extends React
