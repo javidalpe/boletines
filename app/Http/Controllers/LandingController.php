@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mothers\SearchConfigMother;
 use App\Publication;
 use App\Services\ScrapingService;
+use App\Services\Seo\SeoService;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -19,11 +20,19 @@ class LandingController extends Controller
         $service = new SearchConfigMother();
 
         $data = [
-            'config' => json_encode($service->createForSearch())
+            'config' => json_encode($service->createForSearch()),
+            'pages' => SeoService::getPagesConfigForSeo()
         ];
 
 		return view('landing.welcome',$data);
 	}
+
+    public function page(Request $request)
+    {
+        $pages = SeoService::getPagesConfigForSeo();
+        dd($request->id);
+        return view('landing.how');
+    }
 
 	public function how()
     {

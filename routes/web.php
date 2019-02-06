@@ -40,3 +40,5 @@ Route::middleware('auth')->group(function () {
 Route::prefix('admin')->group(function () {
     Route::get('/scrapers', 'AdminController@scrapers')->name('scrapers');
 });
+
+Route::get('{id}', 'LandingController@page')->name('page');

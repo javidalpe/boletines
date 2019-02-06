@@ -150,5 +150,20 @@
 				</ul>
 			</div>
 		</div>
+		<div class="row row-after-search">
+			<div class="col-md-12">
+				<h3>¿Qué puedes buscar?</h3>
+
+				@foreach(array_chunk($pages, 4) as $group)
+					<div class="row">
+						@foreach($group as $page)
+							<div class="col-md-3">
+								<a href="{{url($page['id'])}}">{{$page['term']}}</a>
+							</div>
+						@endforeach
+					</div>
+				@endforeach
+			</div>
+		</div>
 	</div>
 @endsection
