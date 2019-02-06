@@ -158,7 +158,7 @@
 					<div class="row">
 						@foreach($group as $page)
 							<div class="col-md-3">
-								<a href="{{url($page['id'])}}">{{$page['term']}}</a>
+								<a href="{{url($page->slug)}}">{{$page->term}}</a>
 							</div>
 						@endforeach
 					</div>

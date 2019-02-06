@@ -2,6 +2,8 @@
 
 namespace App\Services\Seo;
 
+use App\SeoPage;
+
 class SeoService
 {
     const PREPOSITIONS = [
@@ -56,7 +58,7 @@ class SeoService
         return $noPrepositions;
     }
 
-    public static function getIndex($term)
+    public static function getSlug($term)
     {
         $noPrepositions = self::toLower($term);
         $slugged = str_slug($noPrepositions, '-');
@@ -69,21 +71,17 @@ class SeoService
         return $noPrepositions;
     }
 
-    public static function getDescription($term)
-    {
-        return "Busca en todos los boletines oficiales de España nuevas publicaciones sobre $term y crear alertas diarias.";
-    }
-
+	/**
+	 * @return SeoPage[]
+	 */
     public static function getPagesConfigForSeo()
     {
-        return array_map(function($term) {
-            return [
-                'term' => $term,
-                'id' => self::getIndex($term),
-                'query' => self::getQuery($term),
-                'description' => self::getDescription($term)
-            ];
-        } ,self::TERMS);
+    	$pages = [];
+    	foreach (self::TERMS as $term) {
+		    $slug = self::getSlug($term);
+		    $pages[$slug] = new SeoPage($slug, self::getQuery($term), $term);
+	    }
+	    return $pages;
     }
 
 }

@@ -10,11 +10,9 @@
 		<div class="row text-center">
 			<div class="col-md-8 col-md-offset-2 ">
 				<h2>Supervisa los boletines para estar al día</h2>
-				<p>Nuestro motor de búsqueda es gratuito y puedes buscar todas las veces que lo necesites.
+				<p>Nuestro motor de búsqueda es gratuito y puedes usarlo todas las veces que lo necesites.
 				Pero si quieres que busquemos por tí automáticamente todos los días y te avisemos cuando encontremos un
 					resultado de búsqueda nuevo, {{ config('app.name') }} ofrece un sistema de alertas.</p>
-				<p>Al crear una alerta, supervisaremos diariamente las publicaciones de los boletines oficiales para
-				avisarte por correo electrónico si encontramos un nuevo contenido.</p>
 				<p class="well">Las alertas tienen un coste de 15€/mes las 5 primeras alertas.
 					12€/mes hasta
 					20 alertas y 8€/mes

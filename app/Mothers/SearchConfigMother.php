@@ -12,9 +12,16 @@ class SearchConfigMother
 
     public function createForSearch() : SearchConfig
     {
-        $config =  new SearchConfig(config('scout.algolia.id'), config('scout.algolia.api-key'), config('scout.index'));
+        $config = new SearchConfig(config('scout.algolia.id'), config('scout.algolia.api-key'), config('scout.index'));
         $config->setInitWithResults(false);
         return $config;
+    }
+
+    public function createForSeoPage($term) : SearchConfig
+    {
+    	$config = new SearchConfig(config('scout.algolia.id'), config('scout.algolia.api-key'), config('scout.index'));
+    	$config->setDefaultRefinementSearch($term);
+    	return $config;
     }
 
     public function createForAlert(Alert $alert, Carbon $dayOfYear) : SearchConfig

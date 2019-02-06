@@ -13,31 +13,45 @@ class LandingController extends Controller
 {
 	public function welcome(Request $request)
 	{
-	    if ($request->token) {
-	        session(['token'=> $request->token]);
-        }
+		if ($request->token) {
+			session(['token' => $request->token]);
+		}
 
-        $service = new SearchConfigMother();
+		$service = new SearchConfigMother();
+		$searchConfig = $service->createForSearch();
+		$seoPages = SeoService::getPagesConfigForSeo();
 
-        $data = [
-            'config' => json_encode($service->createForSearch()),
-            'pages' => SeoService::getPagesConfigForSeo()
-        ];
+		$data = [
+			'config' => json_encode($searchConfig),
+			'pages'  => $seoPages
+		];
 
-		return view('landing.welcome',$data);
+		return view('landing.welcome', $data);
 	}
 
-    public function page(Request $request)
-    {
-        $pages = SeoService::getPagesConfigForSeo();
-        dd($request->id);
-        return view('landing.how');
-    }
+	public function page(Request $request)
+	{
+		$pages = SeoService::getPagesConfigForSeo();
+		$page = $pages[$request->id];
+		if (!isset($page)) {
+			return abort(404);
+		}
+
+		$service = new SearchConfigMother();
+		$searchConfig = $service->createForSeoPage($page->query);
+
+		$data = [
+			'page'   => $page,
+			'config' => json_encode($searchConfig)
+		];
+
+		return view('landing.page', $data);
+	}
 
 	public function how()
-    {
-        return view('landing.how');
-    }
+	{
+		return view('landing.how');
+	}
 
 	public function alerts(Request $request)
 	{
@@ -48,36 +62,36 @@ class LandingController extends Controller
 		return view('landing.alerts');
 	}
 
-    public function status()
-    {
-        $data = [
-            'publications1' => Publication::whereIn('priority',
-                [ScrapingService::PRIORITY_NATIONAL,
-                    ScrapingService::PRIORITY_ADMINISTRATIVE_AREA_1])->get(),
-            'publications2' => Publication::whereIn('priority',
-                [ScrapingService::PRIORITY_PROVINCE])->get(),
-        ];
+	public function status()
+	{
+		$data = [
+			'publications1' => Publication::whereIn('priority',
+				[ScrapingService::PRIORITY_NATIONAL,
+					ScrapingService::PRIORITY_ADMINISTRATIVE_AREA_1])->get(),
+			'publications2' => Publication::whereIn('priority',
+				[ScrapingService::PRIORITY_PROVINCE])->get(),
+		];
 
-        return view('landing.status', $data);
-    }
+		return view('landing.status', $data);
+	}
 
-    public function about()
-    {
-        return view('landing.about');
-    }
+	public function about()
+	{
+		return view('landing.about');
+	}
 
-        public function privacy()
-    {
-        return view('landing.privacy');
-    }
+	public function privacy()
+	{
+		return view('landing.privacy');
+	}
 
-    public function cookies()
-    {
-        return view('landing.cookies');
-    }
+	public function cookies()
+	{
+		return view('landing.cookies');
+	}
 
-    public function contact()
-    {
-        return view('landing.contact');
-    }
+	public function contact()
+	{
+		return view('landing.contact');
+	}
 }
