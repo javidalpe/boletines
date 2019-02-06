@@ -27,8 +27,8 @@
 			<div class="col-md-6">
 				<h3>¿Qué puedes buscar?</h3>
 				<hr>
-				<p>Puedes buscar el nombre de una persona,
-					empresa, CIF, NIF, Matrícula, oposición,
+				<p>Puedes buscar oposiciones, el nombre de una persona,
+					empresa, CIF, NIF, Matrícula,
 					nombramiento, normativa, sector… que se
 					publica en cualquiera de los boletines
 					oficiales en el día de hoy.</p>

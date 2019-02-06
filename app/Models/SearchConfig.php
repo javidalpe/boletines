@@ -14,6 +14,10 @@ class SearchConfig
 	 */
     public $defaultRefinementDays;
     public $initWithResults;
+	/**
+	 * @var string[]
+	 */
+    public $existingAlerts;
 
     /**
      * SearchConfig constructor.
@@ -27,6 +31,7 @@ class SearchConfig
         $this->apiKey = $browserKey;
         $this->indexId = $indexId;
         $this->initWithResults = true;
+        $this->existingAlerts = [];
     }
 
     /**
@@ -52,5 +57,13 @@ class SearchConfig
     {
         $this->initWithResults = $initWithResults;
     }
+
+	/**
+	 * @param string[] $existingAlerts
+	 */
+	public function setExistingAlerts(array $existingAlerts)
+	{
+		$this->existingAlerts = $existingAlerts;
+	}
 
 }

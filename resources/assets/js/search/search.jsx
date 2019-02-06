@@ -110,7 +110,7 @@ const SearchHelp = () => {
     if (config.defaultRefinementSearch !== null) {
         return null;
     }
-    return <div className="help-block"><p>Puedes buscar nombres, direcciones, empresas. Ejemplo: 75724470, "Maria Peña", Calle
+    return <div className="help-block"><p>Puedes buscar oposiciones, nombres, direcciones, empresas. Ejemplo: 75724470, "Maria Peña", Calle
         Gran Via, ...</p></div>
 }
 
@@ -134,12 +134,15 @@ class SearchPanel extends React.Component {
     render() {
 	    const state = this.state;
 	    const query = state.query;
+	    const userEnterNewQuery = query.length > 0 && !config.existingAlerts.some(a => a === query);
+	    const defaultQueryNotAlert = config.defaultRefinementSearch && !config.existingAlerts.some(a => a === query)
+	    const shouldShowAlert = userEnterNewQuery || defaultQueryNotAlert;
 	    return <div>
             <SearchHelp/>
             <div id="searchbox-container">
                 <Search onSearch={this.onSearch}/>
-                { query.length > 0 && state !== config.defaultRefinementSearch &&
-                    <CreateAlert query={query}/>
+                { shouldShowAlert &&
+                    <CreateAlert query={query || config.defaultRefinementSearch}/>
                 }
             </div>
             <ResultResume query={query}/>
