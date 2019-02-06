@@ -42,6 +42,7 @@ use App\Services\Scrapers\Europeo\CordobaScraperStrategy;
 use App\Services\Scrapers\Europeo\CuencaScraperStrategy;
 use App\Services\Scrapers\Europeo\EurLexScraperStrategy;
 use App\Services\Scrapers\Europeo\GironaScraperStrategy;
+use App\Services\Scrapers\Europeo\GranadaScraperStrategy;
 use App\Services\ScrapingService;
 use Exception;
 
@@ -131,6 +132,8 @@ class ScraperStrategyFactory
 	        	return new CuencaScraperStrategy();
 	        case ScrapingService::BOLETIN_GIRONA:
 	        	return new GironaScraperStrategy();
+	        case ScrapingService::BOLETIN_GRANADA:
+	        	return new GranadaScraperStrategy();
 	        default:
 	        	return null;
         }
