@@ -5,6 +5,7 @@ namespace App\Console;
 use App\Console\Commands\CheckAlerts;
 use App\Console\Commands\DeleteOldChunks;
 use App\Console\Commands\UpdateIndexes;
+use Artisan;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -34,8 +35,12 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
 	    $schedule->command('indexes:free')->dailyAt(self::FREE_DAILY_TIME);
-	    $schedule->command('indexes:update')->dailyAt(self::SCRAP_DAILY_TIME);
-	    $schedule->command('alerts:check')->dailyAt(self::ALERTS_TIME);
+	    $schedule->command('indexes:update')
+		    ->dailyAt(self::SCRAP_DAILY_TIME)
+		    ->after(function () {
+			    Artisan::call('alerts:check');
+			    Artisan::call('sitemap:generate');
+		    });
     }
 
     /**
