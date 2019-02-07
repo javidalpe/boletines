@@ -38,7 +38,7 @@ class Kernel extends ConsoleKernel
 	    $schedule->command('indexes:update')
 		    ->dailyAt(self::SCRAP_DAILY_TIME)
 		    ->after(function () {
-			    Artisan::call('alerts:check');
+			    Artisan::call('alerts:checks');
 			    Artisan::call('sitemap:generate');
 		    });
     }
