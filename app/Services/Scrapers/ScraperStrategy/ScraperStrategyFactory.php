@@ -41,6 +41,7 @@ use App\Services\Scrapers\Europeo\CiudadRealScraperStrategy;
 use App\Services\Scrapers\Europeo\CordobaScraperStrategy;
 use App\Services\Scrapers\Europeo\CuencaScraperStrategy;
 use App\Services\Scrapers\Europeo\EurLexScraperStrategy;
+use App\Services\Scrapers\Europeo\GipuzkoaScraperStrategy;
 use App\Services\Scrapers\Europeo\GironaScraperStrategy;
 use App\Services\Scrapers\Europeo\GranadaScraperStrategy;
 use App\Services\Scrapers\Europeo\GuadalajaraScraperStrategy;
@@ -137,6 +138,8 @@ class ScraperStrategyFactory
 	        	return new GranadaScraperStrategy();
             case ScrapingService::BOLETIN_GUADALAJARA:
                 return new GuadalajaraScraperStrategy();
+            case ScrapingService::BOLETIN_GUIPUZKOA:
+                return new GipuzkoaScraperStrategy();
 	        default:
 	        	return null;
         }
