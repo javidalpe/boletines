@@ -39,6 +39,8 @@ Route::middleware('auth')->group(function () {
 
 Route::prefix('admin')->group(function () {
     Route::get('/scrapers', 'AdminController@scrapers')->name('scrapers');
+    Route::get('/regex', 'AdminController@regex')->name('regex');
+    Route::post('/regex', 'AdminController@regexStore')->name('regex.store');
 });
 
 Route::get('{id}', 'LandingController@page')->name('page');

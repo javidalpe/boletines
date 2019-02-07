@@ -32,12 +32,12 @@ class LandingController extends Controller
 	public function page(Request $request)
 	{
 		$pages = SeoService::getPagesConfigForSeo();
-		$page = $pages[$request->id];
-		if (!isset($page)) {
-			return abort(404);
-		}
+        if (!isset($pages[$request->id])) {
+            return abort(404);
+        }
 
-		$service = new SearchConfigMother();
+        $page = $pages[$request->id];
+        $service = new SearchConfigMother();
 		$searchConfig = $service->createForSeoPage($page->query);
 
 		$data = [

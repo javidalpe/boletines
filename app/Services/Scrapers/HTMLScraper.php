@@ -92,7 +92,7 @@ class HTMLScraper
             Log::debug("Obteniendo {$request->url}");
             $content = $this->httpContentFromRequest($request);
             $this->contents[] = html_entity_decode($content);
-	        sleep(1);
+            usleep((1000 * 1000)*rand(1, 3));
         }
         $this->requests = [];
         return $this;
