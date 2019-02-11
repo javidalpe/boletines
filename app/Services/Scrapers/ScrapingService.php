@@ -190,7 +190,7 @@ class ScrapingService
 
 		$microsecondsBefore = microtime(true);
 
-		$oldCount = Chunk::where('publication_name', $regionName)->count();
+		$oldCount = Chunk::count();
 		$newCount = $oldCount;
 
 		try {
@@ -204,7 +204,7 @@ class ScrapingService
 			$this->saveFiles($urls, $publication);
 
 			$run->result = self::RUN_RESULT_OK;
-			$newCount = Chunk::where('publication_name', $regionName)->count();
+			$newCount = Chunk::count();
 			$publication->last_success_run_at = Carbon::now();
 		} catch (ServerException $e) {
 			Log::debug("Error updating {$regionName}: error de servidor en " . $e->getRequest()->getUri());
