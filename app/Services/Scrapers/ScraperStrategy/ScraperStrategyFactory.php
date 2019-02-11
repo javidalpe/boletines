@@ -46,6 +46,7 @@ use App\Services\Scrapers\Europeo\GironaScraperStrategy;
 use App\Services\Scrapers\Europeo\GranadaScraperStrategy;
 use App\Services\Scrapers\Europeo\GuadalajaraScraperStrategy;
 use App\Services\Scrapers\Europeo\HuelvaScraperStrategy;
+use App\Services\Scrapers\Europeo\HuescaScraperStrategy;
 use App\Services\ScrapingService;
 use Exception;
 
@@ -143,6 +144,8 @@ class ScraperStrategyFactory
                 return new GipuzkoaScraperStrategy();
             case ScrapingService::BOLETIN_HUELVA:
                 return new HuelvaScraperStrategy();
+            case ScrapingService::BOLETIN_HUESCA:
+                return new HuescaScraperStrategy();
 	        default:
 	        	return null;
         }
