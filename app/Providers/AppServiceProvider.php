@@ -14,6 +14,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        set_time_limit(3600 * 3);
         Schema::defaultStringLength(191);
         setlocale(LC_TIME, 'es_ES.utf8');
     }
