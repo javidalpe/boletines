@@ -266,11 +266,17 @@ class ScrapingService
 	{
 		$storeStrategy = $this->storageStrategyFactory->getStorageStrategyForPublication($publication);
 
-		if ($storeStrategy->fileExists($originUrl)) return;
+		if ($storeStrategy->fileExists($originUrl)) {
+		    Log::info("$originUrl already parsed");
+            return;
+        }
 
 		$response = HttpService::get($originUrl);
 
-		if (!$response) return;
+		if (!$response) {
+            Log::error("$originUrl returns nothing");
+            return;
+        }
 
 		$content = (string)$response->getBody();
 
