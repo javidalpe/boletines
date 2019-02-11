@@ -4,6 +4,7 @@
 namespace App\Services\Scrapers\ParseContentStrategy\Strategies;
 
 
+use App\SearchablePage;
 use App\Services\Scrapers\ParseContentStrategy\IParseContentStrategy;
 use Log;
 use Storage;
@@ -19,17 +20,17 @@ class ParsePdfContentStrategy implements IParseContentStrategy
 	 * @param string $content     The requested page body
 	 * @param string $originalUrl The parsed page url
 	 *
-	 * @return string
+	 * @return SearchablePage[]
 	 */
-	public function parseBodyContent(string $content, string $originalUrl): string
+	public function parseBodyContent(string $content, string $originalUrl): array
 	{
 		$filename = $this->hashUrl($originalUrl);
 
 		Storage::put($filename, $content);
-		$content = $this->getContentFromPDF($filename);
+		$pages = $this->getPagesFromPDF($filename, $originalUrl);
 		Storage::delete($filename);
 
-		return $content;
+		return $pages;
 	}
 
 	/**
@@ -42,29 +43,47 @@ class ParsePdfContentStrategy implements IParseContentStrategy
 		return hash(self::URL_HASH_FUNCTION, $url);
 	}
 
-	/**
-	 * @param $filename
-	 *
-	 * @return bool|string
-	 */
-	private function getContentFromPDF($filename)
+    /**
+     * @param string $filename
+     *
+     * @param string $originalUrl
+     * @return SearchablePage[]
+     */
+	private function getPagesFromPDF($filename, $originalUrl)
 	{
-		Log::debug("Parsing pdf: " . $filename);
+		Log::debug("Parsing pdf: " . $originalUrl);
 
 		$fullFilePath = $this->getFullPath($filename);
 
 		$fullPathWithText = storage_path('app/' . $filename . '.txt');
 
-		exec("pdftotext -enc ASCII7 {$fullFilePath} {$fullPathWithText}");
+		$pages = [];
+		$return_var = 0;
+		$pageCounter = 1;
+		while($return_var === 0) {
+		    $nextPage = $pageCounter + 1;
+            $pdfToTextCommand = "pdftotext -f $pageCounter -l $nextPage -enc ASCII7 $fullFilePath $fullPathWithText";
+            exec($pdfToTextCommand,$output,$return_var);
 
-		if (!file_exists($fullPathWithText)) {
-			return false;
-		}
+            if ($return_var !== 0 || !file_exists($fullPathWithText)) {
+                break;
+            }
 
-		$content = file_get_contents($fullPathWithText);
-		unlink($fullPathWithText);
+            $content = file_get_contents($fullPathWithText);
+            unlink($fullPathWithText);
 
-		return $content;
+            if (!$content || strlen($content) < 10) {
+                break;
+            }
+
+            $pageUrl = $originalUrl . "#page=" . $pageCounter;
+            Log::debug("Store page $pageCounter url $pageUrl");
+            $pages[] = new SearchablePage($pageUrl, $content);
+
+            $pageCounter++;
+        }
+
+		return $pages;
 	}
 
 	/**

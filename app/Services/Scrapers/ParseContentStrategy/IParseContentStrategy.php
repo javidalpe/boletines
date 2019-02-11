@@ -4,6 +4,8 @@
 namespace App\Services\Scrapers\ParseContentStrategy;
 
 
+use App\SearchablePage;
+
 interface IParseContentStrategy
 {
 
@@ -13,7 +15,7 @@ interface IParseContentStrategy
 	 * @param string $content The requested page body
 	 * @param string $originalUrl The parsed page url
 	 *
-	 * @return string
+	 * @return SearchablePage[]
 	 */
-	public function parseBodyContent(string $content, string $originalUrl): string;
+	public function parseBodyContent(string $content, string $originalUrl): array ;
 }

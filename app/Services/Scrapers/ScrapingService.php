@@ -7,6 +7,7 @@ namespace App\Services;
 use App\Chunk;
 use App\Publication;
 use App\Run;
+use App\SearchablePage;
 use App\Services\Scrapers\Exceptions\BadRequestException;
 use App\Services\Scrapers\Http\HttpService;
 use App\Services\Scrapers\IBoletinScraperStrategy;
@@ -198,7 +199,7 @@ class ScrapingService
                 return $request->url;
             }, $requests);
 
-			Log::debug("Handling " . count($urls) . " urls.");
+			Log::debug("Found " . count($urls) . " urls with content.");
 
 			$this->saveFiles($urls, $publication);
 
@@ -230,11 +231,11 @@ class ScrapingService
 
 		$microsecondsAfter = microtime(true);
 		$run->duration = $microsecondsAfter - $microsecondsBefore;
-		$new_files = $newCount - $oldCount;
-		$run->new_files = $new_files;
+		$new_chunks = $newCount - $oldCount;
+		$run->new_files = $new_chunks;
 		$run->save();
 
-		Log::debug("Finished with {$new_files} new files");
+		Log::debug("Finished with {$new_chunks} new chunks");
 
 		$publication->last_run_result = $run->result;
 		$publication->last_run_at = Carbon::now();
@@ -276,17 +277,16 @@ class ScrapingService
 		if (!$content || strlen($content) <= 10) return;
 
 		$parseStrategy = $this->parseContentStrategyFactory->getParseContentStrategy($publication);
-		$plainText = $parseStrategy->parseBodyContent($content, $originUrl);
 
-		if (!$plainText || strlen($plainText) <= 10) return;
+        $storeUrl = $storeStrategy->saveDocument($content, $originUrl);
 
-		$publishedAt = $this->getFileDate($response);
+        $publishedAt = $this->getFileDate($response);
 
-		$storeUrl = $storeStrategy->saveDocument($content, $originUrl);
+        $pages = $parseStrategy->parseBodyContent($content, $storeUrl);
 
-		$reducedText = $this->removeUselessCharacters($plainText);
-
-		$this->storeText($storeUrl, $reducedText, $publication, $publishedAt);
+        foreach ($pages as $page) {
+            $this->storePage($publication, $page, $publishedAt);
+        }
 	}
 
 	/**
@@ -367,6 +367,20 @@ class ScrapingService
         $reduced = preg_replace(self::POSITION_REGEX, '', $reduced);
 
         return $reduced;
+    }
+
+    /**
+     * @param Publication $publication
+     * @param SearchablePage $page
+     * @param $publishedAt
+     */
+    private function storePage(Publication $publication, SearchablePage $page, $publishedAt)
+    {
+        if (!$page->plainText || strlen($page->plainText) <= 10) return;
+
+        $reducedText = $this->removeUselessCharacters($page->plainText);
+
+        $this->storeText($page->pageUrl, $reducedText, $publication, $publishedAt);
     }
 
 

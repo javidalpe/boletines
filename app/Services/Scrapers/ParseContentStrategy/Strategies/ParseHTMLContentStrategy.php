@@ -4,6 +4,7 @@
 namespace App\Services\Scrapers\ParseContentStrategy\Strategies;
 
 
+use App\SearchablePage;
 use App\Services\Scrapers\ParseContentStrategy\IParseContentStrategy;
 
 class ParseHTMLContentStrategy implements IParseContentStrategy
@@ -15,12 +16,14 @@ class ParseHTMLContentStrategy implements IParseContentStrategy
 	 * @param string $content     The requested page body
 	 * @param string $originalUrl The parsed page url
 	 *
-	 * @return string
+	 * @return SearchablePage[]
 	 */
-	public function parseBodyContent(string $content, string $originalUrl): string
+	public function parseBodyContent(string $content, string $originalUrl): array
 	{
 		$html = new \Html2Text\Html2Text($content);
 
-		return $html->getText();
+		return [
+		    new SearchablePage($originalUrl, $html->getText())
+        ];
 	}
 }

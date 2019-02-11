@@ -12,7 +12,7 @@ class DoNotSaveDocumentsStrategy implements IStorageDocumentStrategy
 
 	public function fileExists(string $originalUrl): bool
 	{
-		return Chunk::where('url', $originalUrl)->first() != null;
+		return Chunk::where('url', 'like', "$originalUrl%")->first() != null;
 	}
 
 	public function saveDocument(string $content, string $originalUrl): string
