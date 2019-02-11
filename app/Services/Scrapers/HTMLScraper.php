@@ -71,11 +71,12 @@ class HTMLScraper
     /**
      * @param string $regex
      * @param $modifier
+     * @param int $maxNumberOfLinks
      * @return array
      */
-    public function getLinks(string $regex, $modifier = null)
+    public function getLinks(string $regex, $modifier = null, $maxNumberOfLinks = 0)
     {
-        $this->updateLinks($regex, $maxNumberOfLinks = 0, $inverseSort = true, $modifier);
+        $this->updateLinks($regex, $maxNumberOfLinks, $inverseSort = true, $modifier);
         return $this->requests;
     }
 

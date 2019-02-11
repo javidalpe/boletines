@@ -49,6 +49,7 @@ use App\Services\Scrapers\Europeo\HuelvaScraperStrategy;
 use App\Services\Scrapers\Europeo\HuescaScraperStrategy;
 use App\Services\Scrapers\Europeo\JaenScraperStrategy;
 use App\Services\Scrapers\Europeo\LasPalmasScraperStrategy;
+use App\Services\Scrapers\Europeo\LeonScraperStrategy;
 use App\Services\ScrapingService;
 use Exception;
 
@@ -152,6 +153,8 @@ class ScraperStrategyFactory
                 return new JaenScraperStrategy();
             case ScrapingService::BOLETIN_LAS_PALMAS:
                 return new LasPalmasScraperStrategy();
+            case ScrapingService::BOLETIN_LEON:
+                return new LeonScraperStrategy();
 	        default:
 	        	return null;
         }
