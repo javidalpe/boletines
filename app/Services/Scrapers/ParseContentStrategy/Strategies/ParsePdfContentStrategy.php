@@ -61,8 +61,7 @@ class ParsePdfContentStrategy implements IParseContentStrategy
 		$return_var = 0;
 		$pageCounter = 1;
 		while($return_var === 0) {
-		    $nextPage = $pageCounter + 1;
-            $pdfToTextCommand = "pdftotext -f $pageCounter -l $nextPage -enc ASCII7 $fullFilePath $fullPathWithText";
+            $pdfToTextCommand = "pdftotext -f $pageCounter -l $pageCounter -enc ASCII7 $fullFilePath $fullPathWithText";
             exec($pdfToTextCommand,$output,$return_var);
 
             if ($return_var !== 0 || !file_exists($fullPathWithText)) {
