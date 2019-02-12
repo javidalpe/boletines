@@ -157,7 +157,7 @@
 				@foreach(array_chunk($pages, 4) as $group)
 					<div class="row">
 						@foreach($group as $page)
-							<div class="col-md-3">
+							<div class="col-md-3 col-sm-6">
 								<a href="{{url($page->slug)}}">{{$page->term}}</a>
 							</div>
 						@endforeach
