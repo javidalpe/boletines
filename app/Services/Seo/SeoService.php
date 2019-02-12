@@ -51,11 +51,14 @@ class SeoService
         'Becas de turespaña',
         'Becas para necesidades educativas especiales',
         'Becas de colaboración',
+        'Becas para estudios de doctorado',
+        'Becas de investigación',
 
         'Ofertas de empleo público',
         'Empleo jóven',
 
-        'Subasta judicial',
+        'Subasta judicial concursal',
+        'Subasta judicial voluntaria',
 
         'Concursos de acreedores',
         'Concursos de traslados',
@@ -73,6 +76,8 @@ class SeoService
         'Ayudas para rehabilitación viviendas',
         'Ayudas a discapacitados',
         'Ayudas a autónomos',
+        'Ayudas al autoempleo',
+        'Ayudas a la contratación',
         'Ayudas a extranjeros',
         'Ayudas para libros de texto',
         'Ayudas para material escolar',
@@ -83,7 +88,7 @@ class SeoService
         'Ayudas para jóven agricultor',
         'Ayudas a familias numerosas',
         'Ayudas por maternidad',
-        'Ayudas para regugiados',
+        'Ayudas para refugiados',
 
         'Premios nacionales fin de carrera',
         'Premios extraordinarios de la ESO',
