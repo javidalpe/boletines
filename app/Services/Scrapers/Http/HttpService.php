@@ -4,60 +4,54 @@ namespace App\Services\Scrapers\Http;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Exception\ServerException;
+use GuzzleHttp\HandlerStack;
 
 class HttpService
 {
 
-	/**
-	 * Returns a http response from a http request
-	 *
-	 * @param string $url
-	 * @param string $method
-	 *
-	 * @return mixed|null|\Psr\Http\Message\ResponseInterface
-	 * @throws \GuzzleHttp\Exception\GuzzleException
-	 */
-	public static function get(string $url, string $method = 'GET')
+    /**
+     * Returns a Http response from request
+     *
+     * @param Request $request
+     * @return Response|null
+     */
+	public static function get(Request $request)
 	{
-		$try = 3;
-		while ($try) {
-			try {
-				$client = new Client(['verify' => false]);
+        $try = 3;
 
-				return $client->request($method, $url);
-			} catch (RequestException $e) {
-				$try--;
-			}
-		}
+        while($try) {
+            try {
+                // Add the middleware to stack and create guzzle client
+                $stack = HandlerStack::create();
+                $stack->push(EffectiveUrlMiddleware::middleware());
+                $client = new Client(['handler' => $stack, 'verify' => false]);
 
-		return null;
+                $response = $client->request($request->method, $request->url, $request->options);
+
+                $effectiveUrl = $response->getHeaderLine('X-GUZZLE-EFFECTIVE-URL');
+                return new Response($response, $effectiveUrl);
+            } catch (ServerException $e) {
+                sleep(1);
+                $try--;
+            }
+        }
+
+        return null;
 	}
 
-	/**
-	 * Returns a body content from a http request
-	 *
-	 * @param string $url
-	 * @param string $method
-	 *
-	 * @return string
-	 * @throws \GuzzleHttp\Exception\GuzzleException
-	 */
-	public static function getBody(string $url, string $method = 'GET') : string
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+	public static function json(Request $request)
 	{
-		$response = self::get($url, $method);
-		return (string)$response->getBody();
-	}
+        $response = self::get($request);
 
-	/**
-	 * @param string $url
-	 * @param string $method
-	 *
-	 * @return mixed
-	 * @throws \GuzzleHttp\Exception\GuzzleException
-	 */
-	public static function json(string $url, string $method = 'GET')
-	{
-		$body = self::getBody($url, $method);
-		return json_decode($body, true);
+        if (!$response) {
+            return null;
+        }
+
+        return $response->json();
 	}
 }

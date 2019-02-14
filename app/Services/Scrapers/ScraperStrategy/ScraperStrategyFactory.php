@@ -52,6 +52,7 @@ use App\Services\Scrapers\Europeo\LasPalmasScraperStrategy;
 use App\Services\Scrapers\Europeo\LeonScraperStrategy;
 use App\Services\Scrapers\Europeo\LleidaScraperStrategy;
 use App\Services\Scrapers\Europeo\LugoScraperStrategy;
+use App\Services\Scrapers\Europeo\MalagaScraperStrategy;
 use App\Services\ScrapingService;
 use Exception;
 
@@ -161,6 +162,8 @@ class ScraperStrategyFactory
                 return new LleidaScraperStrategy();
             case ScrapingService::BOLETIN_LUGO:
                 return new LugoScraperStrategy();
+            case ScrapingService::BOLETIN_MALAGA:
+                return new MalagaScraperStrategy();
 	        default:
 	        	return null;
         }

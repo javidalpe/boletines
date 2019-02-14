@@ -5,6 +5,7 @@ namespace App\Services\Scrapers;
 
 
 use App\Services\Scrapers\Http\EffectiveUrlMiddleware;
+use App\Services\Scrapers\Http\HttpService;
 use App\Services\Scrapers\Http\Request;
 use Exception;
 use GuzzleHttp\Client;
@@ -59,12 +60,13 @@ class HTMLScraper
      * @param bool $inverseSort
      * @param $modifier
      *
+     * @param array $options
      * @return $this
      */
     public function forEachLink(string $regex, int $maxNumberOfLinks = 0, $inverseSort = true,
-                                $modifier = null)
+                                $modifier = null, $options = [])
     {
-        $this->updateLinks($regex, $maxNumberOfLinks, $inverseSort, $modifier);
+        $this->updateLinks($regex, $maxNumberOfLinks, $inverseSort, $modifier, $options);
         return $this;
     }
 
@@ -72,11 +74,12 @@ class HTMLScraper
      * @param string $regex
      * @param $modifier
      * @param int $maxNumberOfLinks
+     * @param array $options
      * @return array
      */
-    public function getLinks(string $regex, $modifier = null, $maxNumberOfLinks = 0)
+    public function getLinks(string $regex, $modifier = null, $maxNumberOfLinks = 0, $options = [])
     {
-        $this->updateLinks($regex, $maxNumberOfLinks, $inverseSort = true, $modifier);
+        $this->updateLinks($regex, $maxNumberOfLinks, $inverseSort = true, $modifier, $options);
         return $this->requests;
     }
 
@@ -88,17 +91,46 @@ class HTMLScraper
     public function navigate()
     {
         $this->contents = [];
-
         foreach ($this->requests as $request) {
             Log::debug("Obteniendo {$request->url}");
-            $content = $this->httpContentFromRequest($request);
-            $this->contents[] = html_entity_decode($content);
+
+            $response = HttpService::get($request);
+            if (!$response) {
+                Log::debug("Nada retornado");
+                continue;
+            }
+            $this->updateBaseUrl($response->finalUrl);
+            $this->contents[] = html_entity_decode($response->body());
             usleep((1000 * 1000)*rand(1, 3));
         }
         $this->requests = [];
         return $this;
     }
 
+
+    /**
+     * @param string $link
+     */
+    private function updateBaseUrl(string $link)
+    {
+        $parse = parse_url($link);
+
+        $protocol = (isset($parse["scheme"]) ? ($parse["scheme"] . ":") : '') . '//';
+        $this->lastDomain = $protocol . $parse["host"];
+
+        if (isset($parse["path"])) {
+            $path = $parse["path"];
+        } else {
+            $path = '/';
+        }
+
+        if (strlen($path) > 0 && substr($path, -1, 1) != '/') {
+            $index = strrpos($path, '/');
+            $path = substr($path, 0, $index + 1);
+        }
+
+        $this->lastUrl = $protocol . $parse["host"] . $path;
+    }
 
     /**
      * @param $body
@@ -148,70 +180,17 @@ class HTMLScraper
     }
 
     /**
-     * @param string $link
-     */
-    private function updateBaseUrl(string $link)
-    {
-        $parse = parse_url($link);
-
-        $protocol = (isset($parse["scheme"]) ? ($parse["scheme"] . ":") : '') . '//';
-        $this->lastDomain = $protocol . $parse["host"];
-
-        if (isset($parse["path"])) {
-            $path = $parse["path"];
-        } else {
-            $path = '/';
-        }
-
-        if (strlen($path) > 0 && substr($path, -1, 1) != '/') {
-            $index = strrpos($path, '/');
-            $path = substr($path, 0, $index + 1);
-        }
-
-        $this->lastUrl = $protocol . $parse["host"] . $path;
-    }
-
-    /**
-     * @param Request $request
-     * @return string
-     */
-    private function httpContentFromRequest(Request $request)
-    {
-        $try = 3;
-
-        while($try) {
-            try {
-                // Add the middleware to stack and create guzzle client
-                $stack = HandlerStack::create();
-                $stack->push(EffectiveUrlMiddleware::middleware());
-                $client = new Client(['handler' => $stack, 'verify' => false]);
-
-                $response = $client->request($request->method, $request->url, $request->options);
-                $body = $response->getBody();
-
-                $effectiveUrl = $response->getHeaderLine('X-GUZZLE-EFFECTIVE-URL');
-                $this->updateBaseUrl($effectiveUrl);
-
-                $stringBody = (string)$body;
-                return $stringBody;
-            } catch (ServerException $e) {
-                $try--;
-            }
-        }
-        throw new ServerException();
-    }
-
-    /**
      * @param string $regex
      * @param string $content
      * @param int $maxNumberOfLinks
      * @param bool $inverseSort
      * @param $modifier
+     * @param $options
      * @return array
      */
     private function getLinksFromPageContent(string $regex, string $content, int
     $maxNumberOfLinks,
-                                             bool $inverseSort, $modifier): array
+                                             bool $inverseSort, $modifier, $options): array
     {
         $rawHtmlLinks = $this->match($content, $regex);
         $uniqueRawHtmlLinks = array_unique($rawHtmlLinks);
@@ -232,8 +211,9 @@ class HTMLScraper
             $links = $fixedLinks;
         }
 
-        return array_map(function ($link) {
-            return new Request($link, 'GET', []);
+        return array_map(function ($link) use ($options) {
+            //dd($options);
+            return new Request($link, 'GET', $options);
         }, $links);
     }
 
@@ -242,15 +222,16 @@ class HTMLScraper
      * @param int $maxNumberOfLinks
      * @param bool $inverseSort
      * @param $modifier
+     * @param $options
      */
     protected function updateLinks(string $regex, int $maxNumberOfLinks, bool $inverseSort,
-                                   $modifier)
+                                   $modifier, $options)
     {
         Log::debug($regex);
         $this->requests = [];
         foreach ($this->contents as $content) {
             $sliceArray = $this->getLinksFromPageContent($regex, $content, $maxNumberOfLinks,
-                $inverseSort, $modifier);
+                $inverseSort, $modifier, $options);
             $this->requests = array_merge($this->requests, $sliceArray);
         }
     }

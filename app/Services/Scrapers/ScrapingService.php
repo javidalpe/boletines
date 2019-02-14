@@ -10,6 +10,7 @@ use App\Run;
 use App\SearchablePage;
 use App\Services\Scrapers\Exceptions\BadRequestException;
 use App\Services\Scrapers\Http\HttpService;
+use App\Services\Scrapers\Http\Request;
 use App\Services\Scrapers\IBoletinScraperStrategy;
 use App\Services\Scrapers\ParseContentStrategy\ParseContentStrategyFactory;
 use App\Services\Scrapers\ScraperStrategyFactory;
@@ -195,13 +196,9 @@ class ScrapingService
 
 		try {
 			$requests = $scrapper->downloadFilesFromInternet();
-			$urls = array_map(function ($request) {
-                return $request->url;
-            }, $requests);
+			Log::debug("Found " . count($requests) . " urls with content.");
 
-			Log::debug("Found " . count($urls) . " urls with content.");
-
-			$this->saveFiles($urls, $publication);
+			$this->saveFiles($requests, $publication);
 
 			$run->result = self::RUN_RESULT_OK;
 			$newCount = Chunk::count();
@@ -242,43 +239,41 @@ class ScrapingService
 		$publication->save();
 	}
 
-	/**
-	 * @param                          $urls
-	 * @param Publication              $publication
-	 *
-	 * @throws \GuzzleHttp\Exception\GuzzleException
-	 */
-	private function saveFiles($urls, Publication $publication)
+    /**
+     * @param $requests Request[]
+     * @param Publication $publication
+     */
+	private function saveFiles($requests, Publication $publication)
 	{
-		foreach ($urls as $url) {
-			$this->parseFile($url, $publication);
+		foreach ($requests as $request) {
+			$this->parseFile($request, $publication);
 		}
 	}
 
 
-	/**
-	 * @param                          $originUrl
-	 * @param Publication              $publication
-	 *
-	 * @throws \GuzzleHttp\Exception\GuzzleException
-	 */
-	private function parseFile($originUrl, Publication $publication)
+    /**
+     * @param Request $request
+     * @param Publication $publication
+     */
+	private function parseFile(Request $request, Publication $publication)
 	{
 		$storeStrategy = $this->storageStrategyFactory->getStorageStrategyForPublication($publication);
+
+        $originUrl = $request->url;
 
 		if ($storeStrategy->fileExists($originUrl)) {
 		    Log::info("$originUrl already parsed");
             return;
         }
 
-		$response = HttpService::get($originUrl);
+		$response = HttpService::get($request);
 
 		if (!$response) {
             Log::error("$originUrl returns nothing");
             return;
         }
 
-		$content = (string)$response->getBody();
+		$content = $response->body();
 
 		if (!$content || strlen($content) <= 10) return;
 
