@@ -27,6 +27,14 @@ class Request
     {
         $this->url = $url;
         $this->method = $method;
+
+
+        if (isset($options['headers'])) {
+        	$options['headers'] = array_merge(HttpService::CHROME_HEADERS, $options['headers']);
+        } else {
+	        $options['headers'] = HttpService::CHROME_HEADERS;
+        }
+
         $this->options = $options;
     }
 

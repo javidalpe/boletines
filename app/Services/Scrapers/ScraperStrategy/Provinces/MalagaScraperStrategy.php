@@ -13,7 +13,10 @@ class MalagaScraperStrategy implements IBoletinScraperStrategy
     {
         return HTMLScraper::create("https://www.bopmalaga.es/")
             ->getLinks("/\/descarga\.php\?archivo\=\d+\-\d+\-\d+\-\d+\.pdf/", null, PHP_INT_MAX, [
-                'headers' => HttpService::CHROME_HEADERS
+                'headers' => [
+	                "Host" => "www.bopmalaga.es",
+	                "Referer" => "https://www.bopmalaga.es/",
+                ]
             ]);
     }
 }
