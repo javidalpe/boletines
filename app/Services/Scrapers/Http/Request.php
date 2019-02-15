@@ -23,7 +23,7 @@ class Request
      * @param string $method
      * @param array $options
      */
-    public function __construct(string $url, string $method = 'GET', array $options = null)
+    public function __construct(string $url, string $method = 'GET', array $options = [])
     {
         $this->url = $url;
         $this->method = $method;

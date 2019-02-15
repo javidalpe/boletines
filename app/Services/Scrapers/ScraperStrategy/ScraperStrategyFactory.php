@@ -55,6 +55,9 @@ use App\Services\Scrapers\Europeo\LugoScraperStrategy;
 use App\Services\Scrapers\Europeo\MalagaScraperStrategy;
 use App\Services\Scrapers\Europeo\OurenseScraperStrategy;
 use App\Services\Scrapers\Europeo\PalenciaScraperStrategy;
+use App\Services\Scrapers\Europeo\PontevedraScraperStrategy;
+use App\Services\Scrapers\Europeo\SalamancaScraperStrategy;
+use App\Services\Scrapers\Europeo\SantaCruzDeTenerifeScraperStrategy;
 use App\Services\ScrapingService;
 use Exception;
 
@@ -170,6 +173,12 @@ class ScraperStrategyFactory
 	        	return new OurenseScraperStrategy();
 	        case ScrapingService::BOLETIN_PALENCIA:
 	        	return new PalenciaScraperStrategy();
+	        case ScrapingService::BOLETIN_PONTEVEDRA:
+	        	return new PontevedraScraperStrategy();
+	        case ScrapingService::BOLETIN_SALAMANCA:
+	        	return new SalamancaScraperStrategy();
+	        case ScrapingService::BOLETIN_SANTA_CRUZ_DE_TENERIFE:
+	        	return new SantaCruzDeTenerifeScraperStrategy();
 	        default:
 	        	return null;
         }
