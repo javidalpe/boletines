@@ -61,6 +61,7 @@ use App\Services\Scrapers\Europeo\SantaCruzDeTenerifeScraperStrategy;
 use App\Services\Scrapers\Europeo\SegoviaScraperStrategy;
 use App\Services\Scrapers\Europeo\SevillaScraperStrategy;
 use App\Services\Scrapers\Europeo\SoriaScraperStrategy;
+use App\Services\Scrapers\Europeo\TarragonaScraperStrategy;
 use App\Services\ScrapingService;
 use Exception;
 
@@ -188,6 +189,8 @@ class ScraperStrategyFactory
 	        	return new SevillaScraperStrategy();
 	        case ScrapingService::BOLETIN_SORIA:
 	        	return new SoriaScraperStrategy();
+	        case ScrapingService::BOLETIN_TARRAGONA:
+	        	return new TarragonaScraperStrategy();
 	        default:
 	        	return null;
         }
