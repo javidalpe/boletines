@@ -10,6 +10,19 @@ use GuzzleHttp\HandlerStack;
 class HttpService
 {
 
+	public const CHROME_HEADERS = [
+		"Host" => "www.bopmalaga.es",
+		"Connection" => "keep-alive",
+		"Pragma" => "no-cache",
+		"Cache-Control" => "no-cache",
+		"Upgrade-Insecure-Requests" => "1",
+		"User-Agent" => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.96 Safari/537.36",
+		"Accept" => "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
+		"Referer" => "https://www.bopmalaga.es/",
+		"Accept-Encoding" => "gzip, deflate, br",
+		"Accept-Language" => "es-ES,es;q=0.9,en;q=0.8,ca;q=0.7",
+	];
+
     /**
      * Returns a Http response from request
      *
