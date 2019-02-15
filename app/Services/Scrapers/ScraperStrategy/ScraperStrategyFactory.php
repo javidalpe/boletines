@@ -33,6 +33,7 @@ use App\Services\Scrapers\Europeo\AlmeriaScraperStrategy;
 use App\Services\Scrapers\Europeo\AvilaScraperStrategy;
 use App\Services\Scrapers\Europeo\BadajozScraperStrategy;
 use App\Services\Scrapers\Europeo\BarcelonaScraperStrategy;
+use App\Services\Scrapers\Europeo\BizkaiaScraperStrategy;
 use App\Services\Scrapers\Europeo\BurgosScraperStrategy;
 use App\Services\Scrapers\Europeo\CaceresScraperStrategy;
 use App\Services\Scrapers\Europeo\CadizScraperStrategy;
@@ -203,6 +204,8 @@ class ScraperStrategyFactory
 	        	return new ValenciaScraperStrategy();
 	        case ScrapingService::BOLETIN_VALLADOLID:
 	        	return new ValladolidScraperStrategy();
+	        case ScrapingService::BOLETIN_VIZCAYA:
+	        	return new BizkaiaScraperStrategy();
 	        default:
 	        	return null;
         }
