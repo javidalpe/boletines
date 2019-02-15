@@ -68,6 +68,7 @@ use App\Services\Scrapers\Europeo\ToledoScraperStrategy;
 use App\Services\Scrapers\Europeo\ValenciaScraperStrategy;
 use App\Services\Scrapers\Europeo\ValladolidScraperStrategy;
 use App\Services\Scrapers\Europeo\ZamoraScraperStrategy;
+use App\Services\Scrapers\Europeo\ZaragozaScraperStrategy;
 use App\Services\ScrapingService;
 use Exception;
 
@@ -209,6 +210,8 @@ class ScraperStrategyFactory
 	        	return new BizkaiaScraperStrategy();
 	        case ScrapingService::BOLETIN_ZAMORA:
 	        	return new ZamoraScraperStrategy();
+	        case ScrapingService::BOLETIN_ZARAGOZA:
+	        	return new ZaragozaScraperStrategy();
 	        default:
 	        	return null;
         }
