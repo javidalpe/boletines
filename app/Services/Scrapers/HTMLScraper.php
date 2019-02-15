@@ -77,7 +77,7 @@ class HTMLScraper
      * @param array $options
      * @return array
      */
-    public function getLinks(string $regex, $modifier = null, $maxNumberOfLinks = 0, $options = [])
+    public function getLinks(string $regex, $modifier = null, $maxNumberOfLinks = 50, $options = [])
     {
         $this->updateLinks($regex, $maxNumberOfLinks, $inverseSort = true, $modifier, $options);
         return $this->requests;

@@ -58,6 +58,7 @@ use App\Services\Scrapers\Europeo\PalenciaScraperStrategy;
 use App\Services\Scrapers\Europeo\PontevedraScraperStrategy;
 use App\Services\Scrapers\Europeo\SalamancaScraperStrategy;
 use App\Services\Scrapers\Europeo\SantaCruzDeTenerifeScraperStrategy;
+use App\Services\Scrapers\Europeo\SegoviaScraperStrategy;
 use App\Services\ScrapingService;
 use Exception;
 
@@ -179,6 +180,8 @@ class ScraperStrategyFactory
 	        	return new SalamancaScraperStrategy();
 	        case ScrapingService::BOLETIN_SANTA_CRUZ_DE_TENERIFE:
 	        	return new SantaCruzDeTenerifeScraperStrategy();
+	        case ScrapingService::BOLETIN_SEGOVIA:
+	        	return new SegoviaScraperStrategy();
 	        default:
 	        	return null;
         }
