@@ -19,7 +19,7 @@ class UpdateIndexes extends Command
      *
      * @var string
      */
-    protected $description = 'Download and parse pdfs';
+    protected $description = 'Download and parse PDF for the given publication';
 
     private $service;
     /**
@@ -43,7 +43,7 @@ class UpdateIndexes extends Command
         $id = $this->argument('id');
 
         if ($id == null || $id === false) {
-            $this->service->updateIndexes();
+            $this->service->updateIndexesFrom(0);
         } else {
 	        $this->service->updateIndex($id);
         }

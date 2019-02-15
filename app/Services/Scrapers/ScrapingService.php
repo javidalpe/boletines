@@ -146,11 +146,11 @@ class ScrapingService
 	}
 
 
-	public function updateIndexes()
+	public function updateIndexesFrom(int $from)
 	{
 		Log::debug("Updating all indexes");
 
-		$publications = Publication::all();
+		$publications = Publication::where('id', '>=', $from)->get();
 		foreach ($publications as $publication) {
 			$scrapper = $this->scraperStrategyFactory->getScrapperStrategy($publication);
 

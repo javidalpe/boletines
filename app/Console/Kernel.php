@@ -4,6 +4,7 @@ namespace App\Console;
 
 use App\Console\Commands\CheckAlerts;
 use App\Console\Commands\DeleteOldChunks;
+use App\Console\Commands\UpdateFromIndex;
 use App\Console\Commands\UpdateIndexes;
 use Artisan;
 use Illuminate\Console\Scheduling\Schedule;
@@ -11,9 +12,8 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
 {
-	const SCRAP_DAILY_TIME = '09:30';
-	const ALERTS_TIME = '11:00';
-	const FREE_DAILY_TIME = '07:00';
+	const SCRAP_DAILY_TIME = '11:30';
+	const FREE_DAILY_TIME = '23:00';
 
     /**
      * The Artisan commands provided by your application.
@@ -21,7 +21,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        UpdateIndexes::class,
+	    UpdateIndexes::class,
+	    UpdateFromIndex::class,
         CheckAlerts::class,
 	    DeleteOldChunks::class
     ];
