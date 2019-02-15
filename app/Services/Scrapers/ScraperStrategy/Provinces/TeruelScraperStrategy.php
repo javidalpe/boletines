@@ -11,7 +11,6 @@ class TeruelScraperStrategy implements IBoletinScraperStrategy
 
     public function downloadFilesFromInternet()
     {
-	    Carbon::setLocale('es');
 	    $now = Carbon::now();
 	    $month = $now->formatLocalized('%B');
 	    $date = $now->format("Y/d");

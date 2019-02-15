@@ -63,6 +63,7 @@ use App\Services\Scrapers\Europeo\SevillaScraperStrategy;
 use App\Services\Scrapers\Europeo\SoriaScraperStrategy;
 use App\Services\Scrapers\Europeo\TarragonaScraperStrategy;
 use App\Services\Scrapers\Europeo\TeruelScraperStrategy;
+use App\Services\Scrapers\Europeo\ToledoScraperStrategy;
 use App\Services\ScrapingService;
 use Exception;
 
@@ -194,6 +195,8 @@ class ScraperStrategyFactory
 	        	return new TarragonaScraperStrategy();
 	        case ScrapingService::BOLETIN_TERUEL:
 	        	return new TeruelScraperStrategy();
+	        case ScrapingService::BOLETIN_TOLEDO:
+	        	return new ToledoScraperStrategy();
 	        default:
 	        	return null;
         }
