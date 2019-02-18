@@ -17,7 +17,7 @@ class SearchConfigMother
         return $config;
     }
 
-    public function createForSeoPage($term) : SearchConfig
+    public function createForPredefinedSearch($term) : SearchConfig
     {
     	$config = new SearchConfig(config('scout.algolia.id'), config('scout.algolia.api-key'), config('scout.index'));
     	$config->setDefaultRefinementSearch($term);

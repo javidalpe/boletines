@@ -135,18 +135,23 @@ class SeoService
         return $noPrepositions;
     }
 
+	public static $pages = null;
+
 	/**
 	 * @return SeoPage[]
 	 */
     public static function getPagesConfigForSeo()
     {
-    	$pages = [];
-    	foreach (self::TERMS as $term) {
-		    $slug = self::getSlug($term);
-		    $pages[$slug] = new SeoPage($slug, self::getQuery($term), $term);
+    	if (!self::$pages) {
+		    $pages = [];
+		    foreach (self::TERMS as $term) {
+			    $slug = self::getSlug($term);
+			    $pages[$slug] = new SeoPage($slug, self::getQuery($term), $term);
+		    }
+		    self::$pages = $pages;
 	    }
-	    //dd($pages);
-	    return $pages;
+
+	    return self::$pages;
     }
 
 }

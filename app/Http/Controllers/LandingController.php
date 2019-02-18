@@ -29,22 +29,6 @@ class LandingController extends Controller
 		return view('landing.welcome', $data);
 	}
 
-	public function page(Request $request)
-	{
-		$pages = SeoService::getPagesConfigForSeo();
-		$slug = $request->segments()[0];
-		$page = $pages[$slug];
-        $service = new SearchConfigMother();
-		$searchConfig = $service->createForSeoPage($page->query);
-
-		$data = [
-			'page'   => $page,
-			'config' => json_encode($searchConfig)
-		];
-
-		return view('landing.page', $data);
-	}
-
 	public function how()
 	{
 		return view('landing.how');
