@@ -18,9 +18,9 @@ class ProvincesSeeder extends Seeder
         Publication::insert([
             ['id' => SS::BOLETIN_A_CORUNA, "name" => "Boletín Oficial de A Coruña", "priority" =>
                 SS::PRIORITY_PROVINCE],
-            ['id' => SS::BOLETIN_TERRITORIO_HISTORICO_DE_ALAVA, "name" => "Territorio Histórico de Álava", "priority" => SS::PRIORITY_PROVINCE],
-            ['id' => SS::BOLETIN_ALBACETE, "name" => "Boletín Oficial de Albacete",
-        "priority" =>
+            ['id' => SS::BOLETIN_TERRITORIO_HISTORICO_DE_ALAVA, "name" => "Boletín Oificial del Territorio Histórico de Álava", "priority" =>
+	            SS::PRIORITY_PROVINCE],
+            ['id' => SS::BOLETIN_ALBACETE, "name" => "Boletín Oficial de Albacete", "priority" =>
                 SS::PRIORITY_PROVINCE],
             ['id' => SS::BOLETIN_ALICANTE, "name" => "Boletín Oficial de Alicante", "priority" =>
                 SS::PRIORITY_PROVINCE],

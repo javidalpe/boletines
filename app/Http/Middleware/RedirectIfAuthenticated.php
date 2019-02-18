@@ -18,7 +18,7 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
-            return redirect()->route('alerts.index', $request->query());
+            return redirect()->route('alerts.index');
         }
 
         return $next($request);

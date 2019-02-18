@@ -55,11 +55,19 @@ class LandingController extends Controller
 
 	public function alerts(Request $request)
 	{
-		if (Auth::check()) {
-			return redirect()->route('alerts.create', $request->query());
+		if (!$request->has('query') && Auth::guest()) {
+			return view('landing.alerts');
 		}
 
-		return view('landing.alerts');
+		if ($request->has('query')) {
+			session()->put('query', $request->query('query'));
+		}
+
+		if (Auth::check()) {
+			return redirect()->route('alerts.create');
+		} else {
+			return redirect()->route('alerts');
+		}
 	}
 
 	public function status()
