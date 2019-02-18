@@ -4,6 +4,7 @@ namespace App\Mothers;
 
 use App\Alert;
 use App\Models\SearchConfig;
+use App\Publication;
 use Carbon\Carbon;
 
 class SearchConfigMother
@@ -23,6 +24,13 @@ class SearchConfigMother
     	$config->setDefaultRefinementSearch($term);
     	return $config;
     }
+
+	public function createForPredefinedPublication($publicationName) : SearchConfig
+	{
+		$config = new SearchConfig(config('scout.algolia.id'), config('scout.algolia.api-key'), config('scout.index'));
+		$config->setDefaultRefinementPublications([$publicationName]);
+		return $config;
+	}
 
     public function createForAlert(Alert $alert, Carbon $dayOfYear) : SearchConfig
     {

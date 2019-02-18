@@ -20,10 +20,12 @@ class LandingController extends Controller
 		$service = new SearchConfigMother();
 		$searchConfig = $service->createForSearch();
 		$seoPages = SeoService::getPagesConfigForSeo();
+		$publicationsPages = SeoService::getPagesConfigForPublicationsSeo();
 
 		$data = [
 			'config' => json_encode($searchConfig),
-			'pages'  => $seoPages
+			'pages'  => $seoPages,
+			'publicationsPages' => $publicationsPages
 		];
 
 		return view('landing.welcome', $data);

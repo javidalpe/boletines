@@ -13,6 +13,12 @@ class SearchConfig
 	 * @var string[]
 	 */
     public $defaultRefinementDays;
+	/***
+	 * @var string[]
+	 */
+	public $defaultRefinementPublications;
+
+
     public $initWithResults;
 	/**
 	 * @var string[]
@@ -64,6 +70,14 @@ class SearchConfig
 	public function setExistingAlerts(array $existingAlerts)
 	{
 		$this->existingAlerts = $existingAlerts;
+	}
+
+	/**
+	 * @param string[] $defaultRefinementPublications
+	 */
+	public function setDefaultRefinementPublications(array $defaultRefinementPublications): void
+	{
+		$this->defaultRefinementPublications = $defaultRefinementPublications;
 	}
 
 }

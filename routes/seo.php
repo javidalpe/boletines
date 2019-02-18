@@ -1,11 +1,15 @@
 <?php
 
-$countryQueries = App\Services\Seo\SeoService::getPagesConfigForSeo();
+$termQueries = App\Services\Seo\SeoService::getPagesConfigForSeo();
 
-//Route::get('{id}', 'LandingController@page')->name('page');;
-
-foreach ($countryQueries as $countryQuery) {
+foreach ($termQueries as $countryQuery) {
 	Route::get($countryQuery->slug, 'SeoController@globalQueryTerm');
+}
+
+$publication = App\Services\Seo\SeoService::getPagesConfigForPublicationsSeo();
+
+foreach ($publication as $publication) {
+	Route::get($publication->slug, 'SeoController@publication');
 }
 
 

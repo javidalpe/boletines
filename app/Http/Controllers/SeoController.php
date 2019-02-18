@@ -23,4 +23,21 @@ class SeoController extends Controller
 
 	    return view('landing.seo.global', $data);
     }
+
+	public function publication(Request $request)
+	{
+		$pages = SeoService::getPagesConfigForPublicationsSeo();
+		$slug = $request->segments()[0];
+		$page = $pages[$slug];
+		$service = new SearchConfigMother();
+		$searchConfig = $service->createForPredefinedPublication($page->term);
+
+		$data = [
+			'page'   => $page,
+			'config' => json_encode($searchConfig),
+			'publication' => $page->term
+		];
+
+		return view('landing.seo.publication', $data);
+	}
 }

@@ -34,15 +34,25 @@ const Hit = ({hit}) =>
 const Sidebar = () =>
     <div className="sidebar">
         <Panel header="Filtros">
-            <strong>Publicación</strong>
-            <RefinementList
-                attributeName={"publication_name"}
-                showMore={true}
-                translations={{showMore: 'Mostrar más'}}
-                transformItems={items => orderBy(items, ['label'], ['asc'])}/>
+            <PublicationsMenu/>
             <DayMenu/>
         </Panel>
     </div>
+
+const PublicationsMenu = () => {
+	if (config.defaultRefinementPublications) {
+		return <VirtualMenu attributeName="publication_name" defaultRefinement={config.defaultRefinementPublications}/>
+	} else {
+		return <div>
+            <strong>Publicación</strong>
+            <RefinementList
+			attributeName={"publication_name"}
+			showMore={true}
+			translations={{showMore: 'Mostrar más'}}
+			transformItems={items => orderBy(items, ['label'], ['asc'])}/>
+		</div>
+	}
+};
 
 const DayMenu = () => {
     if (config.defaultRefinementDays) {
@@ -110,8 +120,7 @@ const SearchHelp = () => {
     if (config.defaultRefinementSearch !== null) {
         return null;
     }
-    return <div className="help-block"><p>Puedes buscar oposiciones, nombres, direcciones, empresas. Ejemplo: 75724470, "Maria Peña", Calle
-        Gran Via, ...</p></div>
+    return <div className="help-block"><p>Puedes buscar oposiciones, nombres, direcciones, empresas. Ejemplo: 75714470, "Maria Peña", "energias renovables", ...</p></div>
 }
 
 class SearchPanel extends React.Component {

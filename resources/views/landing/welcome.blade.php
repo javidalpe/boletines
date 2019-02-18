@@ -27,9 +27,8 @@
 			<div class="col-md-6">
 				<h3>¿Qué puedes buscar?</h3>
 				<hr>
-				<p>Puedes buscar oposiciones, el nombre de una persona,
-					empresa, CIF, NIF, Matrícula,
-					nombramiento, normativa, sector… que se
+				<p>Puedes buscar oposiciones, ayudas o concursos, pero también términos concretos como el nombre de una persona,
+					empresa, CIF, NIF, Matrícula, nombramiento, normativa, sector… que se
 					publica en cualquiera de los boletines
 					oficiales en el día de hoy.</p>
 				<p>Escriba la palabra o la frase que quieras entre comillas para buscar concordancias exactas. Por
@@ -40,7 +39,7 @@
 				<h3>¿Cómo creo una alerta?</h3>
 				<hr>
 				<p>Puedes convertir una búsqueda en una alerta. Cada mañana, te enviaremos un email si se ha publicado
-					un nuevo boletín con el término de búsqueda. Puedes crear una alerta en la sección <a href="{{route('alerts.create')
+					un nuevo boletín con el término de búsqueda. Puedes crear una alerta en la sección <a href="{{route('alerts')
                     }}">Alertas</a>.</p>
 			</div>
 		</div>
@@ -48,112 +47,50 @@
 			<div class="col-md-4">
 				<h3 id="donde">¿Dónde buscamos?</h3>
 				<hr>
-				<p>Diario Oficial de la Unión Europea (EUR-LEX).</p>
-				<p>Boletín Oficial del Estado (BOE).</p>
-				<p>Boletines Autonómicos</p>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-4">
-				<ul>
-					<li>Boletín Oficial de la Junta de Andalucía (BOJA)</li>
-					<li>Boletín Oficial de Aragón (BOA)</li>
-					<li>Boletín Oficial del Principado de Asturias (BOPA)</li>
-					<li>Boletín Oficial de Islas Baleares (BOIB)</li>
-					<li>Boletín Oficial de Canarias (BOC)</li>
-					<li>Boletín Oficial de Cantabria (BOC)</li>
-					<li>Diario Oficial de Castilla-La Mancha (DOCM)</li>
-				</ul>
-			</div>
-			<div class="col-md-4">
-				<ul>
-					<li>Boletín Oficial de Castilla y León (BOCYL)</li>
-					<li>Diari Oficial de la Generalitat de Catalunya (DOGC)</li>
-					<li>Diario Oficial de Extremadura (DOE)</li>
-					<li>Diario Oficial de Galicia (DOG)</li>
-					<li>Boletín Oficial de La Rioja (BOR)</li>
-					<li>Boletín Oficial de la Comunidad de Madrid (BOCM)</li>
-					<li>Boletín Oficial de la Región de Murcia (BORM)</li>
-				</ul>
-			</div>
-			<div class="col-md-4">
-				<ul>
-					<li>Boletín Oficial de Navarra (BON)</li>
-					<li>Boletín Oficial del País Vasco (BOPV)</li>
-					<li>Diari Oficial de la Comunitat Valenciana (DOCV)</li>
-					<li>Boletín Oficial de la Ciudad Autónoma de Ceuta (BOCCE)</li>
-					<li>Boletín Oficial de la Ciudad Autónoma de Melilla (BOME)</li>
-				</ul>
+				<h3>Boletines de nivel nacional</h3>
+				<a href="{{url( array_values($publicationsPages)[0]->slug )}}">{{ array_values($publicationsPages)[0]->term }}</a>
+				<br>
+				<a href="{{url( array_values($publicationsPages)[1]->slug )}}">{{ array_values($publicationsPages)[1]->term }}</a>
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="col-md-4">
-				<p>Boletines Provinciales</p>
+				<h3>Boletines Autonómicos</h3>
 			</div>
 		</div>
 
+		@foreach(array_chunk(array_slice($publicationsPages, 2, 19), 3) as $group)
+			<div class="row">
+				@foreach($group as $page)
+					<div class="col-md-4">
+						<a href="{{url($page->slug)}}">{{$page->term}}</a>
+					</div>
+				@endforeach
+			</div>
+		@endforeach
+
 		<div class="row">
 			<div class="col-md-4">
-				<ul>
-					<li>Boletín oficial de A Coruña</li>
-					<li>Boletín oficial de Territorio Histórico de Álava</li>
-					<li>Boletín oficial de Albacete</li>
-					<li>Boletín oficial de Alicante</li>
-					<li>Boletín oficial de Almería</li>
-					<li>Boletín oficial de Ávila</li>
-					<li>Boletín oficial de Badajoz</li>
-					<li>Boletín oficial de Barcelona</li>
-					<li>Boletín oficial de Burgos</li>
-					<li>Boletín oficial de Cáceres</li>
-					<li>Boletín oficial de Cádiz</li>
-					<li>Boletín oficial de Castellón</li>
-					<li>Boletín oficial de Ciudad Real</li>
-					<li>Boletín oficial de Córdoba</li>
-					<li>Boletín oficial de Cuenca</li>
-				</ul>
-			</div>
-			<div class="col-md-4">
-				<ul>
-					<li>Boletín oficial de Girona</li>
-					<li>Boletín oficial de Granada</li>
-					<li>Boletín oficial de Guadalajara</li>
-					<li>Boletín oficial de Guipuzkoa</li>
-					<li>Boletín oficial de Huelva</li>
-					<li>Boletín oficial de Huesca</li>
-					<li>Boletín oficial de Jaén</li>
-					<li>Boletín oficial de Las Palmas</li>
-					<li>Boletín oficial de León</li>
-					<li>Boletín oficial de Lleida</li>
-					<li>Boletín oficial de Lugo</li>
-					<li>Boletín oficial de Málaga</li>
-					<li>Boletín oficial de Ourense</li>
-					<li>Boletín oficial de Palencia</li>
-					<li>Boletín oficial de Pontevedra</li>
-				</ul>
-			</div>
-			<div class="col-md-4">
-				<ul>
-					<li>Boletín oficial de Salamanca</li>
-					<li>Boletín oficial de Santa Cruz de Tenerife</li>
-					<li>Boletín oficial de Segovia</li>
-					<li>Boletín oficial de Sevilla</li>
-					<li>Boletín oficial de Soria</li>
-					<li>Boletín oficial de Tarragona</li>
-					<li>Boletín oficial de Teruel</li>
-					<li>Boletín oficial de Toledo</li>
-					<li>Boletín oficial de Valencia</li>
-					<li>Boletín oficial de Valladolid</li>
-					<li>Boletín oficial de Vizcaya</li>
-					<li>Boletín oficial de Zamora</li>
-					<li>Boletín oficial de Zaragoza</li>
-				</ul>
+				<h3>Boletines Provinciales</h3>
 			</div>
 		</div>
+
+		@foreach(array_chunk(array_slice($publicationsPages, 21), 3) as $group)
+			<div class="row">
+				@foreach($group as $page)
+					<div class="col-md-4">
+						<a href="{{url($page->slug)}}">{{$page->term}}</a>
+					</div>
+				@endforeach
+			</div>
+		@endforeach
+
+
 		<div class="row row-after-search">
 			<div class="col-md-12">
-				<h3>¿Qué puedes buscar?</h3>
-
+				<h3>Los más buscado en los boletines oficiales</h3>
+				<hr>
 				@foreach(array_chunk($pages, 4) as $group)
 					<div class="row">
 						@foreach($group as $page)

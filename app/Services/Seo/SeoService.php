@@ -2,6 +2,7 @@
 
 namespace App\Services\Seo;
 
+use App\Publication;
 use App\SeoPage;
 
 class SeoService
@@ -126,7 +127,7 @@ class SeoService
         $noPrepositions = self::toLower($term);
         $noAccents = self::replaceAccents($noPrepositions);
         $slugged = str_slug($noAccents, '-', 'es');
-        return 'alertas-' . $slugged;
+        return $slugged;
     }
 
     public static function getQuery($term)
@@ -135,23 +136,40 @@ class SeoService
         return $noPrepositions;
     }
 
-	public static $pages = null;
+	public static $pagesConfigForTerms = null;
 
 	/**
 	 * @return SeoPage[]
 	 */
     public static function getPagesConfigForSeo()
     {
-    	if (!self::$pages) {
+    	if (!self::$pagesConfigForTerms) {
 		    $pages = [];
 		    foreach (self::TERMS as $term) {
-			    $slug = self::getSlug($term);
+			    $slug = 'alertas-' . self::getSlug($term);
 			    $pages[$slug] = new SeoPage($slug, self::getQuery($term), $term);
 		    }
-		    self::$pages = $pages;
+		    self::$pagesConfigForTerms = $pages;
 	    }
 
-	    return self::$pages;
+	    return self::$pagesConfigForTerms;
+    }
+
+	public static $pagesConfigForPublications = null;
+
+    public static function getPagesConfigForPublicationsSeo()
+    {
+    	$publications = Publication::all();
+	    if (!self::$pagesConfigForPublications) {
+		    $pages = [];
+		    foreach ($publications as $publication) {
+			    $slug = self::getSlug($publication->name);
+			    $pages[$slug] = new SeoPage($slug, '', $publication->name);
+		    }
+		    self::$pagesConfigForPublications = $pages;
+	    }
+
+	    return self::$pagesConfigForPublications;
     }
 
 }
