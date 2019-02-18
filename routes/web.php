@@ -43,4 +43,3 @@ Route::prefix('admin')->group(function () {
     Route::post('/regex', 'AdminController@regexStore')->name('regex.store');
 });
 
-Route::get('{id}', 'LandingController@page')->name('page');
