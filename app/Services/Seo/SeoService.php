@@ -31,6 +31,7 @@ class SeoService
 
     const PUBLICATIONS = [
         "Boletín Oficial del Estado",
+	    "Diario Oficial de la Unión Europea",
         "Boletín Oficial de la Junta de Andalucía",
         "Boletín Oficial de Aragón",
         "Boletín Oficial del Principado de Asturias",
@@ -50,6 +51,49 @@ class SeoService
         "Diari Oficial de la Comunitat Valenciana",
         "Boletín Oficial de la Ciudad Autónoma de Ceuta",
         "Boletín Oficial de la Ciudad Autónoma de Melilla",
+	    "Boletín Oficial de A Coruña",
+	    "Boletín Oificial del Territorio Histórico de Álava",
+	    "Boletín Oficial de Albacete",
+	    "Boletín Oficial de Alicante",
+	    "Boletín Oficial de Almería",
+	    "Boletín Oficial de Ávila",
+	    "Boletín Oficial de Badajoz",
+	    "Boletín Oficial de Barcelona",
+	    "Boletín Oficial de Burgos",
+	    "Boletín Oficial de Cáceres",
+	    "Boletín Oficial de Cádiz",
+	    "Boletín Oficial de Castellón",
+	    "Boletín Oficial de Ciudad Real",
+	    "Boletín Oficial de Córdoba",
+	    "Boletín Oficial de Cuenca",
+	    "Boletín Oficial de Girona",
+	    "Boletín Oficial de Granada",
+	    "Boletín Oficial de Guadalajara",
+	    "Boletín Oficial de Guipuzkoa",
+	    "Boletín Oficial de Huelva",
+	    "Boletín Oficial de Huesca",
+	    "Boletín Oficial de Jaén",
+	    "Boletín Oficial de Las Palmas",
+	    "Boletín Oficial de León",
+	    "Boletín Oficial de Lleida",
+	    "Boletín Oficial de Lugo",
+	    "Boletín Oficial de Málaga",
+	    "Boletín Oficial de Ourense",
+	    "Boletín Oficial de Palencia",
+	    "Boletín Oficial de Pontevedra",
+	    "Boletín Oficial de Salamanca",
+	    "Boletín Oficial de Santa Cruz de Tenerife",
+	    "Boletín Oficial de Segovia",
+	    "Boletín Oficial de Sevilla",
+	    "Boletín Oficial de Soria",
+	    "Boletín Oficial de Tarragona",
+	    "Boletín Oficial de Teruel",
+	    "Boletín Oficial de Toledo",
+	    "Boletín Oficial de Valencia",
+	    "Boletín Oficial de Valladolid",
+	    "Boletín Oficial de Vizcaya",
+	    "Boletín Oficial de Zamora",
+	    "Boletín Oficial de Zaragoza",
     ];
 
     const TERMS = [
@@ -149,12 +193,12 @@ class SeoService
 	/**
 	 * @return SeoPage[]
 	 */
-    public static function getSeoPagesForTermsWithoutPublication()
+    public static function getSeoPagesForAllTerms()
     {
     	if (!self::$pagesForTerms) {
 		    $pages = [];
 		    foreach (self::TERMS as $term) {
-			    $slug = 'alertas-' . self::getSlug($term);
+			    $slug = self::getTermSlug($term);
 			    $pages[$slug] = new SeoPage($slug, self::getQuery($term), $term);
 		    }
 		    self::$pagesForTerms = $pages;
@@ -168,14 +212,13 @@ class SeoService
     /**
      * @return SeoPage[]
      */
-    public static function getPagesConfigForPublicationsSeo()
+    public static function getSeoPagesForAllPublications()
     {
-    	$publications = Publication::all();
 	    if (!self::$pagesForPublications) {
 		    $pages = [];
-		    foreach ($publications as $publication) {
-			    $slug = self::getSlug($publication->name);
-			    $pages[$slug] = new SeoPage($slug, null, null, $publication->name);
+		    foreach (self::PUBLICATIONS as $publication) {
+			    $slug = self::getSlug($publication);
+			    $pages[$slug] = new SeoPage($slug, null, null, $publication);
 		    }
 		    self::$pagesForPublications = $pages;
 	    }
@@ -188,14 +231,15 @@ class SeoService
      */
     public static function getTermPagesForPublication($publicationSlug)
     {
-        $pagesForPublications = self::getPagesConfigForPublicationsSeo();
+        $pagesForPublications = self::getSeoPagesForAllPublications();
         $pageConfig = $pagesForPublications[$publicationSlug];
+	    $pages = [];
         foreach (self::TERMS as $term) {
-            $slug = self::getSlug($term) . '/' . $pageConfig->url;
+            $slug = self::getTermSlug($term) . '/' . $pageConfig->url;
             $pages[$slug] = new SeoPage($slug, self::getQuery($term), $term, $pageConfig->publicationName);
         }
 
-        return self::$pagesForTerms;
+        return $pages;
     }
 
     /**
@@ -203,13 +247,24 @@ class SeoService
      */
     public static function getPublicationsPagesForTerm($termSlug)
     {
-        $pagesForTerms = self::getSeoPagesForTermsWithoutPublication();
+        $pagesForTerms = self::getSeoPagesForAllTerms();
         $pageConfig = $pagesForTerms[$termSlug];
-        foreach (self::TERMS as $term) {
-            $slug = self::getSlug($term) . '/' . $pageConfig->url;
-            $pages[$slug] = new SeoPage($slug, self::getQuery($term), $term, $pageConfig->publicationName);
+	    $pages = [];
+        foreach (self::PUBLICATIONS as $publication) {
+            $slug = $pageConfig->url . '/' . self::getSlug($publication);
+            $pages[$slug] = new SeoPage($slug, self::getQuery($pageConfig->query), $pageConfig->termName, $publication);
         }
 
-        return self::$pagesForTerms;
+        return $pages;
     }
+
+	/**
+	 * @param $term
+	 *
+	 * @return string
+	 */
+	private static function getTermSlug($term): string
+	{
+		return 'alertas-' . self::getSlug($term);
+}
 }

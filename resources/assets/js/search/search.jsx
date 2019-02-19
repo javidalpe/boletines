@@ -180,14 +180,8 @@ class ResultResume extends React.Component {
 }
 
 const Results = () => {
-    if (mobile()) {
-        return <div className="col-md-12">
-          <Content/>
-        </div>
-    }
-
     return <div>
-        <div className="col-md-4">
+        <div className="col-md-4 hidden-xs">
           <Sidebar/>
         </div>
         <div className="col-md-8">

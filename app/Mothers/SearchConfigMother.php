@@ -32,6 +32,15 @@ class SearchConfigMother
 		return $config;
 	}
 
+	public function createForPredefinedPublicationAndTerm($publicationName, $term) : SearchConfig
+	{
+		$config = new SearchConfig(config('scout.algolia.id'), config('scout.algolia.api-key'), config('scout.index'));
+		$config->setDefaultRefinementPublications([$publicationName]);
+		$config->setDefaultRefinementSearch($term);
+		return $config;
+	}
+
+
     public function createForAlert(Alert $alert, Carbon $dayOfYear) : SearchConfig
     {
 

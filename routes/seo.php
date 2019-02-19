@@ -1,12 +1,18 @@
 <?php
 
-$termQueries = App\Services\Seo\SeoService::getSeoPagesForTermsWithoutPublication();
+use App\Services\Seo\SeoService;
+
+$termQueries = SeoService::getSeoPagesForAllTerms();
 
 foreach ($termQueries as $countryQuery) {
 	Route::get($countryQuery->url, 'SeoController@globalQueryTerm');
+	$publicationsPages = SeoService::getPublicationsPagesForTerm($countryQuery->url);
+	foreach ($publicationsPages as $pub) {
+		Route::get($pub->url, 'SeoController@publicationTerm');
+	}
 }
 
-$publications = App\Services\Seo\SeoService::getPagesConfigForPublicationsSeo();
+$publications = SeoService::getSeoPagesForAllPublications();
 
 foreach ($publications as $publication) {
 	Route::get($publication->url, 'SeoController@publication');
