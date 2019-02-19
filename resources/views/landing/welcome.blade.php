@@ -48,9 +48,11 @@
 				<h3 id="donde">¿Dónde buscamos?</h3>
 				<hr>
 				<h3>Boletines de nivel nacional</h3>
-				<a href="{{url( array_values($publicationsPages)[0]->slug )}}">{{ array_values($publicationsPages)[0]->term }}</a>
+				<a href="{{url( array_values($publicationsPages)[0]->url )}}">{{ array_values
+				($publicationsPages)[0]->publicationName }}</a>
 				<br>
-				<a href="{{url( array_values($publicationsPages)[1]->slug )}}">{{ array_values($publicationsPages)[1]->term }}</a>
+				<a href="{{url( array_values($publicationsPages)[1]->url )}}">{{ array_values
+				($publicationsPages)[1]->publicationName }}</a>
 			</div>
 		</div>
 
@@ -64,7 +66,7 @@
 			<div class="row">
 				@foreach($group as $page)
 					<div class="col-md-4">
-						<a href="{{url($page->slug)}}">{{$page->term}}</a>
+						<a href="{{url($page->url)}}">{{$page->publicationName}}</a>
 					</div>
 				@endforeach
 			</div>
@@ -80,7 +82,7 @@
 			<div class="row">
 				@foreach($group as $page)
 					<div class="col-md-4">
-						<a href="{{url($page->slug)}}">{{$page->term}}</a>
+						<a href="{{url($page->url)}}">{{$page->publicationName}}</a>
 					</div>
 				@endforeach
 			</div>
@@ -91,11 +93,11 @@
 			<div class="col-md-12">
 				<h3>Los más buscado en los boletines oficiales</h3>
 				<hr>
-				@foreach(array_chunk($pages, 4) as $group)
+				@foreach(array_chunk($termPages, 4) as $group)
 					<div class="row">
 						@foreach($group as $page)
 							<div class="col-md-3 col-sm-6">
-								<a href="{{url($page->slug)}}">{{$page->term}}</a>
+								<a href="{{url($page->url)}}">{{$page->termName}}</a>
 							</div>
 						@endforeach
 					</div>

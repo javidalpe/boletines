@@ -29,6 +29,29 @@ class SeoService
         ' tras ',
     ];
 
+    const PUBLICATIONS = [
+        "Boletín Oficial del Estado",
+        "Boletín Oficial de la Junta de Andalucía",
+        "Boletín Oficial de Aragón",
+        "Boletín Oficial del Principado de Asturias",
+        "Boletín Oficial de Islas Baleares",
+        "Boletín Oficial de Canarias",
+        "Boletín Oficial de Cantabria",
+        "Diario Oficial de Castilla-La Mancha",
+        "Boletín Oficial de Castilla y León",
+        "Diari Oficial de la Generalitat de Catalunya",
+        "Diario Oficial de Extremadura",
+        "Diario Oficial de Galicia",
+        "Boletín Oficial de La Rioja",
+        "Boletín Oficial de la Comunidad de Madrid",
+        "Boletín Oficial de la Región de Murcia",
+        "Boletín Oficial de Navarra",
+        "Boletín Oficial del País Vasco",
+        "Diari Oficial de la Comunitat Valenciana",
+        "Boletín Oficial de la Ciudad Autónoma de Ceuta",
+        "Boletín Oficial de la Ciudad Autónoma de Melilla",
+    ];
+
     const TERMS = [
         "Oposiciones a celador",
         "Oposiciones a enfermería",
@@ -108,25 +131,9 @@ class SeoService
         return $noPrepositions;
     }
 
-	/**
-	 * @param $term
-	 * @return mixed
-	 */
-	private static function replaceAccents($term)
-	{
-		$term = str_replace("á", "a", $term);
-		$term = str_replace("é", "e", $term);
-		$term = str_replace("í", "i", $term);
-		$term = str_replace("ó", "o", $term);
-		$term = str_replace("ú", "u", $term);
-		return $term;
-	}
-
     public static function getSlug($term)
     {
-        $noPrepositions = self::toLower($term);
-        $noAccents = self::replaceAccents($noPrepositions);
-        $slugged = str_slug($noAccents, '-', 'es');
+        $slugged = str_slug($term, '-', 'es');
         return $slugged;
     }
 
@@ -136,40 +143,73 @@ class SeoService
         return $noPrepositions;
     }
 
-	public static $pagesConfigForTerms = null;
+
+    public static $pagesForTerms = null;
 
 	/**
 	 * @return SeoPage[]
 	 */
-    public static function getPagesConfigForSeo()
+    public static function getSeoPagesForTermsWithoutPublication()
     {
-    	if (!self::$pagesConfigForTerms) {
+    	if (!self::$pagesForTerms) {
 		    $pages = [];
 		    foreach (self::TERMS as $term) {
 			    $slug = 'alertas-' . self::getSlug($term);
 			    $pages[$slug] = new SeoPage($slug, self::getQuery($term), $term);
 		    }
-		    self::$pagesConfigForTerms = $pages;
+		    self::$pagesForTerms = $pages;
 	    }
 
-	    return self::$pagesConfigForTerms;
+	    return self::$pagesForTerms;
     }
 
-	public static $pagesConfigForPublications = null;
+	public static $pagesForPublications = null;
 
+    /**
+     * @return SeoPage[]
+     */
     public static function getPagesConfigForPublicationsSeo()
     {
     	$publications = Publication::all();
-	    if (!self::$pagesConfigForPublications) {
+	    if (!self::$pagesForPublications) {
 		    $pages = [];
 		    foreach ($publications as $publication) {
 			    $slug = self::getSlug($publication->name);
-			    $pages[$slug] = new SeoPage($slug, '', $publication->name);
+			    $pages[$slug] = new SeoPage($slug, null, null, $publication->name);
 		    }
-		    self::$pagesConfigForPublications = $pages;
+		    self::$pagesForPublications = $pages;
 	    }
 
-	    return self::$pagesConfigForPublications;
+	    return self::$pagesForPublications;
     }
 
+    /**
+     * @return SeoPage[]
+     */
+    public static function getTermPagesForPublication($publicationSlug)
+    {
+        $pagesForPublications = self::getPagesConfigForPublicationsSeo();
+        $pageConfig = $pagesForPublications[$publicationSlug];
+        foreach (self::TERMS as $term) {
+            $slug = self::getSlug($term) . '/' . $pageConfig->url;
+            $pages[$slug] = new SeoPage($slug, self::getQuery($term), $term, $pageConfig->publicationName);
+        }
+
+        return self::$pagesForTerms;
+    }
+
+    /**
+     * @return SeoPage[]
+     */
+    public static function getPublicationsPagesForTerm($termSlug)
+    {
+        $pagesForTerms = self::getSeoPagesForTermsWithoutPublication();
+        $pageConfig = $pagesForTerms[$termSlug];
+        foreach (self::TERMS as $term) {
+            $slug = self::getSlug($term) . '/' . $pageConfig->url;
+            $pages[$slug] = new SeoPage($slug, self::getQuery($term), $term, $pageConfig->publicationName);
+        }
+
+        return self::$pagesForTerms;
+    }
 }

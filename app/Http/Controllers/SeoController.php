@@ -10,7 +10,7 @@ class SeoController extends Controller
 {
     public function globalQueryTerm(Request $request)
     {
-	    $pages = SeoService::getPagesConfigForSeo();
+	    $pages = SeoService::getSeoPagesForTermsWithoutPublication();
 	    $slug = $request->segments()[0];
 	    $page = $pages[$slug];
 	    $service = new SearchConfigMother();
@@ -21,7 +21,7 @@ class SeoController extends Controller
 		    'config' => json_encode($searchConfig)
 	    ];
 
-	    return view('landing.seo.global', $data);
+	    return view('landing.seo.term', $data);
     }
 
 	public function publication(Request $request)
@@ -30,12 +30,11 @@ class SeoController extends Controller
 		$slug = $request->segments()[0];
 		$page = $pages[$slug];
 		$service = new SearchConfigMother();
-		$searchConfig = $service->createForPredefinedPublication($page->term);
+		$searchConfig = $service->createForPredefinedPublication($page->publicationName);
 
 		$data = [
 			'page'   => $page,
-			'config' => json_encode($searchConfig),
-			'publication' => $page->term
+			'config' => json_encode($searchConfig)
 		];
 
 		return view('landing.seo.publication', $data);

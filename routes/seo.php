@@ -1,15 +1,15 @@
 <?php
 
-$termQueries = App\Services\Seo\SeoService::getPagesConfigForSeo();
+$termQueries = App\Services\Seo\SeoService::getSeoPagesForTermsWithoutPublication();
 
 foreach ($termQueries as $countryQuery) {
-	Route::get($countryQuery->slug, 'SeoController@globalQueryTerm');
+	Route::get($countryQuery->url, 'SeoController@globalQueryTerm');
 }
 
-$publication = App\Services\Seo\SeoService::getPagesConfigForPublicationsSeo();
+$publications = App\Services\Seo\SeoService::getPagesConfigForPublicationsSeo();
 
-foreach ($publication as $publication) {
-	Route::get($publication->slug, 'SeoController@publication');
+foreach ($publications as $publication) {
+	Route::get($publication->url, 'SeoController@publication');
 }
 
 

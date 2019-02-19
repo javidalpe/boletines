@@ -9,29 +9,37 @@ class SeoPage
 	/**
 	 * @var string
 	 */
-	public $slug;
+	public $url;
 	/**
 	 * @var string
 	 */
 	public $query;
+
 	/**
 	 * @var string
 	 */
-	public $term;
+	public $termName;
 
-	/**
-	 * SeoPage constructor.
-	 *
-	 * @param string $slug
-	 * @param string $query
-	 * @param string $term
-	 */
-	public function __construct(string $slug, string $query, string $term)
-	{
-		$this->slug = $slug;
-		$this->query = $query;
-		$this->term = $term;
-	}
+    /**
+     * @var string
+     */
+	public $publicationName;
+
+    /**
+     * SeoPage constructor.
+     * @param string $url
+     * @param string $query
+     * @param string $termName
+     * @param string $publicationName
+     */
+    public function __construct(string $url, string $query = null, string $termName = null, string
+    $publicationName = null)
+    {
+        $this->url = $url;
+        $this->query = $query;
+        $this->termName = $termName;
+        $this->publicationName = $publicationName;
+    }
 
 
 }
