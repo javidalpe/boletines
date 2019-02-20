@@ -177,9 +177,9 @@ class SeoService
 
     public static function getSlug($term)
     {
-        $slugged = str_slug($term, '-', 'es');
-	    $noPrepositions = str_replace(self::PREPOSITIONS, " ", $slugged);
-        return $noPrepositions;
+	    $noPrepositions = str_replace(self::PREPOSITIONS, " ", $term);
+        $slugged = str_slug($noPrepositions, '-', 'es');
+        return $slugged;
     }
 
     public static function getQuery($term)
