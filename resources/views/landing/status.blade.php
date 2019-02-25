@@ -28,7 +28,7 @@
             <div class="col-md-6 ">
                 @component('components.panel')
                     @slot('title')
-                        Boletines provinciales
+                        Boletines provinciales y ayuntamientos
                     @endslot
                     @include('landing.components.publications', ['publications' => $publications2])
                 @endcomponent

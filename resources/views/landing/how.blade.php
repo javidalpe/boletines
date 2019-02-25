@@ -2,7 +2,7 @@
 
 @section('seo')
 	<title>Sobre {{ config('app.name') }}</title>
-	<meta name="description" content="Busca en todos los Boletines Oficiales del Estado y Comunidades Autónomas.">
+	<meta name="description" content="Busca en todos los Boletines Oficiales del España.">
 @endsection
 
 @section('content')
@@ -32,7 +32,8 @@
 				<h4>El buscador</h4>
 				<p>{{ config('app.name') }} te permite realizar, desde un único sitio, búsquedas
 					diarias en el Boletín Oficial del Estado, en el Diario Oficial de la Unión
-					Europea y en todos los Boletines Oficiales de las Comunidades Autónomas para
+					Europea, en todos los Boletines Oficiales de las Comunidades Autónomas, en todos los boletines
+					publicados por cada provincia (incluyendo ayuntamientos) para
 					encontrar si han publicado algo relacionado con tu búsqueda.
 					Consulta <a href="{{route('welcome')}}#donde">dónde buscamos</a>.</p>
 				<p>Dado el gran volumen de datos que se generan día a día, de momento no

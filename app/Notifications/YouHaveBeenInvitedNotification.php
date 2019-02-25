@@ -51,7 +51,7 @@ class YouHaveBeenInvitedNotification extends Notification
                     ->greeting("¡Hola!")
                     ->line(sprintf("Tu amigo %s te ha regalado una alerta en %s GRATIS.", $this->user->name, config('app.url')))
                     ->line(sprintf("%s es una plataforma para buscar cada día en todos los Boletines Oficiales 
-                    del Estado y Comunidades Autónomas o crear alertas para lo que quieres buscar y estar informado.",
+                    del España y crear alertas para lo que quieres buscar y estar informado.",
                         config('app.name')))
                     ->line('Para solicitar tu alerta gratis, crea una cuenta a través del siguiente enlace.')
                     ->action('Crear una cuenta', $url)

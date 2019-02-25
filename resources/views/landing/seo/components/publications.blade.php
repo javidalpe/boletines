@@ -27,7 +27,7 @@
 
 <div class="row">
 	<div class="col-md-4">
-		<h3>Boletines Provinciales</h3>
+		<h3>Boletines provinciales y ayuntamientos</h3>
 	</div>
 </div>
 
