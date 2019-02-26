@@ -1,5 +1,5 @@
 @php
-    $count = Auth::user()->alerts()->count();
+    $count = $alertsCount;
 @endphp
 
 

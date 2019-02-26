@@ -16,7 +16,7 @@ use App\Validators\UserValidator;
 class UserRepositoryEloquent extends BaseRepository implements UserRepository
 {
 	const USER_RANDOM_TOKEN = 4;
-	const INITIAL_ALERTS = 1;
+	const INITIAL_ALERTS = 0;
 
     /**
      * Specify Model class name
@@ -28,7 +28,7 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
         return User::class;
     }
 
-    
+
 
     /**
      * Boot up the repository, pushing criteria
@@ -48,7 +48,7 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
 		    'email' => $data['email'],
 		    'password' => bcrypt($data['password']),
 		    'token' => str_random(self::USER_RANDOM_TOKEN),
-		    'alerts_limit' => self::INITIAL_ALERTS,
+		    'free_alerts' => self::INITIAL_ALERTS,
 		    'user_id' => $inviterId
 	    ]);
 

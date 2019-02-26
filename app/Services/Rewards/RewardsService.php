@@ -16,7 +16,7 @@ class RewardsService
     public function rewardUser(User $user, $type)
     {
         Log::debug(sprintf("Added alert to %s due to reward type %s", $user->email, $type));
-        $user->alerts_limit = $user->alerts_limit + 1;
+        $user->free_alerts = $user->free_alerts + 1;
         $user->save();
 
         switch ($type)

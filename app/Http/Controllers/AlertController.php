@@ -6,6 +6,7 @@ use App\Alert;
 use App\Events\AlertCreated;
 use App\Events\AlertDeleted;
 use App\Http\Requests\StoreAlertRequest;
+use App\Services\Billing\BillingService;
 use App\User;
 use Auth;
 use Illuminate\Http\Request;
@@ -39,7 +40,14 @@ class AlertController extends Controller
             flash("Has superado el límite de alertas permitido.")->warning();
             return back();
         }
-        return view('dashboard.alerts.create');
+
+        $user = Auth::user();
+        $alertCount = $user->alerts()->count();
+        $data = [
+        	'shouldPay' => BillingService::shouldUserPayForNewAlert($user),
+	        'alertsCount' => $alertCount
+        ];
+        return view('dashboard.alerts.create', $data);
     }
 
     /**
@@ -56,14 +64,17 @@ class AlertController extends Controller
             return back();
         }
 
+        $shouldUserPayForNewAlert = BillingService::shouldUserPayForNewAlert($user);
         $alert = $user->alerts()->create($request->all());
 
-        if ($user->subscribed('main')) {
-            $user->subscription('main')->updateQuantity($user->alerts()->count());
-        } else {
-            $user->newSubscription('main', config('services.stripe.alert-id'))
-                ->quantity(1)
-                ->create($request->stripeToken);
+	    if ($shouldUserPayForNewAlert) {
+	        if ($user->subscribed('main')) {
+		        $user->subscription('main')->updateQuantity(BillingService::billableAlertsCount($user));
+	        } else {
+		        $user->newSubscription('main', config('services.stripe.alert-id'))
+			        ->quantity(1)
+			        ->create($request->stripeToken);
+	        }
         }
 
 
@@ -123,7 +134,7 @@ class AlertController extends Controller
         $alert->delete();
         $user = Auth::user();
         if ($user->subscribed('main')) {
-            $user->subscription('main')->updateQuantity($user->alerts()->count());
+            $user->subscription('main')->updateQuantity(BillingService::billableAlertsCount($user));
         }
         flash('Alerta borrada.')->success();
         return redirect()->route('alerts.index');
