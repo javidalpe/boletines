@@ -4,10 +4,6 @@
 
 <div id="root"></div>
 
-@push('styles')
-    <link rel="stylesheet" href="{{ mix('/css/search.css') }}">
-@endpush
-
 @push('scripts')
     <script>
         var config = {!! $config !!};
@@ -21,5 +17,22 @@
                 document.getElementById('alert').style.display = "none";
             }
         }, 2000);
+    </script>
+
+    <noscript id="deferred-styles">
+        <link rel="stylesheet" type="text/css" href="{{ mix('/css/search.css') }}"/>
+    </noscript>
+    <script>
+      var loadDeferredStyles = function() {
+        var addStylesNode = document.getElementById("deferred-styles");
+        var replacement = document.createElement("div");
+        replacement.innerHTML = addStylesNode.textContent;
+        document.body.appendChild(replacement)
+        addStylesNode.parentElement.removeChild(addStylesNode);
+      };
+      var raf = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
+        window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+      if (raf) raf(function() { window.setTimeout(loadDeferredStyles, 0); });
+      else window.addEventListener('load', loadDeferredStyles);
     </script>
 @endpush
