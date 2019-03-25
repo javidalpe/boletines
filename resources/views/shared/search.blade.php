@@ -8,7 +8,7 @@
     <script>
         var config = {!! $config !!};
     </script>
-    <script src="{{ mix('/js/search.js') }}"></script>
+    <script async defer src="{{ mix('/js/search.js') }}"></script>
     <script>
         setInterval(function () {
             if (document.getElementById('root').children.length <= 0) {
@@ -22,6 +22,7 @@
     <noscript id="deferred-styles">
         <link rel="stylesheet" type="text/css" href="{{ mix('/css/search.css') }}"/>
     </noscript>
+    
     <script>
       var loadDeferredStyles = function() {
         var addStylesNode = document.getElementById("deferred-styles");
