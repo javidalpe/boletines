@@ -40,11 +40,26 @@
         </div>
     </div>
     <div class="row" style="margin-top: 40px; margin-bottom: 40px">
-        <div class="col-md-2"><img class="img-responsive" src="{{mix('img/boe.png')}}" alt=""></div>
-        <div class="col-md-4"><img class="img-responsive" src="{{mix('img/lex.png')}}"
-                                   alt=""></div>
-        <div class="col-md-2 col-md-offset-3"><img class="img-responsive" src="{{mix
-        ('img/powered_by_stripe@3x.png')}}"
-                                   alt=""></div>
+        <div class="col-md-2">
+            <img class="img-responsive" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="{{mix('img/boe.png')}}" alt="">
+        </div>
+        <div class="col-md-4">
+            <img class="img-responsive" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="{{mix('img/lex.png')}}" alt="">
+        </div>
+        <div class="col-md-2 col-md-offset-3">
+            <img class="img-responsive" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="{{mix('img/powered_by_stripe@3x.png')}}" alt="">
+        </div>
     </div>
 </div>
+
+@push('scripts')
+    <script>
+      function init() {
+        var imgDefer = document.getElementsByTagName('img');
+        for (var i=0; i<imgDefer.length; i++) {
+          if(imgDefer[i].getAttribute('data-src')) {
+            imgDefer[i].setAttribute('src',imgDefer[i].getAttribute('data-src'));
+          } } }
+      window.onload = init;
+    </script>
+@endpush
