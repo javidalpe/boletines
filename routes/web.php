@@ -43,3 +43,5 @@ Route::prefix('admin')->group(function () {
     Route::post('/regex', 'AdminController@regexStore')->name('regex.store');
 });
 
+//Stripe Webhooks
+Route::post('stripe/webhook','\Laravel\Cashier\Http\Controllers\WebhookController@handleWebhook');

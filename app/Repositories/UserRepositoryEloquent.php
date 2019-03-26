@@ -52,6 +52,11 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
 		    'user_id' => $inviterId
 	    ]);
 
+        $user->createAsStripeCustomer([
+            'email' => $user->email,
+            'description' => $user->name
+        ]);
+
 	    event(new UserRegistered($user));
 
 	    return $user;

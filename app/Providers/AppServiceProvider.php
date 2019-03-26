@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Schema;
+use Stripe\Stripe;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -17,6 +18,7 @@ class AppServiceProvider extends ServiceProvider
         set_time_limit(3600 * 3);
         Schema::defaultStringLength(191);
         setlocale(LC_TIME, 'es_ES.utf8');
+        Stripe::setApiKey(config('services.stripe.secret'));
     }
 
     /**
