@@ -9,6 +9,9 @@
 @section('content')
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
+
+            @include('auth.reward')
+
             <div class="panel panel-default">
 
                 <div class="panel-body">
@@ -54,6 +57,20 @@
                                 @if ($errors->has('password'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('token') ? ' has-error' : '' }}">
+                            <label for="token" class="col-md-4 control-label">Código promocional (Opcional)</label>
+
+                            <div class="col-md-6">
+                                <input id="token" type="text" class="form-control" name="token" value="{{ session('token') }}">
+
+                                @if ($errors->has('token'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('token') }}</strong>
                                     </span>
                                 @endif
                             </div>

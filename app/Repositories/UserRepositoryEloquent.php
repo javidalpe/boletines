@@ -15,7 +15,7 @@ use App\Validators\UserValidator;
  */
 class UserRepositoryEloquent extends BaseRepository implements UserRepository
 {
-	const USER_RANDOM_TOKEN = 4;
+	const USER_RANDOM_TOKEN = 6;
 	const INITIAL_ALERTS = 0;
 
     /**
@@ -41,7 +41,7 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
 
     public function registerUser($data)
     {
-	    $inviterId = $this->getInviterId();
+	    $inviterId = $this->getInviterId($data);
 
 	    $user = $this->create([
 		    'name' => $data['name'],
@@ -62,16 +62,17 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
 	    return $user;
     }
 
-	/**
-	 * @return int|null
-	 */
-	protected function getInviterId(): ?int
+    /**
+     * @param array $data
+     * @return int|null
+     */
+	protected function getInviterId(array $data): ?int
 	{
-		if (!session('token')) {
+		if (!isset($data['token'])) {
 			return null;
 		}
 
-		$token = session('token');
+		$token = $data['token'];
 		$otherUser = User::where('token', $token)->first();
 
 		if (!$otherUser) {

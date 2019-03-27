@@ -2,27 +2,24 @@
 
 namespace App\Notifications;
 
-use App\Alert;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class AlertCreatedNotification extends Notification
+class AlertRewardNotification extends Notification
 {
     use Queueable;
 
-    private $alert;
-
     /**
-     * AlertCreatedNotification constructor.
-     * @param $alert
+     * Create a new notification instance.
+     *
+     * @return void
      */
-    public function __construct(Alert $alert)
+    public function __construct()
     {
-        $this->alert = $alert;
+        //
     }
-
 
     /**
      * Get the notification's delivery channels.
@@ -43,13 +40,13 @@ class AlertCreatedNotification extends Notification
      */
     public function toMail($notifiable)
     {
+        $money = money_format('%.2n', config('mgm.rewards.inviter'));
         return (new MailMessage)
-            ->subject("Has creado una alerta")
-            ->greeting('¡Hola!')
-            ->line(sprintf('Has creado una alerta de búsqueda en los boletines oficiales para el siguiente término: %s', $this->alert->query))
-            ->line('Todos los días que encontremos en algún boletín oficial este término, te haremos llegar un mail para informarte.')
-            ->line(sprintf('Podrás gestionar tus alertas desde el área privada de %s.', config('app.name')))
-            ->salutation('Saludos del equipo.');
+            ->subject(sprintf("Felicidades, has ganado %s de descuento", $money))
+            ->greeting('Hola!')
+            ->line(sprintf('Un amigo tuyo ha creado su primera alerta. Como agradecimiento por recomendarnos, te hemos hecho un descuento de %s en tu cuenta.', $money))
+            ->action('Accede a tu cuenta', route('account.index'))
+            ->salutation('Gracias por confiar en nosotros.');
     }
 
     /**

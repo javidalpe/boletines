@@ -30,12 +30,14 @@ Route::middleware('guest')->group(function() {
 
 Route::middleware('auth')->group(function () {
 
-	Route::get('/report/{id}/{timestamp}', 'HomeController@report')->name('report');
+	Route::get('report/{id}/{timestamp}', 'HomeController@report')->name('report');
 	Route::resource('alerts', 'AlertController');
     Route::resource('account', 'AccountController');
-    //Route::resource('invites', 'InviteController');
-	//Route::get('/rewards', 'RewardController@index')->name('rewards');
+    Route::resource('invites', 'InviteController');
+    Route::get('invita', 'MemberGetMemberController@index')->name('mgm');
 });
+
+
 
 Route::prefix('admin')->group(function () {
     Route::get('/scrapers', 'AdminController@scrapers')->name('scrapers');

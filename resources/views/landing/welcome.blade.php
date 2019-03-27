@@ -15,8 +15,8 @@
 					<h1>Busca en todos los boletines oficiales y crea tus alertas</h1>
 					<p>Bienvenido a {{ config('app.name') }}, el único buscador que te permite, desde un único sitio,
 						buscar en el Boletín Oficial del Estado, en el Diario Oficial de la Unión Europea, en los
-						Boletines Oficiales de las Comunidades Autónomas, en todos los boletines provinciales y de
-						ayuntamientos de España para encontrar si han publicado algo relacionado con tu búsqueda.
+						Boletines Oficiales de las Comunidades Autónomas y en todos los boletines provinciales y de
+						ayuntamientos de España.
 					</p>
 				</div>
 			@endunless

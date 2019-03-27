@@ -48,6 +48,6 @@ class UserRegisteredEventListener
     private function computeInvite($user)
     {
         $service = new InvitationService();
-        $service->computeInvite($user);
+        $service->computeNewUserInvite($user);
     }
 }

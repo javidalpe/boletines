@@ -59,10 +59,6 @@ class AlertController extends Controller
     public function store(StoreAlertRequest $request)
     {
         $user = Auth::user();
-        if (!$user->can('create', Alert::class)) {
-            flash("Has superado el límite de alertas permitido.")->warning();
-            return back();
-        }
 
         $shouldUserPayForNewAlert = BillingService::shouldUserPayForNewAlert($user);
         $alert = $user->alerts()->create($request->all());

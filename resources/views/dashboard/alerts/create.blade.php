@@ -13,6 +13,7 @@
                 @if($shouldPay)
                     @include('dashboard.alerts.partials.price')
                     @include('dashboard.payments.index')
+                    @include('dashboard.alerts.partials.discount')
                 @else
                     @include('dashboard.alerts.partials.free')
                 @endif

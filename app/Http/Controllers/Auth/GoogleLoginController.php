@@ -66,7 +66,8 @@ class GoogleLoginController extends Controller
 			$user = $this->userRepository->registerUser([
 				'name'     => $data->name,
 				'email'    => $email,
-				'password' => str_random(6)
+				'password' => str_random(6),
+                'token'    => session('token'),
 			]);
 		}
 

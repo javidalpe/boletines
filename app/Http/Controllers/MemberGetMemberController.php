@@ -10,7 +10,7 @@ use Auth;
 use Illuminate\Http\Request;
 use Notification;
 
-class RewardController extends Controller
+class MemberGetMemberController extends Controller
 {
     public function index()
     {
@@ -24,6 +24,6 @@ class RewardController extends Controller
             'invites' => $user->invites()->pending()->get()
         ];
 
-        return view('dashboard.rewards', $data);
+        return view('dashboard.mgm.index', $data);
     }
 }

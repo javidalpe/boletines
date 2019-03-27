@@ -11,12 +11,8 @@ use Illuminate\Http\Request;
 
 class LandingController extends Controller
 {
-	public function welcome(Request $request)
+	public function welcome()
 	{
-		if ($request->token) {
-			session(['token' => $request->token]);
-		}
-
 		$service = new SearchConfigMother();
 		$searchConfig = $service->createForSearch();
 		$termPages = SeoService::getSeoPagesForAllTerms();

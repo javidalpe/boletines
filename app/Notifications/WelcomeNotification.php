@@ -44,9 +44,10 @@ class WelcomeNotification extends Notification
             ->subject(sprintf("Bienvenido a %s", config('app.name')))
             ->greeting(sprintf("Bienvenido a %s!", config('app.name')))
             ->line('Te has registrado correctamente.')
-            ->line(sprintf('El objetivo de %s es permitirte buscar cada día en todos los boletines oficiales de 
-            España y crear alertas para aquellos términos que te interesan (un nombre, empresa, DNI, NIF, sector, 
-            matricula oposiciñon...).', config('app.name')))
+            ->line(sprintf('%s te permitirte buscar cada día en todos los boletines oficiales de 
+            España. Nuestro motor de búsqueda es gratuito y puedes usarlo todas las veces que lo necesites. Pero si 
+            quieres que busquemos por tí automáticamente todos los días y te avisemos cuando encontremos un resultado 
+            de búsqueda nuevo, %s ofrece un sistema de alertas.', config('app.name'), config('app.name')))
             ->action("Crea tu primera alerta", route('alerts.create'))
             ->salutation("Saludos del equipo");
     }
