@@ -267,9 +267,10 @@ class HTMLScraper
         foreach ($this->contents as $content) {
             $json = json_decode($content, true);
             $urls = $func($json);
+	        $fixed = $this->fixLinks($urls);
             $requests = array_map(function ($url) {
                 return new Request($url, 'GET', []);
-            }, $urls);
+            }, $fixed);
             $newLinks = array_merge($newLinks, $requests);
         }
 

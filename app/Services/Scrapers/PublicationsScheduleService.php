@@ -19,6 +19,7 @@ class PublicationsScheduleService
 
 		switch ($publication->id) {
 			case ScrapingService::BOLETIN_CASTELLON:
+			case ScrapingService::BOLETIN_OFICIAL_DE_LA_REGION_DE_MURCIA:
 				return $this->isMondayToStaturday($now);
 			default:
 				$administrativeLevel = $publication->priority;
