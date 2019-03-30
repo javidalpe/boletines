@@ -118,6 +118,10 @@ class HTMLScraper
         $protocol = (isset($parse["scheme"]) ? ($parse["scheme"] . ":") : '') . '//';
         $this->lastDomain = $protocol . $parse["host"];
 
+        if (isset($parse['port'])) {
+	        $this->lastDomain = $this->lastDomain . ':' . $parse['port'];
+        }
+
         if (isset($parse["path"])) {
             $path = $parse["path"];
         } else {
@@ -129,7 +133,7 @@ class HTMLScraper
             $path = substr($path, 0, $index + 1);
         }
 
-        $this->lastUrl = $protocol . $parse["host"] . $path;
+        $this->lastUrl = $this->lastDomain . $path;
     }
 
     /**
