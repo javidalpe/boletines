@@ -199,6 +199,10 @@ class HTMLScraper
         $rawHtmlLinks = $this->match($content, $regex);
         $uniqueRawHtmlLinks = array_unique($rawHtmlLinks);
 
+	    if ($inverseSort) {
+		    $uniqueRawHtmlLinks = array_reverse($uniqueRawHtmlLinks, SORT_STRING);
+	    }
+
 	    if ($maxNumberOfLinks) {
 		    $links = array_slice($uniqueRawHtmlLinks, 0, $maxNumberOfLinks);
 	    } else {
@@ -210,10 +214,6 @@ class HTMLScraper
             $fixedLinks = $this->fixLinks($modifiedLinks);
         } else {
             $fixedLinks = $this->fixLinks($links);
-        }
-
-        if ($inverseSort) {
-	        rsort($fixedLinks, SORT_STRING);
         }
 
         return array_map(function ($link) use ($options) {

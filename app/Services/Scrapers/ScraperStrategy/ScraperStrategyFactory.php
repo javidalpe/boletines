@@ -88,8 +88,6 @@ class ScraperStrategyFactory
 	        	return new BoeScraperStrategy();
             case ScrapingService::DIARIO_OFICIAL_DE_LA_UNION_EUROPEA:
                 return new EurLexScraperStrategy();
-            case ScrapingService::BOLETIN_OFICIAL_DE_LA_JUNTA_DE_ANDALUCIA:
-                return new JuntaDeAndaluciaBoletinScraperStrategy();
             case ScrapingService::BOLETIN_OFICIAL_DE_ARAGON:
                 return new AragonScraperStrategy();
             case ScrapingService::BOLETIN_OFICIAL_DEL_PRINCIPADO_DE_ASTURIAS:
@@ -126,6 +124,8 @@ class ScraperStrategyFactory
                 return new CeutaScraperStrategy();
             case ScrapingService::BOLETIN_OFICIAL_DE_LA_CIUDAD_AUTONOMA_DE_MELILLA:
                 return new MelillaScraperStrategy();
+	        case ScrapingService::BOLETIN_OFICIAL_DE_LA_JUNTA_DE_ANDALUCIA:
+		        return new JuntaDeAndaluciaBoletinScraperStrategy();
             case ScrapingService::BOLETIN_A_CORUNA:
                 return new ACorunaScraperStrategy();
             case ScrapingService::BOLETIN_TERRITORIO_HISTORICO_DE_ALAVA:
