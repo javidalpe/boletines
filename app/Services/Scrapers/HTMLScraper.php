@@ -198,27 +198,28 @@ class HTMLScraper
     {
         $rawHtmlLinks = $this->match($content, $regex);
         $uniqueRawHtmlLinks = array_unique($rawHtmlLinks);
+
+	    if ($maxNumberOfLinks) {
+		    $links = array_slice($uniqueRawHtmlLinks, 0, $maxNumberOfLinks);
+	    } else {
+		    $links = $uniqueRawHtmlLinks;
+	    }
+
         if ($modifier) {
-            $modifiedLinks = $this->modify($uniqueRawHtmlLinks, $modifier);
+            $modifiedLinks = $this->modify($links, $modifier);
             $fixedLinks = $this->fixLinks($modifiedLinks);
         } else {
-            $fixedLinks = $this->fixLinks($uniqueRawHtmlLinks);
+            $fixedLinks = $this->fixLinks($links);
         }
 
         if ($inverseSort) {
 	        rsort($fixedLinks, SORT_STRING);
         }
 
-        if ($maxNumberOfLinks) {
-            $links = array_slice($fixedLinks, 0, $maxNumberOfLinks);
-        } else {
-            $links = $fixedLinks;
-        }
-
         return array_map(function ($link) use ($options) {
             //dd($options);
             return new Request($link, 'GET', $options);
-        }, $links);
+        }, $fixedLinks);
     }
 
     /**
