@@ -8,7 +8,7 @@ class Response
 {
 
     /**
-     * @var
+     * @var \GuzzleHttp\Psr7\Response
      */
     public $response;
     /**

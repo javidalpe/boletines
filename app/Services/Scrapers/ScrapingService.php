@@ -11,6 +11,7 @@ use App\SearchablePage;
 use App\Services\Scrapers\Exceptions\BadRequestException;
 use App\Services\Scrapers\Http\HttpService;
 use App\Services\Scrapers\Http\Request;
+use App\Services\Scrapers\Http\Response;
 use App\Services\Scrapers\IBoletinScraperStrategy;
 use App\Services\Scrapers\ParseContentStrategy\ParseContentStrategyFactory;
 use App\Services\Scrapers\ScraperStrategyFactory;
@@ -243,10 +244,12 @@ class ScrapingService
 		$publication->save();
 	}
 
-    /**
-     * @param $requests Request[]
-     * @param Publication $publication
-     */
+	/**
+	 * @param             $requests Request[]
+	 * @param Publication $publication
+	 *
+	 * @throws GuzzleException
+	 */
 	private function saveFiles($requests, Publication $publication)
 	{
 		foreach ($requests as $request) {
@@ -255,10 +258,12 @@ class ScrapingService
 	}
 
 
-    /**
-     * @param Request $request
-     * @param Publication $publication
-     */
+	/**
+	 * @param Request     $request
+	 * @param Publication $publication
+	 *
+	 * @throws GuzzleException
+	 */
 	private function parseFile(Request $request, Publication $publication)
 	{
 		$storeStrategy = $this->storageStrategyFactory->getStorageStrategyForPublication($publication);
@@ -339,7 +344,7 @@ class ScrapingService
 	}
 
 	/**
-	 * @param      $response
+	 * @param Response $response
 	 * @param bool $useLastModifiedHeader
 	 *
 	 * @return Carbon
@@ -350,7 +355,7 @@ class ScrapingService
 			return Carbon::now();
 		}
 
-		$lastModifiedHeader = $response->getHeader('Last-Modified');
+		$lastModifiedHeader = $response->response->getHeader('Last-Modified');
 
 		if (!$lastModifiedHeader) return Carbon::now();
 
