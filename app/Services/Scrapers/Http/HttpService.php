@@ -9,6 +9,7 @@ use GuzzleHttp\HandlerStack;
 
 class HttpService
 {
+	public static $cache = [];
 
 	public const CHROME_HEADERS = [
 		"Connection" => "keep-alive",
@@ -21,14 +22,21 @@ class HttpService
 		"Accept-Language" => "es-ES,es;q=0.9,en;q=0.8,ca;q=0.7",
 	];
 
-    /**
-     * Returns a Http response from request
-     *
-     * @param Request $request
-     * @return Response|null
-     */
+	/**
+	 * Returns a Http response from request
+	 *
+	 * @param Request $request
+	 *
+	 * @return Response|null
+	 * @throws \GuzzleHttp\Exception\GuzzleException
+	 */
 	public static function get(Request $request)
 	{
+		$cacheKey = $request->url;
+		if (isset(self::$cache[$cacheKey])) {
+			return self::$cache[$cacheKey];
+		}
+
         $try = 3;
 
         while($try) {
@@ -41,7 +49,9 @@ class HttpService
                 $response = $client->request($request->method, $request->url, $request->options);
 
                 $effectiveUrl = $response->getHeaderLine('X-GUZZLE-EFFECTIVE-URL');
-                return new Response($response, $effectiveUrl);
+	            $httpResponse = new Response($response, $effectiveUrl);
+	            self::$cache[$cacheKey] = $httpResponse;
+	            return $httpResponse;
             } catch (ServerException $e) {
                 sleep(1);
                 $try--;
