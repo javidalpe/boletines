@@ -34,6 +34,7 @@ use App\Services\Scrapers\Europeo\AvilaScraperStrategy;
 use App\Services\Scrapers\Europeo\BadajozScraperStrategy;
 use App\Services\Scrapers\Europeo\BarcelonaScraperStrategy;
 use App\Services\Scrapers\Europeo\BizkaiaScraperStrategy;
+use App\Services\Scrapers\Europeo\BormeScraperStrategy;
 use App\Services\Scrapers\Europeo\BurgosScraperStrategy;
 use App\Services\Scrapers\Europeo\CaceresScraperStrategy;
 use App\Services\Scrapers\Europeo\CadizScraperStrategy;
@@ -88,6 +89,8 @@ class ScraperStrategyFactory
 	        	return new BoeScraperStrategy();
             case ScrapingService::DIARIO_OFICIAL_DE_LA_UNION_EUROPEA:
                 return new EurLexScraperStrategy();
+	        case ScrapingService::BOLETIN_OFICIAL_DEL_REGISTRO_MERCANTIL:
+		        return new BormeScraperStrategy();
             case ScrapingService::BOLETIN_OFICIAL_DE_ARAGON:
                 return new AragonScraperStrategy();
             case ScrapingService::BOLETIN_OFICIAL_DEL_PRINCIPADO_DE_ASTURIAS:
