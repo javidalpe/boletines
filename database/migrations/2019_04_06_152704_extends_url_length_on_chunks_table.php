@@ -14,7 +14,7 @@ class ExtendsUrlLengthOnChunksTable extends Migration
     public function up()
     {
 	    Schema::table('chunks', function (Blueprint $table) {
-		    $table->string('url', 514)->change();
+		    $table->string('url', 320)->change();
 	    });
     }
 
