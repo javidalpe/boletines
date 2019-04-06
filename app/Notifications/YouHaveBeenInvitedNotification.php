@@ -50,10 +50,7 @@ class YouHaveBeenInvitedNotification extends Notification
                     ->subject(sprintf("Invitación a %s", config('app.name')))
                     ->greeting("¡Hola!")
                     ->line(sprintf("Tu amigo %s te ha regalado una alerta gratis en %s.", $this->user->name, config('app.name')))
-                    ->line(sprintf("%s es el único buscador que te permite, desde un único sitio,
-						buscar en el Boletín Oficial del Estado, en el Diario Oficial de la Unión Europea, en los
-						Boletines Oficiales de las Comunidades Autónomas y en todos los boletines provinciales y de
-						ayuntamientos de España.",
+                    ->line(sprintf("%s es el único buscador que te permite, desde un único sitio, buscar en el Boletín Oficial del Estado, en el Diario Oficial de la Unión Europea, en el Boletín Oficial del Registro Mercantil, en los Boletines Oficiales de las Comunidades Autónomas y en todos los boletines provinciales y de ayuntamientos de España.",
                         config('app.name')))
                     ->line(sprintf('Las alertas de %s te permiten supervisar los boletines automáticamente y recibir avisos.', config('app.name')))
                     ->line('Para solicitar tu alerta gratis, crea una cuenta a través del siguiente enlace.')
