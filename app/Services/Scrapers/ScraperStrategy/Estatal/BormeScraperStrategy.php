@@ -27,7 +27,7 @@ class BormeScraperStrategy implements IBoletinScraperStrategy
             ->navigate()
 	        ->forEachLink('/index\.php\?d\=\d+&s\=C/')
 	        ->navigate()
-	        ->getLinks('/\/borme\/dias\/\d+\/\d+\/\d+\/pdfs\/BORME\-C\-\d+\-\d+\-\d+\.pdf/');
+	        ->getLinks('/\/borme\/dias\/\d+\/\d+\/\d+\/pdfs\/BORME\-C\-\d+\-\d+\.pdf/');
 
         return array_merge($actosInscritos, $otrosActos, $anuncios);
     }

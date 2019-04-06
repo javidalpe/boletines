@@ -6,6 +6,9 @@
 		<br>
 		<a href="{{url( array_values($publicationsPages)[1]->url )}}">{{ array_values
 				($publicationsPages)[1]->publicationName }}</a>
+		<br>
+		<a href="{{url( array_values($publicationsPages)[2]->url )}}">{{ array_values
+				($publicationsPages)[2]->publicationName }}</a>
 	</div>
 </div>
 
@@ -15,7 +18,7 @@
 	</div>
 </div>
 
-@foreach(array_chunk(array_slice($publicationsPages, 2, 19), 3) as $group)
+@foreach(array_chunk(array_slice($publicationsPages, 3, 19), 3) as $group)
 	<div class="row">
 		@foreach($group as $page)
 			<div class="col-md-4">
@@ -31,7 +34,7 @@
 	</div>
 </div>
 
-@foreach(array_chunk(array_slice($publicationsPages, 21), 3) as $group)
+@foreach(array_chunk(array_slice($publicationsPages, 22), 3) as $group)
 	<div class="row">
 		@foreach($group as $page)
 			<div class="col-md-4">

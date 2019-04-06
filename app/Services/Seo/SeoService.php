@@ -32,6 +32,7 @@ class SeoService
     const PUBLICATIONS = [
         "Boletín Oficial del Estado",
 	    "Diario Oficial de la Unión Europea",
+	    "Boletín Oficial del Registro Mercantil",
         "Boletín Oficial de la Junta de Andalucía",
         "Boletín Oficial de Aragón",
         "Boletín Oficial del Principado de Asturias",
