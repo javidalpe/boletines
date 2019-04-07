@@ -18,7 +18,6 @@ require('laravel-mix-bundle-analyzer');
 mix.sass('resources/assets/sass/app.scss', 'public/css');
 mix.sass('resources/assets/sass/search.scss', 'public/css');
 mix.react('resources/assets/js/search/search.jsx', 'public/js');
-mix.copy('node_modules/jquery/dist/jquery.slim.min.js', 'public/js');
 mix.copy('resources/assets/img/google-logo.png', 'public/img');
 mix.copy('resources/assets/img/boe.png', 'public/img');
 mix.copy('resources/assets/img/lex.png', 'public/img');

@@ -2,6 +2,7 @@
 <html lang="{{ app()->getLocale() }}">
     <head>
         @include('layouts.meta')
+
         @include('layouts.styles')
         @yield('seo')
         @stack('styles')
@@ -14,7 +15,6 @@
         </div>
         @yield('content')
         @include('landing.footer')
-        @include('layouts.scripts')
         @include('cookieConsent::index')
         @stack('scripts')
     </body>

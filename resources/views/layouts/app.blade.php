@@ -15,7 +15,6 @@
             @yield('content')
         </div>
         @include('dashboard.footer')
-        @include('layouts.scripts')
         @stack('scripts')
     </body>
 </html>
