@@ -10,13 +10,18 @@
     "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
   },
   "devDependencies": {
+    "@babel/preset-react": "^7.0.0",
     "axios": "^0.16.2",
     "babel-preset-react": "^6.23.0",
     "bootstrap-sass": "^3.4.1",
     "browser-sync": "^2.26.3",
     "browser-sync-webpack-plugin": "^1.2.0",
     "cross-env": "^5.2.0",
-    "laravel-mix": "^1.7.2"
+    "laravel-mix": "^4.0.15",
+    "laravel-mix-bundle-analyzer": "^1.0.2",
+    "resolve-url-loader": "^2.3.1",
+    "sass": "^1.17.4",
+    "sass-loader": "^7.1.0"
   },
   "dependencies": {
     "is-mobile": "^2.0.0",
@@ -25,6 +30,7 @@
     "react-app-polyfill": "^0.2.2",
     "react-bootstrap": "^0.31.5",
     "react-dom": "^16.8.6",
-    "react-instantsearch": "^4.5.2"
+    "react-instantsearch": "^4.5.2",
+    "lodash": "latest"
   }
 }

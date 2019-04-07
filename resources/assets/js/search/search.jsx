@@ -12,13 +12,20 @@ import {
     Pagination,
     Stats
 } from 'react-instantsearch/dom'
-import {Panel} from 'react-bootstrap';
 import {connectRefinementList} from 'react-instantsearch/connectors';
-import {orderBy} from 'lodash';
+import orderBy from 'lodash/orderBy';
 import "./search.css";
 import mobile from "is-mobile";
 
 const VirtualMenu = connectRefinementList(() => null);
+
+
+const Panel = props => <div className="panel panel-default">
+    <div className="panel-heading">
+        <div>{props.header}</div>
+    </div>
+    <div className="panel-body">{props.children}</div>
+</div>
 
 const Hit = ({hit}) =>
     <div className="hit panel panel-default panel-body">
