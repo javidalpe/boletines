@@ -1,4 +1,5 @@
 import 'react-app-polyfill/ie9';
+import '../polyfill/includes';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {
@@ -7,7 +8,6 @@ import {
     SearchBox,
     Hits,
     Snippet,
-    Menu,
     RefinementList,
     Pagination,
     Stats
