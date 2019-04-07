@@ -25,7 +25,7 @@
 		</div>
 		<div class="row row-after-search">
 			<div class="col-md-6">
-				<h3>¿Qué puedes buscar?</h3>
+				<h2>¿Qué puedes buscar?</h2>
 				<hr>
 				<p>Puedes buscar oposiciones, ayudas o concursos, pero también términos concretos como el nombre de una persona,
 					empresa, CIF, NIF, Matrícula, nombramiento, normativa, sector… que se
@@ -36,7 +36,7 @@
 					Sanchez".</p>
 			</div>
 			<div class="col-md-6">
-				<h3>¿Cómo creo una alerta?</h3>
+				<h2>¿Cómo creo una alerta?</h2>
 				<hr>
 				<p>Puedes convertir una búsqueda en una alerta. Cada mañana, te enviaremos un email si se ha publicado
 					un nuevo boletín con el término de búsqueda. Puedes crear una alerta en la sección <a href="{{route('alerts')
@@ -45,7 +45,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md-12">
-				<h3 id="donde">¿Dónde buscamos?</h3>
+				<h3 id="donde">¿Dónde busca {{config('app.name')}}?</h3>
 				<hr>
 				@include('landing.seo.components.publications')
 			</div>
