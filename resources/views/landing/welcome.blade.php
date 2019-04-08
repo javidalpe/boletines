@@ -28,9 +28,8 @@
 				<h2>¿Qué puedes buscar?</h2>
 				<hr>
 				<p>Puedes buscar oposiciones, ayudas o concursos, pero también términos concretos como el nombre de una persona,
-					empresa, CIF, NIF, Matrícula, nombramiento, normativa, sector… que se
-					publica en cualquiera de los boletines
-					oficiales en el día de hoy.</p>
+					empresa, CIF, NIF, matrícula, nombramiento, normativa, … que se
+					publiquen en cualquiera de los boletines oficiales.</p>
 				<p>Escriba la palabra o la frase que quieras entre comillas para buscar concordancias exactas. Por
 					ejemplo, "Mario Gomez
 					Sanchez".</p>
@@ -38,8 +37,8 @@
 			<div class="col-md-6">
 				<h2>¿Cómo creo una alerta?</h2>
 				<hr>
-				<p>Puedes convertir una búsqueda en una alerta. Cada mañana, te enviaremos un email si se ha publicado
-					un nuevo boletín con el término de búsqueda. Puedes crear una alerta en la sección <a href="{{route('alerts')
+				<p>Si quieres que supervisemos a diario las publicaciones por ti y te avisemos por email si se ha publicado
+					un nuevo boletín con un término de búsqueda concreto, puedes crear una alerta en la sección <a href="{{route('alerts')
                     }}">Alertas</a>.</p>
 			</div>
 		</div>

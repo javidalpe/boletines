@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-md-12">
-		<h3>Boletines de nivel nacional</h3>
+		<h4>Boletines de nivel nacional</h4>
 		<a href="{{url( array_values($publicationsPages)[0]->url )}}">{{ array_values
 				($publicationsPages)[0]->publicationName }}</a>
 		<br>
@@ -14,7 +14,7 @@
 
 <div class="row">
 	<div class="col-md-4">
-		<h3>Boletines Autonómicos</h3>
+		<h4>Boletines Autonómicos</h4>
 	</div>
 </div>
 
@@ -30,7 +30,7 @@
 
 <div class="row">
 	<div class="col-md-4">
-		<h3>Boletines provinciales y ayuntamientos</h3>
+		<h4>Boletines provinciales y ayuntamientos</h4>
 	</div>
 </div>
 
