@@ -6,6 +6,7 @@
     <table class="table table-bordered table-responsive">
         <thead>
             <tr>
+                <th>Estado</th>
                 <th>Número</th>
                 <th>Fecha</th>
                 <th>Total</th>
@@ -13,13 +14,14 @@
             </tr>
         </thead>
         <tbody>
+        @isset($nextInvoice)
+            <tr>
+                @include('dashboard.invoices.partials.invoice', ['invoice' => $nextInvoice])
+            </tr>
+        @endisset
         @foreach($invoices as $invoice)
             <tr>
-                <td>#{{$invoice->number}}</td>
-                <td>{{(\Carbon\Carbon::createFromTimestamp($invoice->date))
-                ->toFormattedDateString()}}</td>
-                <td>@include('components.money', ['amount' => $invoice->total/100])</td>
-                <td><a href="{{$invoice->invoice_pdf}}">Descargar factura</a></td>
+                @include('dashboard.invoices.partials.invoice', ['invoice' => $invoice])
             </tr>
         @endforeach
         </tbody>

@@ -8,6 +8,7 @@ use App\Services\Rewards\RewardsService;
 use App\User;
 use Auth;
 use Illuminate\Http\Request;
+use Stripe\Invoice;
 
 class AccountController extends Controller
 {
@@ -32,7 +33,10 @@ class AccountController extends Controller
     {
         $user = Auth::user();
         $invoices = $user->subscribed('main') ? $user->invoicesIncludingPending() : [];
-        $data = [
+        $nextInvoice = Invoice::upcoming(["customer" => $user->stripe_id]);
+
+	    $data = [
+	    	'nextInvoice' => $nextInvoice,
             'invoices' => $invoices
         ];
 
