@@ -2,7 +2,7 @@
 
 @section('seo')
 	<title>Sobre {{ config('app.name') }}</title>
-	<meta name="description" content="Busca en todos los Boletines Oficiales del España.">
+	<meta name="description" content="Busca en todos los Boletines Oficiales de España.">
 @endsection
 
 @section('content')

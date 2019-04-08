@@ -43,6 +43,7 @@ class InviteController extends Controller
         $emails = json_decode($request->emails);
         $user = Auth::user();
 
+        $numberOfInvites = 0;
         foreach ($emails as $email) {
             if (User::where('email', $email)->first()) continue;
 
@@ -50,11 +51,17 @@ class InviteController extends Controller
 
             $user->invites()->save(new Invite(['email' => $email]));
 
+	        $numberOfInvites++;
             Notification::route('mail', $email)
                 ->notify(new YouHaveBeenInvitedNotification($user));
         }
 
-        flash("Invitaciones enviadas")->success();
+        if ($numberOfInvites) {
+	        flash("Invitaciones enviadas")->success();
+        } else {
+	        flash("Los emails que has introducido ya han sido invitados o han sido utilizado para crear una cuenta.")->error();
+        }
+
         return back();
     }
 
