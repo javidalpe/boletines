@@ -37,13 +37,5 @@ Route::middleware('auth')->group(function () {
     Route::get('invita', 'MemberGetMemberController@index')->name('mgm');
 });
 
-
-
-Route::prefix('admin')->group(function () {
-    Route::get('/scrapers', 'AdminController@scrapers')->name('scrapers');
-    Route::get('/regex', 'AdminController@regex')->name('regex');
-    Route::post('/regex', 'AdminController@regexStore')->name('regex.store');
-});
-
 //Stripe Webhooks
 Route::post('stripe/webhook','\Laravel\Cashier\Http\Controllers\WebhookController@handleWebhook');

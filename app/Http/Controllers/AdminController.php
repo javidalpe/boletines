@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Publication;
 use App\Run;
+use Auth;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -33,5 +34,11 @@ class AdminController extends Controller
         $input = str_replace("/", "\/", $input);
         $withoutNumber = preg_replace("(\d+)", "\d+", $input);
         return view('admin.regex', ['regex' => $withoutNumber]);
+    }
+
+    public function impersonate($id)
+    {
+    	Auth::loginUsingId($id);
+    	return redirect()->route('alerts.index');
     }
 }
