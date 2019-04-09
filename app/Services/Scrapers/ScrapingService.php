@@ -275,7 +275,7 @@ class ScrapingService
             return;
         }
 
-		$response = HttpService::get($request);
+		$response = HttpService::get($request, false);
 
 		if (!$response) {
             Log::error("$originUrl returns nothing");

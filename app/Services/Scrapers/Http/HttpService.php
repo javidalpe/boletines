@@ -27,13 +27,15 @@ class HttpService
 	 *
 	 * @param Request $request
 	 *
+	 * @param bool    $cache
+	 *
 	 * @return Response|null
 	 * @throws \GuzzleHttp\Exception\GuzzleException
 	 */
-	public static function get(Request $request)
+	public static function get(Request $request, $cache = true)
 	{
 		$cacheKey = $request->url;
-		if (isset(self::$cache[$cacheKey])) {
+		if ($cache && isset(self::$cache[$cacheKey])) {
 			return self::$cache[$cacheKey];
 		}
 
@@ -50,7 +52,9 @@ class HttpService
 
                 $effectiveUrl = $response->getHeaderLine('X-GUZZLE-EFFECTIVE-URL');
 	            $httpResponse = new Response($response, $effectiveUrl);
-	            self::$cache[$cacheKey] = $httpResponse;
+	            if ($cache) {
+		            self::$cache[$cacheKey] = $httpResponse;
+	            }
 	            return $httpResponse;
             } catch (ServerException $e) {
                 sleep(1);
