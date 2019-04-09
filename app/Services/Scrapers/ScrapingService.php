@@ -275,7 +275,12 @@ class ScrapingService
             return;
         }
 
-		$response = HttpService::get($request, false);
+		try {
+			$response = HttpService::get($request, false);
+		} catch (GuzzleException $e) {
+			Log::error("$originUrl returns http exception");
+			return;
+		}
 
 		if (!$response) {
             Log::error("$originUrl returns nothing");
