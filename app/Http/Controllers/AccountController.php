@@ -33,9 +33,14 @@ class AccountController extends Controller
     {
         $user = Auth::user();
         $invoices = $user->subscribed('main') ? $user->invoicesIncludingPending() : [];
-        $nextInvoice = Invoice::upcoming(["customer" => $user->stripe_id]);
 
-	    $data = [
+        try {
+            $nextInvoice = Invoice::upcoming(["customer" => $user->stripe_id]);
+        } catch (\Exception $e) {
+            $nextInvoice = null;
+        }
+
+        $data = [
 	    	'nextInvoice' => $nextInvoice,
             'invoices' => $invoices
         ];
