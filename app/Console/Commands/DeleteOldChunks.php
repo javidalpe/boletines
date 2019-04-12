@@ -45,15 +45,17 @@ class DeleteOldChunks extends Command
 		$indexCount = $searchResult['nbHits'];
 		$limit = config('scout.index_limit');
 		$toErase = $indexCount - $limit;
+        Log::debug("To erase $toErase.");
 		if ($toErase > 0) {
 			$lastId = Chunk::orderBy('id', 'desc')->first();
 			$fromIdToErase = $lastId->id - $indexCount;
 			$toIdToErase = $lastId->id - $limit;
+            Log::debug("Deleting $toErase records to reach $limit. From id $fromIdToErase to $toIdToErase.");
 			Chunk::where('id', '>', $fromIdToErase)
 				->where('id', '<=', $toIdToErase)
 				->unsearchable();
 
-			Log::debug("Deleting $toErase records to reach $limit. From id $fromIdToErase to $toIdToErase.");
+
 		}
 	}
 }

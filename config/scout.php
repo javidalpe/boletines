@@ -19,7 +19,7 @@ return [
 
 	'index' => env('SCOUT_INDEX', 'chunks_index'),
 
-	'index_limit' => env('INDEX_LIMIT', 45000),
+	'index_limit' => env('INDEX_LIMIT', 48000),
 
 		/*
 		|--------------------------------------------------------------------------
