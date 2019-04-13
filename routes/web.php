@@ -34,6 +34,8 @@ Route::middleware('auth')->group(function () {
 	Route::resource('alerts', 'AlertController');
     Route::resource('account', 'AccountController');
     Route::resource('invites', 'InviteController');
+    Route::resource('webhooks', 'WebhooksController');
+    Route::get('webhooks/{webhook}/test', 'WebhooksController@test')->name('webhooks.test');
     Route::get('invita', 'MemberGetMemberController@index')->name('mgm');
 });
 

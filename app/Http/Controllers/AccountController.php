@@ -40,9 +40,12 @@ class AccountController extends Controller
             $nextInvoice = null;
         }
 
+        $webhooks = $user->webhooks;
+
         $data = [
 	    	'nextInvoice' => $nextInvoice,
-            'invoices' => $invoices
+            'invoices' => $invoices,
+            'webhooks' => $webhooks,
         ];
 
         return view('dashboard.account.show', $data);

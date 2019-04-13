@@ -10,6 +10,8 @@
                 @include('dashboard.invoices.index')
             @endif
 
+            @include('dashboard.webhooks.index')
+
             @component('components.panel')
                 @slot('title')
                     Borrar la cuenta y todos sus datos
@@ -19,8 +21,7 @@
                     {!! Form::checkbox('name', 'value', false, ['required']); !!} Acepto que esta acción es irreversible
                 </div>
                 <div class="form-group">
-                    {!! Form::submit('Borrar mi cuenta', array('class' => 'btn btn-danger')) !!}
-                    <a href="{{ route('alerts.index') }}" class="btn btn-default">Cancelar</a>
+                    {!! Form::submit('Borrar mi cuenta', array('class' => 'btn btn-default')) !!}
                 </div>
                 {!! Form::close() !!}
             @endcomponent

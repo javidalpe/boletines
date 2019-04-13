@@ -22,6 +22,20 @@ class HttpService
 		"Accept-Language" => "es-ES,es;q=0.9,en;q=0.8,ca;q=0.7",
 	];
 
+    /***
+     * @param $url
+     * @param $body
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+	public static function post($url, $body)
+    {
+        $client = new Client(['verify' => false]);
+        return $client->request('POST', $url, [
+            'body' => $body
+        ]);
+    }
+
 	/**
 	 * Returns a Http response from request
 	 *

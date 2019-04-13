@@ -22,9 +22,10 @@ class CreateWebhooksTable extends Migration
             $table->enum('status', [Webhook::STATUS_OK, Webhook::STATUS_WARNING, Webhook::STATUS_ERROR])->default
             (Webhook::STATUS_OK);
 
-            $table->dateTime('last_request_at')->nullable();
-            $table->integer('last_request_code')->nullable();
-            $table->text('last_request_response')->nullable();
+            $table->dateTime('last_notification_at')->nullable();
+            $table->integer('last_notification_response_code')->nullable();
+            $table->text('last_notification_response_body')->nullable();
+            $table->text('last_notification_request_body')->nullable();
 
             $table->timestamps();
 

@@ -23,6 +23,9 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Run whereResult($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Run whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Run newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Run newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Run query()
  */
 class Run extends Model
 {

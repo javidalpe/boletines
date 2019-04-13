@@ -27,6 +27,9 @@ use Laravel\Scout\Searchable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Chunk whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Chunk whereUrl($value)
  * @mixin \Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Chunk newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Chunk newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Chunk query()
  */
 class Chunk extends Model
 {
