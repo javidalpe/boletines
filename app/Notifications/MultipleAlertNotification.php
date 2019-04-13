@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Channels\WebhookChannel;
 use App\Services\Alerts\ReportService;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
@@ -32,7 +33,7 @@ class MultipleAlertNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail', WebhookChannel::class];
     }
 
     /**
@@ -62,15 +63,22 @@ class MultipleAlertNotification extends Notification
     }
 
     /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
+     * @return false|string
      */
-    public function toArray($notifiable)
+    public function toWebhook()
     {
-        return [
-            //
-        ];
+        $service = new ReportService();
+        $results = [];
+        foreach ($this->alerts as $alert) {
+            $url = $service->getReportUrlForTodayAlert($alert);
+            $results[] = [
+                'query' => $alert->query,
+                'report' => $url
+            ];
+        }
+
+        return json_encode([
+            'results' => $results
+        ]);
     }
 }

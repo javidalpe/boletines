@@ -3,6 +3,7 @@
 namespace App\Notifications;
 
 use App\Alert;
+use App\Channels\WebhookChannel;
 use App\Services\Alerts\ReportService;
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
@@ -34,7 +35,7 @@ class AlertNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail', WebhookChannel::class];
     }
 
     /**
@@ -55,5 +56,22 @@ class AlertNotification extends Notification
             ->action('Ver boletines', $url)
             ->line(sprintf('Podrás gestionar tus alertas desde el área privada de %s.', config('app.name')))
             ->salutation('Saludos del equipo');
+    }
+
+    /**
+     * @return false|string
+     */
+    public function toWebhook()
+    {
+        $service = new ReportService();
+        $url = $service->getReportUrlForTodayAlert($this->alert);
+        return json_encode([
+            'results' => [
+                [
+                    'query' => $this->alert->query,
+                    'report' => $url
+                ]
+            ]
+        ]);
     }
 }
