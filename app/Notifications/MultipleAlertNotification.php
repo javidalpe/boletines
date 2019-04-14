@@ -3,6 +3,7 @@
 namespace App\Notifications;
 
 use App\Channels\WebhookChannel;
+use App\Services\Alerts\AlertResult;
 use App\Services\Alerts\ReportService;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
@@ -13,15 +14,18 @@ class MultipleAlertNotification extends Notification
 {
     use Queueable;
 
-    private $alerts;
+    /**
+     * @var AlertResult[]
+     */
+    public $alertsResults;
 
     /**
      * MultipleAlertNotification constructor.
-     * @param $alerts
+     * @param AlertResult[] $alerts
      */
-    public function __construct(array $alerts)
+    public function __construct($alerts)
     {
-        $this->alerts = $alerts;
+        $this->alertsResults = $alerts;
     }
 
 
@@ -44,18 +48,29 @@ class MultipleAlertNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        $mail = (new MailMessage())
-            ->success()
-            ->subject('Tenemos varias alertas para ti')
-            ->greeting('¡Hola!')
-            ->line("Hemos encontrado varios términos en los boletines oficiales.");
-
         $service = new ReportService();
 
-        foreach ($this->alerts as $alert) {
-            $url = $service->getReportUrlForTodayAlert($alert);
-            $mail = $mail->line(sprintf('El término -%s- ha aparecido en los siguientes boletines:', $alert->query))
-                ->line($url);
+        $mail = (new MailMessage())
+            ->success()
+            ->greeting('¡Hola!');
+
+        if (count($this->alertsResults) > 1) {
+            $mail->subject('Tenemos varias alertas para ti')
+                ->line("Hemos encontrado varios términos en los boletines oficiales.");
+
+            foreach ($this->alertsResults as $alertResult) {
+                $url = $service->getReportUrlForTodayAlert($alertResult->getAlert());
+                $mail = $mail->line(sprintf('El término -%s- ha aparecido en los siguientes boletines:',
+                    $alertResult->getQuery()))
+                    ->line($url);
+            }
+        } else {
+            $firstResult = $this->alertsResults[0];
+            $url = $service->getReportUrlForTodayAlert($firstResult->getAlert());
+            $mail->subject('Tenemos una alerta para ti')
+                ->line(sprintf('Hemos encontrado el término -%s- en al menos uno de los boletines oficiales.',
+                    $firstResult->getQuery()))
+                ->action('Ver boletines', $url);
         }
 
         return $mail->line(sprintf('Podrás gestionar tus alertas desde el área privada de %s.', config('app.name')))
@@ -69,16 +84,18 @@ class MultipleAlertNotification extends Notification
     {
         $service = new ReportService();
         $results = [];
-        foreach ($this->alerts as $alert) {
-            $url = $service->getReportUrlForTodayAlert($alert);
+        foreach ($this->alertsResults as $alertResult) {
+            $url = $service->getReportUrlForTodayAlert($alertResult->getAlert());
             $results[] = [
-                'query' => $alert->query,
+                'query' => $alertResult->getQuery(),
+                'fragments' => $alertResult->getFragments(),
+                'frequency' => $alertResult->getFrequency(),
                 'report' => $url
             ];
         }
 
         return json_encode([
-            'results' => $results
+            'alerts' => $results
         ]);
     }
 }

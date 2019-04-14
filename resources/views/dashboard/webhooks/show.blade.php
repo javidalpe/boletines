@@ -23,13 +23,15 @@
                             <dd>{{$webhook->last_notification_at}}</dd>
 
                             <dt>Contenido enviado al servidor:</dt>
-                            <dd><code>{{$webhook->last_notification_request_body}}</code></dd>
+                            <dd><code style="word-break:
+                            break-all">{{$webhook->last_notification_request_body}}</code></dd>
 
                             <dt>Código de respuesta del servidor:</dt>
                             <dd>{{$webhook->last_notification_response_code}}</dd>
 
                             <dt>Cuerpo de la respuesta del servidor:</dt>
-                            <dd><code>{{$webhook->last_notification_response_body}}</code></dd>
+                            <dd><code style="word-break:
+                            break-all">{{$webhook->last_notification_response_body}}</code></dd>
                         @endif
                     </dl>
                 @slot('footer')
