@@ -19,6 +19,7 @@ class WebhooksController extends Controller
      */
     public function __construct(WebhookService $webhookService)
     {
+        $this->authorizeResource(Webhook::class, 'webhook');
         $this->webhookService = $webhookService;
     }
 

@@ -19,7 +19,7 @@ class AlertPolicy
      */
     public function view(User $user, Alert $alert)
     {
-        //
+        return $alert->user_id === $user->id;
     }
 
     /**
@@ -31,7 +31,6 @@ class AlertPolicy
     public function create(User $user)
     {
         return true;
-        //return $user->alerts()->count() < $user->alerts_limit;
     }
 
     /**
@@ -43,7 +42,7 @@ class AlertPolicy
      */
     public function update(User $user, Alert $alert)
     {
-        //
+        return $alert->user_id === $user->id;
     }
 
     /**
@@ -55,6 +54,6 @@ class AlertPolicy
      */
     public function delete(User $user, Alert $alert)
     {
-        //
+        return $alert->user_id === $user->id;
     }
 }
