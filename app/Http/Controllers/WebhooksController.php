@@ -86,7 +86,7 @@ class WebhooksController extends Controller
 
         flash("Webhook registrado correctamente.")->success();
 
-        return redirect()->route('account.index');
+        return redirect()->route('webhooks.index');
     }
 
     /**
@@ -124,7 +124,7 @@ class WebhooksController extends Controller
 
         flash("Webhook actualizado correctamente.")->success();
 
-        return redirect()->route('account.index');
+        return redirect()->route('webhooks.show', $webhook);
     }
 
     /**
@@ -139,6 +139,6 @@ class WebhooksController extends Controller
 
         flash("Webhook borrado correctamente.")->success();
 
-        return redirect()->route('account.index');
+        return redirect()->route('webhooks.index');
     }
 }
