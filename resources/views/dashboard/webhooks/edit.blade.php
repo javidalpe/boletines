@@ -7,7 +7,7 @@
         @endslot
         {!! Form::open(array('url' => route('webhooks.update', $webhook), 'class' => 'form', 'method' => 'PUT')) !!}
             @include('dashboard.webhooks.partials.fields')
-            @include('components.form-submit', ['fallback' => route('account.index')])
+            @include('components.form-submit', ['fallback' => route('webhooks.index')])
         {!! Form::close() !!}
     @endcomponent
 @endsection
