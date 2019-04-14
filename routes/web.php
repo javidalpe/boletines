@@ -31,11 +31,16 @@ Route::middleware('guest')->group(function() {
 Route::middleware('auth')->group(function () {
 
 	Route::get('report/{id}/{timestamp}', 'HomeController@report')->name('report');
+
 	Route::resource('alerts', 'AlertController');
     Route::resource('account', 'AccountController');
     Route::resource('invites', 'InviteController');
     Route::resource('webhooks', 'WebhooksController');
+    Route::resource('invoices', 'InvoicesController');
+    Route::resource('balance', 'BalanceController');
+
     Route::get('webhooks/{webhook}/test', 'WebhooksController@test')->name('webhooks.test');
+
     Route::get('invita', 'MemberGetMemberController@index')->name('mgm');
 });
 

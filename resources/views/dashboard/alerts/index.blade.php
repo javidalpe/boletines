@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             @if (count($alerts) > 0)
-                @component('components.panel')
+                @component('components.panel-np')
                     @slot('title')
                         Mis alertas
                     @endslot
@@ -34,11 +34,15 @@
                             @endforeach
                         </tbody>
                     </table>
+
+                    @can ('create', App\Alert::class)
+                        @slot('footer')
+                        <a href="{{route('alerts.create')}}" class="btn btn-primary">Crear alerta</a>
+                        @endslot
+                    @endif
                 @endcomponent
 
-                @can ('create', App\Alert::class)
-                    <a href="{{route('alerts.create')}}" class="btn btn-primary">Crear alerta</a>
-                @endif
+
 
             @else
                 @component('components.empty')

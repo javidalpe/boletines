@@ -1,4 +1,7 @@
-@component('components.panel')
+@extends('layouts.8-columns')
+
+@section('main')
+    @component('components.panel')
     @slot('title')
         Webhooks
     @endslot
@@ -25,5 +28,9 @@
 
     </table>
 
-    <a href="{{route('webhooks.create')}}" class="btn btn-primary">Registrar Webhook</a>
-@endcomponent
+        @slot('footer')
+            <a href="{{route('webhooks.create')}}" class="btn btn-primary">Registrar Webhook</a>
+        @endslot
+
+    @endcomponent
+@endsection

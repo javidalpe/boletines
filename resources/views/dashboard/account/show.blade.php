@@ -1,30 +1,26 @@
-@extends('layouts.app')
+@extends('layouts.8-columns')
 
-@section('content')
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+@section('main')
 
-            @include('balance.index')
+    @component('components.panel')
+        @slot('title')
+            Tu cuenta
+        @endslot
 
-            @if(count($invoices) > 0)
-                @include('dashboard.invoices.index')
-            @endif
+        <p class="lead">Facturación</p>
+        <a href="{{route('invoices.index')}}">Facturas</a>
+        <p>Descarga tus facturas pasadas y visualiza tus facturas futuras.</p>
+        <a href="{{route('balance.index')}}">Balance en cuenta</a>
+        <p>Controla tu balance actual en cuenta.</p>
+        <hr>
 
-            @include('dashboard.webhooks.index')
+        <p class="lead">Desarrolladores</p>
+        <a href="{{route('webhooks.index')}}">Webhooks</a>
+        <p>Los webhooks te permiten recibir las alertas en tus servidores de forma automática.</p>
+        <hr>
 
-            @component('components.panel')
-                @slot('title')
-                    Borrar la cuenta y todos sus datos
-                @endslot
-                {!! Form::open(array('route' => ['account.destroy', Auth::user()], 'method'=>'DELETE', 'class' => 'form')) !!}
-                <div class="form-group">
-                    {!! Form::checkbox('name', 'value', false, ['required']); !!} Acepto que esta acción es irreversible
-                </div>
-                <div class="form-group">
-                    {!! Form::submit('Borrar mi cuenta', array('class' => 'btn btn-default')) !!}
-                </div>
-                {!! Form::close() !!}
-            @endcomponent
-        </div>
-    </div>
+        <p class="lead">Cuenta</p>
+        <a href="{{route('account.edit', Auth::id())}}">Borrado de cuenta</a>
+        <p>Entra en esta sección para darte de baja del servicio de {{config('app.name')}}.</p>
+    @endcomponent
 @endsection

@@ -31,24 +31,7 @@ class AccountController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
-        $invoices = $user->subscribed('main') ? $user->invoicesIncludingPending() : [];
-
-        try {
-            $nextInvoice = Invoice::upcoming(["customer" => $user->stripe_id]);
-        } catch (\Exception $e) {
-            $nextInvoice = null;
-        }
-
-        $webhooks = $user->webhooks;
-
-        $data = [
-	    	'nextInvoice' => $nextInvoice,
-            'invoices' => $invoices,
-            'webhooks' => $webhooks,
-        ];
-
-        return view('dashboard.account.show', $data);
+        return view('dashboard.account.show');
     }
 
     /**
@@ -91,7 +74,7 @@ class AccountController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('dashboard.account.delete');
     }
 
     /**

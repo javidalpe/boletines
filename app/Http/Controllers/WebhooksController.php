@@ -25,6 +25,27 @@ class WebhooksController extends Controller
 
 
     /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function index()
+    {
+        $user = Auth::user();
+        return view('dashboard.webhooks.index', ['webhooks' => $user->webhooks]);
+    }
+
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('dashboard.webhooks.create');
+    }
+
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -41,16 +62,6 @@ class WebhooksController extends Controller
         flash("Se ha enviado una petición de prueba al webhook.")->success();
 
         return redirect()->back();
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('dashboard.webhooks.create');
     }
 
     /**
