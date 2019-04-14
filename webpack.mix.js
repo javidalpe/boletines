@@ -1,9 +1,9 @@
 const mix = require('laravel-mix');
 require('laravel-mix-bundle-analyzer');
 
-//if (!mix.inProduction()) {
+if (!mix.inProduction()) {
     mix.bundleAnalyzer();
-//}
+}
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -19,8 +19,8 @@ mix.sass('resources/assets/sass/app.scss', 'public/css');
 mix.sass('resources/assets/sass/search.scss', 'public/css');
 mix.react('resources/assets/js/search/search.jsx', 'public/js');
 mix.copy('resources/assets/img/google-logo.png', 'public/img');
-mix.copy('resources/assets/img/boe.png', 'public/img');
-mix.copy('resources/assets/img/lex.png', 'public/img');
+mix.copy('resources/assets/img/boe.jp2', 'public/img');
+mix.copy('resources/assets/img/lex.jp2', 'public/img');
 mix.copy('resources/assets/img/powered_by_stripe@3x.png', 'public/img');
 mix.copy('resources/assets/img/powered_by_stripe@2x.png', 'public/img');
 mix.copy('resources/assets/img/powered_by_stripe.png', 'public/img');

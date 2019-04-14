@@ -15,6 +15,7 @@
             @yield('content')
         </div>
         @include('dashboard.footer')
+        @include('layouts.defer-styles')
         @stack('scripts')
     </body>
 </html>
