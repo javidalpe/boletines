@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Alert;
 use App\Http\Requests\StoreWebhookRequest;
 use App\Services\Webhooks\WebhookService;
 use App\Webhook;
@@ -52,12 +53,18 @@ class WebhooksController extends Controller
      */
     public function test(Webhook $webhook)
     {
-        $content = [
-          'alerts' => [
+        $results = [[
+            'query' => 'oposiciones técnico auxiliar',
+            'fragments' => '34',
+            'frequency' => Alert::FREQUENCY_DAILY,
+            'report' => 'https://www.example.com'
+        ]];
 
-          ]
-        ];
-        $this->webhookService->sendToWebhook($webhook, json_encode($content));
+        $content = json_encode([
+            'alerts' => $results
+        ]);
+
+        $this->webhookService->sendToWebhook($webhook, $content);
 
         flash("Se ha enviado una petición de prueba al webhook.")->success();
 

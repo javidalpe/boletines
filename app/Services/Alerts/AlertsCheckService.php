@@ -4,7 +4,6 @@ namespace App\Services\Alerts;
 
 use App\Alert;
 use App\Chunk;
-use App\Notifications\AlertNotification;
 use App\Notifications\MultipleAlertNotification;
 use App\Services\Time\TimeService;
 use App\User;
