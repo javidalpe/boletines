@@ -48,14 +48,13 @@ class AlertsCheckService
      */
     private function searchReturnsNewContent(Alert $alert)
     {
-        return new AlertResult(34, $alert);
     	if ($alert->frequency === Alert::FREQUENCY_DAILY) {
 		    $count = $this->getSearchChunksCountForToday($alert);
 	    } else {
 		    $count = $this->getSearchChunksCountForAWeek($alert);
 	    }
 
-    	if ($count !== 0) {
+    	if ($count === 0) {
     	    return null;
         }
 
