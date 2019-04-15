@@ -73,7 +73,7 @@ class MultipleAlertNotification extends Notification
                 ->action('Ver boletines', $url);
         }
 
-        return $mail->line(sprintf('Podrás gestionar tus alertas desde el área privada de %s.', config('app.name')))
+        return $mail->line(sprintf('Recuerda que puedes gestionar tus alertas desde el área privada de %s.', config('app.name')))
             ->salutation('Saludos del equipo');
     }
 
