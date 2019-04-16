@@ -13,7 +13,7 @@
                 @if (!$publication->last_run_result)
                     <span class="label label-default">Nunca analizado</span>
                 @elseif ($publication->last_run_result == \App\Services\ScrapingService::RUN_RESULT_OK)
-                    <span class="label label-success"><i class="glyphicon glyphicon-ok"></i></span>
+                    <span class="label label-success">Correcto</span>
                 @else
                     <span class="label label-danger">Error</span>
                 @endif
