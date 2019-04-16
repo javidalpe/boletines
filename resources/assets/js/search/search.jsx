@@ -18,6 +18,13 @@ import mobile from "is-mobile";
 
 const VirtualMenu = connectRefinementList(() => null);
 
+let timeout = null;
+const debounce = (func, time) => {
+  if (timeout) {
+    clearTimeout(timeout);
+  }
+  timeout = setTimeout(func, time);
+};
 
 const Panel = props => <div className="panel panel-default">
   <div className="panel-heading">
@@ -163,6 +170,12 @@ class SearchPanel extends React.Component {
     var value = event.target.value;
     this.props.setSearched(value.length > 0);
     this.setState({query: value});
+
+    if (window.ga === undefined) {
+      return;
+    }
+
+    debounce(() => ga('send', 'event', 'Search', 'search', value), 200);
   }
 
   render() {
