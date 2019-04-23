@@ -20,6 +20,7 @@
         "laravelcollective/html": "^5.5",
         "league/flysystem-aws-s3-v3": "^1.0",
         "prettus/l5-repository": "^2.6",
+        "sentry/sentry-laravel": "^1.0.1",
         "smalot/pdfparser": "^0.11.0",
         "socialiteproviders/google": "^3.0",
         "spatie/laravel-cookie-consent": "^2.1",
