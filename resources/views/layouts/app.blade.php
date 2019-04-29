@@ -17,5 +17,6 @@
         @include('dashboard.footer')
         @include('layouts.defer-styles')
         @stack('scripts')
+        @include('layouts.scripts')
     </body>
 </html>
