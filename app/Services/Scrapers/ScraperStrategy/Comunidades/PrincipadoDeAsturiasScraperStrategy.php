@@ -19,7 +19,7 @@ class PrincipadoDeAsturiasScraperStrategy implements IBoletinScraperStrategy
         return HTMLScraper::create("http://www.asturias.es/bopa")
             ->forEachLink ("/\/portal\/site\/Asturias\/menuitem\.\w+\/\?vgnextoid=\w+&i18n\.http\.lang=es&fecha=\d+\/\d+\/\d+&FechaHidden1=FECHA&FechaCompHidden1=1&origen=calendario/", self::MAX_NUMBER_OF_PUBLICATIONS)
             ->navigate()
-            ->getLinks("/https:\/\/sede\.asturias\.es\/bopa\/\d+\/\d+\/\d+\/\w+\.pdf/");
+            ->getLinks("/https:\/\/sede\.asturias\.es\/bopa\/\d+\/\d+\/\d+\/\d+\-\w+\.pdf/");
     }
 
 
