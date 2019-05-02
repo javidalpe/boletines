@@ -24,6 +24,9 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Publication wherePriority($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Publication whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Publication newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Publication newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Publication query()
  */
 class Publication extends Model
 {

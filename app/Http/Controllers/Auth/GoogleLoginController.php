@@ -47,7 +47,7 @@ class GoogleLoginController extends Controller
 
 		$user = $this->getUser($email, $data);
 
-		Auth::login($user);
+		Auth::login($user, true);
 
 		return redirect()->intended(route('alerts.create'));
 	}

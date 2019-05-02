@@ -7,12 +7,17 @@ use App\Events\AlertCreated;
 use App\Events\AlertDeleted;
 use App\Http\Requests\StoreAlertRequest;
 use App\Services\Billing\BillingService;
-use App\User;
 use Auth;
 use Illuminate\Http\Request;
 
 class AlertController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->authorizeResource(Alert::class, 'alert');
+    }
+
     /**
      * Display a listing of the resource.
      *

@@ -81,4 +81,9 @@ class LandingController extends Controller
 	{
 		return view('landing.contact');
 	}
+
+    public function developers()
+    {
+        return view('landing.developers');
+    }
 }

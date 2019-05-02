@@ -4,7 +4,6 @@ namespace App\Services\Alerts;
 
 use App\Alert;
 use App\Chunk;
-use App\Notifications\AlertNotification;
 use App\Notifications\MultipleAlertNotification;
 use App\Services\Time\TimeService;
 use App\User;
@@ -12,73 +11,84 @@ use Carbon\Carbon;
 use Log;
 use Notification;
 
+
 class AlertsCheckService
 {
 
     public function checkAllAlerts()
     {
-        $alertsPerUser = [];
+        /***
+         * @var AlertResult[]
+         */
+        $newContentPerUser = [];
+
         $alerts = Alert::with('user')
-	        //->where('time', '=', Carbon::now()->format('H:i:s'))
 	        ->get();
 
         foreach ($alerts as $alert) {
-            if ($this->isDayToCheck($alert) && $this->searchReturnsNewContent($alert)) {
-                $alertsPerUser = $this->addAlertToUser($alert, $alertsPerUser);
+
+            if (!$this->isDayToCheck($alert)) {
+                continue;
+            }
+
+            $alertSearchResult = $this->searchReturnsNewContent($alert);
+            if ($alertSearchResult) {
+                $newContentPerUser = $this->addAlertToUser($alertSearchResult, $newContentPerUser);
             }
         }
 
-        foreach ($alertsPerUser as $userId => $alerts) {
-            $this->notifyAlertsToUser($alerts, $userId);
+        foreach ($newContentPerUser as $userId => $alertsResults) {
+            $this->notifyAlertsToUser($alertsResults, $userId);
         }
     }
 
     /**
      * @param Alert $alert
-     * @return bool
+     * @return AlertResult|null
      */
     private function searchReturnsNewContent(Alert $alert)
     {
     	if ($alert->frequency === Alert::FREQUENCY_DAILY) {
-		    return $this->getSearchChunksCountForToday($alert) > 0;
+		    $count = $this->getSearchChunksCountForToday($alert);
 	    } else {
-		    return $this->getSearchChunksCountForAWeek($alert) > 0;
+		    $count = $this->getSearchChunksCountForAWeek($alert);
 	    }
 
+    	if ($count === 0) {
+    	    return null;
+        }
+
+    	return new AlertResult($count, $alert);
     }
 
     /**
-     * @param $alert
+     * @param AlertResult $alertSearchResult
      * @param $alertsPerUser
      * @return mixed
      */
-    private function addAlertToUser($alert, $alertsPerUser)
+    private function addAlertToUser(AlertResult $alertSearchResult, $alertsPerUser)
     {
-        $user = $alert->user;
-        if (isset($alertsPerUser[$user->id])) {
-            array_push($alertsPerUser[$user->id], $alert);
+        $userId = $alertSearchResult->getAlert()->user->id;
+        if (isset($alertsPerUser[$userId])) {
+            array_push($alertsPerUser[$userId], $alertSearchResult);
         } else {
-            $alertsPerUser[$user->id] = array($alert);
+            $alertsPerUser[$userId] = [$alertSearchResult];
         }
         return $alertsPerUser;
     }
 
     /**
-     * @param $alerts
+     * @param AlertResult[] $alertsResults
      * @param $userId
      */
-    private function notifyAlertsToUser($alerts, $userId)
+    private function notifyAlertsToUser($alertsResults, $userId)
     {
-        if (count($alerts) <= 1) {
-            $alert = $alerts[0];
-            $alert->user->notify(new AlertNotification($alert));
+        $userToNotify = User::find($userId);
+
+        $userToNotify->notify(new MultipleAlertNotification($alertsResults));
+        foreach ($alertsResults as $alertResult) {
+            $alert = $alertResult->getAlert();
             $this->markAlertAsNotified($alert);
-        } else {
-            $userToNotify = User::find($userId);
-            $userToNotify->notify(new MultipleAlertNotification($alerts));
-            foreach ($alerts as $alert) {
-                $this->markAlertAsNotified($alert);
-            }
         }
     }
 
@@ -125,9 +135,9 @@ class AlertsCheckService
 
 
     /**
-     * @param $alert
+     * @param Alert $alert
      */
-    private function markAlertAsNotified($alert)
+    private function markAlertAsNotified(Alert $alert)
     {
         $alert->notified_at = Carbon::now();
         $alert->save();
@@ -147,5 +157,61 @@ class AlertsCheckService
 		$now = Carbon::now();
 		return $now->dayOfWeek === Carbon::MONDAY;
 	}
+
+}
+
+class AlertResult
+{
+    /***
+     * @var int
+     */
+    public $fragments;
+    /***
+     * @var Alert
+     */
+    public $alert;
+
+    /**
+     * AlertResult constructor.
+     * @param int $fragments
+     * @param Alert $alert
+     */
+    public function __construct(int $fragments, Alert $alert)
+    {
+        $this->fragments = $fragments;
+        $this->alert = $alert;
+    }
+
+    /**
+     * @return int
+     */
+    public function getFragments(): int
+    {
+        return $this->fragments;
+    }
+
+    /**
+     * @return Alert
+     */
+    public function getAlert(): Alert
+    {
+        return $this->alert;
+    }
+
+    /***
+     * @return string
+     */
+    public function getFrequency()
+    {
+        return $this->alert->frequency;
+    }
+
+    /***
+     * @return string
+     */
+    public function getQuery()
+    {
+        return $this->alert->query;
+    }
 
 }

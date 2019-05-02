@@ -45,7 +45,7 @@ class ResetPasswordNotification extends Notification
         return (new MailMessage)
             ->subject("Recuperar contraseña")
             ->line('Estás recibiendo este email porque hemos recibido una petición para recuperar tu contraseña.')
-            ->action("Recuperar contraseña", route('password.reset', $this->token))
+            ->action("Recuperar contraseña", route('password.reset', ['token' => $this->token]))
             ->line("Si tu no solicitaste la recuperación de contraseña, ignora este mensaje.");
     }
 

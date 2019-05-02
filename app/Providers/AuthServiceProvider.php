@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Alert;
 use App\Policies\AlertPolicy;
+use App\Policies\WebhookPolicy;
+use App\Webhook;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -16,6 +18,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         Alert::class => AlertPolicy::class,
+        Webhook::class => WebhookPolicy::class,
     ];
 
     /**

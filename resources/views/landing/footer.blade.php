@@ -13,6 +13,7 @@
                 @guest
                     <li><a href="{{ route('alerts') }}">Alertas</a></li>
                 @endguest
+                <li><a href="{{route('developers')}}">Para desarrolladores</a></li>
                 <li><a href="{{route('account.index')}}">Darse de Baja</a></li>
 
             </ul>
@@ -41,10 +42,12 @@
     </div>
     <div class="row" style="margin-top: 40px; margin-bottom: 40px">
         <div class="col-md-2">
-            <img class="img-responsive" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="{{mix('img/boe.png')}}" alt="Busca en el Boletín Oficial del Estado">
+            <img class="img-responsive" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+                 data-src="{{mix('img/boe.png')}}" alt="Busca en el Boletín Oficial del Estado">
         </div>
         <div class="col-md-4">
-            <img class="img-responsive" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="{{mix('img/lex.png')}}" alt="Busca en el Diario Oficial de la Unión Europea">
+            <img class="img-responsive" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+                 data-src="{{mix('img/lex.png')}}" alt="Busca en el Diario Oficial de la Unión Europea">
         </div>
         <div class="col-md-2 col-md-offset-3">
             <img class="img-responsive" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="{{mix('img/powered_by_stripe@3x.png')}}" alt="Con la tecnología de Stripe">
