@@ -12,6 +12,6 @@ class BarcelonaScraperStrategy implements IBoletinScraperStrategy
     {
         return HTMLScraper::create("https://bop.diba.cat/default.asp?C=recerca.sumari_institucions")
             ->forEachLink("/\/default\.asp\?C\=recerca\.sumari_institucions&f1\=\d+\/\d+\/\d+&f2\=\d+\/\d+\/\d+&sl\=\d+&o\=\d+&p\=\d+/")
-	        ->getLinks("/https\:\/\/bop\.diba\.cat\/scripts\/ftpisa\.aspx\?fnew\?\w+&\d+\/\d+\.pdf&1/");
+	        ->getLinks("/https\:\/\/bop\.diba\.cat\/scripts\/ftpisa\.aspx\?fnew\?\w+&\d+\/\d+\.pdf/");
     }
 }
