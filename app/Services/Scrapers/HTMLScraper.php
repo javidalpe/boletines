@@ -278,4 +278,20 @@ class HTMLScraper
         return $newLinks;
     }
 
+	/**
+	 * @param \Closure $func
+	 *
+	 * @return $this
+	 */
+	public function getContentFromJson(\Closure $func)
+	{
+		$newContents = [];
+		foreach ($this->contents as $content) {
+			$json = json_decode($content, true);
+			$newContents[] = $func($json);
+		}
+
+		$this->contents = $newContents;
+		return $this;
+	}
 }
