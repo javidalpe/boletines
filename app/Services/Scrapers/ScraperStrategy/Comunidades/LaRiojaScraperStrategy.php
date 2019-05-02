@@ -16,21 +16,6 @@ class LaRiojaScraperStrategy implements IBoletinScraperStrategy
 
 	public function downloadFilesFromInternet()
 	{
-		/*$url = 'https://iqadi.larioja.org/apps/ckan-client/public/bor/getBors';
-		$now = Carbon::now();
-		$response = HttpService::post($url, [
-			'form_params' => [
-				'getDetalleBOR' => true,
-				'date' => $now->format('D M d Y H:i:s e')
-			]
-		]);
-		$body = $response->getBody()->getContents();
-		$parsed = json_decode($body, true);
-		$html = $parsed['data']['bor'];
-		$cleanHtml = str_replace("\n", "", $html);
-
-		JSONScraper*/
-
 		$now = Carbon::now();
 		return HTMLScraper::create("https://iqadi.larioja.org/apps/ckan-client/public/bor/getBors", 'POST', [
 			'form_params' => [

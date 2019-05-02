@@ -21,7 +21,7 @@ class HTMLScraper
     private $requests;
     private $contents;
     private $lastDomain;
-    private $lastUrl;
+    public $lastUrl;
 
     const MAX_LINKS_PER_PAGE = 10;
 
@@ -170,7 +170,7 @@ class HTMLScraper
      *
      * @return string
      */
-    private function fixLink(string $link)
+    public function fixLink(string $link)
     {
         if (substr($link, 0, 4) == 'http') {
             return $link;
@@ -179,6 +179,15 @@ class HTMLScraper
         if (substr($link, 0, 1) == '/') {
             return $this->lastDomain . $link;
         }
+
+	    if (substr($link, 0, 2) == './') {
+		    $matches = preg_match_all('/\.\.\//', $link, $matches, PREG_PATTERN_ORDER);
+		    $segments = explode('/', $this->lastUrl);
+		    $take = array_slice($segments, 0, count($segments) - $matches - 1);
+		    $join = implode("/", $take);
+		    $cleanUrl = substr($link, 2 + $matches * 3);
+		    return $join . '/' . $cleanUrl;
+	    }
 
         return $this->lastUrl . $link;
     }
