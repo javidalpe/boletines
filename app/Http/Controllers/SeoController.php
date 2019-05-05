@@ -35,10 +35,12 @@ class SeoController extends Controller
 		$page = $pages[$slug];
 		$service = new SearchConfigMother();
 		$searchConfig = $service->createForPredefinedPublication($page->publicationName);
+		$suggestion = SeoService::getSearchSuggestionForPublication($page->publicationName);
 
 		$data = [
 			'page'   => $page,
 			'termPages' => $termPages,
+			'suggestion' => $suggestion,
 			'config' => json_encode($searchConfig)
 		];
 
@@ -57,10 +59,12 @@ class SeoController extends Controller
 
 		$service = new SearchConfigMother();
 		$searchConfig = $service->createForPredefinedPublicationAndTerm($publicationPage->publicationName, $termPage->query);
+		$suggestion = SeoService::getSearchSuggestionForPublication($publicationPage->publicationName);
 
 		$data = [
 			'termPage'   => $termPage,
 			'publicationPage' => $publicationPage,
+			'suggestion' => $suggestion,
 			'config' => json_encode($searchConfig)
 		];
 

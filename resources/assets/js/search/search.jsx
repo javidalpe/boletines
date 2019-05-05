@@ -147,14 +147,6 @@ function CreateAlert(props) {
   return <a id="call-to-action" href={url} className="btn btn-primary">Crear alerta diaria</a>;
 }
 
-const SearchHelp = () => {
-  if (config.defaultRefinementSearch !== null) {
-    return null;
-  }
-  return <div className="help-block"><p>Puedes buscar oposiciones, nombres, direcciones, empresas. Ejemplo: 75714470,
-    "Maria Peña", "energias renovables", ...</p></div>
-}
-
 class SearchPanel extends React.Component {
 
 
@@ -185,7 +177,6 @@ class SearchPanel extends React.Component {
     const defaultQueryNotAlert = config.defaultRefinementSearch && !config.existingAlerts.some(a => a === query)
     const shouldShowAlert = userEnterNewQuery || defaultQueryNotAlert;
     return <div>
-      <SearchHelp/>
       <div id="searchbox-container">
         <Search onSearch={this.onSearch}/>
         {shouldShowAlert &&

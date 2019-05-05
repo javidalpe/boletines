@@ -17,11 +17,13 @@ class LandingController extends Controller
 		$searchConfig = $service->createForSearch();
 		$termPages = SeoService::getSeoPagesForAllTerms();
 		$publicationsPages = SeoService::getSeoPagesForAllPublications();
+		$suggestion = SeoService::getSearchSuggestionForPublication('');
 
 		$data = [
 			'config' => json_encode($searchConfig),
 			'termPages'  => $termPages,
-			'publicationsPages' => $publicationsPages
+			'publicationsPages' => $publicationsPages,
+			'suggestion' => $suggestion,
 		];
 
 		return view('landing.welcome', $data);

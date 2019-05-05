@@ -4,6 +4,7 @@ namespace App\Services\Seo;
 
 use App\Publication;
 use App\SeoPage;
+use App\Services\ScrapingService;
 
 class SeoService
 {
@@ -30,9 +31,9 @@ class SeoService
     ];
 
     const PUBLICATIONS = [
-        "Boletín Oficial del Estado",
-	    "Diario Oficial de la Unión Europea",
-	    "Boletín Oficial del Registro Mercantil",
+	    self::BOLETIN_OFICIAL_DEL_ESTADO,
+	    self::DIARIO_OFICIAL_DE_LA_UNION_EUROPEA,
+	    self::BOLETIN_OFICIAL_DEL_REGISTRO_MERCANTIL,
         "Boletín Oficial de la Junta de Andalucía",
         "Boletín Oficial de Aragón",
         "Boletín Oficial del Principado de Asturias",
@@ -244,7 +245,11 @@ class SeoService
         "Premios nacionales",
     ];
 
-    /**
+	public const BOLETIN_OFICIAL_DEL_ESTADO = "Boletín Oficial del Estado";
+	public const DIARIO_OFICIAL_DE_LA_UNION_EUROPEA = "Diario Oficial de la Unión Europea";
+	public const BOLETIN_OFICIAL_DEL_REGISTRO_MERCANTIL = "Boletín Oficial del Registro Mercantil";
+
+	/**
      * @param $term
      * @return mixed
      */
@@ -347,5 +352,25 @@ class SeoService
 	private static function getTermSlug($term): string
 	{
 		return 'alertas-' . self::getSlug($term);
-}
+	}
+
+	/**
+	 * @param string $publicationName
+	 *
+	 * @return string
+	 */
+	public static function getSearchSuggestionForPublication($publicationName)
+	{
+		switch ($publicationName)
+		{
+			case self::BOLETIN_OFICIAL_DEL_REGISTRO_MERCANTIL:
+				return "Puedes buscar un nombre de empresa, un CIF, un teléfono de empresa. También nombramientos, juntas generales, ampliaciones de capital, actos inscritos, ...";
+			case self::BOLETIN_OFICIAL_DEL_ESTADO:
+				return "Puedes buscar oposiciones, ayudas, concursos, licitaciones, subastas, multas, nombres de personas. Ejemplo: \"ayudas al alquiler\", \"Maria Peña\", \"paternidad\", ...";
+			case self::DIARIO_OFICIAL_DE_LA_UNION_EUROPEA:
+				return "Puedes buscar nuevas licitaciones, anuncios de información previa DOUE, normas armonizasas, partidas arancelarias, código intrastat, siglas, ...";
+			default:
+				return "Puedes buscar oposiciones, nombres, direcciones, empresas. Ejemplo: 75714470, \"Maria Peña\", \"energias renovables\", ...";
+		}
+	}
 }
