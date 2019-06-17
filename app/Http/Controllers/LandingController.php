@@ -29,6 +29,18 @@ class LandingController extends Controller
 		return view('landing.welcome', $data);
 	}
 
+	public function search(Request $request)
+    {
+        $service = new SearchConfigMother();
+        $searchConfig = $service->createForPredefinedSearch($request->get('q', ''));
+
+        $data = [
+            'config' => json_encode($searchConfig)
+        ];
+
+        return view('landing.search', $data);
+    }
+
 	public function how()
 	{
 		return view('landing.how');

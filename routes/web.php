@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'LandingController@welcome')->name('welcome');
+Route::get('/buscar', 'LandingController@search')->name('search');
 Route::get('/acerca-de', 'LandingController@how')->name('how');
 Route::get('/sobre-nosotros', 'LandingController@about')->name('about');
 Route::get('/contactanos', 'LandingController@contact')->name('contact');
