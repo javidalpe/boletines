@@ -150,7 +150,7 @@
     button,input{-webkit-font-smoothing:antialiased;letter-spacing:.1px;}
     a{-webkit-transition:all .2s;transition:all .2s;}
     .alert{border:none;}
-    .help-block{opacity:.8;font-size:.85em;padding-bottom:10px;}
+    .help-block{opacity:.9;font-size:.85em;padding-bottom:10px;}
     @media only screen and (min-width:600px){
         .row-after-search{margin-top:42px;}
     }
@@ -340,7 +340,7 @@
     button,input{-webkit-font-smoothing:antialiased;letter-spacing:.1px;}
     a{transition:all .2s;}
     .alert{border:none;}
-    .help-block{opacity:.8;font-size:.85em;padding-bottom:10px;}
+    .help-block{opacity:.9;font-size:.85em;padding-bottom:10px;}
     @media only screen and (min-width:600px){
         .row-after-search{margin-top:42px;}
     }
