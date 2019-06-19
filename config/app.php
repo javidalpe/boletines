@@ -213,4 +213,5 @@ return [
 
     ],
 
+    'chrome_extension_url' => env('CHROME_EXTENSION_URL', 'https://chrome.google.com/webstore/detail/infoboe/faaadmimmnkekajegnimmbbeoegaeiik?hl=es')
 ];
