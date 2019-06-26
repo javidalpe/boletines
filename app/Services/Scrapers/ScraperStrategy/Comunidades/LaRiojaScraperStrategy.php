@@ -23,13 +23,9 @@ class LaRiojaScraperStrategy implements IBoletinScraperStrategy
 				'date' => $now->format('D M d Y H:i:s e')
 			]
 		])
-			->mapContent(function($content) {
-				return preg_replace( "/\r|\n/", "", $content );
-			})
-			/*->getContentFromJson(function($json) {
-			$bor = $json['data']['bor'];
-			return preg_replace( "/\r|\n/", "", $bor );
-		})*/->getLinks("/http\:\/\/ias1\.larioja\.org\/boletin\/Bor_Boletin_visor_Servlet\?referencia\=[0-9\-]+PDF+[^\"]+/");
+		->mapContent(function($content) {
+			return preg_replace( '/(\\\n)|(\\\)/', "", $content );
+		})->getLinks("/http\:\/\/ias1\.larioja\.org\/boletin\/Bor_Boletin_visor_Servlet\?referencia\=[0-9\-]+PDF+[^\s\"]+/");
 	}
 
 
