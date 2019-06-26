@@ -300,6 +300,9 @@ class HTMLScraper
 		$newContents = [];
 		foreach ($this->contents as $content) {
 			$json = json_decode($content, true);
+			if ($json === null) {
+				Log::warning("Failed to parse json content: " . substr($content, 10));
+			}
 			$newContents[] = $func($json);
 		}
 
@@ -331,5 +334,21 @@ class HTMLScraper
 	public function getLastDomain()
 	{
 		return $this->lastDomain;
+	}
+
+	/**
+	 * @param \Closure $func
+	 *
+	 * @return $this
+	 */
+	public function mapContent(\Closure $func)
+	{
+		$newContents = [];
+		foreach ($this->contents as $content) {
+			$newContents[] = $func($content);
+		}
+
+		$this->contents = $newContents;
+		return $this;
 	}
 }
