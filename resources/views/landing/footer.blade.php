@@ -13,6 +13,7 @@
                 @guest
                     <li><a href="{{ route('alerts') }}">Alertas</a></li>
                 @endguest
+                <li><a href="{{ config('app.chrome_extension_url') }}">Extensión para el navegador</a></li>
                 <li><a href="{{route('developers')}}">Para desarrolladores</a></li>
                 <li><a href="{{route('account.index')}}">Darse de Baja</a></li>
 

@@ -159,7 +159,7 @@ return [
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
-        App\Providers\TelescopeServiceProvider::class,
+        // App\Providers\TelescopeServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
     ],
@@ -213,4 +213,5 @@ return [
 
     ],
 
+    'chrome_extension_url' => env('CHROME_EXTENSION_URL', 'https://chrome.google.com/webstore/detail/infoboe/faaadmimmnkekajegnimmbbeoegaeiik?hl=es')
 ];

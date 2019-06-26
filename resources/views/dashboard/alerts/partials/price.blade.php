@@ -14,6 +14,6 @@
         @else
             <h2>8€<small>/mes</small></h2>
         @endif
-    <p class="help-block">@include('dashboard.alerts.partials.description')</a>.
+    <p class="help-block">@include('dashboard.alerts.partials.description')</p>
     </p>
 </div>
