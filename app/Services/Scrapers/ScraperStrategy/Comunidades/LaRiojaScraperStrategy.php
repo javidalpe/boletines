@@ -17,7 +17,7 @@ class LaRiojaScraperStrategy implements IBoletinScraperStrategy
 	public function downloadFilesFromInternet()
 	{
 		$now = Carbon::now();
-		return HTMLScraper::create("https://iqadi.larioja.org/apps/ckan-client/public/bor/getBors", 'POST', [
+		return HTMLScraper::create("https://web.larioja.org/apps/ckan-client/public/bor/getBors", 'POST', [
 			'form_params' => [
 				'getDetalleBOR' => true,
 				'date' => $now->format('D M d Y H:i:s e')
