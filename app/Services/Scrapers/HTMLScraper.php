@@ -306,4 +306,30 @@ class HTMLScraper
 		$this->contents = $newContents;
 		return $this;
 	}
+
+
+
+	/**
+	 * @return Request[]
+	 */
+	public function getRequests(): array
+	{
+		return $this->requests;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getContents(): array
+	{
+		return $this->contents;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getLastDomain()
+	{
+		return $this->lastDomain;
+	}
 }

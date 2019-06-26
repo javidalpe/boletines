@@ -24,7 +24,7 @@ class LaRiojaScraperStrategy implements IBoletinScraperStrategy
 			]
 		])->getContentFromJson(function($json) {
 			$bor = $json['data']['bor'];
-			return str_replace("\n", "", $bor);
+			return preg_replace( "/\r|\n/", "", $bor );
 		})->getLinks("/http\:\/\/ias1\.larioja\.org\/boletin\/Bor_Boletin_visor_Servlet\?referencia\=[0-9\-]+PDF+[^\"]+/");
 	}
 
