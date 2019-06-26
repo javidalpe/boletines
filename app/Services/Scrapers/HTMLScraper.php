@@ -248,6 +248,9 @@ class HTMLScraper
                 $inverseSort, $modifier, $options);
             $this->requests = array_merge($this->requests, $sliceArray);
         }
+        if (count($this->requests) === 0 && count($this->contents) > 0) {
+        	Log::warning("Previous regex didn't find links");
+        }
     }
 
     /**
