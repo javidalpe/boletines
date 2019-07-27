@@ -35,6 +35,8 @@ Route::middleware('auth')->group(function () {
 	Route::get('report/{id}/{timestamp}', 'HomeController@report')->name('report');
 
 	Route::resource('alerts', 'AlertController');
+    Route::get('alerta-creada', 'AlertController@index')->name('conversion');
+
     Route::resource('account', 'AccountController');
     Route::resource('invites', 'InviteController');
     Route::resource('webhooks', 'WebhooksController');
