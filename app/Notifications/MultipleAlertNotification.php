@@ -51,7 +51,6 @@ class MultipleAlertNotification extends Notification
         $service = new ReportService();
 
         $mail = (new MailMessage())
-            ->success()
             ->greeting('¡Hola!');
 
         if (count($this->alertsResults) > 1) {
