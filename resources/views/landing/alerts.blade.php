@@ -13,7 +13,6 @@
 				<p>Nuestro motor de búsqueda es gratuito y puedes usarlo todas las veces que lo necesites.
 				Pero si quieres que busquemos por tí automáticamente todos los días y te avisemos cuando encontremos un
 					resultado de búsqueda nuevo, {{ config('app.name') }} ofrece un sistema de alertas.</p>
-				<p class="well">@include('dashboard.alerts.partials.description')</p>
 				<a href="{{ route('register', Request::query()) }}" class="btn btn-primary">Registrarse y crear una alerta</a>
 			</div>
 		</div>

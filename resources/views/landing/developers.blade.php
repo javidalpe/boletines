@@ -12,9 +12,16 @@
                 <h1>Intégrate con {{ config('app.name') }}</h1>
                 <p>Sabemos lo importante que es mejorar el acceso a los Boletines Oficiales del Estado, y eso implica
                     mejorar también el acceso a través de la tecnología. Por ese motivo abrimos nuestra plataforma a
-                    los desarrolladores. Actualmente ofrecemos un sistema basado en webhooks, pero pronto
-                    comenzaremos el desarrollo de una API que te permitirá buscar en tiempo real en todos los
-                    boletines oficiales de España.</p>
+                    los desarrolladores.</p>
+                <p>Si buscar incorporar búsquedas a tu aplicación, utiliza nuestra <i>API</i> de consultas. Si lo que
+                quieres es recibir notificaciones cada vez que un término aparezca en los boletines, registra
+                <i>Webhooks</i>.</p>
+
+                <h2>API</h2>
+                <p>Disponemos de una API que te permite buscar en los últimos Boletines Oficiales del Estado. Basada en
+                respuestas JSON y respuestas HTTP standard, la API ofrece busquedas de texto con o sin concordancias de
+                texto exactas.</p>
+                <p>Si quieres acceder a nuestra API de búsqueda, <a href="{{route('contact')}}">contacta con nosotros.</a></p>
 
                 <h2>Webhooks</h2>
                 <p>Usa los webhooks para ser notificado cuando las alertas ofrecen nuevos resultados.</p>
