@@ -1,5 +1,5 @@
 @php
-$card = Auth::user()->defaultCard();
+$card = Auth::user()->defaultPaymentMethod()->card;
 @endphp
 
 <div class="panel panel-default panel-body">

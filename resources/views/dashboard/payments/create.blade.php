@@ -44,31 +44,37 @@
       });
 
 
+      var intentElement = document.getElementById('intent');
+      var clientSecret = intentElement.dataset.secret;
+
       // Create a token or display an error when the form is submitted.
       var form = document.getElementById('form');
       form.addEventListener('submit', function(event) {
         event.preventDefault();
 
-        stripe.createToken(card).then(function(result) {
-          if (result.error) {
+        stripe.handleCardSetup(clientSecret, card).then(function(data) {
+            var error = data.error;
+            var setupIntent = data.setupIntent;
+
+          if (error) {
             // Inform the customer that there was an error.
             var errorElement = document.getElementById('card-errors');
-            errorElement.textContent = result.error.message;
+            errorElement.textContent = error.message;
           } else {
             // Send the token to your server.
-            stripeTokenHandler(result.token);
+            stripeTokenHandler(setupIntent);
           }
         });
       });
 
-      function stripeTokenHandler(token) {
+      function stripeTokenHandler(setupIntent) {
         // Insert the token ID into the form so it gets submitted to the server
-        var form = document.getElementById('form');
-        var hiddenInput = document.createElement('input');
-        hiddenInput.setAttribute('type', 'hidden');
-        hiddenInput.setAttribute('name', 'stripeToken');
-        hiddenInput.setAttribute('value', token.id);
-        form.appendChild(hiddenInput);
+
+          var paymentMethodhiddenInput = document.createElement('input');
+          paymentMethodhiddenInput.setAttribute('type', 'hidden');
+          paymentMethodhiddenInput.setAttribute('name', 'paymentMethod');
+          paymentMethodhiddenInput.setAttribute('value', setupIntent.payment_method);
+          form.appendChild(paymentMethodhiddenInput);
 
         // Submit the form
         form.submit();
@@ -88,6 +94,7 @@
 
         <!-- Used to display form errors. -->
         <div id="card-errors" role="alert"></div>
+        <div id="intent" data-secret="{{ $intent->client_secret }}"></div>
     </div>
 
 </div>

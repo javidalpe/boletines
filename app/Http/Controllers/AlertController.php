@@ -48,8 +48,10 @@ class AlertController extends Controller
 
         $user = Auth::user();
         $alertCount = $user->alerts()->count();
-        $data = [
-        	'shouldPay' => BillingService::shouldUserPayForNewAlert($user),
+	    $shouldUserPayForNewAlert = BillingService::shouldUserPayForNewAlert($user);
+	    $data = [
+        	'shouldPay' => $shouldUserPayForNewAlert,
+	        'intent' => $shouldUserPayForNewAlert ? $user->createSetupIntent():null,
 	        'alertsCount' => $alertCount
         ];
         return view('dashboard.alerts.create', $data);
@@ -74,7 +76,7 @@ class AlertController extends Controller
 	        } else {
 		        $user->newSubscription('main', config('services.stripe.alert-id'))
 			        ->quantity(1)
-			        ->create($request->stripeToken);
+			        ->create($request->paymentMethod);
 	        }
         }
 
