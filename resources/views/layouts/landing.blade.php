@@ -6,6 +6,7 @@
         @include('layouts.styles')
         @yield('seo')
         @stack('styles')
+        @include('layouts.adsense')
     </head>
     <body>
         @include('layouts.tag-manager-noscript')
