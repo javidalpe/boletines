@@ -4,6 +4,7 @@
 	<title>Busca y crea alertas en el {{ $page->publicationName }}</title>
 	<meta name="description"
 	      content="Busca y supervisa los contenidos del {{ $page->publicationName }}.">
+	@include('landing.components.adsense')
 @endsection
 
 @section('content')
