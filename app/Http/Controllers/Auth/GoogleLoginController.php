@@ -8,6 +8,7 @@ use App\User;
 use Auth;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Support\Str;
 
 class GoogleLoginController extends Controller
 {
@@ -66,7 +67,7 @@ class GoogleLoginController extends Controller
 			$user = $this->userRepository->registerUser([
 				'name'     => $data->name,
 				'email'    => $email,
-				'password' => str_random(6),
+				'password' => Str::random(6),
                 'token'    => session('token'),
 			]);
 		}

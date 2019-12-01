@@ -2,6 +2,7 @@
 
 namespace App\Services\Seo;
 
+use Illuminate\Support\Str;
 use App\Publication;
 use App\SeoPage;
 use App\Services\ScrapingService;
@@ -263,7 +264,7 @@ class SeoService
     public static function getSlug($term)
     {
 	    $noPrepositions = str_replace(self::PREPOSITIONS, " ", $term);
-        $slugged = str_slug($noPrepositions, '-', 'es');
+        $slugged = Str::slug($noPrepositions, '-', 'es');
         return $slugged;
     }
 

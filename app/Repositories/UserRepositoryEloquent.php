@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Events\UserRegistered;
 use App\User;
+use Illuminate\Support\Str;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\UserRepository;
@@ -47,7 +48,7 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
 		    'name' => $data['name'],
 		    'email' => $data['email'],
 		    'password' => bcrypt($data['password']),
-		    'token' => str_random(self::USER_RANDOM_TOKEN),
+		    'token' => Str::random(self::USER_RANDOM_TOKEN),
 		    'free_alerts' => self::INITIAL_ALERTS,
 		    'user_id' => $inviterId
 	    ]);

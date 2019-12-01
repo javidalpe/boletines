@@ -7,10 +7,10 @@
 </td>
 <td>#{{$invoice->number}}</td>
 <td>
-	@if (Carbon\Carbon::createFromTimestamp($invoice->date) > Carbon\Carbon::now())
+	@if (Carbon\Carbon::createFromTimestamp($invoice->created) > Carbon\Carbon::now())
 		<i>(Próximamente)</i>
 	@endif
-	{{(Carbon\Carbon::createFromTimestamp($invoice->date))
+	{{(Carbon\Carbon::createFromTimestamp($invoice->created))
                 ->toFormattedDateString()}}
 </td>
 <td>@include('components.money', ['amount' => $invoice->total/100])</td>
