@@ -39,7 +39,7 @@ class DeleteOldChunks extends Command
 	 */
 	public function handle()
 	{
-		$client = new \AlgoliaSearch\Client(config('scout.algolia.id'), config('scout.algolia.secret'));
+		$client = \Algolia\AlgoliaSearch\SearchClient::create(config('scout.algolia.id'), config('scout.algolia.secret'));
 		$index = $client->initIndex(config('scout.index'));
 		$searchResult = $index->search('', ['hitsPerPage' => 1]);
 		$indexCount = $searchResult['nbHits'];

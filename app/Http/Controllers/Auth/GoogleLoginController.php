@@ -43,7 +43,7 @@ class GoogleLoginController extends Controller
 	 */
 	public function handleProviderCallback()
 	{
-		$data = Socialite::driver('google')->user();
+		$data = Socialite::driver('google')->stateless()->user();
 		$email = $data->email;
 
 		$user = $this->getUser($email, $data);
