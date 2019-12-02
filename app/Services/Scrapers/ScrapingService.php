@@ -153,7 +153,7 @@ class ScrapingService
 
 	public function updateIndexesFrom(int $from)
 	{
-		Log::debug("Updating all indexes");
+		Log::debug("Updating all indexes from $from");
 
 		$publications = Publication::where('id', '>=', $from)->get();
 		foreach ($publications as $publication) {
@@ -242,6 +242,8 @@ class ScrapingService
 		$publication->last_run_result = $run->result;
 		$publication->last_run_at = Carbon::now();
 		$publication->save();
+
+		HttpService::clearCache();
 	}
 
 	/**

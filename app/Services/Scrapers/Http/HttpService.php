@@ -22,6 +22,11 @@ class HttpService
 		"Accept-Language" => "es-ES,es;q=0.9,en;q=0.8,ca;q=0.7",
 	];
 
+	public static function clearCache()
+	{
+		self::$cache = [];
+	}
+
     /***
      * @param $url
      * @param $body
