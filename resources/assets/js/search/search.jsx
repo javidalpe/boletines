@@ -39,7 +39,11 @@ const Hit = ({hit}) =>
     <div>
       <strong>{hit.publication_name}</strong>
       <div>{hit.day}</div>
-      <i><Snippet attributeName="content" hit={hit} tagName="i"/></i>
+        <div style={styles.result}>
+            <i>
+                <Snippet attributeName="content" hit={hit} tagName="i"/>
+            </i>
+        </div>
     </div>
   </div>
 
@@ -257,4 +261,11 @@ class Main
 }
 
 ReactDOM.render(<Main/>, document.getElementById('root'));
+
+const styles = {
+    result: {
+        overflow: "hidden",
+        textOverflow: "ellipsis"
+    }
+}
 
