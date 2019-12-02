@@ -35,7 +35,7 @@ const Panel = props => <div className="panel panel-default">
 
 const Hit = ({hit}) =>
   <div className="hit panel panel-default panel-body">
-    <a href={hit.url} target="_blank" className="btn btn-default pull-right">Descargar PDF</a>
+    <a href={hit.url} target="_blank" rel="noopener noreferrer" className="btn btn-default pull-right">Descargar PDF</a>
     <div>
       <strong>{hit.publication_name}</strong>
       <div>{hit.day}</div>
@@ -137,11 +137,11 @@ function Search(props) {
   const onFocus = () => mobile() && scrollToSearchInput();
 
   if (config.defaultRefinementSearch) {
-    return <SearchBox id="searchbox" onFocus={onFocus} autoFocus={true} onChange={props.onSearch}
+    return <SearchBox id="searchbox" name="search" onFocus={onFocus} autoFocus={true} onChange={props.onSearch}
                       translations={{placeholder: ""}}
                       defaultRefinement={config.defaultRefinementSearch}/>;
   } else {
-    return <SearchBox id="searchbox" onFocus={onFocus} autoFocus={true} onChange={props.onSearch}
+    return <SearchBox id="searchbox" name="search" onFocus={onFocus} autoFocus={true} onChange={props.onSearch}
                       translations={{placeholder: ""}}/>;
   }
 }
@@ -182,7 +182,7 @@ class SearchPanel extends React.Component {
     const shouldShowAlert = userEnterNewQuery || defaultQueryNotAlert;
     return <div>
       <div id="searchbox-container">
-        <Search onSearch={this.onSearch}/>
+          <label htmlFor="search" style={{display: "none"}}>Introduce un término</label><Search onSearch={this.onSearch}/>
         {shouldShowAlert &&
         <CreateAlert query={query || config.defaultRefinementSearch}/>
         }
