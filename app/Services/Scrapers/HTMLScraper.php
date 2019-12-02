@@ -226,7 +226,6 @@ class HTMLScraper
         }
 
         return array_map(function ($link) use ($options) {
-            //dd($options);
             return new Request($link, 'GET', $options);
         }, $fixedLinks);
     }
