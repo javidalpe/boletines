@@ -67,9 +67,7 @@ class HttpService
                 $stack->push(EffectiveUrlMiddleware::middleware());
                 $client = new Client([
                 	'handler' => $stack,
-	                'defaults' => [
-	                    'verify' => false
-                    ]
+                    'verify' => false
                 ]);
 
                 $response = $client->request($request->method, $request->url, $request->options);
