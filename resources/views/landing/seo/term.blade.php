@@ -4,7 +4,7 @@
 	<title>{{ $page->termName }} en los últimos boletines</title>
 	<meta name="description"
 	      content="Busca y crea alertas sobre {{ strtolower($page->termName) }} en los boletines oficiales.">
-	@include('landing.components.adsense')
+
 @endsection
 
 @section('content')

@@ -4,7 +4,7 @@
 	<title>{{ $termPage->termName }} en el {{ $publicationPage->publicationName }}</title>
 	<meta name="description"
 	      content="Busca y supervisa los contenidos del {{ $publicationPage->publicationName }}.">
-	@include('landing.components.adsense')
+
 @endsection
 
 @section('content')

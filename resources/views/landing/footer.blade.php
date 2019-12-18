@@ -43,13 +43,27 @@
     </div>
     <div class="row" style="margin-top: 40px; margin-bottom: 40px">
         <div class="col-md-2">
-            <img loading="lazy" class="img-responsive" src="{{mix('img/boe.webp')}}" alt="Busca en el Boletín Oficial del Estado">
+            <img loading="lazy" class="img-responsive" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+                 data-src="{{mix('img/boe.webp')}}" alt="Busca en el Boletín Oficial del Estado">
         </div>
         <div class="col-md-4">
-            <img loading="lazy" class="img-responsive" src="{{mix('img/lex.webp')}}" alt="Busca en el Diario Oficial de la Unión Europea">
+            <img loading="lazy" class="img-responsive" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+                 data-src="{{mix('img/lex.webp')}}" alt="Busca en el Diario Oficial de la Unión Europea">
         </div>
         <div class="col-md-2 col-md-offset-3" >
-            <img loading="lazy" class="img-responsive" src="{{mix('img/powered_by_stripe@3x.png')}}" alt="Con la tecnología de Stripe">
+            <img loading="lazy" class="img-responsive" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="{{mix('img/powered_by_stripe@3x.png')}}" alt="Con la tecnología de Stripe">
         </div>
     </div>
 </div>
+
+@push('scripts')
+    <script>
+      function init() {
+        var imgDefer = document.getElementsByTagName('img');
+        for (var i=0; i<imgDefer.length; i++) {
+          if(imgDefer[i].getAttribute('data-src')) {
+            imgDefer[i].setAttribute('src',imgDefer[i].getAttribute('data-src'));
+          } } }
+      window.onload = init;
+    </script>
+@endpush
