@@ -2,7 +2,7 @@
 
 return [
     'rewards' => [
-        'inviter' => 50,
-        'invitee' => 15,
+        'inviter' => env('MGM_INVITER', 50),
+        'invitee' => env('MGM_INVITEE',15),
     ]
 ];

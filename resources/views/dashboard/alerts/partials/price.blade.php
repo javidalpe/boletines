@@ -1,19 +1,8 @@
-@php
-    $count = $alertsCount;
-@endphp
-
-
 <div class="form-group">
     <label for="card-element">
         Precio de la alerta:
     </label>
-        @if ($count < 5)
-            <h2>9€<small>/mes</small></h2>
-        @elseif ($count < 20)
-            <h2>7€<small>/mes</small></h2>
-        @else
-            <h2>5€<small>/mes</small></h2>
-        @endif
+    <h3>2€<small>/mes</small></h3>
     <p class="help-block">@include('dashboard.alerts.partials.description')</p>
     </p>
 </div>
