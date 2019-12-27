@@ -255,6 +255,9 @@ class SeoService
         "Empresas por registro sanitario"
     ];
 
+    const DESCRIPTION_FOR_NO_QUERY_TERMS = 'Esta página te permite encontrar personas físicas o jurídicas en los últimos
+     boletines oficiales del estado. Escribe el DNI, NIE o CIF de una empresa para empezar a recibir resultados.';
+
 	public const BOLETIN_OFICIAL_DEL_ESTADO = "Boletín Oficial del Estado";
 	public const DIARIO_OFICIAL_DE_LA_UNION_EUROPEA = "Diario Oficial de la Unión Europea";
 	public const BOLETIN_OFICIAL_DEL_REGISTRO_MERCANTIL = "Boletín Oficial del Registro Mercantil";
@@ -299,7 +302,7 @@ class SeoService
 		    }
             foreach (self::TERMS_WITH_NO_QUERY as $term) {
                 $slug = self::getTermSlug($term);
-                $pages[$slug] = new SeoPage($slug, null, $term);
+                $pages[$slug] = new SeoPage($slug, null, $term, null, self::DESCRIPTION_FOR_NO_QUERY_TERMS);
             }
 		    self::$pagesForTerms = $pages;
 	    }
@@ -341,7 +344,7 @@ class SeoService
 
         foreach (self::TERMS_WITH_NO_QUERY as $term) {
             $slug = self::getTermSlug($term) . '/' . $pageConfig->url;
-            $pages[$slug] = new SeoPage($slug, null, $term, $pageConfig->publicationName);
+            $pages[$slug] = new SeoPage($slug, null, $term, $pageConfig->publicationName, self::DESCRIPTION_FOR_NO_QUERY_TERMS);
         }
 
         return $pages;
