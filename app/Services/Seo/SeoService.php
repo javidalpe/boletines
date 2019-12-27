@@ -246,6 +246,15 @@ class SeoService
         "Premios nacionales",
     ];
 
+    const TERMS_WITH_NO_QUERY = [
+        "Personas físicas",
+        "Personas jurídicas",
+        "Empresas de la competencia",
+        "Empresas por cif",
+        "Empresas en concurso",
+        "Empresas por registro sanitario"
+    ];
+
 	public const BOLETIN_OFICIAL_DEL_ESTADO = "Boletín Oficial del Estado";
 	public const DIARIO_OFICIAL_DE_LA_UNION_EUROPEA = "Diario Oficial de la Unión Europea";
 	public const BOLETIN_OFICIAL_DEL_REGISTRO_MERCANTIL = "Boletín Oficial del Registro Mercantil";
@@ -288,6 +297,10 @@ class SeoService
 			    $slug = self::getTermSlug($term);
 			    $pages[$slug] = new SeoPage($slug, self::getQuery($term), $term);
 		    }
+            foreach (self::TERMS_WITH_NO_QUERY as $term) {
+                $slug = self::getTermSlug($term);
+                $pages[$slug] = new SeoPage($slug, null, $term);
+            }
 		    self::$pagesForTerms = $pages;
 	    }
 
@@ -324,6 +337,11 @@ class SeoService
         foreach (self::TERMS as $term) {
             $slug = self::getTermSlug($term) . '/' . $pageConfig->url;
             $pages[$slug] = new SeoPage($slug, self::getQuery($term), $term, $pageConfig->publicationName);
+        }
+
+        foreach (self::TERMS_WITH_NO_QUERY as $term) {
+            $slug = self::getTermSlug($term) . '/' . $pageConfig->url;
+            $pages[$slug] = new SeoPage($slug, null, $term, $pageConfig->publicationName);
         }
 
         return $pages;
