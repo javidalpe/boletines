@@ -255,7 +255,7 @@ class SeoService
         "Empresas por registro sanitario"
     ];
 
-    const DESCRIPTION_FOR_NO_QUERY_TERMS = 'Esta página te permite encontrar personas físicas o jurídicas en los últimos
+    const DESCRIPTION_FOR_NO_QUERY_TERMS = 'Esta página te permite buscar personas físicas o jurídicas en los últimos
      boletines oficiales del estado. Escribe el DNI, NIE o CIF de una empresa para empezar a recibir resultados.';
 
 	public const BOLETIN_OFICIAL_DEL_ESTADO = "Boletín Oficial del Estado";
