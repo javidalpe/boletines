@@ -80,6 +80,8 @@ class RouteServiceProvider extends ServiceProvider
 		    ->group(base_path('routes/seo.php'));
     }
 
+
+
 	private function mapAdminRoutes()
 	{
 		Route::prefix('admin')
