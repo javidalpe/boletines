@@ -13,7 +13,7 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 class Kernel extends ConsoleKernel
 {
 	const SCRAP_DAILY_TIME = '11:30';
-	const FREE_DAILY_TIME = '23:00';
+    const SITEMAP_GENERATION_TIME = '05:00';
 
     /**
      * The Artisan commands provided by your application.
@@ -35,13 +35,15 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-	    $schedule->command('indexes:free')->dailyAt(self::FREE_DAILY_TIME);
 	    $schedule->command('indexes:update')
 		    ->dailyAt(self::SCRAP_DAILY_TIME)
 		    ->after(function () {
+		        Artisan::call('indexes:free');
 			    Artisan::call('alerts:checks');
-			    Artisan::call('sitemap:generate');
 		    });
+
+        $schedule->command('sitemap:generate')
+            ->dailyAt(self::SITEMAP_GENERATION_TIME);
     }
 
     /**
