@@ -30,14 +30,16 @@ class SeoController extends Controller
 	public function publication(Request $request)
 	{
 		$pages = SeoService::getSeoPagesForAllPublications();
-		$slug = $request->segments()[0];
-		$termPages = SeoService::getTermPagesForPublication($slug);
-		$page = $pages[$slug];
-		$service = new SearchConfigMother();
-		$searchConfig = $service->createForPredefinedPublication($page->publicationName);
-		$suggestion = SeoService::getSearchSuggestionForPublication($page->publicationName);
+        $slug = $request->segments()[0];
+        $page = $pages[$slug];
 
-		$data = [
+        $service = new SearchConfigMother();
+        $searchConfig = $service->createForPredefinedPublication($page->publicationName);
+
+        $suggestion = SeoService::getSearchSuggestionForPublication($page->publicationName);
+        $termPages = SeoService::getTermPagesForPublication($slug);
+
+        $data = [
 			'page'   => $page,
 			'termPages' => $termPages,
 			'suggestion' => $suggestion,

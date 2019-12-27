@@ -12,9 +12,15 @@
 		<div class="row">
 			<div class="col-md-12">
 				<h1>{{ $page->termName }}</h1>
-				<p>Estos los últimos contenidos sobre {{ strtolower($page->termName) }} publicados en los boletines oficiales de España.
-					Con nuestra web puedes buscar de forma gratuita en los últimos boletines
-					oficiales de España y Europa. Y si quieres que busquemos por tí, también puedes <a href="{{route('alerts')}}">crear alertas diarias</a>.</p>
+                <p>
+                    @isset($page->searchDescription)
+                        {{ $page->searchDescription }}
+                    @else
+                    Estos los últimos contenidos sobre {{ strtolower($page->termName) }} publicados en los boletines oficiales de España.
+                        Con nuestra web puedes buscar de forma gratuita en los últimos boletines
+                        oficiales de España y Europa.
+                    @endisset
+                    Y si quieres que busquemos por tí, también puedes <a href="{{route('alerts')}}">crear alertas diarias</a>.</p>
 			</div>
 
 			@include('shared.search')
