@@ -93,7 +93,7 @@
         </div>
 
         <!-- Used to display form errors. -->
-        <div id="card-errors" role="alert"></div>
+        <div id="card-errors" role="alert" class="text-danger"></div>
         <div id="intent" data-secret="{{ $intent->client_secret }}"></div>
     </div>
     <div class="col-md-4">
