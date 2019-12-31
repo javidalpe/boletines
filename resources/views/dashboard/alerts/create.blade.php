@@ -22,19 +22,7 @@
         @endcomponent
     </div>
 
-    <div class="col-md-3 col-md-offset-1">
-        @component('components.panel')
-            @slot('title')
-                Sugerencias de alertas
-            @endslot
-            <ul>
-                <li>57247758E</li>
-                <li>"Construcciones Herrera SA"</li>
-                <li>oposiciones libres bombero</li>
-                <li>"Maria Espinosa Garcia"</li>
-            </ul>
-        @endcomponent
-
+    <div class="col-md-4 col-md-offset-1">
         @component('components.panel')
             @slot('title')
                 ¿Dónde buscamos?
@@ -45,8 +33,9 @@
                 <li>Boletín Oficial del Registro Mercantil</li>
                 <li>18 Boletines de comunidades autónomas</li>
                 <li>44 Boletines provinciales</li>
-                <li><a href="{{route('status')}}">Estado del sistema</a></li>
             </ul>
+
+            <a href="{{route('status')}}">Estado del sistema</a>
         @endcomponent
 
             @component('components.panel')
