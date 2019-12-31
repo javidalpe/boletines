@@ -97,7 +97,7 @@
         <div id="intent" data-secret="{{ $intent->client_secret }}"></div>
     </div>
     <div class="col-md-4">
-        <a href="https://stripe.com/es"><img src="/img/powered_by_stripe.svg" alt="Powered by Stripe" class="img-fluid"></a>
+        <a href="https://stripe.com/es"><img src="/img/powered_by_stripe.svg" alt="Powered by Stripe" class="img-fluid" style="margin-top: 8px;"></a>
     </div>
 </div>
 

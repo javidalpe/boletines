@@ -1,5 +1,5 @@
 @component('components.form-group', ['name' => 'query', 'label' => 'Termino de búsqueda:',
-'help' => 'Supervisaremos diariamente los boletines oficiales buscando este término. Puedes entrecomillar el término de búsqueda para encontrar concondarcias exactas.'])
+'help' => 'Supervisaremos diariamente 65 boletines oficiales buscando este término. Puedes entrecomillar el término de búsqueda para encontrar concondarcias exactas.'])
     {!! Form::text('query', isset($alert)?$alert->query:session()->pull('query'), array('class' =>
     'form-control', 'autofocus' => true)) !!}
 @endcomponent
@@ -11,7 +11,7 @@
 @endcomponent
 
 
-@component('components.form-group', ['name' => 'frequency', 'label' => 'Frecuencia de aviso:',
+@component('components.form-group', ['name' => 'frequency', 'label' => 'Frecuencia:',
 'help' => 'Dinos si quieres que busquemos y te avisemos todos los días o sólo una vez a la semana (los lunes).'])
 	{!! Form::select('frequency', [
 		App\Alert::FREQUENCY_DAILY => 'Como máximo, una vez al día',
