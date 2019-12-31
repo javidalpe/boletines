@@ -34,6 +34,30 @@
                 <li>"Maria Espinosa Garcia"</li>
             </ul>
         @endcomponent
+
+        @component('components.panel')
+            @slot('title')
+                ¿Dónde buscamos?
+            @endslot
+            <ul>
+                <li>Boletín Oficial del Estado</li>
+                <li>Diario Oficial de la Unión Europea</li>
+                <li>Boletín Oficial del Registro Mercantil</li>
+                <li>18 Boletines de comunidades autónomas</li>
+                <li>44 Boletines provinciales</li>
+                <li><a href="{{route('status')}}">Estado del sistema</a></li>
+            </ul>
+        @endcomponent
+
+            @component('components.panel')
+                @slot('title')
+                    Estadísticas hasta la fecha
+                @endslot
+                <ul>
+                    <li>{{ number_format(\App\Run::count(), 0, ",", ".") }} boletines analizados</li>
+                    <li>{{ number_format(\App\Chunk::count(), 0, ",", ".") }} páginas almacenadas</li>
+                </ul>
+            @endcomponent
     </div>
 </div>
 @endsection
