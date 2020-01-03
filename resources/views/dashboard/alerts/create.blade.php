@@ -28,7 +28,7 @@
                 Sugerencias de alertas
             @endslot
             <ul>
-                <li>57247758E</li>
+                <li>757244d</li>
                 <li>"Construcciones Herrera SA"</li>
                 <li>oposiciones libres bombero</li>
                 <li>"Maria Espinosa Garcia"</li>
