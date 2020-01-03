@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 
 class WebhooksController extends Controller
 {
-
     private $webhookService;
 
     /**
