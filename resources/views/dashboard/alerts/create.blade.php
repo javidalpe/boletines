@@ -17,7 +17,10 @@
                 @else
                     @include('dashboard.alerts.partials.free')
                 @endif
-                @include('components.form-submit', ['fallback' => route('alerts.index')])
+                @include('components.form-submit', [
+	                    'action' => $user->subscribed('main') ? 'Guardar' : 'Probar 1 mes gratis',
+	                    'fallback' => route('alerts.index')
+                ])
             {!! Form::close() !!}
         @endcomponent
     </div>

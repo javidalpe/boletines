@@ -50,6 +50,7 @@ class AlertController extends Controller
         $alertCount = $user->alerts()->count();
 	    $shouldUserPayForNewAlert = BillingService::shouldUserPayForNewAlert($user);
 	    $data = [
+	    	'user'     => $user,
         	'shouldPay' => $shouldUserPayForNewAlert,
 	        'intent' => $shouldUserPayForNewAlert ? $user->createSetupIntent():null,
 	        'alertsCount' => $alertCount
@@ -75,6 +76,7 @@ class AlertController extends Controller
 		        $user->subscription('main')->updateQuantity(BillingService::billableAlertsCount($user));
 	        } else {
 		        $user->newSubscription('main', config('services.stripe.alert-id'))
+			        ->trialDays(30)
 			        ->quantity(1)
 			        ->create($request->paymentMethod);
 	        }
