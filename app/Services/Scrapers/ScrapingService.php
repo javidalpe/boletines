@@ -209,25 +209,25 @@ class ScrapingService
 			$newCount = Chunk::count();
 			$publication->last_success_run_at = Carbon::now();
 		} catch (ServerException $e) {
-			Log::debug("Error updating {$regionName}: error de servidor en " . $e->getRequest()->getUri());
+			Log::warning("Error updating {$regionName}: error de servidor en " . $e->getRequest()->getUri());
 			$run->result = self::RUN_RESULT_ERROR;
 		} catch (ClientException $e) {
-			Log::debug("Error updating {$regionName}: error cliente al obtener la url " . $e->getRequest()->getUri() . " : " . $e->getMessage());
+			Log::warning("Error updating {$regionName}: error cliente al obtener la url " . $e->getRequest()->getUri() . " : " . $e->getMessage());
 			$run->result = self::RUN_RESULT_ERROR;
 		} catch (\ErrorException $e) {
 		    if (config('app.debug')) {
 		        throw $e;
             }
-			Log::debug("Error updating {$regionName}: " . $e->getTraceAsString());
+			Log::warning("Error updating {$regionName}: " . $e->getTraceAsString());
 			$run->result = self::RUN_RESULT_ERROR;
 		} catch (BadRequestException $e) {
-			Log::debug("Error updating {$regionName}: error en la petición al obtener la url " . $e->url);
+			Log::warning("Error updating {$regionName}: error en la petición al obtener la url " . $e->url);
 			$run->result = self::RUN_RESULT_ERROR;
 		} catch (\PDOException $e) {
-			Log::debug("Error updating {$regionName}: error al guardar el documento " . $e->getTraceAsString());
+			Log::warning("Error updating {$regionName}: error al guardar el documento " . $e->getTraceAsString());
 			$run->result = self::RUN_RESULT_ERROR;
 		} catch (GuzzleException $e) {
-			Log::debug("Error updating {$regionName}: error al obtener una url " . $e->getMessage());
+			Log::warning("Error updating {$regionName}: error al obtener una url " . $e->getMessage());
 			$run->result = self::RUN_RESULT_ERROR;
 		}
 
@@ -237,7 +237,7 @@ class ScrapingService
 		$run->new_files = $new_chunks;
 		$run->save();
 
-		Log::debug("Finished with {$new_chunks} new chunks");
+		Log::info("Finished {$regionName} with {$new_chunks} new chunks");
 
 		$publication->last_run_result = $run->result;
 		$publication->last_run_at = Carbon::now();
