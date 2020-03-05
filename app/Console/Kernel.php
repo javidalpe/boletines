@@ -13,7 +13,6 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 class Kernel extends ConsoleKernel
 {
 	const SCRAP_DAILY_TIME = '11:30';
-    const SITEMAP_GENERATION_TIME = '05:00';
 
     /**
      * The Artisan commands provided by your application.
@@ -41,9 +40,6 @@ class Kernel extends ConsoleKernel
 		        Artisan::call('indexes:free');
 			    Artisan::call('alerts:checks');
 		    });
-
-        $schedule->command('sitemap:generate')
-            ->dailyAt(self::SITEMAP_GENERATION_TIME);
     }
 
     /**
