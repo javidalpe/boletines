@@ -177,7 +177,7 @@ class AlertsCheckService
 	private function getSearchQueryForAlert(Alert $alert): \Laravel\Scout\Builder
 	{
 		$query = Chunk::search($alert->query);
-		if ($alert->publication_id) {
+		if ($alert->publication_id !== null) {
 			$query = $query->where('publication_id', $alert->publication_id);
 		}
 		return $query;
