@@ -68,6 +68,15 @@ const PublicationsMenu = () => {
         limitMin={10}
         limitMax={65}
         translations={{showMore: expanded => expanded ? 'Mostrar menos' : 'Mostrar mas'}}
+        transformItems={items => items.sort((a, b) => {
+          if (a.label > b.label) {
+            return 1;
+          }
+          if (a.label < b.label) {
+            return -1;
+          }
+          return 0;
+        })}
       />
     </div>
   }
