@@ -34,6 +34,7 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Eloquent
  * @property int|null $publication_id
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Alert wherePublicationId($value)
+ * @property-read \App\Publication|null $publication
  */
 class Alert extends Model
 {

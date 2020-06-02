@@ -116,8 +116,8 @@ class AlertsCheckService
 
         $daystamp = TimeService::dayStamp($now);
 
-        $chunks = Chunk::search($alert->query)
-            ->where('daystamp', $daystamp)
+	    $query = $this->getSearchQueryForAlert($alert);
+	    $chunks = $query->where('daystamp', $daystamp)
             ->get();
 
         return count($chunks);
@@ -137,8 +137,8 @@ class AlertsCheckService
 		$pastWeek = $now->addDays(-2);
 		$weekStamp = TimeService::weekStamp($pastWeek);
 
-		$chunks = Chunk::search($alert->query)
-			->where('weekstamp', $weekStamp)
+		$query = $this->getSearchQueryForAlert($alert);
+		$chunks = $query->where('weekstamp', $weekStamp)
 			->get();
 
 		return count($chunks);
@@ -167,6 +167,20 @@ class AlertsCheckService
 
 		$now = Carbon::now();
 		return $now->dayOfWeek === Carbon::MONDAY;
+	}
+
+	/**
+	 * @param Alert $alert
+	 *
+	 * @return \Laravel\Scout\Builder
+	 */
+	private function getSearchQueryForAlert(Alert $alert): \Laravel\Scout\Builder
+	{
+		$query = Chunk::search($alert->query);
+		if ($alert->publication_id) {
+			$query = $query->where('publication_id', $alert->publication_id);
+		}
+		return $query;
 	}
 
 }

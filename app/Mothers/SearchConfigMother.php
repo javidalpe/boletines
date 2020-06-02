@@ -46,6 +46,9 @@ class SearchConfigMother
 
         $config =  new SearchConfig(config('scout.algolia.id'), config('scout.algolia.api-key'), config('scout.index'));
         $config->setDefaultRefinementSearch($alert->query);
+        if ($alert->publication_id) {
+        	$config->setDefaultRefinementPublications([$alert->publication->name]);
+        }
         $config->setExistingAlerts([$alert->query]);
 
         if ($alert->frequency === Alert::FREQUENCY_DAILY) {
