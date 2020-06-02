@@ -5,6 +5,7 @@ namespace App\Services\Alerts;
 use App\Alert;
 use App\Chunk;
 use App\Notifications\MultipleAlertNotification;
+use App\Publication;
 use App\Services\Time\TimeService;
 use App\User;
 use Carbon\Carbon;
@@ -14,6 +15,16 @@ use Notification;
 
 class AlertsCheckService
 {
+
+	public static function getPublicationsSearchOptions()
+	{
+		$publicationsArray = Publication::all();
+		$hash[''] = 'Buscar en los 65 boletines';
+		foreach ($publicationsArray as $publication) {
+			$hash[$publication->id] = $publication->name;
+		}
+		return $hash;
+	}
 
     public function checkAllAlerts()
     {

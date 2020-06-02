@@ -55,6 +55,12 @@ use Laravel\Cashier\Billable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUseful($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUserId($value)
  * @mixin \Eloquent
+ * @property-read int|null $alerts_count
+ * @property-read int|null $invitees_count
+ * @property-read int|null $invites_count
+ * @property-read int|null $notifications_count
+ * @property-read int|null $subscriptions_count
+ * @property-read int|null $webhooks_count
  */
 class User extends Authenticatable
 {

@@ -333,6 +333,7 @@ class ScrapingService
 		$chunk = new Chunk();
 		$chunk->url = $storedUrl;
 		$chunk->publication_name = $publication->name;
+		$chunk->publication_id = $publication->id;
 		$chunk->publication_priority = $publication->priority;
 		$chunk->published_at = $publishedAt;
 		$chunk->content = $content;

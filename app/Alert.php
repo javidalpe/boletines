@@ -32,6 +32,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Alert whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Alert whereUserId($value)
  * @mixin \Eloquent
+ * @property int|null $publication_id
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Alert wherePublicationId($value)
  */
 class Alert extends Model
 {
@@ -54,6 +56,7 @@ class Alert extends Model
         'frequency',
 	    'email',
 	    'time',
+	    'publication_id',
     ];
 
     /**
@@ -63,4 +66,9 @@ class Alert extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+	public function publication()
+	{
+		return $this->belongsTo('App\Publication');
+	}
 }

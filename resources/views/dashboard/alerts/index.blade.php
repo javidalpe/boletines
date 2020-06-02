@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-10 col-md-offset-1">
             @if (count($alerts) > 0)
                 @component('components.panel-np')
                     @slot('title')
@@ -12,6 +12,7 @@
                         <thead>
                             <tr>
                                 <th>Término de búsqueda</th>
+                                <th>Rango de búsqueda</th>
                                 <th>Última notificación</th>
                                 <th>Acciones</th>
                             </tr>
@@ -20,6 +21,7 @@
                             @foreach($alerts as $alert)
                                 <tr>
                                     <td>{{$alert->query}}</td>
+                                    <td>{{$alert->publication ? $alert->publication->name:'Todos los boletines'}}</td>
                                     <td>{{isset($alert->notified_at)?$alert->notified_at->toDateString():''}}</td>
                                     <td>
                                         {!! Form::open(['id' => $alert->id, 'route' => ['alerts.destroy', $alert], 'method' => 'DELETE']) !!}

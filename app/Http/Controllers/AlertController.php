@@ -6,6 +6,7 @@ use App\Alert;
 use App\Events\AlertCreated;
 use App\Events\AlertDeleted;
 use App\Http\Requests\StoreAlertRequest;
+use App\Services\Alerts\AlertsCheckService;
 use App\Services\Billing\BillingService;
 use Auth;
 use Illuminate\Http\Request;
@@ -27,7 +28,7 @@ class AlertController extends Controller
     {
         $user = Auth::user();
         $data = [
-            'alerts' => $user->alerts,
+            'alerts' => $user->alerts()->with('publication')->get(),
             'user' => $user
         ];
 
@@ -49,11 +50,14 @@ class AlertController extends Controller
         $user = Auth::user();
         $alertCount = $user->alerts()->count();
 	    $shouldUserPayForNewAlert = BillingService::shouldUserPayForNewAlert($user);
+	    $publications = AlertsCheckService::getPublicationsSearchOptions();
+
 	    $data = [
 	    	'user'     => $user,
         	'shouldPay' => $shouldUserPayForNewAlert,
 	        'intent' => $shouldUserPayForNewAlert ? $user->createSetupIntent():null,
-	        'alertsCount' => $alertCount
+	        'alertsCount' => $alertCount,
+		    'publications' => $publications,
         ];
         return view('dashboard.alerts.create', $data);
     }
@@ -107,8 +111,10 @@ class AlertController extends Controller
      */
     public function edit(Alert $alert)
     {
+	    $publications = AlertsCheckService::getPublicationsSearchOptions();
         $data = [
-            'alert' => $alert
+            'alert' => $alert,
+	        'publications' => $publications
         ];
         return view('dashboard.alerts.edit', $data);
     }

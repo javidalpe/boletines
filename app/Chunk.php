@@ -30,6 +30,8 @@ use Laravel\Scout\Searchable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Chunk newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Chunk newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Chunk query()
+ * @property int|null $publication_id
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Chunk wherePublicationId($value)
  */
 class Chunk extends Model
 {

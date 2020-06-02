@@ -19,3 +19,9 @@
 	], isset($alert)?$alert->frequency:App\Alert::FREQUENCY_DAILY, array('class' =>
 	'form-control', 'autofocus' => true)) !!}
 @endcomponent
+
+@component('components.form-group', ['name' => 'publication_id', 'label' => 'Rango de búsqueda:',
+'help' => 'Selecciona si quieres que busquemos en todos los boletines oficiales o restringe tu búsqueda a una entidad concreta.'])
+	{!! Form::select('publication_id', $publications, isset($alert)?$alert->publication_id:'null', array('class' =>
+	'form-control', 'autofocus' => true)) !!}
+@endcomponent
