@@ -65,16 +65,10 @@ const PublicationsMenu = () => {
       <RefinementList
         attributeName={"publication_name"}
         showMore={true}
-        translations={{showMore: 'Mostrar más'}}
-        transformItems={items => items.sort((a, b) => {
-          if (a.label > b.label) {
-            return 1;
-          }
-          if (a.label < b.label) {
-            return -1;
-          }
-          return 0;
-        })}/>
+        limitMin={10}
+        limitMax={65}
+        translations={{showMore: expanded => expanded ? 'Mostrar menos' : 'Mostrar mas'}}
+      />
     </div>
   }
 };
@@ -87,17 +81,11 @@ const DayMenu = () => {
       <strong>Día</strong>
       <RefinementList
         attributeName={"date"}
-        translations={{showMore: 'Mostrar más'}}
+        translations={{showMore: expanded => expanded ? 'Mostrar menos' : 'Mostrar mas'}}
         showMore={true}
-        transformItems={items => items.sort((a, b) => {
-          if (a.label > b.label) {
-            return -1;
-          }
-          if (a.label < b.label) {
-            return 1;
-          }
-          return 0;
-        })}/>
+        limitMin={10}
+        limitMax={30}
+      />
     </div>);
   }
 }
@@ -195,7 +183,7 @@ class SearchPanel extends React.Component {
 function Suggestion(props) {
   if (props.query[0] === "\"" || props.query[props.query.length - 1] === "\"" || !props.query.includes(" ")) return null;
 
-  return <div className="alert alert-warning">Consejo. Puedes entrecomillar {props.query} para buscar concondarcias
+  return <div className="alert alert-warning">Consejo. Puedes entrecomillar {props.query} para buscar concordancias.
     exactas.</div>
 }
 

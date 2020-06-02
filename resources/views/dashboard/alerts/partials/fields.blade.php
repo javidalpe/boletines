@@ -1,5 +1,5 @@
 @component('components.form-group', ['name' => 'query', 'label' => 'Termino de búsqueda:',
-'help' => 'Supervisaremos diariamente 65 boletines oficiales buscando este término. Puedes entrecomillar el término de búsqueda para encontrar concondarcias exactas.'])
+'help' => 'Supervisaremos diariamente 65 boletines oficiales buscando este término. Puedes entrecomillar el término de búsqueda para encontrar concordancias exactas.'])
     {!! Form::text('query', isset($alert)?$alert->query:session()->pull('query'), array('class' =>
     'form-control', 'autofocus' => true)) !!}
 @endcomponent

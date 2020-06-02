@@ -38,7 +38,7 @@
                 <li>44 Boletines provinciales</li>
             </ul>
 
-            <a href="{{route('status')}}">Estado del sistema</a>
+            <a href="{{route('status')}}" target="_blank">Estado del sistema</a>
         @endcomponent
 
             @component('components.panel')

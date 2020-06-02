@@ -1,9 +1,9 @@
 const mix = require('laravel-mix');
-require('laravel-mix-bundle-analyzer');
+/*require('laravel-mix-bundle-analyzer');
 
 if (!mix.inProduction()) {
     mix.bundleAnalyzer();
-}
+}*/
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -29,4 +29,4 @@ if (mix.inProduction()) {
     mix.version();
 }
 
-mix.browserSync('boletines.dev');
+mix.browserSync('boletines.test');
