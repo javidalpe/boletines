@@ -100,6 +100,8 @@ class SeoService
     ];
 
     const TERMS = [
+    	"Covid-19",
+	    "ERTE",
         "Oposiciones a celador",
         "Oposiciones a enfermería",
         "Oposiciones a auxiliar de enfermeria",
