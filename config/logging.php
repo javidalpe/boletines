@@ -38,7 +38,7 @@ return [
 		'single' => [
 			'driver' => 'single',
 			'path' => storage_path('logs/laravel.log'),
-			'level' => 'debug',
+			'level' => env('APP_LOG_LEVEL', 'debug'),
 		],
 
 		'daily' => [
