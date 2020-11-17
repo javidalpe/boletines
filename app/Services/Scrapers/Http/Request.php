@@ -28,6 +28,8 @@ class Request
         $this->url = $url;
         $this->method = $method;
 
+        $options['connect_timeout'] = 10;
+	    $options['timeout'] = 10;
 
         if (isset($options['headers'])) {
         	$options['headers'] = array_merge(HttpService::CHROME_HEADERS, $options['headers']);

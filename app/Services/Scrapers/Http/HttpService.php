@@ -22,6 +22,8 @@ class HttpService
 		"Accept-Language" => "es-ES,es;q=0.9,en;q=0.8,ca;q=0.7",
 	];
 
+	public const DEFAULT_TIMEOUT = 10;
+
 	public static function clearCache()
 	{
 		self::$cache = [];
@@ -35,7 +37,11 @@ class HttpService
      */
 	public static function post($url, $body)
     {
-        $client = new Client(['verify' => false]);
+        $client = new Client([
+        	'verify' => false,
+	        'timeout' => self::DEFAULT_TIMEOUT
+        ]);
+
         return $client->request('POST', $url, [
             'body' => $body
         ]);
@@ -67,7 +73,8 @@ class HttpService
                 $stack->push(EffectiveUrlMiddleware::middleware());
                 $client = new Client([
                 	'handler' => $stack,
-                    'verify' => false
+                    'verify' => false,
+	                'timeout' => self::DEFAULT_TIMEOUT,
                 ]);
 
                 $response = $client->request($request->method, $request->url, $request->options);
