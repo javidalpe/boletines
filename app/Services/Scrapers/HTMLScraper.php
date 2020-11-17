@@ -96,7 +96,7 @@ class HTMLScraper
 
             $response = HttpService::get($request);
             if (!$response) {
-                Log::debug("Nada retornado");
+                Log::warning($request->url . ": Nada retornado");
                 continue;
             }
             $this->updateBaseUrl($response->finalUrl);
