@@ -50,7 +50,7 @@ class DeleteOldChunks extends Command
 			$lastId = Chunk::orderBy('id', 'desc')->first();
 			$fromIdToErase = $lastId->id - $indexCount;
 			$toIdToErase = $lastId->id - $limit;
-            Log::debug("Deleting $toErase records to reach $limit. From id $fromIdToErase to $toIdToErase.");
+            Log::info("Deleting $toErase records to reach $limit. From id $fromIdToErase to $toIdToErase.");
 			Chunk::where('id', '>', $fromIdToErase)
 				->where('id', '<=', $toIdToErase)
 				->unsearchable();
