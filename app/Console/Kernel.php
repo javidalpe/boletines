@@ -34,6 +34,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+    	\Log::info('scheduler');
 	    $schedule->command('indexes:update')
 		    ->dailyAt(self::SCRAP_DAILY_TIME)
 		    ->after(function () {
