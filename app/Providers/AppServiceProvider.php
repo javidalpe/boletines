@@ -21,6 +21,10 @@ class AppServiceProvider extends ServiceProvider
         setlocale(LC_TIME, 'es_ES.utf8');
         setlocale(LC_MONETARY, 'es_ES.utf8');
         Stripe::setApiKey(config('services.stripe.secret'));
+
+	    if($this->app->environment('production')) {
+		    \URL::forceScheme('https');
+	    }
     }
 
     /**
