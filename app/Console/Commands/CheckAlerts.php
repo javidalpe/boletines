@@ -40,5 +40,6 @@ class CheckAlerts extends Command
     {
         $service = new AlertsCheckService();
         $service->checkAllAlerts();
+	    return 0;
     }
 }

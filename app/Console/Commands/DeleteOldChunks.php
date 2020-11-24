@@ -57,5 +57,6 @@ class DeleteOldChunks extends Command
 
 
 		}
+		return 0;
 	}
 }

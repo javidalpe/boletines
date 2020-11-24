@@ -43,5 +43,6 @@ class UpdateFromIndex extends Command
     {
 	    $id = $this->argument('id');
 	    $this->service->updateIndexesFrom($id);
+	    return 0;
     }
 }

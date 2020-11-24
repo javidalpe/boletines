@@ -47,6 +47,6 @@ class UpdateIndexes extends Command
         } else {
 	        $this->service->updateIndex($id);
         }
-
+	    return 0;
     }
 }
