@@ -10,10 +10,13 @@ class TrustProxies extends Middleware
 	/**
 	 * The trusted proxies for this application.
 	 *
+	 * If you are using Amazon AWS or another "cloud" load
+	 * balancer provider, you may not know the IP addresses of your actual balancers. In this case, you may use * to
+	 * trust all proxies:
+	 *
 	 * @var string|array
 	 */
-	protected $proxies = [
-	];
+	protected $proxies = '*';
 
 	/**
 	 * The headers that should be used to detect proxies.
