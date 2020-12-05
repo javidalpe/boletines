@@ -13,7 +13,7 @@ class ValladolidScraperStrategy implements IBoletinScraperStrategy
     {
     	$now = Carbon::now();
     	$month = $now->formatLocalized('%B');
-        return HTMLScraper::create("https://bop.sede.diputaciondevalladolid.es/?bop=ultimo")
+        return HTMLScraper::create("https://bop.sede.diputaciondevalladolid.es/ultimobop")
             ->getLinks("/\/boletines\/\d+\/$month\/\d+\/BOPVA\-B\-\d+\-\d+\.pdf/");
     }
 }

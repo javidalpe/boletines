@@ -10,7 +10,7 @@ class HuelvaScraperStrategy implements IBoletinScraperStrategy
 
     public function downloadFilesFromInternet()
     {
-        return HTMLScraper::create("https://sede.diphuelva.es/servicios/bop")
+        return HTMLScraper::create("https://s2.diphuelva.es/servicios/bop")
             ->getLinks('/%2Fportalweb%2Fbop%2Fboletines%2F\d+\-\d+\.pdf/', function($link) {
             	return urldecode($link);
             });
