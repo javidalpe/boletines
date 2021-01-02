@@ -1,5 +1,5 @@
 <noscript id="deferred-styles">
-    <link rel="stylesheet" type="text/css" href="{{ mix('/css/app.css') }}"/>
+<link rel="stylesheet" type="text/css" href="{{ mix('/css/app.css') }}"/>
     @stack('deferred-styles')
 </noscript>
 

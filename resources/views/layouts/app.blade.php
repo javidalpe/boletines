@@ -14,6 +14,7 @@
             @include('flash::message')
             @yield('content')
         </div>
+
         @include('dashboard.footer')
         @include('layouts.defer-styles')
         @stack('scripts')
