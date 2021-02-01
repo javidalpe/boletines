@@ -4,6 +4,7 @@ namespace App\Console;
 
 use App\Console\Commands\CheckAlerts;
 use App\Console\Commands\DeleteOldChunks;
+use App\Console\Commands\RemoveAlertsFromCanceledSubscriptions;
 use App\Console\Commands\UpdateFromIndex;
 use App\Console\Commands\UpdateIndexes;
 use Artisan;
@@ -14,6 +15,8 @@ class Kernel extends ConsoleKernel
 {
 	const SCRAP_DAILY_TIME = '11:30';
 
+	const SUBCRIPTIONS_DAILY_TIME = '1:00';
+
     /**
      * The Artisan commands provided by your application.
      *
@@ -23,7 +26,8 @@ class Kernel extends ConsoleKernel
 	    UpdateIndexes::class,
 	    UpdateFromIndex::class,
         CheckAlerts::class,
-	    DeleteOldChunks::class
+	    DeleteOldChunks::class,
+	    RemoveAlertsFromCanceledSubscriptions::class
     ];
 
     /**
@@ -41,6 +45,9 @@ class Kernel extends ConsoleKernel
 		        Artisan::call('indexes:free');
 			    Artisan::call('alerts:checks');
 		    });
+
+	    $schedule->command('subscriptions:update')
+		    ->dailyAt(self::SUBCRIPTIONS_DAILY_TIME);
     }
 
     /**
