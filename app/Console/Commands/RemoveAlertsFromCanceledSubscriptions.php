@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Services\Billing\BillingService;
 use App\User;
 use Illuminate\Console\Command;
+use Illuminate\Database\Query\Builder;
 
 class RemoveAlertsFromCanceledSubscriptions extends Command
 {
