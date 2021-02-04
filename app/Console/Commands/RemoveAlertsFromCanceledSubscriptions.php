@@ -5,7 +5,6 @@ namespace App\Console\Commands;
 use App\Services\Billing\BillingService;
 use App\User;
 use Illuminate\Console\Command;
-use Illuminate\Database\Query\Builder;
 
 class RemoveAlertsFromCanceledSubscriptions extends Command
 {
@@ -43,7 +42,7 @@ class RemoveAlertsFromCanceledSubscriptions extends Command
 	    /**
 	     * @var $usersCancelled User[]
 	     */
-	    $usersCancelled = User::whereHas('subscriptions', function (Builder $query) {
+	    $usersCancelled = User::whereHas('subscriptions', function (\Illuminate\Database\Query\Builder $query) {
 		    $query->where('stripe_status', '=', 'canceled');
 	    })->get();
 
