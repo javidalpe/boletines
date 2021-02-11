@@ -42,7 +42,7 @@ class RemoveAlertsFromCanceledSubscriptions extends Command
 	    /**
 	     * @var $usersCancelled User[]
 	     */
-	    $usersCancelled = User::whereHas('subscriptions', function (\Illuminate\Database\Query\Builder $query) {
+	    $usersCancelled = User::whereHas('subscriptions', function ($query) {
 		    $query->where('stripe_status', '=', 'canceled');
 	    })->get();
 
