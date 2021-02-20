@@ -43,6 +43,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('invoices', 'InvoicesController');
     Route::resource('balance', 'BalanceController');
 
+	Route::get('subscriptions', 'SubscriptionsController@index')->name('subscriptions');
+
     Route::get('webhooks/{webhook}/test', 'WebhooksController@test')->name('webhooks.test');
 
     Route::get('invita', 'MemberGetMemberController@index')->name('mgm');

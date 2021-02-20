@@ -29,7 +29,7 @@
         "socialiteproviders/google": "3.0.*",
         "spatie/laravel-cookie-consent": "2.12.9",
         "spatie/laravel-sitemap": "5.7",
-        "stripe/stripe-php": "7.14.*"
+        "stripe/stripe-php": "^7.74.0"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "2.6.*",

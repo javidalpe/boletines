@@ -7,9 +7,9 @@
             Tu cuenta
         @endslot
 
-        <p class="lead">Facturación</p>
-        <a href="{{route('invoices.index')}}">Facturas</a>
-        <p>Descarga tus facturas pasadas y visualiza tus facturas futuras.</p>
+        <p class="lead">Subscripciones</p>
+        <a href="{{route('subscriptions')}}">Portal de facturación</a>
+        <p>Descarga tus facturas pasadas, actualiza tus datos fiscales o cambia tu método de pago.</p>
         <a href="{{route('balance.index')}}">Balance en cuenta</a>
         <p>Controla tu balance actual en cuenta.</p>
         <hr>
