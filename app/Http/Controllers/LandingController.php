@@ -46,6 +46,11 @@ class LandingController extends Controller
 		return view('landing.how');
 	}
 
+	public function bye()
+	{
+		return view('landing.bye');
+	}
+
 	public function alerts(Request $request)
 	{
 		if (!$request->has('query') && Auth::guest()) {

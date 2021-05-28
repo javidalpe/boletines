@@ -32,6 +32,7 @@
             <p class="lead">Compañía</p>
             <hr>
             <ul class="list-unstyled">
+                <li><a href="{{ route('bye') }}">Cesamos la actividad en 2022</a></li>
                 <li><a href="{{ route('about') }}">Acerca de nosotros</a></li>
                 <li><a href="{{ route('contact') }}">Contáctanos</a></li>
                 <li><a href="{{route('status')}}">Estado del sistema</a></li>

@@ -22,6 +22,8 @@ Route::get('/alertas', 'LandingController@alerts')->name('alerts');
 Route::get('/politica-de-privacidad', 'LandingController@privacy')->name('privacy');
 Route::get('/politica-de-cookies', 'LandingController@cookies')->name('cookies');
 
+Route::get('/nos-despedimos', 'LandingController@bye')->name('bye');
+
 
 Auth::routes();
 

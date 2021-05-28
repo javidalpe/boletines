@@ -58,6 +58,8 @@
 					puedes consultar el estado del sistema.</p>
 			</div>
 		</div>
+		<hr>
+		@include('landing.components.bye-notice')
 	</div>
 
 @endsection

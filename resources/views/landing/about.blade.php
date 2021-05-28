@@ -14,6 +14,7 @@
                     información y la comunicación. En 2017 descubrimos la necesidad de mejorar
                     el acceso a la información de los
                     boletines oficiales y desde entonces desarrollamos {{ config('app.name') }}.</p>
+                @include('landing.components.bye-notice')
                 <p>¿Quieres saber más sobre nosotros? <a href="{{route('contact')
                 }}">Escríbenos</a></p>
             </div>
