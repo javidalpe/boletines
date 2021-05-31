@@ -49,7 +49,7 @@ class AlertsCheckService
         }
 
         foreach ($newContentPerUser as $userId => $alertsResults) {
-            $this->notifyAlertsToUser($alertsResults, $userId);
+            $this->notifyAlertsToUser($alertsResults);
         }
     }
 
@@ -90,13 +90,29 @@ class AlertsCheckService
 
     /**
      * @param AlertResult[] $alertsResults
-     * @param $userId
      */
-    private function notifyAlertsToUser($alertsResults, $userId)
+    private function notifyAlertsToUser(array $alertsResults)
     {
-        $userToNotify = User::find($userId);
+    	if (count($alertsResults) <= 0) {
+    		return;
+	    }
 
-        $userToNotify->notify(new MultipleAlertNotification($alertsResults));
+    	$alertsResultsByEmail = [];
+	    foreach ($alertsResults as $alertResult) {
+	    	$alert = $alertResult->getAlert();
+	        if(isset($alertsResultsByEmail[$alert->email])) {
+		        $alertsResultsByEmail[$alert->email][] = $alertResult;
+	        } else {
+		        $alertsResultsByEmail[$alert->email] = [$alertResult];
+	        }
+	    }
+
+	    foreach ($alertsResultsByEmail as $email => $alertResult) {
+		    $firstResult = $alertResult[0];
+		    $alert = $firstResult->getAlert();
+		    $alert->notify(new MultipleAlertNotification($alertResult));
+	    }
+
         foreach ($alertsResults as $alertResult) {
             $alert = $alertResult->getAlert();
             $this->markAlertAsNotified($alert);

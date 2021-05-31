@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 /**
  * App\Alert
@@ -38,6 +39,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Alert extends Model
 {
+	use Notifiable;
+
     const FREQUENCY_DAILY = "daily";
     const FREQUENCY_WEEKLY = "weekly";
     /**
