@@ -29,13 +29,12 @@ class MultipleAlertNotification extends Notification
     }
 
 
-    /**
-     * Get the notification's delivery channels.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
-    public function via($notifiable)
+	/**
+	 * Get the notification's delivery channels.
+	 *
+	 * @return array
+	 */
+    public function via()
     {
         return ['mail', WebhookChannel::class];
     }

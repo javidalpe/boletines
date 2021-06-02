@@ -28,9 +28,9 @@ class WebhookChannel
      */
     public function send($notifiable, Notification $notification)
     {
-        $message = $notification->toWebhook($notifiable);
-        $notifiable->webhooks;
-        foreach ($notifiable->webhooks as $webhook) {
+        $message = $notification->toWebhook();
+	    $webhooks = $notifiable->user->webhooks;
+	    foreach ($webhooks as $webhook) {
             $this->webhookService->sendToWebhook($webhook, $message);
         }
     }
