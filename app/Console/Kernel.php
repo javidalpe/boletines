@@ -39,8 +39,11 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
     	\Log::info('scheduler');
-	    $schedule->command('indexes:update')
+	    $schedule->command('indexes:free')
 		    ->dailyAt(self::SCRAP_DAILY_TIME)
+		    ->after(function () {
+			    Artisan::call('indexes:update');
+		    })
 		    ->after(function () {
 		        Artisan::call('indexes:free');
 			    Artisan::call('alerts:checks');
