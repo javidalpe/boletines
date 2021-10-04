@@ -24,6 +24,7 @@ Route::get('/politica-de-cookies', 'LandingController@cookies')->name('cookies')
 
 Route::get('/nos-despedimos', 'LandingController@bye')->name('bye');
 
+Route::get('/visualizar/{id}', 'LandingController@view')->name('view');
 
 Auth::routes();
 

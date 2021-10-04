@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Chunk;
 use App\Mothers\SearchConfigMother;
 use App\Publication;
 use App\Services\ScrapingService;
@@ -49,6 +50,12 @@ class LandingController extends Controller
 	public function bye()
 	{
 		return view('landing.bye');
+	}
+
+	public function view($id)
+	{
+		$chunk = Chunk::findOrFail($id);
+		return redirect($chunk->url);
 	}
 
 	public function alerts(Request $request)

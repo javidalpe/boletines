@@ -32,7 +32,7 @@ const Panel = props => <div className="panel panel-default">
 
 const Hit = ({hit}) =>
 	<div className="hit panel panel-default panel-body">
-		<a href={hit.url} target="_blank" rel="noopener noreferrer" className="btn btn-default pull-right">Descargar PDF</a>
+		<a href={`${window.location.origin}/visualizar/${hit.id}`} target="_blank" rel="noopener noreferrer" className="btn btn-default pull-right">Descargar PDF</a>
 		<div>
 			<strong>{hit.publication_name}</strong>
 			<div>{hit.day}</div>
