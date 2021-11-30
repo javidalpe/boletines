@@ -72,6 +72,7 @@ class MultipleAlertNotification extends Notification
         }
 
         return $mail->line(sprintf('Recuerda que puedes gestionar tus alertas desde el área privada de %s.', config('app.name')))
+	        ->line(sprintf('(Tras más de 4 años de servicio ininterrumpido, el equipo de Infoboe ha decidio que la plataforma cesará su actividad a partir en 2022. Os explicamos por qué en %s)', route('bye')))
             ->salutation('Saludos del equipo');
     }
 

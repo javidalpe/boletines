@@ -10,6 +10,11 @@
 		<div class="row">
 			<div class="col-md-12">
 				<h2>Comunicado sobre el cese de actividad en 2022</h2>
+				<p><i>29 de Noviembre de 2021</i></p>
+				<p>Nos alegra comunicaros que hemos encontrado varios equipos interesados en continuar con el proyecto y que la plataforma seguirá operando con normalidad hasta nuevo aviso, y no cesará su actividad el 31 de diciembre de 2021 tal y como habíamos comunicado meses atrás.</p>
+				<p>Mientras concretamos el traspaso de la plataforma seguiremos atendiendo nuevas iniciativas. Si crees que dispones de los recursos necesarios para hacerte cargo del proyecto, mantenerlo y evolucionarlo, no dudas en contactar con nosotros. Si estás interesado, puedes escribirnos un email a <a
+							href="mailto:{{ config('mail.from.address') }}">{{ config('mail.from.address') }}</a>.</p>
+				<br>
 				<p><i>28 de Mayo de 2021</i></p>
 				<p>Tras más de 4 años de servicio ininterrumpido, el equipo de Infoboe ha decidio que la plataforma cesará su actividad a partir del día 1 de enero de 2022. Todas las subscripciones serán canceladas el día 1 de diciembre de 2021. Os explicamos por qué:</p>
 				<p>Infoboe.com nació en 2017, hace ya más de cuatro años. Eramos un grupo de ingenieros trabajando en el sector de la consultoría tecnológica, con diferentes experiencias pero con las mismas ganas de montar un proyecto juntos. Habíamos desarrollado varios proyectos relacionados con la administración y el acceso a los datos públicos parecía un tema común que interesaba a varias empresas. Coincidió además con el lanzamiento de una tecnología de motor de búsqueda muy novedosa que permitía realizar búsquedas sobre grandes volúmenes de texto.</p>
