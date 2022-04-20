@@ -36,12 +36,6 @@
                             @endforeach
                         </tbody>
                     </table>
-
-                    @can ('create', App\Alert::class)
-                        @slot('footer')
-                        <a href="{{route('alerts.create')}}" class="btn btn-primary">Crear alerta</a>
-                        @endslot
-                    @endif
                 @endcomponent
 
 
@@ -53,9 +47,6 @@
                     @endslot
                     Por cada alerta que crees recibirás un email si el término de búsqueda aparece en un nuevo boletín.
 
-                    @slot('actions')
-                            <a href="{{route('alerts.create')}}" class="btn btn-default">Crear alerta</a>
-                    @endslot
                 @endcomponent
             @endif
         </div>

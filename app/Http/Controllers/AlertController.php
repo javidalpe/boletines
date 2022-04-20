@@ -42,6 +42,9 @@ class AlertController extends Controller
      */
     public function create()
     {
+	    flash("No se permite crear nuevas alertas. Nuestro servicio de alertas dejará de estar disponible próximamente.")->warning();
+	    return back();
+
         if (!Auth::user()->can('create', Alert::class)) {
             flash("Has superado el límite de alertas permitido.")->warning();
             return back();

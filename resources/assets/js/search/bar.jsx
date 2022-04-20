@@ -10,7 +10,6 @@ import {
 	Stats
 } from 'react-instantsearch/dom'
 import { connectRefinementList } from 'react-instantsearch/connectors';
-//import "./search.css";
 import mobile from "is-mobile";
 
 const VirtualMenu = connectRefinementList(() => null);

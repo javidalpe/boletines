@@ -5,7 +5,7 @@ import React, { lazy, Suspense } from 'react';
 const Bar = lazy(() => import('./Bar'));
 
 const Main = () => (
-    <Suspense fallback={'Cargando buscador...'}>
+    <Suspense fallback="Cargando buscador...">
       <Bar />
     </Suspense>
 )
